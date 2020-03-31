@@ -4,6 +4,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import paranoid.common.P2d;
 
 /**
  * Controllore della gui game.fxml .
@@ -70,11 +71,11 @@ public final class GameController implements GuiController {
         });
     }
 
-    private int getXinPixel(final Pos2d pos) {
+    private int getXinPixel(final P2d pos) {
         return (int) Math.round(pos.getX() * RATIO_X);
     }
 
-    private int getYinPixel(final Pos2d pos) {
+    private int getYinPixel(final P2d pos) {
         return (int) Math.round(pos.getY() * RATIO_Y);
     }
 
