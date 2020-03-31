@@ -1,8 +1,8 @@
 package paranoid.view;
 
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import paranoid.view.parameters.LayoutManager;
 
 /**
  * Stage principale dell'applicazione.
@@ -12,16 +12,17 @@ public class MainStage extends Stage {
     public MainStage() {
         super();
         this.setTitle("PARANOID");
-        this.setScene(new MainScene(null));
+        this.setScene(new MainScene());
         this.sizeToScene();
         this.show();
     }
 
     public class MainScene extends Scene {
-
-        public MainScene(Parent root) {
-            super(root);
-            // TODO Auto-generated constructor stub
+        /**
+         * costruttore che aggiunge il layout menu.fxml e le dimensioni alla scena.
+         */
+        public MainScene() {
+            super(LayoutManager.MENU.getLayout(), 850, 700);
         }
 
     }
