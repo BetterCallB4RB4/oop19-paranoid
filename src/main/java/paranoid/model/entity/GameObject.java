@@ -13,9 +13,9 @@ public interface GameObject {
 
     V2d getVel();
 
-    void setHeight();
+    void setHeight(int height);
 
-    void setWidth();
+    void setWidth(int width);
 
     int getHeight();
 
