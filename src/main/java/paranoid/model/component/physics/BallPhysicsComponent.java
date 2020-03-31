@@ -1,5 +1,8 @@
 package paranoid.model.component.physics;
 
+import java.util.Optional;
+
+import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.V2d;
 import paranoid.model.entity.Ball;
@@ -20,6 +23,18 @@ public class BallPhysicsComponent implements PhysicsComponent {
         P2d pos = ball.getPos();
         V2d vel = ball.getVel();
         ball.setPos(pos.sum(vel.mul(scaler * dt)));
+
+        Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
+        if (borderCollisionInfo.isPresent()) {
+
+            if (borderCollisionInfo.get().equals(Collision.TOP)
+            ||  borderCollisionInfo.get().equals(Collision.BOTTOM)) {
+                ball.flipVelOnY();
+            } else {
+                ball.flipVelOnX();
+            }
+        }
     }
+
 
 }
