@@ -11,10 +11,16 @@ import paranoid.controller.GuiController;
  *
  */
 public enum LayoutManager {
+
     /**
-     * collegamento a tutti file fxml.
+     * menu.fxml path.
      */
-    MENU("layouts/menu.fxml");
+    MENU("layouts/menu.fxml"),
+
+    /**
+     * game.fxml path.
+     */
+    GAME("layouts/game.fxml");
 
     private final GuiController guiController;
     private Pane layout;
