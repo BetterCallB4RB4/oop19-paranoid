@@ -12,14 +12,12 @@ public final class MenuController implements GuiController {
     @FXML
     private Button btnStart;
 
-    private Scene scene;
-
     /**
      * Gestore evento click del mouse sul bottone inizia partita.
      */
     @FXML
     public void btnStartonClickHandler() {
-        this.scene = btnStart.getScene();
+        final Scene scene = btnStart.getScene();
         final Thread engine = new Thread(new GameEngine(this.scene));
         engine.setDaemon(true); //permette alla VM di chiudere il thread quando si esce dall' app.
         engine.start();

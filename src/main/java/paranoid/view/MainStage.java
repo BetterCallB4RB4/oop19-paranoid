@@ -17,11 +17,11 @@ public class MainStage extends Stage {
         this.show();
     }
 
-    public class MainScene extends Scene {
+    private final class MainScene extends Scene {
         /**
          * costruttore che aggiunge il layout menu.fxml e le dimensioni alla scena.
          */
-        public MainScene() {
+        private MainScene() {
             super(LayoutManager.MENU.getLayout(), 850, 700);
         }
 
