@@ -4,10 +4,10 @@ import paranoid.common.P2d;
 
 public class Border {
 
-    private P2d upperLefCorner;
-    private P2d bottomRightCorner;
-    private int width;
-    private int height;
+    private final P2d upperLefCorner;
+    private final P2d bottomRightCorner;
+    private final int width;
+    private final int height;
 
     public Border(final int width, final int height) {
         this.width = width;

@@ -20,6 +20,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @return the pos
      */
+    @Override
     public P2d getPos() {
         return pos;
     }
@@ -27,6 +28,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @param pos the pos to set
      */
+    @Override
     public void setPos(final P2d pos) {
         this.pos = pos;
     }
@@ -34,6 +36,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @return the vel
      */
+    @Override
     public V2d getVel() {
         return vel;
     }
@@ -41,6 +44,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @param vel the vel to set
      */
+    @Override
     public void setVel(final V2d vel) {
         this.vel = vel;
     }
@@ -48,6 +52,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @return the height
      */
+    @Override
     public int getHeight() {
         return height;
     }
@@ -55,6 +60,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @param height the height to set
      */
+    @Override
     public void setHeight(final int height) {
         this.height = height;
     }
@@ -62,6 +68,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @return the width
      */
+    @Override
     public int getWidth() {
         return this.width;
     }
@@ -69,6 +76,7 @@ public abstract class GameObj implements GameObject {
     /**
      * @param width the width to set
      */
+    @Override
     public void setWidth(final int width) {
         this.width = width;
     }
