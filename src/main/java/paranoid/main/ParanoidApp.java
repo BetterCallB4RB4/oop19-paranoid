@@ -2,6 +2,7 @@ package paranoid.main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import paranoid.view.MainStage;
 
 /**
  * PARANOID MAIN.

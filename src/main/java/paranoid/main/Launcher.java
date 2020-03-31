@@ -13,6 +13,6 @@ public final class Launcher {
      * @param args
      */
     public static void main(final String[] args) {
-        ParanoidApp.main();
+        ParanoidApp.main(args);
     }
 }
