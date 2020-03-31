@@ -2,6 +2,7 @@ package paranoid.model.entity;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.physics.PhysicsComponent;
 
 public abstract class GameObj implements GameObject {
 
@@ -9,12 +10,14 @@ public abstract class GameObj implements GameObject {
     private V2d vel;
     private int height;
     private int width;
+    private PhysicsComponent phys;
 
-    public GameObj(final P2d pos, final V2d vel, final int height, final int width) {
+    public GameObj(final P2d pos, final V2d vel, final int height, final int width, final PhysicsComponent phys) {
         this.pos = pos;
         this.vel = vel;
         this.height = height;
         this.width = width;
+        this.phys = phys;
     }
 
     /**
@@ -80,5 +83,15 @@ public abstract class GameObj implements GameObject {
     public void setWidth(final int width) {
         this.width = width;
     }
+
+    /**
+     * 
+     * @return the physical component of this gameObj
+     */
+    public PhysicsComponent getPhysicsComponent() {
+        return this.phys;
+    }
+
+    public abstract void updatePhysics(int dt, World w);
 
 }

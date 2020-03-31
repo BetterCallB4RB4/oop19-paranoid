@@ -2,6 +2,7 @@ package paranoid.model.entity;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.physics.PhysicsComponent;
 
 public interface GameObject {
 
@@ -20,5 +21,9 @@ public interface GameObject {
     int getHeight();
 
     int getWidth(); 
+
+    PhysicsComponent getPhysicsComponent();
+
+    void updatePhysics(int dt, World w);
 
 }

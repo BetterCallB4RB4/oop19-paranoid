@@ -2,13 +2,14 @@ package paranoid.model.entity;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.physics.BallPhysicsComponent;
 
 public class Ball extends GameObj {
 
     private boolean isMoving;
 
     public Ball(final P2d pos, final V2d vel, final int height, final int width) {
-        super(pos, vel, height, width);
+        super(pos, vel, height, width, new BallPhysicsComponent());
         this.isMoving = true;
     }
 
@@ -24,7 +25,7 @@ public class Ball extends GameObj {
      * 
      * @return if the ball can move 
      */
-    public boolean getBallMotion() {
+    public boolean isBallMoving() {
         return this.isMoving;
     }
 
@@ -33,7 +34,7 @@ public class Ball extends GameObj {
      * simulate a vertical collision.
      */
     public void flipVelOnY() {
-        this.setVel(new V2d(this.getVel().getX(), -this.getVel().getY()));
+        this.flipByValue(new V2d(this.getVel().getX(), -this.getVel().getY()));
     }
 
     /**
@@ -41,7 +42,7 @@ public class Ball extends GameObj {
      * simulate a orizontal collision.
      */
     public void flipVelOnX() {
-        this.setVel(new V2d(-this.getVel().getX(), this.getVel().getY()));
+        this.flipByValue(new V2d(-this.getVel().getX(), this.getVel().getY()));
     }
 
     /**
@@ -50,6 +51,15 @@ public class Ball extends GameObj {
      */
     public void flipByValue(final V2d newValue) {
         this.setVel(newValue);
+    }
+
+    /**
+     * 
+     * allows to update the physics component of the ball.
+     */
+    @Override
+    public void updatePhysics(final int dt, final World w) {
+        this.getPhysicsComponent().update(dt, this, w);
     }
 
 }
