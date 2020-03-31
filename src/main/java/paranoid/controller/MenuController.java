@@ -18,7 +18,7 @@ public final class MenuController implements GuiController {
     @FXML
     public void btnStartonClickHandler() {
         final Scene scene = btnStart.getScene();
-        final Thread engine = new Thread(new GameEngine(this.scene));
+        final Thread engine = new Thread(new GameEngine(scene));
         engine.setDaemon(true); //permette alla VM di chiudere il thread quando si esce dall' app.
         engine.start();
     }
