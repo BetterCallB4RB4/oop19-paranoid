@@ -2,6 +2,8 @@ package paranoid.model.entity;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.input.InputComponent;
+import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.PhysicsComponent;
 
 public abstract class GameObj implements GameObject {
@@ -11,13 +13,15 @@ public abstract class GameObj implements GameObject {
     private int height;
     private int width;
     private PhysicsComponent phys;
+    private InputComponent input;
 
-    public GameObj(final P2d pos, final V2d vel, final int height, final int width, final PhysicsComponent phys) {
+    public GameObj(final P2d pos, final V2d vel, final int height, final int width, final PhysicsComponent phys, final InputComponent input) {
         this.pos = pos;
         this.vel = vel;
         this.height = height;
         this.width = width;
         this.phys = phys;
+        this.input = input;
     }
 
     /**
@@ -92,6 +96,16 @@ public abstract class GameObj implements GameObject {
         return this.phys;
     }
 
+    /**
+     * 
+     * @return the input component of this gameObj
+     */
+    public InputComponent getInputComponent() {
+        return this.input;
+    }
+
     public abstract void updatePhysics(int dt, World w);
+
+    public abstract void updateInput(InputController controller);
 
 }

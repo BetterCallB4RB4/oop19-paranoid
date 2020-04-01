@@ -2,6 +2,8 @@ package paranoid.model.entity;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.input.DummyInputComponent;
+import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.BallPhysicsComponent;
 
 public class Ball extends GameObj {
@@ -9,7 +11,7 @@ public class Ball extends GameObj {
     private boolean isMoving;
 
     public Ball(final P2d pos, final V2d vel, final int height, final int width) {
-        super(pos, vel, height, width, new BallPhysicsComponent());
+        super(pos, vel, height, width, new BallPhysicsComponent(), new DummyInputComponent());
         this.isMoving = true;
     }
 
@@ -60,6 +62,15 @@ public class Ball extends GameObj {
     @Override
     public void updatePhysics(final int dt, final World w) {
         this.getPhysicsComponent().update(dt, this, w);
+    }
+
+    /**
+     * 
+     * allows to update the physics component of the ball.
+     */
+    @Override
+    public void updateInput(final InputController controller) {
+        this.getInputComponent().update(this, controller);
     }
 
 }
