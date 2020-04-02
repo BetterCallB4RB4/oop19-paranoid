@@ -27,7 +27,7 @@ public class GameLoop implements Runnable {
         this.scene.setRoot(LayoutManager.GAME.getLayout());
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         List<Ball> ballContainer = new ArrayList<>();
-        ballContainer.add(new Ball(new P2d(20, 20), new V2d(100, 100), 10, 10));
+        ballContainer.add(new Ball(new P2d(2, 30), new V2d(20, 20), 3, 3));
         this.world = new World(ballContainer, new Border(60, 60));
     }
 
@@ -80,7 +80,7 @@ public class GameLoop implements Runnable {
      * @param elapsed game physics is updated
      */
     private void updateGame(final int elapsed) {
-
+        world.updateState(elapsed);
     }
 
     private void render() {

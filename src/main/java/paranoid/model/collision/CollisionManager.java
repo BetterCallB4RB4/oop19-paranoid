@@ -15,7 +15,9 @@ public class CollisionManager {
      * @return the collision surface
      */
     public Optional<Collision> checkCollisionWithBoundaries(final Border border, final GameObject entity) {
-        if (entity.getPos().getY() < border.getUpperleftCorner().getY()) {
+        if (entity.getPos().getY() + entity.getHeight() > border.getBottomRightCorner().getY()) {
+            return Optional.of(Collision.BOTTOM);
+        } else if (entity.getPos().getY() < border.getUpperleftCorner().getY()) {
             return Optional.of(Collision.TOP);
         } else if (entity.getPos().getX() < border.getUpperleftCorner().getX()) {
             return Optional.of(Collision.LEFT);

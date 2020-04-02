@@ -41,6 +41,14 @@ public class World {
 
     /**
      * 
+     * @param dt the time difference delta time
+     */
+    public void updateState(final int dt) {
+        this.getSceneEntities().forEach(i -> i.updatePhysics(dt, this));
+    }
+
+    /**
+     * 
      * @return the border of the world
      */
     public Border getBorder() {
