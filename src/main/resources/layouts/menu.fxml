@@ -5,27 +5,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.MenuController">
-   <top>
-      <HBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </top>
-   <left>
-      <VBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <VBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </right>
-   <bottom>
-      <HBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <center>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0" BorderPane.alignment="CENTER">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;backgrounds/bgmenu.jpg&quot;); -fx-background-size: stretch;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.MenuController">
+   <items>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
          <children>
-            <Button fx:id="btnStart" onMouseClicked="#btnStartonClickHandler" text="INIZIA PARTITA" />
+            <Button fx:id="btnStart" onMouseClicked="#btnStartonClick" text="INIZIA PARTITA" />
             <Button text="MIGLIORI PUNTEGGI" />
             <Button text="OPZIONI" />
             <Button text="ISTRUZIONI" />
          </children>
       </VBox>
-   </center>
-</BorderPane>
+   </items>
+</SplitPane>

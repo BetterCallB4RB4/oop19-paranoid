@@ -6,23 +6,39 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
-   <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="50.0" BorderPane.alignment="CENTER">
+<SplitPane disable="true" dividerPositions="375.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
+  <items>
+    <AnchorPane style="-fx-background-image: url(&quot;backgrounds/bggame2.jpg&quot;); -fx-background-size: stretch;">
          <children>
-            <Label fx:id="score" text="Score:" />
-            <Label fx:id="life" text="Life:" />
+            <VBox>
+               <children>
+                  <Label text="PARANOID" />
+                  <Label text="SCORE: " />
+                  <Label text="LIVES: " />
+               </children>
+            </VBox>
          </children>
-      </VBox>
-   </center>
-   <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </top>
-   <left>
-      <VBox prefHeight="100.0" prefWidth="100.0" style="-fx-border-image-source: url(&quot;backgrounds/bgmenu.jpg&quot;),  url(&quot;backgrounds/bgmenu.jpg&quot;); -fx-border-image-repeat: stretch, stretch; -fx-border-image-width: 20, 20; -fx-border-image-slice: 25,30;" BorderPane.alignment="CENTER">
+      </AnchorPane>
+    <AnchorPane>
          <children>
-            <Canvas fx:id="canvas" />
-         </children>
-      </VBox>
-   </left>
-</BorderPane>
+            <BorderPane>
+               <center>
+                  <Pane style="-fx-background-image: url(&quot;backgrounds/bggame.gif&quot;); -fx-background-size: stretch;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Canvas fx:id="canvas" />
+                     </children>
+                  </Pane>
+               </center>
+               <top>
+                  <Pane opacity="0.7" prefHeight="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <Pane opacity="0.7" prefHeight="200.0" prefWidth="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Pane opacity="0.7" prefHeight="200.0" prefWidth="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+               </right>
+            </BorderPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
