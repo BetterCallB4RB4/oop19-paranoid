@@ -1,10 +1,14 @@
 package paranoid.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import paranoid.common.P2d;
+import paranoid.model.entity.Ball;
+import paranoid.model.entity.GameObj;
+import paranoid.model.entity.GameObject;
 
 /**
  * Controllore della gui game.fxml .
@@ -16,8 +20,7 @@ public final class GameController implements GuiController {
     private static final double CANVAS_HEIGHT = 600;
     private static final double RATIO_X = CANVAS_WIDTH / 60;
     private static final double RATIO_Y = CANVAS_HEIGHT / 60;
-    private final GraphicsContext gc;
-    private final List<GameObj> gameEntities;
+    private GraphicsContext gc;
 
     @FXML
     private Canvas canvas;
@@ -53,21 +56,22 @@ public final class GameController implements GuiController {
      */
     private void drawWorld(final List<GameObj> gameEntities) {
         gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
-        gameEntities.stream().foreach(e -> {
-            final Pos2d pos = e.getCurrentPos();
+        gameEntities.stream().forEach(e -> {
+            final P2d pos = e.getPos();
             final int xPos = getXinPixel(pos);
             final int yPos = getYinPixel(pos);
-            final int w = getWinPixel(e.getWidth);
-            final int h = getHinPixel(e.getHeight);
+            final int w = getWinPixel(e.getWidth());
+            final int h = getHinPixel(e.getHeight());
 
-            if (e instanceof Player) {
-                gc.fillRect(xPos, yPos, w, h);
-            } else if (e instanceof Ball) {
+            if (e instanceof Ball) {
                 gc.fillOval(xPos, yPos, w, h);
-            } else if (e instanceof Brick) {
-                gc.fillRect(xPos, yPos, w, h);
             }
+
+//            if (e instanceof Player) {
+//                gc.fillRect(xPos, yPos, w, h);
+//            } else if (e instanceof Brick) {
+//                gc.fillRect(xPos, yPos, w, h);
+//            }
         });
     }
 

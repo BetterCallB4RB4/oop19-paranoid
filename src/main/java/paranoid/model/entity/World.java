@@ -9,12 +9,12 @@ import paranoid.model.collision.CollisionManager;
 
 public class World {
 
-    private List<Ball> balls = new ArrayList<>();
+    private List<Ball> balls;
     private Border border;
     private CollisionManager collisionManager;
 
     public World(final List<Ball> balls, final Border border) {
-        this.balls.addAll(balls);
+        this.balls = balls;
         this.border = border;
         this.collisionManager = new CollisionManager();
     }
@@ -34,8 +34,8 @@ public class World {
      * @return a list of all the gameObj in the world
      */
     public List<GameObj> getSceneEntities() {
-        List<GameObj> entities = new ArrayList<GameObj>();
-        entities.addAll(balls);
+        List<GameObj> entities = new ArrayList<>();
+        entities.addAll(this.balls);
         return entities;
     }
 
