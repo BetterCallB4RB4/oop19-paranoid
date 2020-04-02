@@ -84,13 +84,12 @@ public class GameLoop implements Runnable {
     }
 
     private void render() {
-        gameController.render(world.getSceneEntities());
-//        Platform.runLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                gameController.render(world.getSceneEntities());
-//            }
-//        });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                gameController.render(world.getSceneEntities());
+            }
+        });
     }
 
 }

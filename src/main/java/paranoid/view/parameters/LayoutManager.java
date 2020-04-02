@@ -33,12 +33,12 @@ public enum LayoutManager {
      */
     LayoutManager(final String name) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(name));
-        this.guiController = loader.getController();
         try {
             this.layout = loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        this.guiController = loader.getController();
     }
 
     public Pane getLayout() {
