@@ -5,18 +5,23 @@ import java.util.List;
 import java.util.Optional;
 
 import paranoid.common.Collision;
+import paranoid.controller.event.Event;
+import paranoid.controller.event.EventConsumer;
+import paranoid.controller.event.WorldEventListener;
 import paranoid.model.collision.CollisionManager;
 
-public class World {
+public class World implements WorldEventListener{
 
     private List<Ball> balls;
     private Border border;
     private CollisionManager collisionManager;
+    private EventConsumer eventHandler;
 
     public World(final List<Ball> balls, final Border border) {
         this.balls = balls;
         this.border = border;
         this.collisionManager = new CollisionManager();
+        this.eventHandler = new EventConsumer();
     }
 
     /**
@@ -53,5 +58,13 @@ public class World {
      */
     public Border getBorder() {
         return this.border;
+    }
+
+    /**
+     * add events to the queue that will be resolved with each iteration of gameLoop.
+     */
+    @Override
+    public void notifyEvent(final Event ev) {
+        this.eventHandler.addEvent(ev);
     }
 }
