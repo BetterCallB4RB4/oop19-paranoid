@@ -1,14 +1,14 @@
 package paranoid.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import paranoid.common.P2d;
+import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.GameObj;
-import paranoid.model.entity.GameObject;
 
 /**
  * Controllore della gui game.fxml .
@@ -16,18 +16,10 @@ import paranoid.model.entity.GameObject;
  */
 public final class GameController implements GuiController {
 
-    private static final double CANVAS_WIDTH = 600;
-    private static final double CANVAS_HEIGHT = 600;
-    private static final double RATIO_X = CANVAS_WIDTH / 60;
-    private static final double RATIO_Y = CANVAS_HEIGHT / 60;
     private GraphicsContext gc;
 
     @FXML
     private Canvas canvas;
-
-    public GameController() {
-
-    }
 
     /**
      * Setta le dimensioni del riquadro di gioco e 
@@ -35,13 +27,13 @@ public final class GameController implements GuiController {
      */
     @FXML
     public void initialize() {
-        this.canvas.setWidth(CANVAS_WIDTH);
-        this.canvas.setHeight(CANVAS_HEIGHT);
+        this.canvas.setWidth(ScreenConstant.CANVAS_WIDTH);
+        this.canvas.setHeight(ScreenConstant.CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
     }
 
     /**
-     * Metodo richiamato dal game engine per aggiornare la visuale del mondo di gioco.
+     * Metodo richiamato dal game engine per aggiornare ogni elemento nello schermo.
      * @param gameEntities
      * Collezione contenente le varie entità di gioco.
      */
@@ -50,18 +42,20 @@ public final class GameController implements GuiController {
     }
 
     /**
-     * Metodo che disegna il mondo di gioco all'interno del riquadro.
+     * Metodo che disegna il mondo di gioco all'interno del riquadro proporzionato alla
+     * risoluzione del monitor.
      * @param gameEntities
      * Collezione contenente le varie entità del gioco. 
      */
     private void drawWorld(final List<GameObj> gameEntities) {
-        gc.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
+        gc.setFill(Color.ALICEBLUE);
         gameEntities.stream().forEach(e -> {
             final P2d pos = e.getPos();
-            final int xPos = getXinPixel(pos);
-            final int yPos = getYinPixel(pos);
-            final int w = getWinPixel(e.getWidth());
-            final int h = getHinPixel(e.getHeight());
+            final double xPos = getXinPixel(pos);
+            final double yPos = getYinPixel(pos);
+            final double w = getWinPixel(e.getWidth());
+            final double h = getHinPixel(e.getHeight());
 
             if (e instanceof Ball) {
                 gc.fillOval(xPos, yPos, w, h);
@@ -75,19 +69,19 @@ public final class GameController implements GuiController {
         });
     }
 
-    private int getXinPixel(final P2d pos) {
-        return (int) Math.round(pos.getX() * RATIO_X);
+    private double getXinPixel(final P2d pos) {
+        return pos.getX() * ScreenConstant.RATIO_X;
     }
 
-    private int getYinPixel(final P2d pos) {
-        return (int) Math.round(pos.getY() * RATIO_Y);
+    private double getYinPixel(final P2d pos) {
+        return pos.getY() * ScreenConstant.RATIO_Y;
     }
 
-    private int getWinPixel(final double wp) {
-        return (int) Math.round(wp * RATIO_X);
+    private double getWinPixel(final double wp) {
+        return wp * ScreenConstant.RATIO_X;
     }
 
-    private int getHinPixel(final double hp) {
-        return (int) Math.round(hp * RATIO_Y);
+    private double getHinPixel(final double hp) {
+        return hp * ScreenConstant.RATIO_Y;
     }
 }

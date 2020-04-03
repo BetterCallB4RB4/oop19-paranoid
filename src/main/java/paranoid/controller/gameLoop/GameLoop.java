@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
@@ -26,8 +27,9 @@ public class GameLoop implements Runnable {
         this.scene.setRoot(LayoutManager.GAME.getLayout());
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         List<Ball> ballContainer = new ArrayList<>();
-        ballContainer.add(new Ball(new P2d(2, 30), new V2d(20, 20), 3, 3));
-        this.world = new World(ballContainer, new Border(60, 60));
+        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 10, 10));
+        this.world = new World(ballContainer, new Border(ScreenConstant.WORLD_WIDTH,
+                ScreenConstant.WORLD_HEIGHT));
     }
 
     /**

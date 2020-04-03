@@ -9,7 +9,7 @@
    <items>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
          <children>
-            <Button fx:id="btnStart" onMouseClicked="#btnStartonClick" text="INIZIA PARTITA" />
+            <Button fx:id="btnStart" onMouseClicked="#btnStartonClickHandler" text="INIZIA PARTITA" />
             <Button text="MIGLIORI PUNTEGGI" />
             <Button text="OPZIONI" />
             <Button text="ISTRUZIONI" />

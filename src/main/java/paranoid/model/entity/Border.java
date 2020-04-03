@@ -6,10 +6,10 @@ public class Border {
 
     private final P2d upperLefCorner;
     private final P2d bottomRightCorner;
-    private final int width;
-    private final int height;
+    private final double width;
+    private final double height;
 
-    public Border(final int width, final int height) {
+    public Border(final double width, final double height) {
         this.width = width;
         this.height = height;
         this.upperLefCorner = new P2d(0, 0);
@@ -36,7 +36,7 @@ public class Border {
      * 
      * @return width of border
      */
-    public int getHeight() {
+    public double getHeight() {
         return this.width;
     }
 
