@@ -19,22 +19,22 @@ public final class ScreenConstant {
     public static final double SCREEN_HEIGHT = SCREEN_RES.getHeight() / 1.5;
 
     /**
-     * Larghezza del mondo di gioco (in base a questa si dispongono gli elementi del model.
+     * Larghezza del mondo di gioco (in base a questa si dispongono gli elementi del model).
      */
     public static final double WORLD_WIDTH = 600;
 
     /**
-     * Altezza del mondo di gioco (in base a questa si dispongono gli elementi del model.
+     * Altezza del mondo di gioco (in base a questa si dispongono gli elementi del model).
      */
     public static final double WORLD_HEIGHT = 600;
 
     /**
-     * Larghezza del riquadro da usare nella gui.
+     * Larghezza del riquadro da usare nella gui (si adatta alla risoluzione del monitor).
      */
     public static final double CANVAS_WIDTH = SCREEN_HEIGHT / 1.025;
 
     /**
-     * Altezza del riquadro da usare nella gui.
+     * Altezza del riquadro da usare nella gui (si adatta alla risoluzione del monitor).
      */
     public static final double CANVAS_HEIGHT = SCREEN_HEIGHT / 1.025;
 

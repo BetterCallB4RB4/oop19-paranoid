@@ -10,8 +10,8 @@ public class Ball extends GameObj {
 
     private boolean isMoving;
 
-    public Ball(final P2d pos, final V2d vel, final int height, final int width) {
-        super(pos, vel, height, width, new BallPhysicsComponent(), new DummyInputComponent());
+    public Ball(final P2d pos, final V2d vel, final double agility, final int height, final int width) {
+        super(pos, vel, agility, height, width, new BallPhysicsComponent(), new DummyInputComponent());
         this.isMoving = true;
     }
 

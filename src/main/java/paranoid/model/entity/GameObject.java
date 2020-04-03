@@ -16,6 +16,10 @@ public interface GameObject {
 
     V2d getVel();
 
+    void setAgility(double agil);
+
+    double getAgility();
+
     void setHeight(int height);
 
     void setWidth(int width);

@@ -6,9 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane disable="true" dividerPositions="375.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
-  <items>
-    <AnchorPane style="-fx-background-image: url(&quot;backgrounds/bggame2.jpg&quot;); -fx-background-size: stretch;">
+<SplitPane dividerPositions="375.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="paranoid.controller.GameController">
+   <items>
+      <AnchorPane style="-fx-background-image: url(&quot;backgrounds/bggame2.jpg&quot;); -fx-background-size: stretch;">
          <children>
             <VBox>
                <children>
@@ -19,7 +19,7 @@
             </VBox>
          </children>
       </AnchorPane>
-    <AnchorPane>
+      <AnchorPane>
          <children>
             <BorderPane>
                <center>
@@ -29,16 +29,17 @@
                      </children>
                   </Pane>
                </center>
-               <top>
-                  <Pane opacity="0.7" prefHeight="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
-               </top>
                <left>
-                  <Pane opacity="0.7" prefHeight="200.0" prefWidth="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+                  <Pane prefHeight="200.0" prefWidth="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
                </left>
                <right>
-                  <Pane opacity="0.7" prefHeight="200.0" prefWidth="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+                  <Pane prefHeight="200.0" prefWidth="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
                </right>
+               <top>
+                  <Pane prefHeight="15.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER" />
+               </top>
             </BorderPane>
-         </children></AnchorPane>
-  </items>
+         </children>
+      </AnchorPane>
+   </items>
 </SplitPane>

@@ -10,14 +10,16 @@ public abstract class GameObj implements GameObject {
 
     private P2d pos;
     private V2d vel;
+    private double agility;
     private int height;
     private int width;
     private PhysicsComponent phys;
     private InputComponent input;
 
-    public GameObj(final P2d pos, final V2d vel, final int height, final int width, final PhysicsComponent phys, final InputComponent input) {
+    public GameObj(final P2d pos, final V2d vel, final double agility, final int height, final int width, final PhysicsComponent phys, final InputComponent input) {
         this.pos = pos;
         this.vel = vel;
+        this.agility = agility;
         this.height = height;
         this.width = width;
         this.phys = phys;
@@ -57,6 +59,21 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
+     * @return the agility
+     */
+    @Override
+    public double getAgility() {
+        return agility;
+    }
+
+    /**
+     * @param agility the agility to set
+     */
+    @Override
+    public void setAgility(final double agility) {
+        this.agility = agility;
+    }
+    /**
      * @return the height
      */
     @Override
@@ -92,6 +109,7 @@ public abstract class GameObj implements GameObject {
      * 
      * @return the physical component of this gameObj
      */
+    @Override
     public PhysicsComponent getPhysicsComponent() {
         return this.phys;
     }
@@ -100,12 +118,15 @@ public abstract class GameObj implements GameObject {
      * 
      * @return the input component of this gameObj
      */
+    @Override
     public InputComponent getInputComponent() {
         return this.input;
     }
 
+    @Override
     public abstract void updatePhysics(int dt, World w);
 
+    @Override
     public abstract void updateInput(InputController controller);
 
 }

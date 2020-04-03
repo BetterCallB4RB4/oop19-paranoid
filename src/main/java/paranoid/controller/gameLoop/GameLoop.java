@@ -27,7 +27,7 @@ public class GameLoop implements Runnable {
         this.scene.setRoot(LayoutManager.GAME.getLayout());
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         List<Ball> ballContainer = new ArrayList<>();
-        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 10, 10));
+        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
         this.world = new World(ballContainer, new Border(ScreenConstant.WORLD_WIDTH,
                 ScreenConstant.WORLD_HEIGHT));
     }
