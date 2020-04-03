@@ -1,6 +1,7 @@
 package paranoid.model.entity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class World implements WorldEventListener{
      * @param entity the object to be checked
      * @return on what surface the object collides
      */
-    public Optional<Collision> checkCollisionWithBoundaries(final GameObj entity) {
+    public Optional<Collision> checkCollisionWithBoundaries(final GameObject entity) {
         return this.collisionManager.checkCollisionWithBoundaries(border, entity);
     }
 
@@ -38,10 +39,10 @@ public class World implements WorldEventListener{
      * 
      * @return a list of all the gameObj in the world
      */
-    public List<GameObj> getSceneEntities() {
-        List<GameObj> entities = new ArrayList<>();
+    public List<GameObject> getSceneEntities() {
+        List<GameObject> entities = new ArrayList<>();
         entities.addAll(this.balls);
-        return entities;
+        return Collections.unmodifiableList(entities);
     }
 
     /**

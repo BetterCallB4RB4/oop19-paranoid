@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.Ball;
-import paranoid.model.entity.GameObj;
+import paranoid.model.entity.GameObject;
 
 /**
  * Controllore della gui game.fxml .
@@ -37,7 +37,7 @@ public final class GameController implements GuiController {
      * @param gameEntities
      * Collezione contenente le varie entità di gioco.
      */
-    public void render(final List<GameObj> gameEntities) {
+    public void render(final List<GameObject> gameEntities) {
         drawWorld(gameEntities);
     }
 
@@ -47,7 +47,7 @@ public final class GameController implements GuiController {
      * @param gameEntities
      * Collezione contenente le varie entità del gioco. 
      */
-    private void drawWorld(final List<GameObj> gameEntities) {
+    private void drawWorld(final List<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
         gc.setFill(Color.ALICEBLUE);
         gameEntities.stream().forEach(e -> {
