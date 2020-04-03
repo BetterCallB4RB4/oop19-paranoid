@@ -81,6 +81,7 @@ public class GameLoop implements Runnable {
      */
     private void updateGame(final int elapsed) {
         world.updateState(elapsed);
+        world.getEventHanlder().resolveEvent();
     }
 
     private void render() {

@@ -67,4 +67,12 @@ public class World implements WorldEventListener{
     public void notifyEvent(final Event ev) {
         this.eventHandler.addEvent(ev);
     }
+
+    /**
+     * 
+     * @return the eventHandler
+     */
+    public EventConsumer getEventHanlder() {
+        return this.eventHandler;
+    }
 }

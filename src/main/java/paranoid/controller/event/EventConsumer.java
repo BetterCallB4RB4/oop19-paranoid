@@ -12,7 +12,10 @@ public class EventConsumer {
      */
     public void resolveEvent() {
         events.stream().forEach(ev -> {
+            if (ev instanceof HitBorderEvent) {
+                //TODO flat the score multiplier
 
+            }
         });
         events.clear();
     }
