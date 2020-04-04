@@ -12,7 +12,6 @@ import paranoid.model.entity.World;
 
 public class BallPhysicsComponent implements PhysicsComponent {
 
-    private static final double SCALER = 0.001;
     /**
      * ball asks the world if collisions have occurred.
      * report events
@@ -24,8 +23,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
         P2d old = gameObj.getPos(); //primitive method
         P2d pos = ball.getPos();
         V2d vel = ball.getVel();
-        double agility = ball.getAgility();
-        ball.setPos(pos.sum(vel.mul(SCALER * dt * agility)));
+        ball.setPos(pos.sum(vel.mul(SCALER * dt * ball.getAgility())));
 
         Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
         if (borderCollisionInfo.isPresent()) {

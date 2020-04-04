@@ -20,8 +20,7 @@ public class Player extends GameObj {
      */
     @Override
     public void updatePhysics(final int dt, final World w) {
-        // TODO Auto-generated method stub
-
+        super.getPhysicsComponent().update(dt, this, w);
     }
     /**
      * Gestisce la direzione del movimento tramite comandi da tastiera.

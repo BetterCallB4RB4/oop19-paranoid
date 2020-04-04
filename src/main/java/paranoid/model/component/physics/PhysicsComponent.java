@@ -5,6 +5,8 @@ import paranoid.model.entity.World;
 
 public interface PhysicsComponent {
 
+    double SCALER = 0.001;
+
     void update(int dt, GameObject gameObj, World w);
 
 }
