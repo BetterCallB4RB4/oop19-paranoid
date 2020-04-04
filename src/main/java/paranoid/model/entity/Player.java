@@ -28,7 +28,7 @@ public class Player extends GameObj {
      */
     @Override
     public void updateInput(final InputController controller) {
-        // TODO Auto-generated method stub
+        super.getInputComponent().update(this, controller);
 
     }
 
