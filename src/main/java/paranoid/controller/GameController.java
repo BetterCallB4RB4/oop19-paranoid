@@ -13,8 +13,8 @@ import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 
 /**
- * Controllore della gui game.fxml .
- * Tramite il game engine inizializza il mondo ed i vari oggetti di gioco ad ogni frame.
+ * Gui controller of game.fxml .
+ * It take from game loop every entities of the game and render it adapted to the monitor resolution
  */
 public final class GameController implements GuiController {
 
@@ -24,8 +24,8 @@ public final class GameController implements GuiController {
     private Canvas canvas;
 
     /**
-     * Setta le dimensioni del riquadro di gioco e 
-     * inizializza la classe che disegna i vari oggetti.
+     * At game.fxml load it initialize the width and height of the canvas and set his 
+     * graphic context for draw entity.
      */
     @FXML
     public void initialize() {
@@ -35,20 +35,13 @@ public final class GameController implements GuiController {
     }
 
     /**
-     * Metodo richiamato dal game engine per aggiornare ogni elemento nello schermo.
-     * @param gameEntities
-     * Collezione contenente le varie entità di gioco.
+     * Draw all entities of the game adapted to the current resolution.
+     * @param gameEntities Collection of each game entity taken from the game loop.
      */
     public void render(final List<GameObject> gameEntities) {
         drawWorld(gameEntities);
     }
 
-    /**
-     * Metodo che disegna il mondo di gioco all'interno del riquadro proporzionato alla
-     * risoluzione del monitor.
-     * @param gameEntities
-     * Collezione contenente le varie entità del gioco. 
-     */
     private void drawWorld(final List<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
         gc.setFill(Color.ALICEBLUE);

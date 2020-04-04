@@ -1,7 +1,7 @@
 package paranoid.main;
 
 /**
- * Rappresenta il Launcher del sistema, per bypassare i vincoli dei moduli di Java11.
+ * Launcher of the application, for bypass java11 modules constraints.
  */
 public final class Launcher {
 

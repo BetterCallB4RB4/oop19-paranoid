@@ -12,6 +12,9 @@ import paranoid.model.entity.World;
 
 public final class PlayerPhysicsComponent implements PhysicsComponent {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final int dt, final GameObject gameObj, final World w) {
 
