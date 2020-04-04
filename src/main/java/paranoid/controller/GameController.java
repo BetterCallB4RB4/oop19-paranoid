@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.Ball;
+import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 
@@ -62,11 +63,9 @@ public final class GameController implements GuiController {
                 gc.fillOval(xPos, yPos, w, h);
             } else if (e instanceof Player) {
                 gc.fillRect(xPos, yPos, w, h);
+            } else if (e instanceof Brick) {
+                gc.fillRect(xPos, yPos, w, h);
             }
-
-//            if (e instanceof Brick) {
-//                gc.fillRect(xPos, yPos, w, h);
-//            }
         });
     }
 

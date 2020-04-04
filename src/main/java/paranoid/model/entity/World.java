@@ -15,13 +15,15 @@ import paranoid.model.component.input.InputController;
 public class World implements WorldEventListener {
 
     private List<Ball> balls;
+    private List<Brick> bricks;
     private List<Player> players;
     private Border border;
     private CollisionManager collisionManager;
     private EventConsumer eventHandler;
 
-    public World(final List<Ball> balls, final List<Player> players, final Border border) {
+    public World(final List<Ball> balls, final List<Brick> bricks, final List<Player> players, final Border border) {
         this.balls = balls;
+        this.bricks = bricks;
         this.players = players;
         this.border = border;
         this.collisionManager = new CollisionManager();
@@ -45,6 +47,7 @@ public class World implements WorldEventListener {
     public List<GameObject> getSceneEntities() {
         List<GameObject> entities = new ArrayList<>();
         entities.addAll(this.balls);
+        entities.addAll(this.bricks);
         entities.addAll(this.players);
         return Collections.unmodifiableList(entities);
     }
