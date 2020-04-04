@@ -11,6 +11,7 @@ import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
+import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
 import paranoid.view.parameters.LayoutManager;
 
@@ -27,8 +28,10 @@ public class GameLoop implements Runnable {
         this.scene.setRoot(LayoutManager.GAME.getLayout());
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         List<Ball> ballContainer = new ArrayList<>();
+        List<Player> playerContainer = new ArrayList<>();
         ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 3, 10, 10));
-        this.world = new World(ballContainer, new Border(ScreenConstant.WORLD_WIDTH,
+        playerContainer.add(new Player(new P2d(290, 500), new V2d(0, 0), 300, 10, 80));
+        this.world = new World(ballContainer, playerContainer, new Border(ScreenConstant.WORLD_WIDTH,
                 ScreenConstant.WORLD_HEIGHT));
     }
 

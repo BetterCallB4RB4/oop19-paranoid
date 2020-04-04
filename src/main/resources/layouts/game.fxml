@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="375.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="paranoid.controller.GameController">
+<SplitPane disable="true" dividerPositions="375.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
    <items>
       <AnchorPane style="-fx-background-image: url(&quot;backgrounds/bggame2.jpg&quot;); -fx-background-size: stretch;">
          <children>

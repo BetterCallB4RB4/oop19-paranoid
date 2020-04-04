@@ -4,7 +4,7 @@ import paranoid.common.P2d;
 import paranoid.common.V2d;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.PlayerInputComponent;
-import paranoid.model.component.physics.DummyPhysicsComponent;
+import paranoid.model.component.physics.PlayerPhysicsComponent;
 
 /**
  * Classe che gestisce l'entità del giocatore con i relativi componenti fisici e di input.
@@ -13,7 +13,7 @@ import paranoid.model.component.physics.DummyPhysicsComponent;
 public class Player extends GameObj {
 
     public Player(final P2d pos, final V2d vel, final double agility, final int height, final int width) {
-        super(pos, vel, agility, height, width, new DummyPhysicsComponent(), new PlayerInputComponent());
+        super(pos, vel, agility, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent());
     }
     /**
      * Gestisce le collisioni con il bordo di gioco ed effettua lo postamento del giocatore.

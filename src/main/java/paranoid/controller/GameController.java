@@ -9,6 +9,7 @@ import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.GameObject;
+import paranoid.model.entity.Player;
 
 /**
  * Controllore della gui game.fxml .
@@ -59,11 +60,11 @@ public final class GameController implements GuiController {
 
             if (e instanceof Ball) {
                 gc.fillOval(xPos, yPos, w, h);
+            } else if (e instanceof Player) {
+                gc.fillRect(xPos, yPos, w, h);
             }
 
-//            if (e instanceof Player) {
-//                gc.fillRect(xPos, yPos, w, h);
-//            } else if (e instanceof Brick) {
+//            if (e instanceof Brick) {
 //                gc.fillRect(xPos, yPos, w, h);
 //            }
         });
