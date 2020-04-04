@@ -10,6 +10,7 @@ import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
 import paranoid.controller.event.WorldEventListener;
 import paranoid.model.collision.CollisionManager;
+import paranoid.model.component.input.InputController;
 
 public class World implements WorldEventListener {
 
@@ -78,5 +79,13 @@ public class World implements WorldEventListener {
      */
     public EventConsumer getEventHanlder() {
         return this.eventHandler;
+    }
+
+    /**
+     * Update player input component.
+     * @param inputController controller that check the key pressed by user input device
+     */
+    public void movePlayer(final InputController inputController) {
+        this.players.forEach(p -> p.updateInput(inputController));
     }
 }
