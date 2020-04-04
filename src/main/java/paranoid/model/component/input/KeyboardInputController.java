@@ -1,29 +1,29 @@
 package paranoid.model.component.input;
 
-public class KeyboardInputController implements InputController {
+public final class KeyboardInputController implements InputController {
 
-    private boolean isBallRolling;
+    private boolean moveRight;
+    private boolean moveLeft;
 
-    /**
-     * controll if the player started the match.
-     */
     @Override
-    public boolean isBallRolling() {
-        return isBallRolling;
+    public boolean isMoveRight() {
+        return this.moveRight;
     }
 
-    /**
-     * notifies that the player press the button to starte the game.
-     */
-    public void notifyBallRoll() {
-        isBallRolling = true;
+    @Override
+    public boolean isMoveLeft() {
+        return this.moveLeft;
     }
 
-    /**
-     * notifies that the player press the button to pause the game.
-     */
-    public void notifyNoMoreBallRoll() {
-        isBallRolling = false;
+    @Override
+    public void notifyMoveRight(final boolean condition) {
+        this.moveRight = condition;
     }
+
+    @Override
+    public void notifyMoveLeft(final boolean condition) {
+        this.moveLeft = condition;
+    }
+
 
 }
