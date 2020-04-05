@@ -9,10 +9,10 @@ import paranoid.model.component.physics.PlayerPhysicsComponent;
 /**
  * Player entity.
  */
-public class Player extends GameObj {
+public final class Player extends GameObj {
 
-    public Player(final P2d pos, final V2d vel, final double agility, final int height, final int width) {
-        super(pos, vel, agility, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent());
+    private Player(final P2d pos, final int height, final int width) {
+        super(pos, new V2d(0, 0), 300, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent());
     }
 
     /**
@@ -30,6 +30,35 @@ public class Player extends GameObj {
     public void updateInput(final InputController controller) {
         super.getInputComponent().update(this, controller);
 
+    }
+
+    public static final class Builder {
+
+        private P2d pos;
+        private int height;
+        private int width;
+
+        public Builder position(final P2d pos) {
+            this.pos = pos;
+            return this;
+        }
+
+        public Builder height(final int height) {
+            this.height = height;
+            return this;
+        }
+
+        public Builder width(final int width) {
+            this.width = width;
+            return this;
+        }
+
+        public Player build() {
+            if (this.pos == null || this.height <= 0 || this.width <= 0) {
+                throw new IllegalStateException();
+            }
+            return new Player(this.pos, this.height, this.width);
+        }
     }
 
 }

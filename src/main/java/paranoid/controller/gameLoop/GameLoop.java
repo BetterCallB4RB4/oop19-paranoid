@@ -35,8 +35,6 @@ public class GameLoop implements Runnable {
         List<Brick> brickContainer = new ArrayList<>();
         List<Player> playerContainer = new ArrayList<>();
         ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
-        brickContainer.add(new Brick(new P2d(290, 30), new V2d(0, 0), 0, 30, 60));
-        playerContainer.add(new Player(new P2d(290, 500), new V2d(0, 0), 300, 10, 80));
         this.world = new World(ballContainer, brickContainer, playerContainer, new Border(ScreenConstant.WORLD_WIDTH,
                 ScreenConstant.WORLD_HEIGHT));
         notifyInputEvent();
