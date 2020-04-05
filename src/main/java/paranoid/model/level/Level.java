@@ -1,16 +1,15 @@
 package paranoid.model.level;
 
-import java.util.ArrayList;
-
+import java.io.Serializable;
 import java.util.List;
-
 import paranoid.model.entity.Brick;
 
-public class Level {
+public class Level implements Serializable {
 
     //TODO add music URI
     //TODO add backGround URI
-    private List<Brick> bricks = new ArrayList<>();
+    private static final long serialVersionUID = -3269378075735300995L;
+    private List<Brick> bricks;
     private String levelName;
 
     public Level(final List<Brick> bricks, final String levelName) {
