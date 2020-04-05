@@ -1,6 +1,8 @@
 package paranoid.model.entity;
 
+import javafx.scene.paint.Color;
 import paranoid.common.P2d;
+import paranoid.common.PlayerId;
 import paranoid.common.V2d;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.PlayerInputComponent;
@@ -11,8 +13,12 @@ import paranoid.model.component.physics.PlayerPhysicsComponent;
  */
 public final class Player extends GameObj {
 
-    private Player(final P2d pos, final int height, final int width) {
+    private final Color color;
+    private final PlayerId playerId;
+    private Player(final P2d pos, final int height, final int width, final Color color, final PlayerId playerId) {
         super(pos, new V2d(0, 0), 300, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent());
+        this.color = color;
+        this.playerId = playerId;
     }
 
     /**
@@ -32,11 +38,20 @@ public final class Player extends GameObj {
 
     }
 
+    public Color getColor() {
+        return this.color;
+    }
+    public PlayerId getPlayerId() {
+        return this.playerId;
+    }
+
     public static final class Builder {
 
         private P2d pos;
         private int height;
         private int width;
+        private Color color;
+        private PlayerId playerId;
 
         public Builder position(final P2d pos) {
             this.pos = pos;
@@ -53,11 +68,23 @@ public final class Player extends GameObj {
             return this;
         }
 
+        public Builder color(final Color color) {
+            this.color = color;
+            return this;
+        }
+
+        public Builder playerId(final PlayerId playerId) {
+            this.playerId = playerId;
+            return this;
+        }
+
         public Player build() {
-            if (this.pos == null || this.height <= 0 || this.width <= 0) {
+            if (this.pos == null || this.height <= 0 || this.width <= 0 || this.color == null
+                    || this.playerId == null) {
+
                 throw new IllegalStateException();
             }
-            return new Player(this.pos, this.height, this.width);
+            return new Player(this.pos, this.height, this.width, this.color, this.playerId);
         }
     }
 

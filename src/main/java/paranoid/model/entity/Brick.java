@@ -15,7 +15,7 @@ public final class Brick extends GameObj {
     private final Color color;
     private final int pointEarned;
     private int energy;
-    private boolean desctructible;
+    private final boolean desctructible;
     /**
      * Constructor.
      * @param pos the position of this game object

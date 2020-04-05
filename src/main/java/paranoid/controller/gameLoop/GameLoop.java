@@ -1,11 +1,15 @@
 package paranoid.controller.gameLoop;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import paranoid.common.P2d;
+import paranoid.common.PlayerId;
 import paranoid.common.V2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
@@ -23,18 +27,33 @@ public class GameLoop implements Runnable {
     private static final int PERIOD = 20;
     private final Scene scene;
     private final GameController gameController;
-    private final InputController inputController;
+    private final Map<PlayerId, InputController> inputController = new HashMap<>();
     private World world;
 
     public GameLoop(final Scene scene) {
         this.scene = scene;
         this.scene.setRoot(LayoutManager.GAME.getLayout());
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
-        this.inputController = new KeyboardInputController();
+        this.inputController.put(PlayerId.ONE, new KeyboardInputController());
+        this.inputController.put(PlayerId.TWO, new KeyboardInputController());
         List<Ball> ballContainer = new ArrayList<>();
         List<Brick> brickContainer = new ArrayList<>();
         List<Player> playerContainer = new ArrayList<>();
         ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
+
+        playerContainer.add(new Player.Builder().position(new P2d(350,500))
+                .width(80)
+                .height(10)
+                .color(Color.DARKGREEN)
+                .playerId(PlayerId.ONE)
+                .build());
+        
+        playerContainer.add(new Player.Builder().position(new P2d(290,500))
+                .width(80)
+                .height(10)
+                .color(Color.RED)
+                .playerId(PlayerId.TWO)
+                .build());
         this.world = new World(ballContainer, brickContainer, playerContainer, new Border(ScreenConstant.WORLD_WIDTH,
                 ScreenConstant.WORLD_HEIGHT));
         notifyInputEvent();
@@ -81,7 +100,9 @@ public class GameLoop implements Runnable {
      * keyboard commands are executed.
      */
     private void processInput() {
-        world.movePlayer(inputController);
+        inputController.entrySet().forEach(i -> {
+            world.movePlayer(i.getKey(), i.getValue());
+        });
     }
 
     /**
@@ -107,10 +128,16 @@ public class GameLoop implements Runnable {
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
             case RIGHT:
-                inputController.notifyMoveRight(true);
+                inputController.get(PlayerId.ONE).notifyMoveRight(true);
                 break;
             case LEFT:
-                inputController.notifyMoveLeft(true);
+                inputController.get(PlayerId.ONE).notifyMoveLeft(true);
+                break;
+            case D:
+                inputController.get(PlayerId.TWO).notifyMoveRight(true);
+                break;
+            case A:
+                inputController.get(PlayerId.TWO).notifyMoveLeft(true);
                 break;
             default:
                 break;
@@ -120,10 +147,16 @@ public class GameLoop implements Runnable {
         this.scene.setOnKeyReleased(e -> {
             switch (e.getCode()) {
             case RIGHT:
-                inputController.notifyMoveRight(false);
+                inputController.get(PlayerId.ONE).notifyMoveRight(false);
                 break;
             case LEFT:
-                inputController.notifyMoveLeft(false);
+                inputController.get(PlayerId.ONE).notifyMoveLeft(false);
+                break;
+            case D:
+                inputController.get(PlayerId.TWO).notifyMoveRight(false);
+                break;
+            case A:
+                inputController.get(PlayerId.TWO).notifyMoveLeft(false);
                 break;
             default:
                 break;

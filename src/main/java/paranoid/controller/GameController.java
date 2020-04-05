@@ -55,8 +55,10 @@ public final class GameController implements GuiController {
             if (e instanceof Ball) {
                 gc.fillOval(xPos, yPos, w, h);
             } else if (e instanceof Player) {
+                gc.setFill(((Player) e).getColor());
                 gc.fillRect(xPos, yPos, w, h);
             } else if (e instanceof Brick) {
+                gc.setFill(Color.ALICEBLUE);
                 gc.fillRect(xPos, yPos, w, h);
             }
         });
