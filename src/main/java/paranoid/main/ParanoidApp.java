@@ -8,7 +8,7 @@ import paranoid.view.MainStage;
 
 /**
  * PARANOID MAIN.
- * Creazione dello stage.
+ * Stage creation.
  *
  */
 public class ParanoidApp extends Application {

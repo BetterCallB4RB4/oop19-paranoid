@@ -7,8 +7,7 @@ import javafx.scene.control.SplitPane;
 import paranoid.controller.GuiController;
 
 /**
- * Enum per gestire i caricamenti dei file fxml da passare alla scena.
- *
+ * Enum for static load all fxml at the start of application.
  */
 public enum LayoutManager {
 
@@ -31,10 +30,8 @@ public enum LayoutManager {
     private SplitPane layout;
 
     /**
-     * Costruttore privato che carica all'avvio dell'applicazione tutti i file fxml ed 
-     * i relativi controller da poter passare alle classi che li richiedono.
-     * @param name
-     * url dove prelevare il file fxml.
+     * Constructor.
+     * @param name url where take the fxml
      */
     LayoutManager(final String name) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(name));
@@ -46,10 +43,17 @@ public enum LayoutManager {
         this.guiController = loader.getController();
     }
 
+    /**
+     * @return layout from selected fxml path
+     */
     public SplitPane getLayout() {
         return this.layout;
     }
 
+    /**
+     * 
+     * @return gui controller from selected fxml path
+     */
     public GuiController getGuiController() {
         return this.guiController;
     }

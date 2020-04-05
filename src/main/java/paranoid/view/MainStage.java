@@ -6,7 +6,7 @@ import paranoid.common.dimension.ScreenConstant;
 import paranoid.view.parameters.LayoutManager;
 
 /**
- * Stage principale dell'applicazione.
+ * Main stage of this application.
  */
 public class MainStage extends Stage {
 
@@ -21,7 +21,8 @@ public class MainStage extends Stage {
 
     private final class MainScene extends Scene {
         /**
-         * costruttore che aggiunge il layout menu.fxml e le dimensioni alla scena.
+         * Constructor.
+         * Add layout menu.fxml and size to the scene.
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);

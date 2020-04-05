@@ -7,7 +7,7 @@ import paranoid.controller.gameLoop.GameLoop;
 import paranoid.view.parameters.LayoutManager;
 
 /**
- * Controller relativo alla gui menu.fxml.
+ * Controller of menu.fxml.
  */
 public final class MenuController implements GuiController {
 
@@ -18,13 +18,13 @@ public final class MenuController implements GuiController {
     private Button btnBuilder;
 
     /**
-     * Gestore evento click del mouse sul bottone inizia partita.
+     * Handle start game button event.
      */
     @FXML
     public void btnStartonClickHandler() {
         final Scene scene = btnStart.getScene();
         final Thread engine = new Thread(new GameLoop(scene));
-        engine.setDaemon(true); //permette alla VM di chiudere il thread quando si esce dall' app.
+        engine.setDaemon(true); //allow jvm to close the thread when close the window.
         engine.start();
     }
 

@@ -1,7 +1,7 @@
 package paranoid.controller;
 
 /**
- * Interfaccia che collega tutti i controller delle gui alla enum LayoutManager.
+ * GUI interface.
  */
 public interface GuiController {
 

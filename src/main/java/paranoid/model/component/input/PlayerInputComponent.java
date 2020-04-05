@@ -6,6 +6,9 @@ import paranoid.model.entity.Player;
 
 public final class PlayerInputComponent implements InputComponent {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final GameObject obj, final InputController c) {
         final Player player = (Player) obj;

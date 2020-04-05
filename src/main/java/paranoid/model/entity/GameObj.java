@@ -27,7 +27,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @return the pos
+     * {@inheritDoc}
      */
     @Override
     public P2d getPos() {
@@ -35,7 +35,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @param pos the pos to set
+     * {@inheritDoc}
      */
     @Override
     public void setPos(final P2d pos) {
@@ -43,7 +43,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @return the vel
+     * {@inheritDoc}
      */
     @Override
     public V2d getVel() {
@@ -51,7 +51,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @param vel the vel to set
+     * {@inheritDoc}
      */
     @Override
     public void setVel(final V2d vel) {
@@ -59,7 +59,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @return the agility
+     * {@inheritDoc}
      */
     @Override
     public double getAgility() {
@@ -67,14 +67,15 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @param agility the agility to set
+     * {@inheritDoc}
      */
     @Override
     public void setAgility(final double agility) {
         this.agility = agility;
     }
+
     /**
-     * @return the height
+     * {@inheritDoc}
      */
     @Override
     public int getHeight() {
@@ -82,7 +83,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @param height the height to set
+     * {@inheritDoc}
      */
     @Override
     public void setHeight(final int height) {
@@ -90,7 +91,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @return the width
+     * {@inheritDoc}
      */
     @Override
     public int getWidth() {
@@ -98,7 +99,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * @param width the width to set
+     * {@inheritDoc}
      */
     @Override
     public void setWidth(final int width) {
@@ -106,8 +107,7 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * 
-     * @return the physical component of this gameObj
+     * {@inheritDoc}
      */
     @Override
     public PhysicsComponent getPhysicsComponent() {
@@ -115,17 +115,22 @@ public abstract class GameObj implements GameObject {
     }
 
     /**
-     * 
-     * @return the input component of this gameObj
+     * {@inheritDoc}
      */
     @Override
     public InputComponent getInputComponent() {
         return this.input;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public abstract void updatePhysics(int dt, World w);
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public abstract void updateInput(InputController controller);
 

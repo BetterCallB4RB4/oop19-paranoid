@@ -12,6 +12,9 @@ import paranoid.model.entity.World;
 
 public final class PlayerPhysicsComponent implements PhysicsComponent {
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(final int dt, final GameObject gameObj, final World w) {
 
@@ -20,8 +23,11 @@ public final class PlayerPhysicsComponent implements PhysicsComponent {
         final V2d velPlayer = player.getVel();
 
         player.setPos(posPlayer.sum(velPlayer.mul(SCALER * dt * player.getAgility())));
+
+        //check collision with world border
         final Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(player);
 
+        // if collision is present check where happened and don't allow the player to move out of the border
         if (borderCollisionInfo.isPresent()) {
             final Collision typeCol = borderCollisionInfo.get();
             if (typeCol.equals(Collision.LEFT)) {
