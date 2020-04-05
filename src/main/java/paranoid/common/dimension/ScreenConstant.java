@@ -3,7 +3,7 @@ package paranoid.common.dimension;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 /**
- * Contains global information for setup the view adaptable to the resolution
+ * Contains global information for setup the view adaptable to the resolution.
  */
 public final class ScreenConstant {
 
@@ -11,7 +11,7 @@ public final class ScreenConstant {
      * @return current screen size
      */
     private static final Rectangle2D SCREEN_RES = Screen.getPrimary().getBounds();
-    
+
     /**
      * Width of the gui (portion adapted to the resolution).
      */
