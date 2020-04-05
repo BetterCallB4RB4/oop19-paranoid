@@ -13,6 +13,7 @@
             <Button text="MIGLIORI PUNTEGGI" />
             <Button text="OPZIONI" />
             <Button text="ISTRUZIONI" />
+            <Button fx:id="btnBuilder" onMouseClicked="#goToLevelBuilder" text="LEVEL BUILDER" />
          </children>
       </VBox>
    </items>
