@@ -36,4 +36,5 @@ public final class MenuController implements GuiController {
         final Scene scene = btnBuilder.getScene();
         scene.setRoot(LayoutManager.LEVEL_BUILDER.getLayout());
     }
+
 }

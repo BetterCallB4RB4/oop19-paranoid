@@ -44,15 +44,17 @@ public class GameBuilderController implements GuiController {
     private Canvas canvas;
 
     /**
-     * set the size of the builder.
+     * 
      */
     @FXML
     public void initialize() {
         this.canvas.setWidth(ScreenConstant.CANVAS_WIDTH);
         this.canvas.setHeight(ScreenConstant.CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
+        this.gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         this.levelBuilder = new LevelBuilder();
     }
+
 
     /**
      * go back to menu.
