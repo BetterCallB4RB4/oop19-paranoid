@@ -1,7 +1,10 @@
 package paranoid.model.entity;
 
+import java.io.Serializable;
+
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
+import paranoid.common.SerializableColor;
 import paranoid.common.V2d;
 import paranoid.model.component.input.DummyInputComponent;
 import paranoid.model.component.input.InputController;
@@ -10,9 +13,10 @@ import paranoid.model.component.physics.DummyPhysicsComponent;
 /**
  * Brick entity.
  */
-public final class Brick extends GameObj {
+public final class Brick extends GameObj implements Serializable {
 
-    private final Color color;
+    private static final long serialVersionUID = -2501638679114243141L;
+    private final SerializableColor color;
     private final int pointEarned;
     private int energy;
     private boolean desctructible;
@@ -26,7 +30,7 @@ public final class Brick extends GameObj {
      */
     private Brick(final P2d pos, final int height, final int width, final Color color, final int pointEarned, final int energy, final boolean destructible) {
         super(pos, new V2d(0, 0), 0, height, width, new DummyPhysicsComponent(), new DummyInputComponent());
-        this.color = color;
+        this.color = new SerializableColor(color);
         this.pointEarned = pointEarned;
         this.energy = energy;
         this.desctructible = destructible;
@@ -50,7 +54,7 @@ public final class Brick extends GameObj {
     }
 
     public Color getColor() {
-        return this.color;
+        return this.color.getColor();
     }
 
     public int getPointEarned() {

@@ -1,13 +1,16 @@
 package paranoid.model.entity;
 
+import java.io.Serializable;
+
 import paranoid.common.P2d;
 import paranoid.common.V2d;
 import paranoid.model.component.input.InputComponent;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.PhysicsComponent;
 
-public abstract class GameObj implements GameObject {
+public abstract class GameObj implements GameObject, Serializable {
 
+    private static final long serialVersionUID = 1256139078242900664L;
     private P2d pos;
     private V2d vel;
     private double agility;
