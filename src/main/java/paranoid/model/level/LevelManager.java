@@ -3,10 +3,10 @@ package paranoid.model.level;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import paranoid.main.ParanoidApp;
 
 public class LevelManager {
@@ -20,16 +20,13 @@ public class LevelManager {
         }
     }
 
-    public static Level loadLevel(final String nameLevel) throws NullPointerException {
+    public static Level loadLevel(final String nameLevel) {
         Level level = null;
         try (ObjectInputStream istream = new ObjectInputStream(
         new BufferedInputStream(new FileInputStream(ParanoidApp.LEVEL_FOLDER + ParanoidApp.SEPARATOR + nameLevel)))) {
             level = (Level) istream.readObject();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (level == null) {
-            throw new NullPointerException();
         }
         return level;
     }
