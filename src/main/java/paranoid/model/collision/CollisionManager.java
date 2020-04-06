@@ -3,6 +3,7 @@ package paranoid.model.collision;
 import java.util.Optional;
 
 import paranoid.common.Collision;
+import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
@@ -39,20 +40,29 @@ public class CollisionManager {
         final boolean checkRight = checkRightForCollision(brick.getPos().getX(), entity.getPos().getX());
         final boolean checkTop = checkTopForCollision(brick.getPos().getY(), entity.getPos().getY());
         final boolean checkBottom = checkBottomForCollision(brick.getPos().getY(), entity.getPos().getY());
+        final Ball ball = (Ball) entity;
 
-        if (checkLeft && checkRight && checkTop && checkBottom) {
-            return Optional.empty();
+        if (!checkLeft) {
+            brick.getLastZonePresence().put(ball, Collision.RIGHT);
+        } else if (!checkRight) {
+            brick.getLastZonePresence().put(ball, Collision.LEFT);
+        } else if (!checkTop) {
+            brick.getLastZonePresence().put(ball, Collision.BOTTOM);
+        } else if (!checkBottom) {
+            brick.getLastZonePresence().put(ball, Collision.TOP);
+        } else {
+            return Optional.of(brick.getLastZonePresence().get(ball));
         }
 
         return Optional.empty();
     }
 
     private boolean checkLeftForCollision(final double posBrick, final double posEntity) {
-        return posBrick > posEntity;
+        return posBrick < posEntity;
     }
 
     private boolean checkRightForCollision(final double posBrick, final double posEntity) {
-        return posBrick < posEntity;
+        return posBrick > posEntity;
     }
 
     private boolean checkTopForCollision(final double posBrick, final double posEntity) {
