@@ -55,7 +55,7 @@ public final class Settings implements Serializable {
         return selectedLevel;
     }
 
-    public static final class Builder {
+    public static final class SettingsBuilder {
 
         private Difficulty difficulty;
         private boolean playMusic;
@@ -63,7 +63,7 @@ public final class Settings implements Serializable {
         private int playerNumber;
         private String selectedLevel;
 
-        public Builder() {
+        public SettingsBuilder() {
             this.difficulty = Difficulty.NORMAL;
             this.playMusic = false;
             this.playEffects = true;
@@ -71,7 +71,7 @@ public final class Settings implements Serializable {
             this.selectedLevel = "level1";
         }
 
-        public Builder fromSettings(final Settings settings) {
+        public SettingsBuilder fromSettings(final Settings settings) {
             this.difficulty = settings.getDifficulty();
             this.playMusic = settings.isPlayMusic();
             this.playEffects = settings.isPlayEffects();
@@ -80,27 +80,27 @@ public final class Settings implements Serializable {
             return this;
         }
 
-        public Builder difficulty(final Difficulty diffculty) {
+        public SettingsBuilder difficulty(final Difficulty diffculty) {
             this.difficulty = diffculty;
             return this;
         }
 
-        public Builder playMusic(final boolean playMusic) {
+        public SettingsBuilder playMusic(final boolean playMusic) {
             this.playMusic = playMusic;
             return this;
         }
 
-        public Builder playEffect(final boolean playEffect) {
+        public SettingsBuilder playEffect(final boolean playEffect) {
             this.playEffects = playEffect;
             return this;
         }
 
-        public Builder playerNumber(final int playerNumber) {
+        public SettingsBuilder playerNumber(final int playerNumber) {
             this.playerNumber = playerNumber;
             return this;
         }
 
-        public Builder selectLevel(final String selectedLevel) {
+        public SettingsBuilder selectLevel(final String selectedLevel) {
             this.selectedLevel = selectedLevel;
             return this;
         }
