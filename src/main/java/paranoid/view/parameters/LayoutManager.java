@@ -19,7 +19,12 @@ public enum LayoutManager {
     /**
      * game.fxml path.
      */
-    GAME("layouts/game.fxml");
+    GAME("layouts/game.fxml"),
+
+    /**
+     * levelBuilder.fxml path.
+     */
+    LEVEL_BUILDER("layouts/levelBuilder.fxml");
 
     private final GuiController guiController;
     private SplitPane layout;
