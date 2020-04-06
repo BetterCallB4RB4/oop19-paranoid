@@ -59,7 +59,7 @@ public class World implements WorldEventListener {
         }
         return Optional.empty();
     }
-    
+
     /**
      * 
      * @return a list of all the gameObj in the world

@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import paranoid.common.Collision;
 import paranoid.model.entity.Border;
+import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 
 public class CollisionManager {
@@ -26,6 +27,40 @@ public class CollisionManager {
         } else {
             return Optional.empty();
         }
+    }
+
+    /**
+     * @param brick the brick to check the collision
+     * @param entity the object that can collide with the brick
+     * @return the collision surface
+     */
+    public Optional<Collision> checkCollisionWithBricks(final Brick brick, final GameObject entity) {
+        final boolean checkLeft = checkLeftForCollision(brick.getPos().getX(), entity.getPos().getX());
+        final boolean checkRight = checkRightForCollision(brick.getPos().getX(), entity.getPos().getX());
+        final boolean checkTop = checkTopForCollision(brick.getPos().getY(), entity.getPos().getY());
+        final boolean checkBottom = checkBottomForCollision(brick.getPos().getY(), entity.getPos().getY());
+
+        if (checkLeft && checkRight && checkTop && checkBottom) {
+            return Optional.empty();
+        }
+
+        return Optional.empty();
+    }
+
+    private boolean checkLeftForCollision(final double posBrick, final double posEntity) {
+        return posBrick > posEntity;
+    }
+
+    private boolean checkRightForCollision(final double posBrick, final double posEntity) {
+        return posBrick < posEntity;
+    }
+
+    private boolean checkTopForCollision(final double posBrick, final double posEntity) {
+        return posBrick < posEntity;
+    }
+
+    private boolean checkBottomForCollision(final double posBrick, final double posEntity) {
+        return posBrick > posEntity;
     }
 }
 
