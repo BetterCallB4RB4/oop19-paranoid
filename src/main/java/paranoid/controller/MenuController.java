@@ -17,6 +17,9 @@ public final class MenuController implements GuiController {
     @FXML
     private Button btnBuilder;
 
+    @FXML
+    private Button btSettings;
+
     /**
      * Handle start game button event.
      */
@@ -35,6 +38,12 @@ public final class MenuController implements GuiController {
     public void goToLevelBuilder() {
         final Scene scene = btnBuilder.getScene();
         scene.setRoot(LayoutManager.LEVEL_BUILDER.getLayout());
+    }
+
+    @FXML
+    public void goToSettings() {
+        final Scene scene = btSettings.getScene();
+        scene.setRoot(LayoutManager.SETTINGS.getLayout());
     }
 
 }

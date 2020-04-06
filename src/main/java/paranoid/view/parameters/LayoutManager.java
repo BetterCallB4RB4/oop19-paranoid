@@ -22,6 +22,11 @@ public enum LayoutManager {
     GAME("layouts/game.fxml"),
 
     /**
+     * game.fxml path.
+     */
+    SETTINGS("layouts/settings.fxml"),
+
+    /**
      * levelBuilder.fxml path.
      */
     LEVEL_BUILDER("layouts/levelBuilder.fxml");
