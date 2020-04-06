@@ -23,7 +23,7 @@
             <Label layoutX="62.0" layoutY="175.0" text="DUREZZA" />
             <TextField fx:id="levelName" layoutX="13.0" layoutY="247.0" />
             <Label layoutX="47.0" layoutY="230.0" text="NOME LIVELLO" />
-            <Button fx:id="build" layoutX="33.0" layoutY="290.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="113.0" text="COSTRUISCI" />
+            <Button fx:id="build" layoutX="33.0" layoutY="290.0" mnemonicParsing="false" onMouseClicked="#buildLvl" prefHeight="38.0" prefWidth="113.0" text="COSTRUISCI" />
             <Button fx:id="menu" layoutX="33.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="38.0" prefWidth="113.0" text="MENU" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
