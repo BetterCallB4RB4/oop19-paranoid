@@ -29,6 +29,7 @@ public class GameLoop implements Runnable {
     private final GameController gameController;
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
     private World world;
+    private GameState gameState;
 
     public GameLoop(final Scene scene) {
         this.scene = scene;
@@ -36,9 +37,13 @@ public class GameLoop implements Runnable {
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
+        this.gameState = new GameState();
+        this.world = gameState.getWorld();
+        /*
         List<Ball> ballContainer = new ArrayList<>();
         List<Brick> brickContainer = new ArrayList<>();
         List<Player> playerContainer = new ArrayList<>();
+
         ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
 
         playerContainer.add(new Player.Builder().position(new P2d(350,500))
@@ -47,7 +52,7 @@ public class GameLoop implements Runnable {
                 .color(Color.DARKGREEN)
                 .playerId(PlayerId.ONE)
                 .build());
-        
+
         playerContainer.add(new Player.Builder().position(new P2d(290,500))
                 .width(80)
                 .height(10)
@@ -56,6 +61,7 @@ public class GameLoop implements Runnable {
                 .build());
         this.world = new World(ballContainer, brickContainer, playerContainer, new Border(ScreenConstant.WORLD_WIDTH,
                 ScreenConstant.WORLD_HEIGHT));
+        */
         notifyInputEvent();
     }
 

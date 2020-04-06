@@ -4,6 +4,8 @@ import java.io.File;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import paranoid.model.settings.SettingsManager;
+import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
 
 /**
@@ -60,12 +62,14 @@ public class ParanoidApp extends Application {
      * if not present, create the folder to keep the game files.
      */
     public static void initSoftware() {
+        SettingsBuilder settingsBuilder = new SettingsBuilder();
         File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
         if (!mainFolder.exists()) {
             try {
                 mainFolder.mkdir();
                 levelFolder.mkdir();
+                SettingsManager.saveOption(settingsBuilder.build());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
