@@ -12,7 +12,7 @@ import paranoid.model.entity.GameObject;
 import paranoid.model.entity.World;
 
 public class BallPhysicsComponent implements PhysicsComponent {
-
+    private long timeBrickCol = System.currentTimeMillis();
     /**
      * ball asks the world if collisions have occurred.
      * report events
@@ -26,7 +26,8 @@ public class BallPhysicsComponent implements PhysicsComponent {
         V2d vel = ball.getVel();
         ball.setPos(pos.sum(vel.mul(SCALER * dt * ball.getAgility())));
 
-        Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
+        final Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
+
         if (borderCollisionInfo.isPresent()) {
             ball.setPos(old);
             w.notifyEvent(new HitBorderEvent());
@@ -38,16 +39,24 @@ public class BallPhysicsComponent implements PhysicsComponent {
             }
         }
 
-        Optional<Collision> brickCollisionInfo = w.checkCollisionWithBricks(ball);
-        if (brickCollisionInfo.isPresent()) {
-            ball.setPos(old);
-            w.notifyEvent(new HitBrickEvent());
+        final long minTimeCol = dt + 5;
+
+        if ((System.currentTimeMillis() - timeBrickCol) > minTimeCol) {
+            final Optional<Collision> brickCollisionInfo = w.checkCollisionWithBricks(ball);
+
+            if (brickCollisionInfo.isPresent()) {
+                this.timeBrickCol = System.currentTimeMillis();
+                ball.setPos(old);
+                w.notifyEvent(new HitBrickEvent());
+
             if (brickCollisionInfo.get().equals(Collision.TOP)
                     || brickCollisionInfo.get().equals(Collision.BOTTOM)) {
                 ball.flipVelOnY();
             } else {
                 ball.flipVelOnX();
             }
+        }
+
         }
     }
 
