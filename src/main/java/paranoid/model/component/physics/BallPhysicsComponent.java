@@ -6,6 +6,7 @@ import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.V2d;
 import paranoid.controller.event.HitBorderEvent;
+import paranoid.controller.event.HitBrickEvent;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.World;
@@ -40,6 +41,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
         Optional<Collision> brickCollisionInfo = w.checkCollisionWithBricks(ball);
         if (brickCollisionInfo.isPresent()) {
             ball.setPos(old);
+            w.notifyEvent(new HitBrickEvent());
             if (brickCollisionInfo.get().equals(Collision.TOP)
                     || brickCollisionInfo.get().equals(Collision.BOTTOM)) {
                 ball.flipVelOnY();
