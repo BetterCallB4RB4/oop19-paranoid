@@ -22,13 +22,37 @@ public class World implements WorldEventListener {
     private CollisionManager collisionManager;
     private EventConsumer eventHandler;
 
-    public World(final List<Ball> balls, final List<Brick> bricks, final List<Player> players, final Border border) {
-        this.balls = balls;
-        this.bricks = bricks;
-        this.players = players;
+    public World(final Border border) {
         this.border = border;
+        this.balls = new ArrayList<>();
+        this.bricks = new ArrayList<>();
+        this.players = new ArrayList<>();
         this.collisionManager = new CollisionManager();
         this.eventHandler = new EventConsumer();
+    }
+
+    /**
+     * 
+     * @param balls added int eh world
+     */
+    public void setBalls(final List<Ball> balls) {
+        this.balls = balls;
+    }
+
+    /**
+     * 
+     * @param players added int the world
+     */
+    public void setPlayers(final List<Player> players) {
+        this.players = players;
+    }
+
+    /**
+     * 
+     * @param bricks added in the world
+     */
+    public void setBricks(final List<Brick> bricks) {
+        this.bricks = bricks;
     }
 
     /**
