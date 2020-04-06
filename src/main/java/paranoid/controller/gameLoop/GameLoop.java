@@ -40,7 +40,14 @@ public class GameLoop implements Runnable {
         List<Brick> brickContainer = new ArrayList<>();
         List<Player> playerContainer = new ArrayList<>();
         ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
-
+        brickContainer.add(new Brick.Builder().position(new P2d(50, 100))
+                    .width(80)
+                    .height(40)
+                    .color(Color.DARKGREEN)
+                    .destructible(true)
+                    .energy(1)
+                    .pointEarned(10)
+                    .build());
         playerContainer.add(new Player.Builder().position(new P2d(350,500))
                 .width(80)
                 .height(10)

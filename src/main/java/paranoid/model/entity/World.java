@@ -42,6 +42,25 @@ public class World implements WorldEventListener {
     }
 
     /**
+     * the world asks the collision manager to check 
+     * if there are collisions with bricks and given objects.
+     * @param entity the object to be checked
+     * @return on what surface the object collides
+     */
+    public Optional<Collision> checkCollisionWithBricks(final GameObject entity) {
+        Optional<Collision> collisionResult = Optional.empty();
+
+        for (Brick brick : this.bricks) {
+            collisionResult = this.collisionManager.checkCollisionWithBricks(brick, entity);
+
+            if (collisionResult.isPresent()) {
+                return collisionResult;
+            }
+        }
+        return Optional.empty();
+    }
+
+    /**
      * 
      * @return a list of all the gameObj in the world
      */
@@ -91,6 +110,6 @@ public class World implements WorldEventListener {
      * @param inputController controller that check the key pressed by user input device
      */
     public void movePlayer(final PlayerId playerId, final InputController inputController) {
-        this.players.stream().filter(p -> p.getPlayerId() == playerId).forEach(p -> p.updateInput(inputController));
+        this.players.stream().filter(p -> p.getPlayerId().equals(playerId)).forEach(p -> p.updateInput(inputController));
     }
 }

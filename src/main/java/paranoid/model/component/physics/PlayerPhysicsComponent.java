@@ -30,6 +30,7 @@ public final class PlayerPhysicsComponent implements PhysicsComponent {
         // if collision is present check where happened and don't allow the player to move out of the border
         if (borderCollisionInfo.isPresent()) {
             final Collision typeCol = borderCollisionInfo.get();
+
             if (typeCol.equals(Collision.LEFT)) {
                 player.setPos(new P2d(w.getBorder().getUpperleftCorner().getX(), 
                         player.getPos().getY()));

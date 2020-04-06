@@ -2,7 +2,10 @@ package paranoid.model.entity;
 
 import java.io.Serializable;
 
+import java.util.Map;
+import java.util.HashMap;
 import javafx.scene.paint.Color;
+import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.SerializableColor;
 import paranoid.common.V2d;
@@ -20,6 +23,8 @@ public final class Brick extends GameObj implements Serializable {
     private final int pointEarned;
     private int energy;
     private final boolean desctructible;
+    private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
+
     /**
      * Constructor.
      * @param pos the position of this game object
@@ -71,6 +76,10 @@ public final class Brick extends GameObj implements Serializable {
 
     public boolean isDestructible() {
         return this.desctructible;
+    }
+
+    public Map<Ball, Collision> getLastZonePresence() {
+        return this.lastZonePresence;
     }
 
     public static final class Builder {
