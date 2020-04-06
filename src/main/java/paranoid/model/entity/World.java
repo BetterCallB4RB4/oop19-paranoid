@@ -110,6 +110,6 @@ public class World implements WorldEventListener {
      * @param inputController controller that check the key pressed by user input device
      */
     public void movePlayer(final PlayerId playerId, final InputController inputController) {
-        this.players.stream().filter(p -> p.getPlayerId() == playerId).forEach(p -> p.updateInput(inputController));
+        this.players.stream().filter(p -> p.getPlayerId().equals(playerId)).forEach(p -> p.updateInput(inputController));
     }
 }

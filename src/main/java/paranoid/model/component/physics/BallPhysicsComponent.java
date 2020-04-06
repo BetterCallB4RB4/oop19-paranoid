@@ -27,10 +27,21 @@ public class BallPhysicsComponent implements PhysicsComponent {
 
         Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
         if (borderCollisionInfo.isPresent()) {
-            gameObj.setPos(old);
+            ball.setPos(old);
             w.notifyEvent(new HitBorderEvent());
             if (borderCollisionInfo.get().equals(Collision.TOP)
             ||  borderCollisionInfo.get().equals(Collision.BOTTOM)) {
+                ball.flipVelOnY();
+            } else {
+                ball.flipVelOnX();
+            }
+        }
+
+        Optional<Collision> brickCollisionInfo = w.checkCollisionWithBricks(ball);
+        if (brickCollisionInfo.isPresent()) {
+            ball.setPos(old);
+            if (brickCollisionInfo.get().equals(Collision.TOP)
+                    || brickCollisionInfo.get().equals(Collision.BOTTOM)) {
                 ball.flipVelOnY();
             } else {
                 ball.flipVelOnX();
