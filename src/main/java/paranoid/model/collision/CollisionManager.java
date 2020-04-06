@@ -36,11 +36,12 @@ public class CollisionManager {
      * @return the collision surface
      */
     public Optional<Collision> checkCollisionWithBricks(final Brick brick, final GameObject entity) {
-        final boolean checkLeft = checkLeftForCollision(brick.getPos().getX(), entity.getPos().getX());
-        final boolean checkRight = checkRightForCollision(brick.getPos().getX(), entity.getPos().getX());
-        final boolean checkTop = checkTopForCollision(brick.getPos().getY(), entity.getPos().getY());
-        final boolean checkBottom = checkBottomForCollision(brick.getPos().getY(), entity.getPos().getY());
+        final boolean checkLeft = checkLeftForCollision(entity.getPos().getX(), brick.getPos().getX() + brick.getWidth());
+        final boolean checkRight = checkRightForCollision(entity.getPos().getX() + entity.getWidth(), brick.getPos().getX());
+        final boolean checkTop = checkTopForCollision(entity.getPos().getY(), brick.getPos().getY() + brick.getHeight());
+        final boolean checkBottom = checkBottomForCollision(entity.getPos().getY() + entity.getHeight(), brick.getPos().getY());
         final Ball ball = (Ball) entity;
+
 
         if (!checkLeft) {
             brick.getLastZonePresence().put(ball, Collision.RIGHT);
@@ -57,20 +58,20 @@ public class CollisionManager {
         return Optional.empty();
     }
 
-    private boolean checkLeftForCollision(final double posBrick, final double posEntity) {
-        return posBrick < posEntity;
+    private boolean checkLeftForCollision(final double posEntity, final double posBrick) {
+        return posEntity < posBrick;
     }
 
-    private boolean checkRightForCollision(final double posBrick, final double posEntity) {
-        return posBrick > posEntity;
+    private boolean checkRightForCollision(final double posEntity, final double posBrick) {
+        return posEntity > posBrick;
     }
 
-    private boolean checkTopForCollision(final double posBrick, final double posEntity) {
-        return posBrick < posEntity;
+    private boolean checkTopForCollision(final double posEntity, final double posBrick) {
+        return posEntity < posBrick;
     }
 
-    private boolean checkBottomForCollision(final double posBrick, final double posEntity) {
-        return posBrick > posEntity;
+    private boolean checkBottomForCollision(final double posEntity, final double posBrick) {
+        return posEntity > posBrick;
     }
 }
 
