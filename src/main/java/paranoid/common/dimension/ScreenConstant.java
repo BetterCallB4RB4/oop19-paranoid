@@ -52,6 +52,16 @@ public final class ScreenConstant {
      */
     public static final double RATIO_Y = CANVAS_HEIGHT / WORLD_HEIGHT;
 
+    /**
+     * the number of bricks messu on the x-axis.
+     */
+    public static final double BRICK_NUMBER_X = 10;
+
+    /**
+     * the number of bricks messu on the y-axis.
+     */
+    public static final double BRICK_NUMBER_Y = 22;
+
     private ScreenConstant() {
 
     }
