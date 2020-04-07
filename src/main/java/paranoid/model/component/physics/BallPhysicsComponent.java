@@ -41,8 +41,11 @@ public class BallPhysicsComponent implements PhysicsComponent {
                 ball.flipVelOnX();
             }
         }
-
-        final long minTimeCol = dt + 5;
+        /**
+         * Ball check collision with all entities in the application (bricks and players)
+         * send entity event and choose how to bounce.
+         */
+        final long minTimeCol = dt + 5; //set minimum time for avoid multiple collision in the same time.
 
         if ((System.currentTimeMillis() - timeBrickCol) > minTimeCol) {
             final Optional<Pair<GameObject, Collision>> entityCollisionInfo = w.checkCollisionWithEntity(ball);
