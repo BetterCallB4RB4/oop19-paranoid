@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import paranoid.common.Collision;
+import paranoid.common.Pair;
 import paranoid.common.PlayerId;
 import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
@@ -77,6 +78,19 @@ public class World implements WorldEventListener {
         for (Brick brick : this.bricks) {
             collisionResult = this.collisionManager.checkCollisionWithBricks(brick, ball);
 
+            if (collisionResult.isPresent()) {
+                return collisionResult;
+            }
+        }
+        return Optional.empty();
+    }
+    
+    public Optional<Pair<Player, Collision>> checkCollisionWithPlayers(final Ball ball) {
+        Optional<Pair<Player, Collision>> collisionResult = Optional.empty();
+        
+        for (Player player : this.players) {
+            collisionResult = this.collisionManager.checkCollisionWithPlayers(player, ball);
+            
             if (collisionResult.isPresent()) {
                 return collisionResult;
             }

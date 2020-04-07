@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import paranoid.common.Collision;
 import paranoid.common.P2d;
+import paranoid.common.Pair;
 import paranoid.common.V2d;
 import paranoid.controller.event.HitBorderEvent;
 import paranoid.controller.event.HitBrickEvent;
@@ -60,7 +61,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
 
         }
 
-        final Optional<Pair<Player, Collision>> playerCollisionInfo = w.checkCollisionWithPlayer(ball);
+        final Optional<Pair<Player, Collision>> playerCollisionInfo = w.checkCollisionWithPlayers(ball);
 
         if (playerCollisionInfo.isPresent()) {
             final Player player = playerCollisionInfo.get().getX();
