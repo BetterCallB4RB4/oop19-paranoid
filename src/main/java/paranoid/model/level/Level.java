@@ -6,15 +6,17 @@ import paranoid.model.entity.Brick;
 
 public class Level implements Serializable {
 
-    //TODO add music URI
-    //TODO add backGround URI
     private static final long serialVersionUID = -3269378075735300995L;
     private List<Brick> bricks;
     private String levelName;
+    private String music;
+    private String backGround;
 
-    public Level(final List<Brick> bricks, final String levelName) {
+    public Level(final List<Brick> bricks, final String levelName, final String music, final String backGround) {
         this.bricks = bricks;
         this.levelName = levelName;
+        this.music = music;
+        this.backGround = backGround;
     }
 
     /**
@@ -31,6 +33,20 @@ public class Level implements Serializable {
      */
     public String getLevelName() {
         return this.levelName;
+    }
+
+    /**
+     * @return the music
+     */
+    public String getMusic() {
+        return music;
+    }
+
+    /**
+     * @return the backGround
+     */
+    public String getBackGround() {
+        return backGround;
     }
 
 }
