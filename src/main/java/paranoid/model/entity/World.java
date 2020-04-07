@@ -72,30 +72,23 @@ public class World implements WorldEventListener {
      * @param ball the object to be checked
      * @return on what surface the object collides
      */
-    public Optional<Collision> checkCollisionWithBricks(final Ball ball) {
-        Optional<Collision> collisionResult = Optional.empty();
 
-        for (Brick brick : this.bricks) {
-            collisionResult = this.collisionManager.checkCollisionWithBricks(brick, ball);
+    public Optional<Pair<GameObject, Collision>> checkCollisionWithEntity(final Ball ball) {
+        Optional<Pair<GameObject, Collision>> collisionResult = Optional.empty();
 
+        for (GameObject gameObj : getSceneEntities()) {
+            if (gameObj instanceof Player) {
+                collisionResult = this.collisionManager.checkCollisionWithPlayers((Player) gameObj, ball);
+            } else if (gameObj instanceof Brick) {
+                collisionResult = this.collisionManager.checkCollisionWithBricks((Brick) gameObj, ball);
+            }
             if (collisionResult.isPresent()) {
                 return collisionResult;
             }
+
         }
         return Optional.empty();
-    }
-    
-    public Optional<Pair<Player, Collision>> checkCollisionWithPlayers(final Ball ball) {
-        Optional<Pair<Player, Collision>> collisionResult = Optional.empty();
-        
-        for (Player player : this.players) {
-            collisionResult = this.collisionManager.checkCollisionWithPlayers(player, ball);
-            
-            if (collisionResult.isPresent()) {
-                return collisionResult;
-            }
-        }
-        return Optional.empty();
+
     }
 
     /**

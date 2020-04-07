@@ -9,6 +9,7 @@ import paranoid.common.V2d;
 import paranoid.controller.event.HitBorderEvent;
 import paranoid.controller.event.HitBrickEvent;
 import paranoid.model.entity.Ball;
+import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
@@ -44,36 +45,50 @@ public class BallPhysicsComponent implements PhysicsComponent {
         final long minTimeCol = dt + 5;
 
         if ((System.currentTimeMillis() - timeBrickCol) > minTimeCol) {
-            final Optional<Collision> brickCollisionInfo = w.checkCollisionWithBricks(ball);
+            final Optional<Pair<GameObject, Collision>> entityCollisionInfo = w.checkCollisionWithEntity(ball);
 
-            if (brickCollisionInfo.isPresent()) {
+            if (entityCollisionInfo.isPresent()) {
                 this.timeBrickCol = System.currentTimeMillis();
-                ball.setPos(old);
-                w.notifyEvent(new HitBrickEvent());
+                final GameObject entity = entityCollisionInfo.get().getX();
+                final Collision collision = entityCollisionInfo.get().getY();
+                if (entity instanceof Brick) {
+                    final Brick brick = (Brick) entity;
+                    w.notifyEvent(new HitBrickEvent());
 
-            if (brickCollisionInfo.get().equals(Collision.TOP)
-                    || brickCollisionInfo.get().equals(Collision.BOTTOM)) {
-                ball.flipVelOnY();
-            } else {
-                ball.flipVelOnX();
-            }
+                    if (collision.equals(Collision.TOP)) {
+                        ball.setPos(new P2d(ball.getPos().getX(), brick.getPos().getY() - ball.getHeight()));
+
+                        ball.flipVelOnY();
+                    } else if (collision.equals(Collision.BOTTOM)) {
+                        System.out.println("beccato");
+                        ball.setPos(new P2d(ball.getPos().getX(), brick.getPos().getY() + brick.getHeight()));
+
+                        ball.flipVelOnY();
+                    } else if (collision.equals(Collision.LEFT)) {
+                        ball.setPos(new P2d(brick.getPos().getX() - ball.getWidth(), ball.getPos().getY()));
+
+                        ball.flipVelOnX();
+                    } else if (collision.equals(Collision.RIGHT)) {
+                        ball.setPos(new P2d(brick.getPos().getX() + brick.getWidth(), ball.getPos().getY()));
+
+                        ball.flipVelOnX();
+                    }
+ 
+                } else if (entity instanceof Player) {
+                    final Player player = (Player) entity;
+                    ball.setPos(new P2d(ball.getPos().getX(), player.getPos().getY() - ball.getHeight()));
+
+                    if (collision.equals(Collision.LEFT)) {
+                        ball.setVel(new V2d(-100, -200));
+                    } else if (collision.equals(Collision.RIGHT)) {
+                        ball.setVel(new V2d(100, -200));
+                    }
+                }
+
         }
 
         }
 
-        final Optional<Pair<Player, Collision>> playerCollisionInfo = w.checkCollisionWithPlayers(ball);
-
-        if (playerCollisionInfo.isPresent()) {
-            final Player player = playerCollisionInfo.get().getX();
-            final Collision collision = playerCollisionInfo.get().getY();
-
-            ball.setPos(new P2d(ball.getPos().getX(), player.getPos().getY() - ball.getHeight()));
-            if (collision.equals(Collision.LEFT)) {
-                ball.setVel(new V2d(-100, -200));
-            } else if (collision.equals(Collision.RIGHT)) {
-                ball.setVel(new V2d(100, -200));
-            }
-        }
     }
 
 

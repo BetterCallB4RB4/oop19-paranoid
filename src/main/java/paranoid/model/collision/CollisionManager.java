@@ -37,7 +37,7 @@ public class CollisionManager {
      * @param ball the object that can collide with the brick
      * @return the collision surface
      */
-    public Optional<Collision> checkCollisionWithBricks(final Brick brick, final Ball ball) {
+    public Optional<Pair<GameObject, Collision>> checkCollisionWithBricks(final Brick brick, final Ball ball) {
         final boolean checkLeft = checkLeftForCollision(ball.getPos().getX(), brick.getPos().getX() + brick.getWidth());
         final boolean checkRight = checkRightForCollision(ball.getPos().getX() + ball.getWidth(), brick.getPos().getX());
         final boolean checkTop = checkTopForCollision(ball.getPos().getY(), brick.getPos().getY() + brick.getHeight());
@@ -52,15 +52,16 @@ public class CollisionManager {
         } else if (!checkBottom) {
             brick.getLastZonePresence().put(ball, Collision.TOP);
         } else {
-            return Optional.of(brick.getLastZonePresence().get(ball));
+            return Optional.of(new Pair<>(brick, brick.getLastZonePresence().get(ball)));
         }
 
         return Optional.empty();
     }
-    
-    public Optional<Pair<Player, Collision>> checkCollisionWithPlayers(final Player player, final Ball ball) {
-        if (player.getPos().getY() < ball.getPos().getY() + ball.getHeight() 
-        && player.getPos().getY() + player.getHeight() > ball.getPos().getY()) {
+
+    public Optional<Pair<GameObject, Collision>> checkCollisionWithPlayers(final Player player, final Ball ball) {
+        final boolean checkTop = checkTopForCollision(ball.getPos().getY(), player.getPos().getY() + player.getHeight());
+        final boolean checkBottom = checkBottomForCollision(ball.getPos().getY() + ball.getHeight(), player.getPos().getY());
+        if (checkTop && checkBottom) {
             double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
             double leftPlayer = player.getPos().getX();
             double centerPlayer = player.getPos().getX() + (player.getWidth() / 2);
@@ -71,24 +72,24 @@ public class CollisionManager {
                 return Optional.of(new Pair<>(player, Collision.RIGHT));
             }
         }
-        
+
         return Optional.empty();
     }
 
-    private boolean checkLeftForCollision(final double posBall, final double posBrick) {
-        return posBall < posBrick;
+    private boolean checkLeftForCollision(final double posBall, final double posEntity) {
+        return posBall < posEntity;
     }
 
-    private boolean checkRightForCollision(final double posBall, final double posBrick) {
-        return posBall > posBrick;
+    private boolean checkRightForCollision(final double posBall, final double posEntity) {
+        return posBall > posEntity;
     }
 
-    private boolean checkTopForCollision(final double posBall, final double posBrick) {
-        return posBall < posBrick;
+    private boolean checkTopForCollision(final double posBall, final double posEntity) {
+        return posBall < posEntity;
     }
 
-    private boolean checkBottomForCollision(final double posBall, final double posBrick) {
-        return posBall > posBrick;
+    private boolean checkBottomForCollision(final double posBall, final double posEntity) {
+        return posBall > posEntity;
     }
 }
 
