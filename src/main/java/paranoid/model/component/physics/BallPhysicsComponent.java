@@ -9,6 +9,7 @@ import paranoid.controller.event.HitBorderEvent;
 import paranoid.controller.event.HitBrickEvent;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.GameObject;
+import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
 
 public class BallPhysicsComponent implements PhysicsComponent {
@@ -57,6 +58,20 @@ public class BallPhysicsComponent implements PhysicsComponent {
             }
         }
 
+        }
+
+        final Optional<Pair<Player, Collision>> playerCollisionInfo = w.checkCollisionWithPlayer(ball);
+
+        if (playerCollisionInfo.isPresent()) {
+            final Player player = playerCollisionInfo.get().getX();
+            final Collision collision = playerCollisionInfo.get().getY();
+
+            ball.setPos(new P2d(ball.getPos().getX(), player.getPos().getY() - ball.getHeight()));
+            if (collision.equals(Collision.LEFT)) {
+                ball.setVel(new V2d(-100, -200));
+            } else if (collision.equals(Collision.RIGHT)) {
+                ball.setVel(new V2d(100, -200));
+            }
         }
     }
 
