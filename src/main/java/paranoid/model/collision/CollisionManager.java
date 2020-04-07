@@ -3,10 +3,12 @@ package paranoid.model.collision;
 import java.util.Optional;
 
 import paranoid.common.Collision;
+import paranoid.common.Pair;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
+import paranoid.model.entity.Player;
 
 public class CollisionManager {
 
@@ -53,6 +55,23 @@ public class CollisionManager {
             return Optional.of(brick.getLastZonePresence().get(ball));
         }
 
+        return Optional.empty();
+    }
+    
+    public Optional<Pair<Player, Collision>> checkCollisionWithPlayers(final Player player, final Ball ball) {
+        if (player.getPos().getY() < ball.getPos().getY() + ball.getHeight() 
+        && player.getPos().getY() + player.getHeight() > ball.getPos().getY()) {
+            double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
+            double leftPlayer = player.getPos().getX();
+            double centerPlayer = player.getPos().getX() + (player.getWidth() / 2);
+            double rightPlayer = player.getPos().getX() + player.getWidth();
+            if (centerBall >= leftPlayer && centerBall < centerPlayer) {
+                return Optional.of(new Pair<>(player, Collision.LEFT));
+            } else if (centerBall >= centerPlayer && centerBall <= rightPlayer){
+                return Optional.of(new Pair<>(player, Collision.RIGHT));
+            }
+        }
+        
         return Optional.empty();
     }
 
