@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.util.ArrayList?>
+
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ScoreController">
+   <items>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+         <children>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
+               <children>
+                  <Label fx:id="name1" text="NOME: " textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score1" text="SCORE" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
+               <children>
+                  <Label fx:id="name2" text="NOME: " textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score2" text="SCORE" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
+               <children>
+                  <Label fx:id="name3" text="NOME: " textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score3" text="SCORE" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
+               <children>
+                  <Label fx:id="name4" text="NOME: " textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score4" text="SCORE" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
+               <children>
+                  <Label fx:id="name5" text="NOME: " textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score5" text="SCORE" textAlignment="CENTER">
+                     <font>
+                        <Font size="35.0" />
+                     </font>
+                  </Label>
+               </children>
+            </FlowPane>
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" text="MENU" />
+         </children>
+         
+         <fx:define>
+         	<ArrayList fx:id="nameList" >
+         		<fx:reference source="name1"/>
+         		<fx:reference source="name2"/>
+         		<fx:reference source="name3"/>
+         		<fx:reference source="name4"/>
+         		<fx:reference source="name5"/>
+         	</ArrayList>
+         </fx:define>
+         
+         <fx:define>
+         	<ArrayList fx:id="scoreList" >
+         		<fx:reference source="score1"/>
+         		<fx:reference source="score2"/>
+         		<fx:reference source="score3"/>
+         		<fx:reference source="score4"/>
+         		<fx:reference source="score5"/>
+         	</ArrayList>
+         </fx:define>
+      </VBox>
+   </items>
+</SplitPane>

@@ -1,10 +1,13 @@
 package paranoid.main;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 import paranoid.model.settings.SettingsManager;
+import paranoid.model.score.Score;
+import paranoid.model.score.ScoreManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
 
@@ -41,6 +44,11 @@ public class ParanoidApp extends Application {
     public static final String OPTIONS = MAIN_FOLDER + SEPARATOR + "options";
 
     /**
+     * the file to save the top scores.
+     */
+    public static final String SCORE = MAIN_FOLDER + SEPARATOR + "score.txt";
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -65,12 +73,20 @@ public class ParanoidApp extends Application {
         SettingsBuilder settingsBuilder = new SettingsBuilder();
         File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
+        File highScore = new File(SCORE);
         if (!mainFolder.exists()) {
             try {
                 mainFolder.mkdir();
                 levelFolder.mkdir();
                 SettingsManager.saveOption(settingsBuilder.build());
             } catch (SecurityException e) {
+                e.printStackTrace();
+            }
+        }
+        if (!highScore.exists()) {
+            try {
+                ScoreManager.saveScore(new Score.Builder().defaultScore().build());
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }

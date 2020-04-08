@@ -15,6 +15,9 @@ public final class MenuController implements GuiController {
     private Button btnStart;
 
     @FXML
+    private Button btnScore;
+
+    @FXML
     private Button btnBuilder;
 
     @FXML
@@ -24,7 +27,7 @@ public final class MenuController implements GuiController {
      * Handle start game button event.
      */
     @FXML
-    public void btnStartonClickHandler() {
+    public void btnStartOnClickHandler() {
         final Scene scene = btnStart.getScene();
         final Thread engine = new Thread(new GameLoop(scene));
         engine.setDaemon(true); //allow jvm to close the thread when close the window.
@@ -32,8 +35,13 @@ public final class MenuController implements GuiController {
     }
 
     /**
-     * Gestore evento click del mouse sul bottone inizia partita.
+     * Handle high score button event.
      */
+    @FXML
+    public void btnScoreOnClickHandler() {
+        final Scene scene = btnScore.getScene();
+        scene.setRoot(LayoutManager.SCORE.getLayout());
+    }
     @FXML
     public void goToLevelBuilder() {
         final Scene scene = btnBuilder.getScene();

@@ -60,20 +60,15 @@ public class BallPhysicsComponent implements PhysicsComponent {
 
                     if (collision.equals(Collision.TOP)) {
                         ball.setPos(new P2d(ball.getPos().getX(), brick.getPos().getY() - ball.getHeight()));
-
                         ball.flipVelOnY();
                     } else if (collision.equals(Collision.BOTTOM)) {
-                        System.out.println("beccato");
                         ball.setPos(new P2d(ball.getPos().getX(), brick.getPos().getY() + brick.getHeight()));
-
                         ball.flipVelOnY();
                     } else if (collision.equals(Collision.LEFT)) {
                         ball.setPos(new P2d(brick.getPos().getX() - ball.getWidth(), ball.getPos().getY()));
-
                         ball.flipVelOnX();
                     } else if (collision.equals(Collision.RIGHT)) {
                         ball.setPos(new P2d(brick.getPos().getX() + brick.getWidth(), ball.getPos().getY()));
-
                         ball.flipVelOnX();
                     }
  

@@ -22,7 +22,12 @@ public enum LayoutManager {
     GAME("layouts/game.fxml"),
 
     /**
-     * game.fxml path.
+     * score.fxml path.
+     */
+    SCORE("layouts/score.fxml"),
+
+    /**
+     * settings.fxml path.
      */
     SETTINGS("layouts/settings.fxml"),
 
