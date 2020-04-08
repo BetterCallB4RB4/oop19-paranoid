@@ -25,8 +25,12 @@ public class Score {
         return this.scoreList;
     }
 
-    public int getHighest() {
+    public int getHightScore() {
         return this.scoreList.get(0).getY();
+    }
+
+    public void addScore(final String name, final Integer score) {
+        this.scoreList.add(new Pair<>(name, score));
     }
 
     public static final class Builder {
@@ -44,10 +48,6 @@ public class Score {
         public Builder fromExScore(final List<Pair<String, Integer>> scoreList) {
             this.scoreList = scoreList;
             return this;
-        }
-
-        public void addScore(final String name, final Integer score) {
-            this.scoreList.add(new Pair<>(name, score));
         }
 
         public Score build() {
