@@ -23,11 +23,12 @@ public class ScoreController implements GuiController {
 
     @FXML
     public void initialize() {
+
         try {
             final Score score = ScoreManager.loadScore();
             final List<Pair<String, Integer>> scoreList = score.getScore();
 
-            for (int x = 0; x < scoreList.size() && x < Score.MAX_SCORE; x++) {
+            for (int x = 0; x < scoreList.size(); x++) {
                 this.nameList.get(x).setText(scoreList.get(x).getX());
                 this.scoreList.get(x).setText(scoreList.get(x).getY().toString());
             }

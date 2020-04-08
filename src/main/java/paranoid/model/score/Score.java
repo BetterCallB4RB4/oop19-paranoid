@@ -10,10 +10,6 @@ import java.util.Collections;
 
 public class Score {
 
-    /**
-     * Number of element that you want show in Score GUI.
-     */
-    public static final int MAX_SCORE = 5;
 
     private final List<Pair<String, Integer>> scoreList;
 
@@ -26,7 +22,11 @@ public class Score {
     }
 
     public int getHightScore() {
-        return this.scoreList.get(0).getY();
+        if (this.scoreList.size() > 0) {
+            return this.scoreList.get(0).getY();
+        }
+        return 0;
+
     }
 
     public void addScore(final String name, final Integer score) {
@@ -45,6 +45,7 @@ public class Score {
             this.scoreList.add(new Pair<>("JIMMI", 10000));
             return this;
         }
+
         public Builder fromExScore(final List<Pair<String, Integer>> scoreList) {
             this.scoreList = scoreList;
             return this;
@@ -55,11 +56,6 @@ public class Score {
                 throw new IllegalStateException();
             }
 
-            Collections.sort(scoreList, java.util.Comparator.comparing(Pair::getY));
-            Collections.reverse(scoreList);
-            while (scoreList.size() > MAX_SCORE) {
-                scoreList.remove(scoreList.size() - 1);
-            }
             return new Score(this.scoreList);
 
         }

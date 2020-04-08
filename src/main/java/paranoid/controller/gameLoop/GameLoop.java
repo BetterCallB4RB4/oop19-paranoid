@@ -125,6 +125,9 @@ public class GameLoop implements Runnable {
     private void updateGame(final int elapsed) {
         world.updateState(elapsed);
         world.getEventHanlder().resolveEvent();
+        if (gameState.getLives() == 0) {
+            gameState.saveScore();
+        }
     }
 
     private void render() {

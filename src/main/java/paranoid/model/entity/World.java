@@ -11,6 +11,7 @@ import paranoid.common.PlayerId;
 import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
 import paranoid.controller.event.WorldEventListener;
+import paranoid.controller.gameLoop.GameState;
 import paranoid.model.collision.CollisionManager;
 import paranoid.model.component.input.InputController;
 
@@ -23,13 +24,13 @@ public class World implements WorldEventListener {
     private CollisionManager collisionManager;
     private EventConsumer eventHandler;
 
-    public World(final Border border) {
+    public World(final Border border, final GameState gameState) {
         this.border = border;
         this.balls = new ArrayList<>();
         this.bricks = new ArrayList<>();
         this.players = new ArrayList<>();
         this.collisionManager = new CollisionManager();
-        this.eventHandler = new EventConsumer();
+        this.eventHandler = new EventConsumer(gameState);
     }
 
     /**

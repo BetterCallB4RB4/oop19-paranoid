@@ -1,5 +1,6 @@
 package paranoid.controller.gameLoop;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,22 +15,32 @@ import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
+import paranoid.model.score.Score;
+import paranoid.model.score.ScoreManager;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
 
 public class GameState {
 
+    private Score bestScores;
+    private int highScore;
     private int score;
     private int multiplier;
     private int lives;
     private World world;
 
     public GameState() {
+        try {
+            this.bestScores = ScoreManager.loadScore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.highScore = this.bestScores.getHightScore();
         this.score = 0;
         this.multiplier = 1;
         this.lives = 1;
 
-        this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT));
+        this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
         Settings set = SettingsManager.loadOption();
 
         //add brick to the world
@@ -109,4 +120,12 @@ public class GameState {
         return world;
     }
 
+    public void saveScore() {
+        this.bestScores.addScore("marco", 51000);
+        try {
+            ScoreManager.saveScore(this.bestScores);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
