@@ -1,7 +1,6 @@
 package paranoid.main;
 
 import java.io.File;
-import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -46,7 +45,7 @@ public class ParanoidApp extends Application {
     /**
      * the file to save the top scores.
      */
-    public static final String SCORE = MAIN_FOLDER + SEPARATOR + "score.txt";
+    public static final String SCORE = MAIN_FOLDER + SEPARATOR + "score";
 
     /**
      * {@inheritDoc}
@@ -86,7 +85,7 @@ public class ParanoidApp extends Application {
         if (!highScore.exists()) {
             try {
                 ScoreManager.saveScore(new Score.Builder().defaultScore().build());
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

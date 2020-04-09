@@ -1,6 +1,8 @@
 package paranoid.controller.gameLoop;
 
 import java.io.IOException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class GameState {
     public GameState() {
         try {
             this.bestScores = ScoreManager.loadScore();
-        } catch (IOException e) {
+        } catch (InvalidKeyException | InvalidAlgorithmParameterException | IOException e) {
             e.printStackTrace();
         }
         this.highScore = this.bestScores.getHightScore();
@@ -122,9 +124,10 @@ public class GameState {
 
     public void saveScore() {
         this.bestScores.addScore("marco", 51000);
+
         try {
             ScoreManager.saveScore(this.bestScores);
-        } catch (IOException e) {
+        } catch (InvalidKeyException | IOException e) {
             e.printStackTrace();
         }
     }
