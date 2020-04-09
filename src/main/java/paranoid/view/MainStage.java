@@ -3,6 +3,8 @@ package paranoid.view;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.controller.GameBuilderController;
+import paranoid.controller.SettingsController;
 import paranoid.view.parameters.LayoutManager;
 
 /**
@@ -23,9 +25,12 @@ public class MainStage extends Stage {
         /**
          * Constructor.
          * Add layout menu.fxml and size to the scene.
+         *  e collego gli osservatori al soggetto
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);
+            SettingsController setttingsController = (SettingsController) LayoutManager.SETTINGS.getGuiController();
+            setttingsController.initialize((GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController());
         }
 
     }
