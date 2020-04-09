@@ -12,7 +12,7 @@
             <Button fx:id="btnStart" onMouseClicked="#btnStartOnClickHandler" text="INIZIA PARTITA" />
             <Button fx:id="btnScore" onMouseClicked="#btnScoreOnClickHandler" text="MIGLIORI PUNTEGGI" />
             <Button fx:id="btSettings" onMouseClicked="#goToSettings" text="OPZIONI" />
-            <Button text="ISTRUZIONI" />
+            <Button fx:id="btnTutorial" onMouseClicked="#btnTutorialOnClickHandler" text="ISTRUZIONI" />
             <Button fx:id="btnBuilder" onMouseClicked="#goToLevelBuilder" text="LEVEL BUILDER" />
          </children>
       </VBox>

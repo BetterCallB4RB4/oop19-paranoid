@@ -32,6 +32,11 @@ public enum LayoutManager {
     SETTINGS("layouts/settings.fxml"),
 
     /**
+     * tutorial.fxml path.
+     */
+    TUTORIAL("layouts/tutorial.fxml"),
+
+    /**
      * levelBuilder.fxml path.
      */
     LEVEL_BUILDER("layouts/levelBuilder.fxml");
