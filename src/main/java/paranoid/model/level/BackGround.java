@@ -1,5 +1,10 @@
 package paranoid.model.level;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public enum BackGround {
 
     /**
@@ -76,6 +81,36 @@ public enum BackGround {
      */
     public String getName() {
         return name;
+    }
+
+    public static List<String> getBackGroundNames() {
+        List<String> list = new ArrayList<>();
+        list.add(BackGround.BACKGROUND_1.getName());
+        list.add(BackGround.BACKGROUND_2.getName());
+        list.add(BackGround.BACKGROUND_3.getName());
+        list.add(BackGround.BACKGROUND_4.getName());
+        list.add(BackGround.BACKGROUND_5.getName());
+        list.add(BackGround.BACKGROUND_6.getName());
+        list.add(BackGround.BACKGROUND_7.getName());
+        list.add(BackGround.BACKGROUND_8.getName());
+        list.add(BackGround.BACKGROUND_9.getName());
+        list.add(BackGround.BACKGROUND_10.getName());
+        return list;
+    }
+
+    public static BackGround getBackGroundByName(final String name) {
+        Map<String, BackGround> musicName = new HashMap<>();
+        musicName.put(BackGround.BACKGROUND_1.getName(), BackGround.BACKGROUND_1);
+        musicName.put(BackGround.BACKGROUND_2.getName(), BackGround.BACKGROUND_2);
+        musicName.put(BackGround.BACKGROUND_3.getName(), BackGround.BACKGROUND_3);
+        musicName.put(BackGround.BACKGROUND_4.getName(), BackGround.BACKGROUND_4);
+        musicName.put(BackGround.BACKGROUND_5.getName(), BackGround.BACKGROUND_5);
+        musicName.put(BackGround.BACKGROUND_6.getName(), BackGround.BACKGROUND_6);
+        musicName.put(BackGround.BACKGROUND_7.getName(), BackGround.BACKGROUND_7);
+        musicName.put(BackGround.BACKGROUND_8.getName(), BackGround.BACKGROUND_8);
+        musicName.put(BackGround.BACKGROUND_9.getName(), BackGround.BACKGROUND_9);
+        musicName.put(BackGround.BACKGROUND_10.getName(), BackGround.BACKGROUND_10);
+        return musicName.get(name);
     }
 
 }

@@ -1,9 +1,6 @@
 package paranoid.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -21,10 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import paranoid.common.Pair;
 import paranoid.common.dimension.ScreenConstant;
-import paranoid.main.ParanoidApp;
 import paranoid.model.entity.PlaceHolder;
+import paranoid.model.level.BackGround;
 import paranoid.model.level.LevelBuilder;
 import paranoid.model.level.LevelManager;
+import paranoid.model.level.Music;
 import paranoid.view.parameters.LayoutManager;
 
 public class GameBuilderController implements GuiController, Subject {
@@ -74,6 +72,8 @@ public class GameBuilderController implements GuiController, Subject {
      */
     @FXML
     public void initialize() {
+        this.ost.getItems().addAll(Music.getMusicNames());
+        this.backGround.getItems().addAll(BackGround.getBackGroundNames());
         this.observer = new ArrayList<>();
         this.colorPicker.setValue(Color.HOTPINK);
         this.colorPicker.setEditable(false);
