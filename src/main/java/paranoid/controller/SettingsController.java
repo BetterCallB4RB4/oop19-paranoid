@@ -18,7 +18,9 @@ import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.model.settings.SettingsManager;
 import paranoid.view.parameters.LayoutManager;
 
-public class SettingsController implements GuiController {
+public class SettingsController implements GuiController, Observer {
+
+    private Subject subject;
 
     @FXML
     private RadioButton easy;
@@ -51,16 +53,14 @@ public class SettingsController implements GuiController {
     private Button menu;
 
     /**
-     * initialize the controller.
+     * 
+     * @param subject observed
      */
     @FXML
-    public void initialize() {
-        File folderLevel = new File(ParanoidApp.LEVEL_FOLDER);
-        List<String> levelList = new ArrayList<String>();
-        for (int i = 0; i < folderLevel.list().length; i++) {
-            levelList.add(folderLevel.list()[i]);
-        }
-        selectedLevel.getItems().addAll(levelList);
+    public void initialize(final Subject subject) {
+        this.update();
+        this.subject = subject;
+        this.subject.register(this);
     }
 
     /**
@@ -97,5 +97,49 @@ public class SettingsController implements GuiController {
             settingsBuilder.playerNumber(2);
         }
         SettingsManager.saveOption(settingsBuilder.build());
+    }
+
+    /**
+     * permette di caricare tutti i livelli disponibili.
+     */
+    @Override
+    public void update() {
+        Settings settings = SettingsManager.loadOption();
+        switch (settings.getDifficulty()) {
+            case EASY:
+                easy.setSelected(true);
+            break;
+            case NORMAL:
+                normal.setSelected(true);
+            break;
+            case HARD:
+                hard.setSelected(true);
+            break;
+            default:
+            break;
+        }
+        if (settings.isPlayEffects()) {
+            this.effect.setSelected(true);
+        } else {
+            this.effect.setSelected(false);
+        }
+        if (settings.isPlayMusic()) {
+            this.music.setSelected(true);
+        } else {
+            this.music.setSelected(false);
+        }
+        selectedLevel.getItems().clear();
+        File folderLevel = new File(ParanoidApp.LEVEL_FOLDER);
+        List<String> levelList = new ArrayList<String>();
+        for (int i = 0; i < folderLevel.list().length; i++) {
+            levelList.add(folderLevel.list()[i]);
+        }
+        selectedLevel.getItems().addAll(levelList);
+        selectedLevel.getSelectionModel().select(settings.getSelectedLevel());
+        if (settings.getPlayerNumber() == 1) {
+            this.onePlayer.setSelected(true);
+        } else {
+            this.twoPlayers.setSelected(true);
+        }
     }
 }

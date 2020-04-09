@@ -1,5 +1,8 @@
 package paranoid.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 
 import javafx.fxml.FXML;
@@ -19,8 +22,9 @@ import paranoid.model.level.LevelBuilder;
 import paranoid.model.level.LevelManager;
 import paranoid.view.parameters.LayoutManager;
 
-public class GameBuilderController implements GuiController {
+public class GameBuilderController implements GuiController, Subject {
 
+    private List<Observer> observer;
     private LevelBuilder levelBuilder;
     private static final int PLAYER_ZONE = 4;
     private GraphicsContext gc;
@@ -59,6 +63,7 @@ public class GameBuilderController implements GuiController {
      */
     @FXML
     public void initialize() {
+        this.observer = new ArrayList<>();
         this.colorPicker.setValue(Color.HOTPINK);
         this.colorPicker.setEditable(false);
         this.levelBuilder = new LevelBuilder();
@@ -129,6 +134,7 @@ public class GameBuilderController implements GuiController {
             this.levelBuilder.setLevelName(levelName.getText());
             LevelManager.saveLevel(this.levelBuilder.build());
             JOptionPane.showMessageDialog(null, "Livello creato con successo");
+            this.notifyObserver();
         }
     }
 
@@ -139,6 +145,30 @@ public class GameBuilderController implements GuiController {
     public void delateAll() {
         levelBuilder.delateAll();
         this.setCanvas();
+    }
+
+    /**
+     * add an observer.
+     */
+    @Override
+    public void register(final Observer obs) {
+        this.observer.add(obs);
+    }
+
+    /**
+     * remove an observer.
+     */
+    @Override
+    public void unregister(final Observer obs) {
+        this.observer.remove(obs);
+    }
+
+    /**
+     * notifies all observers of changes that have occurred.
+     */
+    @Override
+    public void notifyObserver() {
+        this.observer.forEach(i -> i.update());
     }
 
 }
