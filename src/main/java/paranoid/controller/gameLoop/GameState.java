@@ -69,7 +69,19 @@ public class GameState {
 
         //add balls to the world
         List<Ball> ballContainer = new ArrayList<>();
-        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 2, 10, 10));
+        switch (set.getDifficulty()) {
+            case EASY:
+                ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
+            break;
+            case NORMAL:
+                ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 2, 10, 10));
+            break;
+            case HARD:
+                ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 2.5, 10, 10));
+            break;
+            default:
+            break;
+        }
         world.setBalls(ballContainer);
     }
 
