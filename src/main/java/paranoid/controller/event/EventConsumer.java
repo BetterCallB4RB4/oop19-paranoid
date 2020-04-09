@@ -19,8 +19,12 @@ public class EventConsumer {
     public void resolveEvent() {
         events.stream().forEach(ev -> {
             if (ev instanceof HitBorderEvent) {
-                this.gameState.setLives(0);
 
+            } else if (ev instanceof HitBrickEvent) {
+                HitBrickEvent hit = (HitBrickEvent) ev;
+                gameState.setScore(gameState.getScore() 
+                        + (hit.getBrick().getPointEarned() * gameState.getMultiplier()));
+                hit.getBrick().decEnergy();
             }
         });
         events.clear();
