@@ -82,7 +82,7 @@ public class LevelBuilder {
      * @return Pair<Brick, Boolean>
      */
     public Pair<PlaceHolder, Boolean> hit(final double x, final double y, 
-                                          final Color color, final boolean isDestructibile, 
+                                          final Color color, final boolean isIndestructibile, 
                                           final int point, final int lives) {
         Pair<PlaceHolder, Boolean> res = new Pair<>(new PlaceHolder(new P2d(0, 0), 0, 0), false);
         for (PlaceHolder ph : this.builderCanvas.keySet()) {
@@ -100,7 +100,7 @@ public class LevelBuilder {
                                          .width(this.gameCanvas.get(hit).getX().getWidth())
                                          .pointEarned(point)
                                          .color(color)
-                                         .destructible(isDestructibile)
+                                         .destructible(isIndestructibile)
                                          .energy(lives)
                                          .build();
                     this.gameCanvas.replace(hit, new Pair<>(this.gameCanvas.get(hit).getX(), Optional.of(brick)));

@@ -35,7 +35,7 @@ public class GameBuilderController implements GuiController, Subject {
     private ColorPicker colorPicker;
 
     @FXML
-    private CheckBox isDestructible;
+    private CheckBox isIndestructible;
 
     @FXML
     private Slider pointSlider;
@@ -72,7 +72,7 @@ public class GameBuilderController implements GuiController, Subject {
             if (e.getY() < (tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE))) {
                 Pair<PlaceHolder, Boolean> res = levelBuilder.hit(e.getX(), e.getY(),
                                                                   colorPicker.getValue(),
-                                                                  isDestructible.isSelected(),
+                                                                  isIndestructible.isSelected(),
                                                                   (int) pointSlider.getValue(),
                                                                   (int) lifeSlider.getValue());
                 if (res.getY()) {
