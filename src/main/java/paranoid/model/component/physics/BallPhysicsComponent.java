@@ -56,7 +56,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
                 final Collision collision = entityCollisionInfo.get().getY();
                 if (entity instanceof Brick) {
                     final Brick brick = (Brick) entity;
-                    w.notifyEvent(new HitBrickEvent());
+                    w.notifyEvent(new HitBrickEvent(brick));
 
                     if (collision.equals(Collision.TOP)) {
                         ball.setPos(new P2d(ball.getPos().getX(), brick.getPos().getY() - ball.getHeight()));
