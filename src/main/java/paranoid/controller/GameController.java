@@ -4,6 +4,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
@@ -23,6 +24,15 @@ public final class GameController implements GuiController {
     @FXML
     private Canvas canvas;
 
+    @FXML
+    private Label lblScore;
+
+    @FXML
+    private Label lblHighScore;
+
+    @FXML
+    private Label lblLives;
+
     /**
      * At game.fxml load it initialize the width and height of the canvas and set his 
      * graphic context for draw entity.
@@ -37,11 +47,20 @@ public final class GameController implements GuiController {
     /**
      * Draw all entities of the game adapted to the current resolution.
      * @param gameEntities Collection of each game entity taken from the game loop.
+     * @param score The score of the player.
+     * @param highScore The top score.
+     * @param lives The remained life ot the player.
      */
-    public void render(final List<GameObject> gameEntities) {
+    public void render(final List<GameObject> gameEntities, final int score, final int highScore, final int lives) {
+        drawScoreAndLives(score, highScore, lives);
         drawWorld(gameEntities);
-    }
 
+    }
+    private void drawScoreAndLives(final Integer highScore, final Integer score, final Integer lives) {
+        this.lblHighScore.setText("HIGHSCORE: " + highScore.toString());
+        this.lblScore.setText("SCORE: " + score.toString());
+        this.lblLives.setText("LIVES: " + lives.toString());
+    }
     private void drawWorld(final List<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
         gc.setFill(Color.ALICEBLUE);
