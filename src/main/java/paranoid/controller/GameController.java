@@ -5,6 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
@@ -12,6 +19,7 @@ import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
+import paranoid.model.level.BackGround;
 
 /**
  * Gui controller of game.fxml .
@@ -33,6 +41,9 @@ public final class GameController implements GuiController {
     @FXML
     private Label lblLives;
 
+    @FXML
+    private Pane panel;
+
     /**
      * At game.fxml load it initialize the width and height of the canvas and set his 
      * graphic context for draw entity.
@@ -41,6 +52,10 @@ public final class GameController implements GuiController {
     public void initialize() {
         this.canvas.setWidth(ScreenConstant.CANVAS_WIDTH);
         this.canvas.setHeight(ScreenConstant.CANVAS_HEIGHT);
+        this.panel.setMinWidth(ScreenConstant.CANVAS_WIDTH);
+        this.panel.setMaxWidth(ScreenConstant.CANVAS_WIDTH);
+        this.panel.setMinHeight(ScreenConstant.CANVAS_HEIGHT);
+        this.panel.setMaxHeight(ScreenConstant.CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
     }
 
@@ -99,5 +114,18 @@ public final class GameController implements GuiController {
 
     private double getHinPixel(final double hp) {
         return hp * ScreenConstant.RATIO_Y;
+    }
+
+    public void setBackGroundImage(final BackGround backGround) {
+        BackgroundImage bg = new BackgroundImage(new Image(backGround.getLocation(), 
+                                                             ScreenConstant.CANVAS_WIDTH,
+                                                             ScreenConstant.CANVAS_HEIGHT,
+                                                             false,
+                                                             true),
+                                                   BackgroundRepeat.REPEAT, 
+                                                   BackgroundRepeat.NO_REPEAT, 
+                                                   BackgroundPosition.DEFAULT,
+                                                   BackgroundSize.DEFAULT);
+        this.panel.setBackground(new Background(bg));
     }
 }
