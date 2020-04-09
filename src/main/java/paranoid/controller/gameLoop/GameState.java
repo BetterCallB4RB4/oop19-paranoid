@@ -30,6 +30,8 @@ public class GameState {
     private int multiplier;
     private int lives;
     private World world;
+    private GamePhase phase = GamePhase.INIT;
+    private Settings set = SettingsManager.loadOption();
 
     public GameState() {
         try {
@@ -40,25 +42,26 @@ public class GameState {
         this.highScore = this.bestScores.getHightScore();
         this.score = 0;
         this.multiplier = 1;
-        this.lives = 1;
+        this.lives = 4;
 
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
-        Settings set = SettingsManager.loadOption();
 
         //add brick to the world
         Level lvl = LevelManager.loadLevel(set.getSelectedLevel());
         world.setBricks(lvl.getBricks());
+    }
 
-        //add players to the world
+    public void init() {
+      //add players to the world
         List<Player> playerList = new ArrayList<>();
-        playerList.add(new Player.Builder().position(new P2d(350,500))
+        playerList.add(new Player.Builder().position(new P2d(290,580))
                                            .width(80)
                                            .height(10)
                                            .color(Color.DARKGREEN)
                                            .playerId(PlayerId.ONE)
                                            .build());
         if (set.getPlayerNumber() == 2) {
-            playerList.add(new Player.Builder().position(new P2d(290,500))
+            playerList.add(new Player.Builder().position(new P2d(290,580))
                                                .width(80)
                                                .height(10)
                                                .color(Color.RED)
@@ -71,20 +74,20 @@ public class GameState {
         List<Ball> ballContainer = new ArrayList<>();
         switch (set.getDifficulty()) {
             case EASY:
-                ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
+                ballContainer.add(new Ball(new P2d(330, 570), new V2d(100, -200), 1, 10, 10));
             break;
             case NORMAL:
-                ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 2, 10, 10));
+                ballContainer.add(new Ball(new P2d(330, 570), new V2d(100, -200), 2, 10, 10));
             break;
             case HARD:
-                ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 2.5, 10, 10));
+                ballContainer.add(new Ball(new P2d(330, 570), new V2d(100, -200), 2.5, 10, 10));
             break;
             default:
             break;
         }
         world.setBalls(ballContainer);
+        phase = GamePhase.PAUSE;
     }
-
     /**
      * @return the score
      */
@@ -138,6 +141,9 @@ public class GameState {
         this.lives = lives;
     }
 
+    public void decLives() {
+        this.lives--;
+    }
     /**
      * @return the world
      */
@@ -156,5 +162,13 @@ public class GameState {
         } catch (InvalidKeyException | IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public GamePhase getPhase() {
+        return this.phase;
+    }
+
+    public void setPhase(final GamePhase phase) {
+        this.phase = phase;
     }
 }

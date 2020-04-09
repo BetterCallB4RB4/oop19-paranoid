@@ -33,7 +33,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
 
         if (borderCollisionInfo.isPresent()) {
             ball.setPos(old);
-            w.notifyEvent(new HitBorderEvent());
+            w.notifyEvent(new HitBorderEvent(ball, borderCollisionInfo.get()));
             if (borderCollisionInfo.get().equals(Collision.TOP)
             ||  borderCollisionInfo.get().equals(Collision.BOTTOM)) {
                 ball.flipVelOnY();

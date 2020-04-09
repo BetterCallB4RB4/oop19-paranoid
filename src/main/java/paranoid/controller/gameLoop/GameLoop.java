@@ -79,15 +79,31 @@ public class GameLoop implements Runnable {
     @Override
     public void run() {
         long lastTime = System.currentTimeMillis();
-        while (true) {
+        while (gameState.getPhase() != GamePhase.WIN && gameState.getPhase() != GamePhase.LOST) {
             long current = System.currentTimeMillis();
             int elapsed = (int) (current - lastTime);
-            processInput();
-            updateGame(elapsed);
-            render();
+
+            switch (gameState.getPhase()) {
+            case INIT:
+                gameState.init();
+                render();
+                break;
+            case PAUSE:
+                render();
+                break;
+            case RUNNING:
+                processInput();
+                updateGame(elapsed);
+                render();
+                break;
+            default:
+                break;
+            }
             waitForNextFrame(current);
             lastTime = current;
         }
+        gameState.saveScore();
+        this.scene.setRoot(LayoutManager.SCORE.getLayout());
     }
 
     /**
@@ -141,6 +157,13 @@ public class GameLoop implements Runnable {
 
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
+            case SPACE:
+                if (gameState.getPhase().equals(GamePhase.PAUSE)) {
+                    gameState.setPhase(GamePhase.RUNNING);
+                } else {
+                    gameState.setPhase(GamePhase.PAUSE);
+                }
+                break;
             case RIGHT:
                 inputController.get(PlayerId.ONE).notifyMoveRight(true);
                 break;

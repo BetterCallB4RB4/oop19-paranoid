@@ -57,6 +57,22 @@ public class World implements WorldEventListener {
         this.bricks = bricks;
     }
 
+    public List<Ball> getBalls() {
+        return Collections.unmodifiableList(this.balls);
+    }
+    
+    public List<Brick> getBricks() {
+        return this.bricks;
+    }
+
+    public void removeBall(final Ball ball) {
+        this.balls.remove(ball);
+    }
+    
+    public void removeBrick(final Brick brick) {
+        this.bricks.remove(brick);
+    }
+
     /**
      * the world asks the collision manager to check 
      * if there are collisions border and given objects.
