@@ -1,26 +1,31 @@
 package paranoid.model.level;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public enum Music {
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_1("animatedBackGround/futureFunk1.wav", "music1"),
+    MUSIC_1("music/futureFunk1.wav", "music1"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_2("animatedBackGround/lucky.wav", "music2"),
+    MUSIC_2("music/lucky.wav", "music2"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_3("animatedBackGround/moderat.wav", "music3"),
+    MUSIC_3("music/moderat.wav", "music3"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_4("animatedBackGround/stereo.wav", "music4");
+    MUSIC_4("music/stereo.wav", "music4");
 
     private String location;
     private String name;
@@ -47,4 +52,23 @@ public enum Music {
     public String getName() {
         return name;
     }
+
+    public static List<String> getMusicNames() {
+        List<String> list = new ArrayList<>();
+        list.add(Music.MUSIC_1.getName());
+        list.add(Music.MUSIC_2.getName());
+        list.add(Music.MUSIC_3.getName());
+        list.add(Music.MUSIC_4.getName());
+        return list;
+    }
+
+    public static Music getMusicByName(final String name) {
+        Map<String, Music> musicName = new HashMap<>();
+        musicName.put(Music.MUSIC_1.getName(), Music.MUSIC_1);
+        musicName.put(Music.MUSIC_2.getName(), Music.MUSIC_2);
+        musicName.put(Music.MUSIC_3.getName(), Music.MUSIC_3);
+        musicName.put(Music.MUSIC_4.getName(), Music.MUSIC_4);
+        return musicName.get(name);
+    }
+
 }
