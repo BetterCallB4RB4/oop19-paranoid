@@ -81,10 +81,21 @@ public class GameState {
     }
 
     /**
+     * @return the highscore.
+     */
+    public int getHighScore() {
+        return highScore;
+    }
+
+    /**
      * @param score the score to set
      */
     public void setScore(final int score) {
         this.score = score;
+
+        if (this.score > this.highScore) {
+            this.highScore = this.score;
+        }
     }
 
     /**
@@ -122,8 +133,11 @@ public class GameState {
         return world;
     }
 
+    /**
+     * Save the final score in file.
+     */
     public void saveScore() {
-        this.bestScores.addScore("marco", 51000);
+        this.bestScores.addScore("SUPERMK", this.getScore());
 
         try {
             ScoreManager.saveScore(this.bestScores);
