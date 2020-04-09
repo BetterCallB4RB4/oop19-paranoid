@@ -112,6 +112,7 @@ public class World implements WorldEventListener {
      * @param dt the time difference delta time
      */
     public void updateState(final int dt) {
+        this.bricks.removeIf(i -> i.getEnergy() == 0 && i.isDestructible());
         this.getSceneEntities().forEach(i -> i.updatePhysics(dt, this));
     }
 

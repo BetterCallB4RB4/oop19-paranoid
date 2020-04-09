@@ -123,11 +123,8 @@ public class GameLoop implements Runnable {
      * @param elapsed game physics is updated
      */
     private void updateGame(final int elapsed) {
-        world.updateState(elapsed);
         world.getEventHanlder().resolveEvent();
-        if (gameState.getLives() == 0) {
-            gameState.saveScore();
-        }
+        world.updateState(elapsed);
     }
 
     private void render() {

@@ -69,7 +69,7 @@ public class GameState {
 
         //add balls to the world
         List<Ball> ballContainer = new ArrayList<>();
-        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
+        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 2, 10, 10));
         world.setBalls(ballContainer);
     }
 
