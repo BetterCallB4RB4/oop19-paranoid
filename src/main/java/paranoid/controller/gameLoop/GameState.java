@@ -11,16 +11,19 @@ import paranoid.common.P2d;
 import paranoid.common.PlayerId;
 import paranoid.common.V2d;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.controller.GameController;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
+import paranoid.model.level.BackGround;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
+import paranoid.view.parameters.LayoutManager;
 
 public class GameState {
 
@@ -30,6 +33,7 @@ public class GameState {
     private int multiplier;
     private int lives;
     private World world;
+    private GameController gameController;
 
     public GameState() {
         try {
@@ -45,8 +49,11 @@ public class GameState {
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
         Settings set = SettingsManager.loadOption();
 
-        //add brick to the world
         Level lvl = LevelManager.loadLevel(set.getSelectedLevel());
+        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
+        this.gameController.setBackGroundImage(BackGround.getBackGroundByName(lvl.getBackGround()));
+
+        //add brick to the world
         world.setBricks(lvl.getBricks());
 
         //add players to the world

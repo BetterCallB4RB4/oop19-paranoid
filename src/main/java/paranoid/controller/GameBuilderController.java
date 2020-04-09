@@ -143,8 +143,8 @@ public class GameBuilderController implements GuiController, Subject {
             JOptionPane.showMessageDialog(null, "Inserisci un nome al livello");
         } else {
             this.levelBuilder.setLevelName(levelName.getText());
-            this.levelBuilder.setBackGround(ost.getValue());
-            this.levelBuilder.setSong(backGround.getValue());
+            this.levelBuilder.setBackGround(backGround.getValue());
+            this.levelBuilder.setSong(ost.getValue());
             LevelManager.saveLevel(this.levelBuilder.build());
             JOptionPane.showMessageDialog(null, "Livello creato con successo");
             this.notifyObserver();
