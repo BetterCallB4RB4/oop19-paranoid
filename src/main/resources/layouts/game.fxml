@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.*?>
 <?import java.lang.*?>
@@ -12,9 +13,22 @@
          <children>
             <VBox>
                <children>
-                  <Label text="PARANOID" />
-                  <Label text="SCORE: " />
-                  <Label text="LIVES: " />
+                  <Label text="PARANOID">
+                     <font>
+                        <Font size="30.0" />
+                     </font></Label>
+                  <Label fx:id="lblHighScore" text="HIGHSCORE: ">
+                     <font>
+                        <Font size="25.0" />
+                     </font></Label>
+                  <Label fx:id="lblScore" text="SCORE: ">
+                     <font>
+                        <Font size="25.0" />
+                     </font></Label>
+                  <Label fx:id="lblLives" text="LIVES: ">
+                     <font>
+                        <Font size="25.0" />
+                     </font></Label>
                </children>
             </VBox>
          </children>
