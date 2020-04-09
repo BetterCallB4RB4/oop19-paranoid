@@ -1,6 +1,9 @@
 package paranoid.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -12,11 +15,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import paranoid.common.Pair;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.main.ParanoidApp;
 import paranoid.model.entity.PlaceHolder;
 import paranoid.model.level.LevelBuilder;
 import paranoid.model.level.LevelManager;
@@ -57,6 +62,12 @@ public class GameBuilderController implements GuiController, Subject {
 
     @FXML
     private Canvas canvas;
+
+    @FXML
+    private ComboBox<String> ost;
+
+    @FXML
+    private ComboBox<String> backGround;
 
     /**
      * init the canvas.
@@ -132,6 +143,8 @@ public class GameBuilderController implements GuiController, Subject {
             JOptionPane.showMessageDialog(null, "Inserisci un nome al livello");
         } else {
             this.levelBuilder.setLevelName(levelName.getText());
+            this.levelBuilder.setBackGround(ost.getValue());
+            this.levelBuilder.setSong(backGround.getValue());
             LevelManager.saveLevel(this.levelBuilder.build());
             JOptionPane.showMessageDialog(null, "Livello creato con successo");
             this.notifyObserver();
