@@ -167,8 +167,8 @@ public class GameState {
      * Save the final score in file.
      */
     public void saveScore() {
+        this.gameController.getMusicPlayer().stopMusic();
         this.bestScores.addScore("SUPERMK", this.getScore());
-
         try {
             ScoreManager.saveScore(this.bestScores);
         } catch (InvalidKeyException | IOException e) {
