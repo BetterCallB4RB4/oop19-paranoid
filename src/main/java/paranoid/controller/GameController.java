@@ -1,9 +1,13 @@
 package paranoid.controller;
 
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
@@ -33,6 +37,12 @@ public final class GameController implements GuiController {
     @FXML
     private Label lblLives;
 
+    @FXML
+    private Label lblPause;
+
+    @FXML
+    private Button btnMenu;
+
     /**
      * At game.fxml load it initialize the width and height of the canvas and set his 
      * graphic context for draw entity.
@@ -42,6 +52,16 @@ public final class GameController implements GuiController {
         this.canvas.setWidth(ScreenConstant.CANVAS_WIDTH);
         this.canvas.setHeight(ScreenConstant.CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
+    }
+
+    @FXML
+    public void btnMenuOnClickHandler() {
+
+    }
+
+    public void isPause(final boolean pause) {
+        this.lblPause.setVisible(pause);
+        this.btnMenu.setVisible(pause);
     }
 
     /**

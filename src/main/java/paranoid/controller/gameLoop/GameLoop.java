@@ -157,13 +157,6 @@ public class GameLoop implements Runnable {
 
         this.scene.setOnKeyPressed(e -> {
             switch (e.getCode()) {
-            case SPACE:
-                if (gameState.getPhase().equals(GamePhase.PAUSE)) {
-                    gameState.setPhase(GamePhase.RUNNING);
-                } else {
-                    gameState.setPhase(GamePhase.PAUSE);
-                }
-                break;
             case RIGHT:
                 inputController.get(PlayerId.ONE).notifyMoveRight(true);
                 break;
@@ -194,6 +187,25 @@ public class GameLoop implements Runnable {
                 break;
             case A:
                 inputController.get(PlayerId.TWO).notifyMoveLeft(false);
+                break;
+            case SPACE:
+                if (gameState.getPhase().equals(GamePhase.PAUSE)) {
+                    gameState.setPhase(GamePhase.RUNNING);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            gameController.isPause(false);
+                        }
+                    });
+                } else {
+                    gameState.setPhase(GamePhase.PAUSE);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            gameController.isPause(true);
+                        }
+                    });
+                }
                 break;
             default:
                 break;
