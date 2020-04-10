@@ -33,7 +33,13 @@ public class GameLoop implements Runnable {
 
     public GameLoop(final Scene scene) {
         this.scene = scene;
-        this.scene.setRoot(LayoutManager.GAME.getLayout());
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
+                scene.setRoot(LayoutManager.GAME.getLayout());
+            }
+        });
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
@@ -103,7 +109,13 @@ public class GameLoop implements Runnable {
             lastTime = current;
         }
         gameState.saveScore();
-        this.scene.setRoot(LayoutManager.SCORE.getLayout());
+        Platform.runLater(new Runnable() {
+
+            @Override
+            public void run() {
+                scene.setRoot(LayoutManager.SCORE.getLayout());
+            }
+        });
     }
 
     /**
