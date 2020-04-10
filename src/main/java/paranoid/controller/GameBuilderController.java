@@ -20,9 +20,11 @@ import paranoid.common.Pair;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.PlaceHolder;
 import paranoid.model.level.BackGround;
+import paranoid.model.level.Effect;
 import paranoid.model.level.LevelBuilder;
 import paranoid.model.level.LevelManager;
 import paranoid.model.level.Music;
+import paranoid.model.level.MusicPlayer;
 import paranoid.view.parameters.LayoutManager;
 
 public class GameBuilderController implements GuiController, Subject {

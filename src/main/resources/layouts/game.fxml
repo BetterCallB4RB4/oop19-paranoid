@@ -33,7 +33,7 @@
             </Label>
          </children>
       </VBox>
-      <Pane fx:id="panel" >
+      <Pane fx:id="panel">
          <children>
             <Canvas fx:id="canvas" />
          </children>
