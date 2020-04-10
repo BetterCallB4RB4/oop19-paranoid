@@ -11,16 +11,20 @@ import paranoid.common.P2d;
 import paranoid.common.PlayerId;
 import paranoid.common.V2d;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.controller.GameController;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
+import paranoid.model.level.BackGround;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
+import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
+import paranoid.view.parameters.LayoutManager;
 
 public class GameState {
 
@@ -32,6 +36,7 @@ public class GameState {
     private World world;
     private GamePhase phase = GamePhase.INIT;
     private Settings set = SettingsManager.loadOption();
+    private GameController gameController;
 
     public GameState() {
         try {
@@ -46,8 +51,14 @@ public class GameState {
 
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
 
-        //add brick to the world
         Level lvl = LevelManager.loadLevel(set.getSelectedLevel());
+        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
+        this.gameController.setBackGroundImage(BackGround.getBackGroundByName(lvl.getBackGround()));
+        this.gameController.getMusicPlayer().setMusicEnable(set.isPlayMusic());
+        this.gameController.getMusicPlayer().setEffectEnable(set.isPlayEffects());
+        this.world.getEventHanlder().addMusicPlayer(this.gameController.getMusicPlayer());
+        this.gameController.getMusicPlayer().playMusic(Music.getMusicByName(lvl.getMusic()));
+        //add brick to the world
         world.setBricks(lvl.getBricks());
     }
 
@@ -87,6 +98,7 @@ public class GameState {
         }
         world.setBalls(ballContainer);
         phase = GamePhase.PAUSE;
+        
     }
     /**
      * @return the score
