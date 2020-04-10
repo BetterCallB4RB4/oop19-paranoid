@@ -7,6 +7,7 @@ import paranoid.common.Collision;
 import paranoid.controller.gameLoop.GamePhase;
 import paranoid.controller.gameLoop.GameState;
 import paranoid.model.entity.Ball;
+import paranoid.model.entity.Brick;
 
 public class EventConsumer {
 
@@ -25,28 +26,22 @@ public class EventConsumer {
                 HitBorderEvent hit = (HitBorderEvent) ev;
                 if (hit.getCollision().equals(Collision.BOTTOM)) {
                     gameState.getWorld().removeBall(hit.getBall());
-                    if (gameState.getWorld().getBalls().size() == 0 ) {
-                        this.gameState.decLives();
-                        if (this.gameState.getLives() == 0) {
-                            this.gameState.setPhase(GamePhase.LOST);
-                        } else {
-                            this.gameState.setPhase(GamePhase.INIT);
-                        }
+                    if (gameState.getWorld().getBalls().isEmpty()) {
+                        gameState.decLives();
+                        gameState.setPhase(GamePhase.INIT);
                     }
                 }
             } else if (ev instanceof HitBrickEvent) {
-                HitBrickEvent hit = (HitBrickEvent) ev;
+                Brick brick = ((HitBrickEvent) ev).getBrick();
                 gameState.setScore(gameState.getScore() 
-                        + (hit.getBrick().getPointEarned() * gameState.getMultiplier()));
-                hit.getBrick().decEnergy();
-                if (hit.getBrick().getEnergy() == 0 && !hit.getBrick().isIndestructible()) {
-                    gameState.getWorld().removeBrick(hit.getBrick());
-                    if (gameState.getWorld().getBricks().size() == 0) {
-                        gameState.setPhase(GamePhase.WIN);
-                    }
+                        + (brick.getPointEarned() * gameState.getMultiplier()));
+                brick.decEnergy();
+                if (brick.getEnergy() == 0 && !brick.isIndestructible()) {
+                    gameState.getWorld().removeBrick(brick);
                 }
             }
         });
+        isOver();
         events.clear();
     }
 
@@ -58,4 +53,12 @@ public class EventConsumer {
         this.events.add(event);
     }
 
+    private void isOver() {
+        if (gameState.getLives() == 0) {
+            gameState.setPhase(GamePhase.LOST);
+        } else if (gameState.getWorld().getBricks().stream()
+            .filter(i -> !i.isIndestructible()).count() == 0) {
+            gameState.setPhase(GamePhase.WIN);
+           }
+    }
 }
