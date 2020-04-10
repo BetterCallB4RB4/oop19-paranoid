@@ -33,7 +33,9 @@ public class MusicPlayer {
      * stop the current music.
      */
     public void stopMusic() {
-        this.clip.stop();
+        if (this.isMusicEnable) {
+            this.clip.stop();
+        }
     }
 
     /**
