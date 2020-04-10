@@ -7,11 +7,14 @@ import paranoid.common.Collision;
 import paranoid.controller.gameLoop.GamePhase;
 import paranoid.controller.gameLoop.GameState;
 import paranoid.model.entity.Ball;
+import paranoid.model.level.Effect;
+import paranoid.model.level.MusicPlayer;
 
 public class EventConsumer {
 
     private List<Event> events = new ArrayList<>();
     private GameState gameState;
+    private MusicPlayer player;
 
     public EventConsumer(final GameState gameState) {
         this.gameState = gameState;
@@ -25,7 +28,7 @@ public class EventConsumer {
                 HitBorderEvent hit = (HitBorderEvent) ev;
                 if (hit.getCollision().equals(Collision.BOTTOM)) {
                     gameState.getWorld().removeBall(hit.getBall());
-                    if (gameState.getWorld().getBalls().size() == 0 ) {
+                    if (gameState.getWorld().getBalls().size() == 0) {
                         this.gameState.decLives();
                         if (this.gameState.getLives() == 0) {
                             this.gameState.setPhase(GamePhase.LOST);
@@ -34,6 +37,7 @@ public class EventConsumer {
                         }
                     }
                 }
+                this.player.playEffect(Effect.BOARD_COLLISION);
             } else if (ev instanceof HitBrickEvent) {
                 HitBrickEvent hit = (HitBrickEvent) ev;
                 gameState.setScore(gameState.getScore() 
@@ -45,6 +49,7 @@ public class EventConsumer {
                         gameState.setPhase(GamePhase.WIN);
                     }
                 }
+                this.player.playEffect(Effect.BRICK_COLLISION);
             }
         });
         events.clear();
@@ -58,4 +63,11 @@ public class EventConsumer {
         this.events.add(event);
     }
 
+    /**
+     * 
+     * @param player effect
+     */
+    public void addMusicPlayer(final MusicPlayer player) {
+        this.player = player;
+    }
 }
