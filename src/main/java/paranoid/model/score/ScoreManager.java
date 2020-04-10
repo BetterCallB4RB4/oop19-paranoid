@@ -47,8 +47,17 @@ public final class ScoreManager {
     }
 
     public static void saveScore(final Score score) throws IOException, InvalidKeyException {
+        final List<Pair<String, Integer>> scoreList = score.getScore();
+
+        Collections.sort(scoreList, (o1, o2) -> (o1.getY() == o2.getY()) 
+                ? o1.getX().compareTo(o2.getX()) 
+                        : o2.getY() - o1.getY());
+        while (scoreList.size() > MAX_SCORE_ELE) {
+            scoreList.remove(scoreList.size() - 1);
+        }
+
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] iv = cipher.getIV();
+        final byte[] iv = cipher.getIV();
         try (
                 FileOutputStream fileOut = new FileOutputStream(ParanoidApp.SCORE)
         ) {
@@ -59,13 +68,6 @@ public final class ScoreManager {
                             new OutputStreamWriter(
                             new CipherOutputStream(fileOut, cipher)))
                 ) {
-                final List<Pair<String, Integer>> scoreList = score.getScore();
-
-                Collections.sort(scoreList, java.util.Comparator.comparing(Pair::getY));
-                Collections.reverse(scoreList);
-                while (scoreList.size() > MAX_SCORE_ELE) {
-                    scoreList.remove(scoreList.size() - 1);
-                }
 
                 for (final Pair<String, Integer> ele : scoreList) {
                     w.write(ele.getX());
@@ -81,7 +83,7 @@ public final class ScoreManager {
         try (
                 FileInputStream fileIn = new FileInputStream(ParanoidApp.SCORE)
         ) {
-            byte[] fileIv = new byte[16];
+            final byte[] fileIv = new byte[16];
             fileIn.read(fileIv);
             cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileIv));
 

@@ -38,11 +38,6 @@ public class Score {
         private List<Pair<String, Integer>> scoreList = new ArrayList<>();
 
         public Builder defaultScore() {
-            this.scoreList.add(new Pair<>("TIMMY", 10000));
-            this.scoreList.add(new Pair<>("BILLY", 5000));
-            this.scoreList.add(new Pair<>("WILLY", 3000));
-            this.scoreList.add(new Pair<>("TOMMY", 1000));
-            this.scoreList.add(new Pair<>("JIMMI", 100));
             return this;
         }
 
