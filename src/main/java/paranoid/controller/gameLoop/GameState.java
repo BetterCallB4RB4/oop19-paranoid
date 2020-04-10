@@ -19,6 +19,7 @@ import paranoid.model.entity.World;
 import paranoid.model.level.BackGround;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
+import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.settings.Settings;
@@ -52,6 +53,9 @@ public class GameState {
         Level lvl = LevelManager.loadLevel(set.getSelectedLevel());
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.gameController.setBackGroundImage(BackGround.getBackGroundByName(lvl.getBackGround()));
+        this.gameController.getMusicPlayer().setMusicEnable(set.isPlayMusic());
+        this.gameController.getMusicPlayer().setEffectEnable(set.isPlayEffects());
+        this.world.getEventHanlder().addMusicPlayer(this.gameController.getMusicPlayer());
 
         //add brick to the world
         world.setBricks(lvl.getBricks());
@@ -90,6 +94,7 @@ public class GameState {
             break;
         }
         world.setBalls(ballContainer);
+        this.gameController.getMusicPlayer().playMusic(Music.getMusicByName(lvl.getMusic()));
     }
 
     /**

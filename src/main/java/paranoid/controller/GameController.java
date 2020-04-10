@@ -20,6 +20,7 @@ import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 import paranoid.model.level.BackGround;
+import paranoid.model.level.MusicPlayer;
 
 /**
  * Gui controller of game.fxml .
@@ -28,6 +29,7 @@ import paranoid.model.level.BackGround;
 public final class GameController implements GuiController {
 
     private GraphicsContext gc;
+    private MusicPlayer player;
 
     @FXML
     private Canvas canvas;
@@ -50,6 +52,7 @@ public final class GameController implements GuiController {
      */
     @FXML
     public void initialize() {
+        this.player = new MusicPlayer();
         this.canvas.setWidth(ScreenConstant.CANVAS_WIDTH);
         this.canvas.setHeight(ScreenConstant.CANVAS_HEIGHT);
         this.panel.setMinWidth(ScreenConstant.CANVAS_WIDTH);
@@ -127,5 +130,9 @@ public final class GameController implements GuiController {
                                                    BackgroundPosition.DEFAULT,
                                                    BackgroundSize.DEFAULT);
         this.panel.setBackground(new Background(bg));
+    }
+
+    public MusicPlayer getMusicPlayer() {
+        return this.player;
     }
 }
