@@ -1,6 +1,8 @@
 package paranoid.model.settings;
 
 import java.io.Serializable;
+import paranoid.model.level.Level;
+import paranoid.model.level.LevelSelection;
 
 public final class Settings implements Serializable {
 
@@ -9,10 +11,10 @@ public final class Settings implements Serializable {
     private boolean playMusic;
     private boolean playEffects;
     private int playerNumber;
-    private String selectedLevel;
+    private Level selectedLevel;
 
     private Settings(final Difficulty difficulty, final boolean playMusic, final boolean playEffect,
-                    final int playerNumber, final String selectedLevel) {
+                    final int playerNumber, final Level selectedLevel) {
         this.difficulty = difficulty;
         this.playEffects = playEffect;
         this.playMusic = playMusic;
@@ -51,7 +53,7 @@ public final class Settings implements Serializable {
     /**
      * @return the selectedLevel
      */
-    public String getSelectedLevel() {
+    public Level getSelectedLevel() {
         return selectedLevel;
     }
 
@@ -61,14 +63,14 @@ public final class Settings implements Serializable {
         private boolean playMusic;
         private boolean playEffects;
         private int playerNumber;
-        private String selectedLevel;
+        private Level selectedLevel;
 
         public SettingsBuilder() {
             this.difficulty = Difficulty.NORMAL;
             this.playMusic = false;
             this.playEffects = true;
             this.playerNumber = 1;
-            this.selectedLevel = "level1";
+            this.selectedLevel = LevelSelection.LEVEL1.getLevel();
         }
 
         public SettingsBuilder fromSettings(final Settings settings) {
@@ -100,7 +102,7 @@ public final class Settings implements Serializable {
             return this;
         }
 
-        public SettingsBuilder selectLevel(final String selectedLevel) {
+        public SettingsBuilder selectLevel(final Level selectedLevel) {
             this.selectedLevel = selectedLevel;
             return this;
         }
