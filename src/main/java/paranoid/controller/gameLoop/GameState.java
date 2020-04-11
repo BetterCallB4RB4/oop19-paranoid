@@ -41,7 +41,7 @@ public class GameState {
     public GameState() {
         try {
             this.bestScores = ScoreManager.loadScore();
-        } catch (InvalidKeyException | InvalidAlgorithmParameterException | IOException e) {
+        } catch (InvalidKeyException | InvalidAlgorithmParameterException | IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         this.highScore = this.bestScores.getHightScore();
@@ -98,7 +98,6 @@ public class GameState {
         }
         world.setBalls(ballContainer);
         phase = GamePhase.PAUSE;
-        
     }
     /**
      * @return the score

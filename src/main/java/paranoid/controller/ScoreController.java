@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import paranoid.common.Pair;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
+import paranoid.model.score.User;
 import paranoid.view.parameters.LayoutManager;
 
 public class ScoreController implements GuiController {
@@ -26,11 +26,11 @@ public class ScoreController implements GuiController {
 
         try {
             final Score score = ScoreManager.loadScore();
-            final List<Pair<String, Integer>> scoreList = score.getScore();
+            final List<User> scoreList = score.getScore();
 
-            for (int x = 0; x < scoreList.size(); x++) {
-                this.nameList.get(x).setText(scoreList.get(x).getX());
-                this.scoreList.get(x).setText(scoreList.get(x).getY().toString());
+            for (int x = 0; x < this.scoreList.size() && x < scoreList.size(); x++) {
+                this.nameList.get(x).setText(scoreList.get(x).getName());
+                this.scoreList.get(x).setText(scoreList.get(x).getScore().toString());
             }
 
         } catch (Exception e) {
