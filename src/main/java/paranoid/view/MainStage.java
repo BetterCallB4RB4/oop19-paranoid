@@ -3,7 +3,9 @@ package paranoid.view;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.controller.ChooseLevelController;
 import paranoid.controller.GameBuilderController;
+import paranoid.controller.GameController;
 import paranoid.controller.SettingsController;
 import paranoid.view.parameters.LayoutManager;
 
@@ -29,8 +31,9 @@ public class MainStage extends Stage {
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);
-            SettingsController setttingsController = (SettingsController) LayoutManager.SETTINGS.getGuiController();
-            setttingsController.initialize((GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController());
+            GameBuilderController builder = (GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController();
+            ChooseLevelController chooseLevel = (ChooseLevelController) LayoutManager.CHOOSE_LVL.getGuiController();
+            chooseLevel.initialize(builder);
         }
 
     }
