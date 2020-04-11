@@ -49,4 +49,40 @@ public class Level implements Serializable {
         return backGround;
     }
 
+    /**
+     * hash code.
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((levelName == null) ? 0 : levelName.hashCode());
+        return result;
+    }
+
+    /**
+     * equals.
+     */
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Level other = (Level) obj;
+        if (levelName == null) {
+            if (other.levelName != null) {
+                return false;
+            }
+        } else if (!levelName.equals(other.levelName)) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -2,11 +2,14 @@ package paranoid.model.level;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import paranoid.main.ParanoidApp;
 
 public class LevelManager {
@@ -20,7 +23,18 @@ public class LevelManager {
         }
     }
 
-    public static Level loadLevel(final String nameLevel) {
+    public static List<Level> loadLevels() {
+        List<Level> levels = new ArrayList<>();
+        File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
+        if (levelFolder.exists() && levelFolder.isDirectory()) {
+            for (int i = 0; i < levelFolder.list().length; i++) {
+                levels.add(loadLevel(levelFolder.listFiles()[i].getName()));
+            }
+        }
+        return levels;
+    }
+
+    private static Level loadLevel(final String nameLevel) {
         Level level = null;
         try (ObjectInputStream istream = new ObjectInputStream(
         new BufferedInputStream(new FileInputStream(ParanoidApp.LEVEL_FOLDER + ParanoidApp.SEPARATOR + nameLevel)))) {
