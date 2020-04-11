@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.VBox?>
+
+<SplitPane fx:id="mainPanel" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ChooseLevelController">
+   <items>
+      <ScrollPane fx:id="scroller" prefHeight="342.0" prefWidth="541.0">
+         <content>
+            <VBox fx:id="buttonContainer" alignment="CENTER" prefHeight="374.0" prefWidth="554.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="back" mnemonicParsing="false" onMouseClicked="#backToMenu" text="MENU" />
+   </items>
+</SplitPane>
