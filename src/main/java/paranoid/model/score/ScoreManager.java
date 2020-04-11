@@ -1,17 +1,16 @@
 package paranoid.model.score;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 
-import paranoid.common.Pair;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +28,6 @@ public final class ScoreManager {
     /**
      * Number of score elements that you want in file.
      */
-    private static final int MAX_SCORE_ELE = 5;
     private static SecretKey secretKey;
     private static Cipher cipher;
 
@@ -47,14 +45,11 @@ public final class ScoreManager {
     }
 
     public static void saveScore(final Score score) throws IOException, InvalidKeyException {
-        final List<Pair<String, Integer>> scoreList = score.getScore();
+        final List<User> scoreList = score.getScore();
 
-        Collections.sort(scoreList, (o1, o2) -> (o1.getY() == o2.getY()) 
-                ? o1.getX().compareTo(o2.getX()) 
-                        : o2.getY() - o1.getY());
-        while (scoreList.size() > MAX_SCORE_ELE) {
-            scoreList.remove(scoreList.size() - 1);
-        }
+        Collections.sort(scoreList, (o1, o2) -> (o1.getScore().equals(o2.getScore())) 
+                ? o1.getName().compareTo(o2.getName()) 
+                        : o2.getScore() - o1.getScore());
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         final byte[] iv = cipher.getIV();
@@ -64,42 +59,38 @@ public final class ScoreManager {
             fileOut.write(iv);
 
             try (
-                    BufferedWriter w = new BufferedWriter(
-                            new OutputStreamWriter(
+                    ObjectOutputStream w = new ObjectOutputStream(
+                            new BufferedOutputStream(
                             new CipherOutputStream(fileOut, cipher)))
                 ) {
-
-                for (final Pair<String, Integer> ele : scoreList) {
-                    w.write(ele.getX());
-                    w.newLine();
-                    w.write(ele.getY().toString());
-                    w.newLine();
-                }
+                w.writeObject(scoreList);
             }
         }
     }
 
-    public static Score loadScore() throws IOException, InvalidKeyException, InvalidAlgorithmParameterException {
+    @SuppressWarnings("unchecked")
+    public static Score loadScore() throws IOException, InvalidKeyException, InvalidAlgorithmParameterException, ClassNotFoundException {
         try (
                 FileInputStream fileIn = new FileInputStream(ParanoidApp.SCORE)
         ) {
             final byte[] fileIv = new byte[16];
-            fileIn.read(fileIv);
+            if (fileIn.read(fileIv) == -1) {
+                throw new IOException();
+            }
             cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileIv));
 
             try (
-                    BufferedReader r = new BufferedReader(
-                            new InputStreamReader(
+                    ObjectInputStream r = new ObjectInputStream(
+                            new BufferedInputStream(
                             new CipherInputStream(fileIn, cipher)))
 
                 ) {
-                final List<Pair<String, Integer>> scoreList = new ArrayList<>();
-                String name = null;
-                int score;
-                while ((name = r.readLine()) != null) {
-                    score = Integer.parseInt(r.readLine());
-                    scoreList.add(new Pair<>(name, score));
+                final Object obj = r.readObject();
+                List<User> scoreList = new ArrayList<>();
+                if (obj instanceof List) {
+                    scoreList = (List<User>) obj;
                 }
+
                 return new Score.Builder().fromExScore(scoreList).build();
             }
         }
