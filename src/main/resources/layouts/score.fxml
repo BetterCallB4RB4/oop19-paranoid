@@ -67,40 +67,24 @@
                   </Label>
                </children>
             </FlowPane>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
-               <children>
-                  <Label fx:id="name5" text="NOME: " textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="score5" text="SCORE" textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
             <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" text="MENU" />
          </children>
          
          <fx:define>
-         	<ArrayList fx:id="nameList" >
+         	<ArrayList fx:id="lblListName" >
          		<fx:reference source="name1"/>
          		<fx:reference source="name2"/>
          		<fx:reference source="name3"/>
          		<fx:reference source="name4"/>
-         		<fx:reference source="name5"/>
          	</ArrayList>
          </fx:define>
          
          <fx:define>
-         	<ArrayList fx:id="scoreList" >
+         	<ArrayList fx:id="lblListScore" >
          		<fx:reference source="score1"/>
          		<fx:reference source="score2"/>
          		<fx:reference source="score3"/>
          		<fx:reference source="score4"/>
-         		<fx:reference source="score5"/>
          	</ArrayList>
          </fx:define>
       </VBox>
