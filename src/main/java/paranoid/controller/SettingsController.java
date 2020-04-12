@@ -8,6 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.VBox;
+import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.Settings.SettingsBuilder;
@@ -43,12 +51,25 @@ public class SettingsController implements GuiController {
     @FXML
     private Button menu;
 
+    @FXML
+    private VBox buttonContainer;
+
     /**
      * 
      */
     @FXML
     public void initialize() {
         this.updateForm();
+        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/menu4.jpg", 
+                                                              ScreenConstant.SCREEN_WIDTH,
+                                                              ScreenConstant.SCREEN_HEIGHT,
+                                                              false,
+                                                              true),
+                                                    BackgroundRepeat.NO_REPEAT, 
+                                                    BackgroundRepeat.NO_REPEAT, 
+                                                    BackgroundPosition.DEFAULT,
+                                                    BackgroundSize.DEFAULT);
+        this.buttonContainer.setBackground(new Background(myBI2));
     }
 
     /**

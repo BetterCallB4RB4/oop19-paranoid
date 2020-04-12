@@ -7,58 +7,105 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.SettingsController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.SettingsController">
    <items>
-      <VBox alignment="TOP_CENTER" prefHeight="484.0" prefWidth="598.0">
+      <VBox fx:id="buttonContainer" alignment="TOP_CENTER" prefHeight="484.0" prefWidth="598.0">
          <children>
             <Label text="DIFFICOLTA'">
                <VBox.margin>
                   <Insets top="20.0" />
-               </VBox.margin></Label>
-            <RadioButton fx:id="easy" mnemonicParsing="false" text="facile">
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <RadioButton fx:id="easy" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="facile   ">
                <VBox.margin>
-                  <Insets top="5.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
                <toggleGroup>
                   <ToggleGroup fx:id="challenge" />
-               </toggleGroup></RadioButton>
-            <RadioButton fx:id="normal" mnemonicParsing="false" selected="true" text="normale" toggleGroup="$challenge">
+               </toggleGroup>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect></RadioButton>
+            <RadioButton fx:id="normal" mnemonicParsing="false" selected="true" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="normale   " toggleGroup="$challenge">
                <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></RadioButton>
-            <RadioButton fx:id="hard" mnemonicParsing="false" text="difficile" toggleGroup="$challenge">
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect></RadioButton>
+            <RadioButton fx:id="hard" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="difficile   " toggleGroup="$challenge">
                <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin></RadioButton>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect></RadioButton>
             <CheckBox fx:id="effect" mnemonicParsing="false" selected="true" text="effetti sonori">
                <VBox.margin>
                   <Insets top="20.0" />
-               </VBox.margin></CheckBox>
-            <CheckBox fx:id="music" mnemonicParsing="false" text="musica">
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="music" accessibleRoleDescription=" " mnemonicParsing="false" text="musica">
                <VBox.margin>
                   <Insets top="20.0" />
-               </VBox.margin></CheckBox>
-            <Label text="numero giocatori">
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></CheckBox>
+            <Label text="NUMERO GIOCATORI">
                <VBox.margin>
                   <Insets top="20.0" />
-               </VBox.margin></Label>
-            <RadioButton fx:id="onePlayer" mnemonicParsing="false" selected="true" text="1 giocatore">
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font></Label>
+            <RadioButton fx:id="onePlayer" mnemonicParsing="false" selected="true" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="1 giocatore   ">
                <toggleGroup>
                   <ToggleGroup fx:id="player" />
                </toggleGroup>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect>
             </RadioButton>
-            <RadioButton fx:id="twoPlayers" mnemonicParsing="false" text="2 giocatori" toggleGroup="$player" />
-            <Button fx:id="apply" mnemonicParsing="false" onMouseClicked="#applyChanges" prefHeight="50.0" prefWidth="160.0" text="applica modifiche">
+            <RadioButton fx:id="twoPlayers" mnemonicParsing="false" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="2 giocatori   " toggleGroup="$player">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect></RadioButton>
+            <Button fx:id="apply" mnemonicParsing="false" onMouseClicked="#applyChanges" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="applica modifiche" textFill="WHITE">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect>
             </Button>
-            <Button fx:id="menu" mnemonicParsing="false" onMouseClicked="#backToMenu" prefHeight="50.0" prefWidth="160.0" text="menu">
+            <Button fx:id="menu" mnemonicParsing="false" onMouseClicked="#backToMenu" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="menu" textFill="WHITE">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
+               </effect>
             </Button>
          </children>
       </VBox>
