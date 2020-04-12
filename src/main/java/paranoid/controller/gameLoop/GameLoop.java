@@ -13,6 +13,7 @@ import paranoid.common.PlayerId;
 import paranoid.common.V2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
+import paranoid.controller.GameOverController;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.KeyboardInputController;
 import paranoid.model.entity.Ball;
@@ -26,7 +27,8 @@ public class GameLoop implements Runnable {
 
     private static final int PERIOD = 20;
     private final Scene scene;
-    private final GameController gameController;
+    private final GameController gameController = (GameController) LayoutManager.GAME.getGuiController();
+    private final GameOverController gameOverController = (GameOverController) LayoutManager.GAME_OVER.getGuiController();
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
     private World world;
     private GameState gameState;
@@ -40,7 +42,6 @@ public class GameLoop implements Runnable {
                 scene.setRoot(LayoutManager.GAME.getLayout());
             }
         });
-        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
         this.gameState = new GameState();
@@ -108,12 +109,13 @@ public class GameLoop implements Runnable {
             waitForNextFrame(current);
             lastTime = current;
         }
-        gameState.saveScore();
         Platform.runLater(new Runnable() {
 
             @Override
             public void run() {
-                scene.setRoot(LayoutManager.SCORE.getLayout());
+                gameController.getMusicPlayer().stopMusic();
+                scene.setRoot(LayoutManager.GAME_OVER.getLayout());
+                gameOverController.updateScore(gameState.getPlayerScore());
             }
         });
     }
@@ -159,8 +161,8 @@ public class GameLoop implements Runnable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                gameController.render(world.getSceneEntities(), gameState.getHighScore(), 
-                        gameState.getScore(), gameState.getLives());
+                gameController.render(world.getSceneEntities(), gameState.getHighScoreValue(), 
+                        gameState.getPlayerScore(), gameState.getLives());
             }
         });
     }

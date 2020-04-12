@@ -28,24 +28,19 @@ import paranoid.view.parameters.LayoutManager;
 
 public class GameState {
 
-    private Score bestScores;
-    private int highScore;
-    private int score;
+    private int highScoreValue;
+    private int playerScore;
     private int multiplier;
     private int lives;
     private World world;
     private GamePhase phase = GamePhase.INIT;
     private Settings set = SettingsManager.loadOption();
+    private Score topScores = ScoreManager.loadScore();
     private GameController gameController;
 
     public GameState() {
-        try {
-            this.bestScores = ScoreManager.loadScore();
-        } catch (InvalidKeyException | InvalidAlgorithmParameterException | IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        this.highScore = this.bestScores.getHightScore();
-        this.score = 0;
+        this.highScoreValue = this.topScores.getHighValue();
+        this.playerScore = 0;
         this.multiplier = 1;
         this.lives = 4;
 
@@ -102,25 +97,25 @@ public class GameState {
     /**
      * @return the score
      */
-    public int getScore() {
-        return score;
+    public int getPlayerScore() {
+        return playerScore;
     }
 
     /**
      * @return the highscore.
      */
-    public int getHighScore() {
-        return highScore;
+    public int getHighScoreValue() {
+        return highScoreValue;
     }
 
     /**
-     * @param score the score to set
+     * @param playerScore the player score to set
      */
-    public void setScore(final int score) {
-        this.score = score;
+    public void setPlayerScore(final int playerScore) {
+        this.playerScore = playerScore;
 
-        if (this.score > this.highScore) {
-            this.highScore = this.score;
+        if (this.playerScore > this.highScoreValue) {
+            this.highScoreValue = this.playerScore;
         }
     }
 
@@ -155,24 +150,12 @@ public class GameState {
     public void decLives() {
         this.lives--;
     }
+
     /**
      * @return the world
      */
     public World getWorld() {
         return world;
-    }
-
-    /**
-     * Save the final score in file.
-     */
-    public void saveScore() {
-        this.gameController.getMusicPlayer().stopMusic();
-        this.bestScores.addScore("SUPERMK", this.getScore());
-        try {
-            ScoreManager.saveScore(this.bestScores);
-        } catch (InvalidKeyException | IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public GamePhase getPhase() {
