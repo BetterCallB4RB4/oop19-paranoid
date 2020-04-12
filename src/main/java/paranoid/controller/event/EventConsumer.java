@@ -37,7 +37,7 @@ public class EventConsumer {
                 this.player.playEffect(Effect.BOARD_COLLISION);
             } else if (ev instanceof HitBrickEvent) {
                 Brick brick = ((HitBrickEvent) ev).getBrick();
-                gameState.setScore(gameState.getScore() 
+                gameState.setPlayerScore(gameState.getPlayerScore() 
                         + (brick.getPointEarned() * gameState.getMultiplier()));
                 brick.decEnergy();
                 if (brick.getEnergy() == 0 && !brick.isIndestructible()) {
