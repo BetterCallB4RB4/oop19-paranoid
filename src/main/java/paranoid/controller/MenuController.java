@@ -3,6 +3,15 @@ package paranoid.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.VBox;
+import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.gameLoop.GameLoop;
 import paranoid.model.settings.SettingsManager;
 import paranoid.model.level.LevelSelection;
@@ -34,6 +43,30 @@ public final class MenuController implements GuiController {
 
     @FXML
     private Button playYourLvl;
+
+    @FXML
+    private SplitPane backGroundPane;
+
+    @FXML
+    private VBox backDash;
+
+    @FXML
+    public void initialize() {
+        this.backGroundPane.setMinWidth(ScreenConstant.CANVAS_WIDTH);
+        this.backGroundPane.setMaxWidth(ScreenConstant.CANVAS_WIDTH);
+        this.backGroundPane.setMinHeight(ScreenConstant.CANVAS_HEIGHT);
+        this.backGroundPane.setMaxHeight(ScreenConstant.CANVAS_HEIGHT);
+        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/menu1.jpg", 
+                                                              ScreenConstant.SCREEN_WIDTH,
+                                                              ScreenConstant.SCREEN_HEIGHT,
+                                                              false,
+                                                              true),
+                                                    BackgroundRepeat.NO_REPEAT, 
+                                                    BackgroundRepeat.NO_REPEAT, 
+                                                    BackgroundPosition.DEFAULT,
+                                                    BackgroundSize.DEFAULT);
+        this.backDash.setBackground(new Background(myBI2));
+    }
 
     @FXML
     public void clickContinue() {

@@ -1,21 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;backgrounds/bgmenu.jpg&quot;); -fx-background-size: stretch;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.MenuController">
+<SplitPane fx:id="backGroundPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;backgrounds/bgmenu.jpg&quot;); -fx-background-size: stretch;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.MenuController">
    <items>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+      <VBox fx:id="backDash" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
          <children>
-            <Button fx:id="continua" mnemonicParsing="false" onMouseClicked="#clickContinue" text="CONTINUA" />
-            <Button fx:id="btnStart" onMouseClicked="#btnStartOnClickHandler" text="NUOVA PARTITA" />
-            <Button fx:id="btnScore" onMouseClicked="#btnScoreOnClickHandler" text="MIGLIORI PUNTEGGI" />
-            <Button fx:id="btSettings" onMouseClicked="#goToSettings" text="OPZIONI" />
-            <Button fx:id="btnTutorial" onMouseClicked="#btnTutorialOnClickHandler" text="ISTRUZIONI" />
-            <Button fx:id="btnBuilder" onMouseClicked="#goToLevelBuilder" text="LEVEL BUILDER" />
-            <Button fx:id="playYourLvl" mnemonicParsing="false" onMouseClicked="#clickPlayYourLvl" text="GIOCA I TUOI LIVELLI" />
+            <Button fx:id="continua" mnemonicParsing="false" onMouseClicked="#clickContinue" text="CONTINUA">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
+            <Button fx:id="btnStart" onMouseClicked="#btnStartOnClickHandler" text="NUOVA PARTITA">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
+            <Button fx:id="btnScore" onMouseClicked="#btnScoreOnClickHandler" text="MIGLIORI PUNTEGGI">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
+            <Button fx:id="btSettings" onMouseClicked="#goToSettings" text="OPZIONI">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
+            <Button fx:id="btnTutorial" onMouseClicked="#btnTutorialOnClickHandler" text="ISTRUZIONI">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
+            <Button fx:id="btnBuilder" onMouseClicked="#goToLevelBuilder" text="LEVEL BUILDER">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
+            <Button fx:id="playYourLvl" mnemonicParsing="false" onMouseClicked="#clickPlayYourLvl" text="GIOCA I TUOI LIVELLI">
+               <VBox.margin>
+                  <Insets left="100.0" />
+               </VBox.margin></Button>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </VBox>
    </items>
 </SplitPane>
