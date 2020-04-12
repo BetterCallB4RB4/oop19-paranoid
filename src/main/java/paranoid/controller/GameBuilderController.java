@@ -20,11 +20,10 @@ import paranoid.common.Pair;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.PlaceHolder;
 import paranoid.model.level.BackGround;
-import paranoid.model.level.Effect;
 import paranoid.model.level.LevelBuilder;
 import paranoid.model.level.LevelManager;
+import paranoid.model.level.LevelSelection;
 import paranoid.model.level.Music;
-import paranoid.model.level.MusicPlayer;
 import paranoid.view.parameters.LayoutManager;
 
 public class GameBuilderController implements GuiController, Subject {
@@ -144,12 +143,16 @@ public class GameBuilderController implements GuiController, Subject {
         if (levelName.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Inserisci un nome al livello");
         } else {
-            this.levelBuilder.setLevelName(levelName.getText());
-            this.levelBuilder.setBackGround(backGround.getValue());
-            this.levelBuilder.setSong(ost.getValue());
-            LevelManager.saveLevel(this.levelBuilder.build());
-            JOptionPane.showMessageDialog(null, "Livello creato con successo");
-            this.notifyObserver();
+            if (LevelSelection.isStoryLevel(levelName.getText())) {
+                JOptionPane.showMessageDialog(null, "Il nome inserito appartiene ad un livello della storia");
+            } else {
+                this.levelBuilder.setLevelName(levelName.getText());
+                this.levelBuilder.setBackGround(backGround.getValue());
+                this.levelBuilder.setSong(ost.getValue());
+                LevelManager.saveLevel(this.levelBuilder.build());
+                JOptionPane.showMessageDialog(null, "Livello creato con successo");
+                this.notifyObserver();
+            }
         }
     }
 

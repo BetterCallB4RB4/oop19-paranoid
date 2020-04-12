@@ -37,6 +37,11 @@ public enum LayoutManager {
     TUTORIAL("layouts/tutorial.fxml"),
 
     /**
+     * chooseLvl.fxml path.
+     */
+    CHOOSE_LVL("layouts/chooseLvl.fxml"),
+
+    /**
      * levelBuilder.fxml path.
      */
     LEVEL_BUILDER("layouts/levelBuilder.fxml"),

@@ -46,7 +46,7 @@ public class GameState {
 
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
 
-        Level lvl = LevelManager.loadLevel(set.getSelectedLevel());
+        Level lvl = set.getSelectedLevel();
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.gameController.setBackGroundImage(BackGround.getBackGroundByName(lvl.getBackGround()));
         this.gameController.getMusicPlayer().setMusicEnable(set.isPlayMusic());
