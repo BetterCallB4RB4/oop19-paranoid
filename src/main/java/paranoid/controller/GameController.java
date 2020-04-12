@@ -69,6 +69,16 @@ public final class GameController implements GuiController {
         this.panel.setMinHeight(ScreenConstant.CANVAS_HEIGHT);
         this.panel.setMaxHeight(ScreenConstant.CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
+        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/dashboard7.jpg", 
+                                                              ScreenConstant.SCREEN_WIDTH - ScreenConstant.CANVAS_WIDTH,
+                                                              ScreenConstant.SCREEN_HEIGHT,
+                                                              false,
+                                                              true),
+                                                    BackgroundRepeat.NO_REPEAT, 
+                                                    BackgroundRepeat.NO_REPEAT, 
+                                                    BackgroundPosition.CENTER,
+                                                    BackgroundSize.DEFAULT);
+        this.dashBoard.setBackground(new Background(myBI2));
     }
 
     public void isPause(final boolean pause) {
