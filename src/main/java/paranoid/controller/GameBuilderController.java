@@ -160,8 +160,8 @@ public class GameBuilderController implements GuiController, Subject {
      */
     @FXML
     public void buildLvl() {
-        if (levelName.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Inserisci un nome al livello");
+        if (levelName.getText().isBlank() || ost.getValue() == null || backGround.getValue() == null) {
+            JOptionPane.showMessageDialog(null, "Devi riempire tutti le form");
         } else {
             if (LevelSelection.isStoryLevel(levelName.getText())) {
                 JOptionPane.showMessageDialog(null, "Il nome inserito appartiene ad un livello della storia");
