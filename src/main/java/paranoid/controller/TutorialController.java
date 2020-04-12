@@ -11,7 +11,7 @@ public class TutorialController implements GuiController {
     private Button btnMenu;
 
     @FXML
-    public void btnMenuOnClickHandler() {
+    private void btnMenuOnClickHandler() {
         final Scene scene = this.btnMenu.getScene();
         scene.setRoot(LayoutManager.MENU.getLayout());
     }
