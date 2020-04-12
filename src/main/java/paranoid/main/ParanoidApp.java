@@ -83,11 +83,8 @@ public class ParanoidApp extends Application {
             }
         }
         if (!highScore.exists()) {
-            try {
-                ScoreManager.saveScore(new Score.Builder().defaultScore().build());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            ScoreManager.saveScore(new Score.Builder().defaultScore().build());
+
         }
     }
 
