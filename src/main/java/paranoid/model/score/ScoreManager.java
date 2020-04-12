@@ -8,12 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -44,18 +38,12 @@ public final class ScoreManager {
 
     }
 
-    public static void saveScore(final Score score) throws IOException, InvalidKeyException {
-        final List<User> scoreList = score.getScore();
-
-        Collections.sort(scoreList, (o1, o2) -> (o1.getScore().equals(o2.getScore())) 
-                ? o1.getName().compareTo(o2.getName()) 
-                        : o2.getScore() - o1.getScore());
-
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        final byte[] iv = cipher.getIV();
+    public static void saveScore(final Score score) {
         try (
                 FileOutputStream fileOut = new FileOutputStream(ParanoidApp.SCORE)
         ) {
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            final byte[] iv = cipher.getIV();
             fileOut.write(iv);
 
             try (
@@ -63,13 +51,13 @@ public final class ScoreManager {
                             new BufferedOutputStream(
                             new CipherOutputStream(fileOut, cipher)))
                 ) {
-                w.writeObject(scoreList);
+                w.writeObject(score);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
-    @SuppressWarnings("unchecked")
-    public static Score loadScore() throws IOException, InvalidKeyException, InvalidAlgorithmParameterException, ClassNotFoundException {
+    public static Score loadScore() {
         try (
                 FileInputStream fileIn = new FileInputStream(ParanoidApp.SCORE)
         ) {
@@ -85,14 +73,12 @@ public final class ScoreManager {
                             new CipherInputStream(fileIn, cipher)))
 
                 ) {
-                final Object obj = r.readObject();
-                List<User> scoreList = new ArrayList<>();
-                if (obj instanceof List) {
-                    scoreList = (List<User>) obj;
-                }
 
-                return new Score.Builder().fromExScore(scoreList).build();
+                return (Score) r.readObject();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
 }
