@@ -13,6 +13,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
@@ -49,6 +50,9 @@ public final class GameController implements GuiController {
 
     @FXML
     private Pane panel;
+
+    @FXML
+    private VBox dashBoard;
 
 
     /**
