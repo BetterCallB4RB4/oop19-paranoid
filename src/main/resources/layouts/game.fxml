@@ -1,41 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="375.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
+<SplitPane dividerPositions="375.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
 
    <items>
       <VBox fx:id="dashBoard" alignment="CENTER">
          <children>
-            <Label text="PARANOID">
+            <Label style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="PARANOID" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label fx:id="lblHighScore" text="HIGHSCORE: ">
+            <Label fx:id="lblHighScore" style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="HIGHSCORE:" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label fx:id="lblScore" text="SCORE: ">
+            <Label fx:id="lblScore" style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="SCORE:" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label fx:id="lblLives" text="LIVES: ">
+            <Label fx:id="lblLives" style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="LIVES:" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
-            <Label fx:id="lblPause" text="PAUSA" visible="false">
+            <Label fx:id="lblPause" style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="PAUSA" textFill="WHITE" visible="false">
             	<font>
        			   <Font size="25.0" />
     		    </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets left="20.0" right="20.0" />
+               </padding>
             </Label>
             
          </children>
