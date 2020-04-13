@@ -3,7 +3,6 @@ package paranoid.model.level;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 
 public class MusicPlayer {
 
@@ -17,8 +16,7 @@ public class MusicPlayer {
      */
     public void playMusic(final Music music) {
         if (isMusicEnable) {
-            try {
-                AudioInputStream audioIn = AudioSystem.getAudioInputStream(ClassLoader.getSystemResourceAsStream(music.getLocation()));
+            try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(ClassLoader.getSystemResourceAsStream(music.getLocation()))) {
                 this.clip = AudioSystem.getClip();
                 this.clip.open(audioIn);
                 this.clip.start();
@@ -35,6 +33,7 @@ public class MusicPlayer {
     public void stopMusic() {
         if (this.isMusicEnable) {
             this.clip.stop();
+            this.clip.close();
         }
     }
 
@@ -44,8 +43,7 @@ public class MusicPlayer {
      */
     public void playEffect(final Effect effect) {
         if (isEffectEnable) {
-            try {
-                AudioInputStream audioIn = AudioSystem.getAudioInputStream(ClassLoader.getSystemResourceAsStream(effect.getLocation()));
+            try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(ClassLoader.getSystemResourceAsStream(effect.getLocation()))) {
                 Clip effectClip = AudioSystem.getClip();
                 effectClip.open(audioIn);
                 effectClip.start();
