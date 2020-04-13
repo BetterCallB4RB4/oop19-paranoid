@@ -22,7 +22,7 @@ public class SerializableColor implements Serializable {
      * @return color scomposed int his parts
      */
     public Color getColor() {
-        return Color.rgb((int) red, (int) green, (int) blue);
+        return Color.color(red, green, blue);
     }
 
 }
