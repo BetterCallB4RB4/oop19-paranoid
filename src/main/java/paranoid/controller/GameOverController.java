@@ -10,10 +10,9 @@ import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.view.parameters.LayoutManager;
 
-public class GameOverController implements GuiController, SubjectScore {
-
+public class GameOverController implements GuiController, SubjectScore  {
+    private static final int MAX_LENGTH = 10;
     private List<ObserverScore> observer;
-    private String name;
     private Score topScores;
     private Integer playerScore;
 
@@ -28,14 +27,18 @@ public class GameOverController implements GuiController, SubjectScore {
 
     @FXML
     private void btnSendOnClickHandler() {
-        this.name = this.txtName.getText();
-        if (!this.name.contentEquals("")) {
+
+        if (!this.txtName.getText().contentEquals("")) {
+            String username = this.txtName.getText();
+            if (username.length() > MAX_LENGTH) {
+                username = this.txtName.getText().substring(0, MAX_LENGTH);
+            }
             Score.Builder scoreBuilder = new Score.Builder();
             scoreBuilder.fromExistScore(this.topScores);
-            scoreBuilder.addUserScore(this.name, this.playerScore);
+            scoreBuilder.addUserScore(username, this.playerScore);
             ScoreManager.saveScore(scoreBuilder.build());
             this.notifyObserver();
-            this.btnSend.getScene().setRoot(LayoutManager.SCORE.getLayout());
+            this.btnSend.getScene().setRoot(LayoutManager.MENU.getLayout());
         }
     }
 
@@ -50,7 +53,7 @@ public class GameOverController implements GuiController, SubjectScore {
     }
 
     public void updateScore(final Integer playerScore) {
-        this.topScores = ScoreManager.loadScore();
+        this.topScores = ScoreManager.loadScore("story");
         this.playerScore = playerScore;
 
         if (!topScores.getScoreList().isEmpty()) {
@@ -65,7 +68,7 @@ public class GameOverController implements GuiController, SubjectScore {
             this.btnScore.setVisible(false);
         }
     }
-
+    
     @Override
     public void register(final ObserverScore obs) {
         this.observer.add(obs);
