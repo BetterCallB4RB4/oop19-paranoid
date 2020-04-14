@@ -13,6 +13,7 @@ import paranoid.controller.event.EventConsumer;
 import paranoid.controller.event.WorldEventListener;
 import paranoid.controller.gameLoop.GameState;
 import paranoid.model.collision.CollisionManager;
+import paranoid.model.collision.Direction;
 import paranoid.model.component.input.InputController;
 
 public class World implements WorldEventListener {
@@ -57,18 +58,34 @@ public class World implements WorldEventListener {
         this.bricks = bricks;
     }
 
+    /**
+     * 
+     * @return x
+     */
     public List<Ball> getBalls() {
         return Collections.unmodifiableList(this.balls);
     }
-    
+
+    /**
+     * 
+     * @return x
+     */
     public List<Brick> getBricks() {
         return this.bricks;
     }
 
+    /**
+     * 
+     * @param ball
+     */
     public void removeBall(final Ball ball) {
         this.balls.remove(ball);
     }
-    
+
+    /**
+     * 
+     * @param brick
+     */
     public void removeBrick(final Brick brick) {
         this.bricks.remove(brick);
     }
@@ -84,12 +101,38 @@ public class World implements WorldEventListener {
     }
 
     /**
-     * the world asks the collision manager to check 
-     * if there are collisions with bricks and given objects.
-     * @param entity the object to be checked
-     * @return on what surface the object collides
+     * 
+     * @param ball
+     * @return dio 
      */
+    public Optional<Pair<Brick, Collision>> checkCollisionWithBrick(final Ball ball) {
+        Optional<Pair<Brick, Collision>> resultCollision = Optional.empty();
+        for (var elem : this.bricks) {
+            resultCollision = this.collisionManager.checkCollisionWithBricks(elem, ball);
+            if (resultCollision.isPresent()) {
+                return resultCollision;
+            }
+        }
+        return resultCollision;
+    }
 
+    /**
+     * 
+     * @param ball
+     * @return miao
+     */
+    public Optional<Pair<GameObject, Direction>> checkCollisionWithPlayer(final Ball ball) {
+        Optional<Pair<GameObject, Direction>> resultCollision = Optional.empty();
+        for (var elem : this.players) {
+            resultCollision = this.collisionManager.checkCollisionWithPlayers(elem, ball);
+            if (resultCollision.isPresent()) {
+                return resultCollision;
+            }
+        }
+        return resultCollision;
+    }
+
+    /*
     public Optional<Pair<GameObject, Collision>> checkCollisionWithEntity(final GameObject entity) {
         Optional<Pair<GameObject, Collision>> collisionResult = Optional.empty();
         if (entity instanceof Ball) {
@@ -110,6 +153,7 @@ public class World implements WorldEventListener {
         return Optional.empty();
 
     }
+    */
 
     /**
      * 
