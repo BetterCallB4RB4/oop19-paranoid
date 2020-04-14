@@ -41,9 +41,9 @@ public final class ScoreManager {
 
     }
 
-    public static void saveScore(final Score score) {
+    public static void saveScore(final TypeScore typeScore, final Score score) {
         try (
-                FileOutputStream fileOut = new FileOutputStream(ParanoidApp.SCORE_FOLDER + ParanoidApp.SEPARATOR + score.getScoreName())
+                FileOutputStream fileOut = new FileOutputStream(typeScore.getPath() + ParanoidApp.SEPARATOR + score.getScoreName())
         ) {
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             final byte[] iv = cipher.getIV();
@@ -61,20 +61,20 @@ public final class ScoreManager {
         }
     }
 
-    public static List<Score> loadScores() {
+    public static List<Score> loadScores(final TypeScore typeScore) {
         List<Score> scores = new ArrayList<>();
-        File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
+        File scoreFolder = new File(typeScore.getPath());
         if (scoreFolder.exists() && scoreFolder.isDirectory()) {
             for (int i = 0; i < scoreFolder.list().length; i++) {
-                scores.add(loadScore(scoreFolder.listFiles()[i].getName()));
+                scores.add(loadScore(typeScore, scoreFolder.listFiles()[i].getName()));
             }
         }
         return scores;
 
     }
-    public static Score loadScore(final String scoreName) {
+    public static Score loadScore(final TypeScore typeScore, final String scoreName) {
         try (
-                FileInputStream fileIn = new FileInputStream(ParanoidApp.SCORE_FOLDER + ParanoidApp.SEPARATOR + scoreName)
+                FileInputStream fileIn = new FileInputStream(typeScore.getPath() + ParanoidApp.SEPARATOR + scoreName)
         ) {
             final byte[] fileIv = new byte[16];
             if (fileIn.read(fileIv) == -1) {

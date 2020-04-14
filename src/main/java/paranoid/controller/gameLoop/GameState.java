@@ -23,6 +23,7 @@ import paranoid.model.level.LevelManager;
 import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
+import paranoid.model.score.TypeScore;
 import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
@@ -37,7 +38,7 @@ public class GameState {
     private World world;
     private GamePhase phase = GamePhase.INIT;
     private Settings set = SettingsManager.loadOption();
-    private Score topScores = ScoreManager.loadScore("story");
+    private Score topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
     private GameController gameController;
 
     public GameState() {
