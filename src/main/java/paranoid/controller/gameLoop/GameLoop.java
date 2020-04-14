@@ -1,26 +1,20 @@
 package paranoid.controller.gameLoop;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.List;
-
 import javafx.application.Platform;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
-import paranoid.common.P2d;
 import paranoid.common.PlayerId;
-import paranoid.common.V2d;
-import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
 import paranoid.controller.GameOverController;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.KeyboardInputController;
-import paranoid.model.entity.Ball;
-import paranoid.model.entity.Border;
-import paranoid.model.entity.Brick;
-import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
+import paranoid.model.level.Level;
+import paranoid.model.level.LevelSelection;
+import paranoid.model.settings.Settings;
+import paranoid.model.settings.Settings.SettingsBuilder;
+import paranoid.model.settings.SettingsManager;
 import paranoid.view.parameters.LayoutManager;
 
 public class GameLoop implements Runnable {
@@ -46,36 +40,6 @@ public class GameLoop implements Runnable {
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
         this.gameState = new GameState();
         this.world = gameState.getWorld();
-        /*
-        List<Ball> ballContainer = new ArrayList<>();
-        List<Brick> brickContainer = new ArrayList<>();
-        List<Player> playerContainer = new ArrayList<>();
-
-        ballContainer.add(new Ball(new P2d(330, 500), new V2d(100, -200), 1, 10, 10));
-        brickContainer.add(new Brick.Builder().position(new P2d(50, 100))
-                    .width(80)
-                    .height(40)
-                    .color(Color.DARKGREEN)
-                    .destructible(true)
-                    .energy(1)
-                    .pointEarned(10)
-                    .build());
-        playerContainer.add(new Player.Builder().position(new P2d(350,500))
-                .width(80)
-                .height(10)
-                .color(Color.DARKGREEN)
-                .playerId(PlayerId.ONE)
-                .build());
-
-        playerContainer.add(new Player.Builder().position(new P2d(290,500))
-                .width(80)
-                .height(10)
-                .color(Color.RED)
-                .playerId(PlayerId.TWO)
-                .build());
-        this.world = new World(ballContainer, brickContainer, playerContainer, new Border(ScreenConstant.WORLD_WIDTH,
-                ScreenConstant.WORLD_HEIGHT));
-        */
         notifyInputEvent();
     }
 
@@ -109,6 +73,22 @@ public class GameLoop implements Runnable {
             waitForNextFrame(current);
             lastTime = current;
         }
+
+        Settings settings = SettingsManager.loadOption();
+        Level currentLevel = settings.getSelectedLevel();
+        if (LevelSelection.isStoryLevel(currentLevel.getLevelName())) {
+            SettingsBuilder settingsBuilder = new SettingsBuilder();
+            if (LevelSelection.getSelectionFromLevel(currentLevel).hasNext()) {
+                SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
+                                                          .selectLevel(LevelSelection.getSelectionFromLevel(currentLevel).next().getLevel())
+                                                          .build());
+            } else {
+                SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
+                                                          .selectLevel(LevelSelection.LEVEL1.getLevel())
+                                                          .build());
+            }
+        }
+
         Platform.runLater(new Runnable() {
 
             @Override
