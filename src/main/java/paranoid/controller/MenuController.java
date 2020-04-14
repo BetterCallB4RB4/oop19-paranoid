@@ -1,5 +1,8 @@
 package paranoid.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,7 +24,9 @@ import paranoid.view.parameters.LayoutManager;
 /**
  * Controller of menu.fxml.
  */
-public final class MenuController implements GuiController {
+public final class MenuController implements GuiController, SubjectScore {
+
+    private List<ObserverScore> observer;
 
     @FXML
     private Button continua;
@@ -52,6 +57,7 @@ public final class MenuController implements GuiController {
 
     @FXML
     public void initialize() {
+        this.observer = new ArrayList<>();
         this.backGroundPane.setMinWidth(ScreenConstant.CANVAS_WIDTH);
         this.backGroundPane.setMaxWidth(ScreenConstant.CANVAS_WIDTH);
         this.backGroundPane.setMinHeight(ScreenConstant.CANVAS_HEIGHT);
@@ -96,6 +102,7 @@ public final class MenuController implements GuiController {
      */
     @FXML
     private void btnScoreOnClickHandler() {
+        this.notifyObserver();
         final Scene scene = btnScore.getScene();
         scene.setRoot(LayoutManager.SCORE.getLayout());
     }
@@ -121,6 +128,24 @@ public final class MenuController implements GuiController {
     public void clickPlayYourLvl() {
         final Scene scene = playYourLvl.getScene();
         scene.setRoot(LayoutManager.CHOOSE_LVL.getLayout());
+    }
+    
+    @Override
+    public void register(final ObserverScore obs) {
+        this.observer.add(obs);
+
+    }
+
+    @Override
+    public void unregister(final ObserverScore obs) {
+        this.observer.remove(obs);
+
+    }
+
+    @Override
+    public void notifyObserver() {
+        this.observer.forEach(ObserverScore::update);
+
     }
 
 }
