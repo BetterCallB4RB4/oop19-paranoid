@@ -45,7 +45,7 @@ public class ParanoidApp extends Application {
     /**
      * the file to save the top scores.
      */
-    public static final String SCORE = MAIN_FOLDER + SEPARATOR + "score";
+    public static final String SCORE_FOLDER = MAIN_FOLDER + SEPARATOR + "scores";
 
     /**
      * {@inheritDoc}
@@ -72,19 +72,18 @@ public class ParanoidApp extends Application {
         SettingsBuilder settingsBuilder = new SettingsBuilder();
         File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
-        File highScore = new File(SCORE);
+        File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
         if (!mainFolder.exists()) {
             try {
                 mainFolder.mkdir();
                 levelFolder.mkdir();
+                scoreFolder.mkdir();
                 SettingsManager.saveOption(settingsBuilder.build());
+                ScoreManager.saveScore(new Score.Builder().defaultScore("story")
+                        .build());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
-        }
-        if (!highScore.exists()) {
-            ScoreManager.saveScore(new Score.Builder().defaultScore().build());
-
         }
     }
 
