@@ -12,9 +12,12 @@ public class Score implements Serializable{
     private static final long serialVersionUID = 6171113929805935910L;
 
     private final List<User> scoreList;
-    private static final int MAX_ELEM = 4;
-    private Score(final List<User> scoreList) {
+    private String scoreName;
+    private static final int MAX_ELEM = 10;
+
+    private Score(final List<User> scoreList, final String scoreName) {
         this.scoreList = scoreList;
+        this.scoreName = scoreName;
     }
 
     public List<User> getScoreList() {
@@ -29,30 +32,39 @@ public class Score implements Serializable{
 
     }
 
+    public String getScoreName() {
+        return this.scoreName;
+    }
+
     public static final class Builder {
 
         private List<User> scoreList;
+        private String scoreName;
 
-        public Builder defaultScore() {
+        public Builder defaultScore(final String scoreName) {
             this.scoreList = new ArrayList<>();
+            this.scoreName = scoreName;
             return this;
         }
 
         public Builder fromExistScore(final Score score) {
             this.scoreList = score.getScoreList();
+            this.scoreName = score.getScoreName();
             return this;
         }
 
-        public void addUserScore(final String name, final Integer score) {
+        public Builder addUserScore(final String name, final Integer score) {
             this.scoreList.add(new User(name, score));
+            return this;
         }
 
-        public void removeUserScore(final User user) {
+        public Builder removeUserScore(final User user) {
             this.scoreList.remove(user);
+            return this;
         }
 
         public Score build() {
-            if (this.scoreList == null) {
+            if (this.scoreList == null || this.scoreName == null) {
                 throw new IllegalStateException();
             }
 
@@ -62,7 +74,7 @@ public class Score implements Serializable{
                 this.scoreList.remove(this.scoreList.size() - 1);
             }
 
-            return new Score(this.scoreList);
+            return new Score(this.scoreList, this.scoreName);
 
         }
 
