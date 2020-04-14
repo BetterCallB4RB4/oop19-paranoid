@@ -1,25 +1,20 @@
 package paranoid.controller.gameLoop;
 
-import java.io.IOException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.paint.Color;
-import paranoid.common.P2d;
 import paranoid.common.PlayerId;
-import paranoid.common.V2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
 import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
+import paranoid.model.entity.StartPhase;
 import paranoid.model.entity.World;
 import paranoid.model.level.BackGround;
 import paranoid.model.level.Level;
-import paranoid.model.level.LevelManager;
 import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
@@ -59,19 +54,22 @@ public class GameState {
         world.setBricks(lvl.getBricks());
     }
 
+    /**
+     * set initial game state.
+     */
     public void init() {
       //add players to the world
         List<Player> playerList = new ArrayList<>();
-        playerList.add(new Player.Builder().position(new P2d(290,580))
-                                           .width(120)
-                                           .height(10)
+        playerList.add(new Player.Builder().position(StartPhase.PLAYER.getSpawnPoint())
+                                           .width(StartPhase.PLAYER.getInitWidth())
+                                           .height(StartPhase.PLAYER.getInitHeight())
                                            .color(Color.DARKGREEN)
                                            .playerId(PlayerId.ONE)
                                            .build());
         if (set.getPlayerNumber() == 2) {
-            playerList.add(new Player.Builder().position(new P2d(290,580))
-                                               .width(80)
-                                               .height(10)
+            playerList.add(new Player.Builder().position(StartPhase.PLAYER.getSpawnPoint())
+                                               .width(StartPhase.PLAYER.getInitWidth())
+                                               .height(StartPhase.PLAYER.getInitHeight())
                                                .color(Color.RED)
                                                .playerId(PlayerId.TWO)
                                                .build());
@@ -82,13 +80,13 @@ public class GameState {
         List<Ball> ballContainer = new ArrayList<>();
         switch (set.getDifficulty()) {
             case EASY:
-                ballContainer.add(new Ball(new P2d(330, 570), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.EASY.getSpeed(), 10, 10));
+                ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.EASY.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
             break;
             case NORMAL:
-                ballContainer.add(new Ball(new P2d(330, 570), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.NORMAL.getSpeed(), 10, 10));
+                ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.NORMAL.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
             break;
             case HARD:
-                ballContainer.add(new Ball(new P2d(330, 570), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.HARD.getSpeed(), 10, 10));
+                ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.HARD.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
             break;
             default:
             break;
@@ -149,6 +147,9 @@ public class GameState {
         this.lives = lives;
     }
 
+    /**
+     * 
+     */
     public void decLives() {
         this.lives--;
     }
@@ -160,10 +161,18 @@ public class GameState {
         return world;
     }
 
+    /**
+     * 
+     * @return the game phase
+     */
     public GamePhase getPhase() {
         return this.phase;
     }
 
+    /**
+     * 
+     * @param phase
+     */
     public void setPhase(final GamePhase phase) {
         this.phase = phase;
     }
