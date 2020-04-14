@@ -29,14 +29,14 @@ public interface GameObject {
     V2d getVel();
 
     /**
-     * @param agility the agility to set
+     * @param speed the agility to set
      */
-    void setAgility(double agility);
+    void setSpeed(double speed);
 
     /**
      * @return the agility
      */
-    double getAgility();
+    double getSpeed();
 
     /**
      * @param height the height to set
