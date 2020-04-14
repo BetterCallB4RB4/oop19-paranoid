@@ -8,11 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
+import paranoid.model.score.TypeScore;
 import paranoid.view.parameters.LayoutManager;
 
-public class GameOverController implements GuiController, SubjectScore  {
+public class GameOverController implements GuiController  {
     private static final int MAX_LENGTH = 10;
-    private List<ObserverScore> observer;
     private Score topScores;
     private Integer playerScore;
 
@@ -36,8 +36,7 @@ public class GameOverController implements GuiController, SubjectScore  {
             Score.Builder scoreBuilder = new Score.Builder();
             scoreBuilder.fromExistScore(this.topScores);
             scoreBuilder.addUserScore(username, this.playerScore);
-            ScoreManager.saveScore(scoreBuilder.build());
-            this.notifyObserver();
+            ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
             this.btnSend.getScene().setRoot(LayoutManager.MENU.getLayout());
         }
     }
@@ -49,11 +48,11 @@ public class GameOverController implements GuiController, SubjectScore  {
 
     @FXML
     public void initialize() {
-        this.observer = new ArrayList<>();
+
     }
 
     public void updateScore(final Integer playerScore) {
-        this.topScores = ScoreManager.loadScore("story");
+        this.topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
         this.playerScore = playerScore;
 
         if (!topScores.getScoreList().isEmpty()) {
@@ -67,24 +66,6 @@ public class GameOverController implements GuiController, SubjectScore  {
             this.btnSend.setVisible(true);
             this.btnScore.setVisible(false);
         }
-    }
-    
-    @Override
-    public void register(final ObserverScore obs) {
-        this.observer.add(obs);
-
-    }
-
-    @Override
-    public void unregister(final ObserverScore obs) {
-        this.observer.remove(obs);
-
-    }
-
-    @Override
-    public void notifyObserver() {
-        this.observer.forEach(ObserverScore::update);
-
     }
 
 }
