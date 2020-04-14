@@ -31,6 +31,9 @@ import paranoid.model.level.LevelBuilder;
 import paranoid.model.level.LevelManager;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.level.Music;
+import paranoid.model.score.Score;
+import paranoid.model.score.ScoreManager;
+import paranoid.model.score.TypeScore;
 import paranoid.view.parameters.LayoutManager;
 
 public class GameBuilderController implements GuiController, Subject {
@@ -170,6 +173,9 @@ public class GameBuilderController implements GuiController, Subject {
                 this.levelBuilder.setBackGround(backGround.getValue());
                 this.levelBuilder.setSong(ost.getValue());
                 LevelManager.saveLevel(this.levelBuilder.build());
+                ScoreManager.saveScore(TypeScore.CUSTOM, new Score.Builder()
+                        .defaultScore(this.levelName.getText())
+                        .build());
                 JOptionPane.showMessageDialog(null, "Livello creato con successo");
                 this.notifyObserver();
             }
