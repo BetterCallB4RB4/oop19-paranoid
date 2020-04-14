@@ -35,7 +35,7 @@ public class GameState {
     private World world;
     private GamePhase phase = GamePhase.INIT;
     private Settings set = SettingsManager.loadOption();
-    private Score topScores = ScoreManager.loadScore();
+    private Score topScores = ScoreManager.loadScore("story");
     private GameController gameController;
 
     public GameState() {
