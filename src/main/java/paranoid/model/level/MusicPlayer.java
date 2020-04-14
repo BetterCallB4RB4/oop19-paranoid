@@ -16,7 +16,7 @@ public class MusicPlayer {
      */
     public void playMusic(final Music music) {
         if (isMusicEnable) {
-            try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(ClassLoader.getSystemResourceAsStream(music.getLocation()))) {
+            try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(music.getLocation())) {
                 this.clip = AudioSystem.getClip();
                 this.clip.open(audioIn);
                 this.clip.start();
@@ -43,7 +43,7 @@ public class MusicPlayer {
      */
     public void playEffect(final Effect effect) {
         if (isEffectEnable) {
-            try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(ClassLoader.getSystemResourceAsStream(effect.getLocation()))) {
+            try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(effect.getLocation())) {
                 Clip effectClip = AudioSystem.getClip();
                 effectClip.open(audioIn);
                 effectClip.start();
