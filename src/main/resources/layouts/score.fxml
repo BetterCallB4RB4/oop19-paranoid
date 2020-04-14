@@ -1,92 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import java.util.ArrayList?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ScoreController">
+<SplitPane fx:id="mainPanel" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ScoreController">
    <items>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+      <VBox fx:id="vBoxMenu" alignment="TOP_CENTER" spacing="30.0" style="-fx-background-color: black;">
          <children>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
-               <children>
-                  <Label fx:id="name1" text="NOME: " textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="score1" text="SCORE" textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
-               <children>
-                  <Label fx:id="name2" text="NOME: " textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="score2" text="SCORE" textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
-               <children>
-                  <Label fx:id="name3" text="NOME: " textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="score3" text="SCORE" textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="100.0" prefHeight="30.0" prefWidth="598.0" rowValignment="TOP">
-               <children>
-                  <Label fx:id="name4" text="NOME: " textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="score4" text="SCORE" textAlignment="CENTER">
-                     <font>
-                        <Font size="35.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
-            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" text="MENU" />
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" text="MENU PRINCIPALE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <ScrollPane fx:id="scrollerLeft" fitToHeight="true" fitToWidth="true" style="-fx-background-color: black;">
+               <content>
+                  <VBox fx:id="buttonContainer" alignment="TOP_CENTER" pickOnBounds="false" spacing="10.0" style="-fx-background-color: black;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </ScrollPane>
          </children>
-         
-         <fx:define>
-         	<ArrayList fx:id="lblListName" >
-         		<fx:reference source="name1"/>
-         		<fx:reference source="name2"/>
-         		<fx:reference source="name3"/>
-         		<fx:reference source="name4"/>
-         	</ArrayList>
-         </fx:define>
-         
-         <fx:define>
-         	<ArrayList fx:id="lblListScore" >
-         		<fx:reference source="score1"/>
-         		<fx:reference source="score2"/>
-         		<fx:reference source="score3"/>
-         		<fx:reference source="score4"/>
-         	</ArrayList>
-         </fx:define>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
       </VBox>
+      <ScrollPane fx:id="scrollerRight" fitToHeight="true" fitToWidth="true">
+         <content>
+            <VBox fx:id="labelContainer" alignment="TOP_CENTER" style="-fx-background-color: black;">
+               <children>
+                  <GridPane fx:id="grid" alignment="TOP_CENTER" vgap="15.0">
+                     <columnConstraints>
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="97.0" minWidth="19.0" prefWidth="37.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="177.0" minWidth="64.0" prefWidth="126.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="113.0" />
+                     </columnConstraints>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
    </items>
 </SplitPane>
