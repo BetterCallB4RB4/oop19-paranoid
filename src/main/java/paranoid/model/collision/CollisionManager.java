@@ -37,12 +37,11 @@ public class CollisionManager {
      * @param ball the object that can collide with the brick
      * @return the collision surface
      */
-    public Optional<Pair<GameObject, Collision>> checkCollisionWithBricks(final Brick brick, final Ball ball) {
+    public Optional<Pair<Brick, Collision>> checkCollisionWithBricks(final Brick brick, final Ball ball) {
         final boolean checkLeft = checkLeftForCollision(ball.getPos().getX(), brick.getPos().getX() + brick.getWidth());
         final boolean checkRight = checkRightForCollision(ball.getPos().getX() + ball.getWidth(), brick.getPos().getX());
         final boolean checkTop = checkTopForCollision(ball.getPos().getY(), brick.getPos().getY() + brick.getHeight());
         final boolean checkBottom = checkBottomForCollision(ball.getPos().getY() + ball.getHeight(), brick.getPos().getY());
-
         if (!checkLeft) {
             brick.getLastZonePresence().put(ball, Collision.RIGHT);
         } else if (!checkRight) {
@@ -56,23 +55,30 @@ public class CollisionManager {
         }
 
         return Optional.empty();
+
     }
 
-    public Optional<Pair<GameObject, Collision>> checkCollisionWithPlayers(final Player player, final Ball ball) {
+    /**
+     * 
+     * @param player
+     * @param ball
+     * @return ememe
+     */
+    public Optional<Pair<GameObject, Direction>> checkCollisionWithPlayers(final Player player, final Ball ball) {
+        final boolean checkLeft = checkLeftForCollision(ball.getPos().getX(), player.getPos().getX() + player.getWidth());
+        final boolean checkRight = checkRightForCollision(ball.getPos().getX() + ball.getWidth(), player.getPos().getX());
         final boolean checkTop = checkTopForCollision(ball.getPos().getY(), player.getPos().getY() + player.getHeight());
         final boolean checkBottom = checkBottomForCollision(ball.getPos().getY() + ball.getHeight(), player.getPos().getY());
-        if (checkTop && checkBottom) {
+        if (checkBottom && checkTop && checkLeft && checkRight) {
             double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
-            double leftPlayer = player.getPos().getX();
-            double centerPlayer = player.getPos().getX() + (player.getWidth() / 2);
-            double rightPlayer = player.getPos().getX() + player.getWidth();
-            if (centerBall >= leftPlayer && centerBall < centerPlayer) {
-                return Optional.of(new Pair<>(player, Collision.LEFT));
-            } else if (centerBall >= centerPlayer && centerBall <= rightPlayer){
-                return Optional.of(new Pair<>(player, Collision.RIGHT));
+            double playerHitZone = player.getWidth() / Direction.values().length;
+            for (int i = 0; i < Direction.values().length; i++) {
+                if (centerBall > player.getPos().getX() + (i * playerHitZone)
+                && centerBall < player.getPos().getX() + ((i + 1) * playerHitZone)) {
+                    return Optional.of(new Pair<>(player, Direction.values()[i]));
+                }
             }
         }
-
         return Optional.empty();
     }
 

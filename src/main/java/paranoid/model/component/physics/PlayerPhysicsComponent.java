@@ -22,7 +22,7 @@ public final class PlayerPhysicsComponent implements PhysicsComponent {
         final P2d posPlayer = player.getPos();
         final V2d velPlayer = player.getVel();
 
-        player.setPos(posPlayer.sum(velPlayer.mul(SCALER * dt * player.getAgility())));
+        player.setPos(posPlayer.sum(velPlayer.mul(SCALER * dt * player.getSpeed())));
 
         //check collision with world border
         final Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(player);

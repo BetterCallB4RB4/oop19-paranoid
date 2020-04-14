@@ -1,5 +1,7 @@
 package paranoid.model.level;
 
+import java.net.URL;
+
 public enum Effect {
 
     /**
@@ -30,8 +32,8 @@ public enum Effect {
     /**
      * @return the location
      */
-    public String getLocation() {
-        return location;
+    public URL getLocation() {
+        return ClassLoader.getSystemResource(location);
     }
 
 }

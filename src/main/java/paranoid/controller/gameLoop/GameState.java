@@ -12,6 +12,7 @@ import paranoid.common.PlayerId;
 import paranoid.common.V2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
+import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
@@ -22,6 +23,7 @@ import paranoid.model.level.LevelManager;
 import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
+import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
 import paranoid.view.parameters.LayoutManager;
@@ -61,7 +63,7 @@ public class GameState {
       //add players to the world
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player.Builder().position(new P2d(290,580))
-                                           .width(80)
+                                           .width(120)
                                            .height(10)
                                            .color(Color.DARKGREEN)
                                            .playerId(PlayerId.ONE)
@@ -80,13 +82,13 @@ public class GameState {
         List<Ball> ballContainer = new ArrayList<>();
         switch (set.getDifficulty()) {
             case EASY:
-                ballContainer.add(new Ball(new P2d(330, 570), new V2d(100, -200), 1, 10, 10));
+                ballContainer.add(new Ball(new P2d(330, 570), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.EASY.getSpeed(), 10, 10));
             break;
             case NORMAL:
-                ballContainer.add(new Ball(new P2d(330, 570), new V2d(100, -200), 2, 10, 10));
+                ballContainer.add(new Ball(new P2d(330, 570), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.NORMAL.getSpeed(), 10, 10));
             break;
             case HARD:
-                ballContainer.add(new Ball(new P2d(330, 570), new V2d(100, -200), 2.5, 10, 10));
+                ballContainer.add(new Ball(new P2d(330, 570), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.HARD.getSpeed(), 10, 10));
             break;
             default:
             break;

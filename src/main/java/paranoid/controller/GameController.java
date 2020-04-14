@@ -118,7 +118,7 @@ public final class GameController implements GuiController {
                 gc.setFill(((Player) e).getColor());
                 gc.fillRect(xPos, yPos, w, h);
             } else if (e instanceof Brick) {
-                gc.setFill(Color.ALICEBLUE);
+                gc.setFill(((Brick) e).getColor());
                 gc.fillRect(xPos, yPos, w, h);
                 gc.setStroke(Color.BLACK);
                 gc.strokeRect(xPos, yPos, w, h);

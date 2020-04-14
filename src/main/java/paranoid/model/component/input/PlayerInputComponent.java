@@ -14,9 +14,9 @@ public final class PlayerInputComponent implements InputComponent {
         final Player player = (Player) obj;
 
         if (c.isMoveRight()) {
-            player.setVel(new V2d(1, 0));
+            player.setVel(new V2d(1.5, 0));
         } else if (c.isMoveLeft()) {
-            player.setVel(new V2d(-1, 0));
+            player.setVel(new V2d(-1.5, 0));
         } else {
             player.setVel(new V2d(0, 0));
         }

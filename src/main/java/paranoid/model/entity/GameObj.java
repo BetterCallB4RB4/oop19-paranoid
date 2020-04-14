@@ -13,16 +13,16 @@ public abstract class GameObj implements GameObject, Serializable {
     private static final long serialVersionUID = 1256139078242900664L;
     private P2d pos;
     private V2d vel;
-    private double agility;
+    private double speed;
     private int height;
     private int width;
     private PhysicsComponent phys;
     private InputComponent input;
 
-    public GameObj(final P2d pos, final V2d vel, final double agility, final int height, final int width, final PhysicsComponent phys, final InputComponent input) {
+    public GameObj(final P2d pos, final V2d vel, final double speed, final int height, final int width, final PhysicsComponent phys, final InputComponent input) {
         this.pos = pos;
         this.vel = vel;
-        this.agility = agility;
+        this.speed = speed;
         this.height = height;
         this.width = width;
         this.phys = phys;
@@ -65,16 +65,16 @@ public abstract class GameObj implements GameObject, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public double getAgility() {
-        return agility;
+    public double getSpeed() {
+        return speed;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void setAgility(final double agility) {
-        this.agility = agility;
+    public void setSpeed(final double speed) {
+        this.speed = speed;
     }
 
     /**
