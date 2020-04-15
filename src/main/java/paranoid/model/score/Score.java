@@ -53,8 +53,8 @@ public class Score implements Serializable{
             return this;
         }
 
-        public Builder addUserScore(final String name, final Integer score) {
-            this.scoreList.add(new User(name, score));
+        public Builder addUserScore(final User user) {
+            this.scoreList.add(user);
             return this;
         }
 
