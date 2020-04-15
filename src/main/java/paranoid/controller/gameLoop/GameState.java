@@ -15,6 +15,7 @@ import paranoid.model.entity.StartPhase;
 import paranoid.model.entity.World;
 import paranoid.model.level.BackGround;
 import paranoid.model.level.Level;
+import paranoid.model.level.LevelSelection;
 import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
@@ -34,16 +35,22 @@ public class GameState {
     private GamePhase phase = GamePhase.INIT;
     private Settings set = SettingsManager.loadOption();
     private final User user = UserManager.loadUser();
-    private Score topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
+    private final Score topScores;
     private GameController gameController;
 
     public GameState() {
-        this.highScoreValue = this.topScores.getHighValue();
         this.multiplier = 1;
 
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
 
         Level lvl = set.getSelectedLevel();
+        if (LevelSelection.isStoryLevel(lvl.getLevelName())) {
+            this.topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
+        } else {
+            this.topScores = ScoreManager.loadScore(TypeScore.CUSTOM, lvl.getLevelName());
+        }
+        this.highScoreValue = this.topScores.getHighValue();
+
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.gameController.setBackGroundImage(BackGround.getBackGroundByName(lvl.getBackGround()));
         this.gameController.getMusicPlayer().setMusicEnable(set.isPlayMusic());
@@ -176,5 +183,9 @@ public class GameState {
 
     public User getUser() {
         return this.user;
+    }
+
+    public Score getTopScores() {
+        return this.topScores;
     }
 }

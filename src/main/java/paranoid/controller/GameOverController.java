@@ -38,7 +38,11 @@ public class GameOverController implements GuiController  {
             Score.Builder scoreBuilder = new Score.Builder();
             scoreBuilder.fromExistScore(this.topScores);
             scoreBuilder.addUserScore(user);
-            ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
+            if (this.topScores.getScoreName().contentEquals("storia")) {
+                ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
+            } else {
+                ScoreManager.saveScore(TypeScore.CUSTOM, scoreBuilder.build());
+            }
             this.btnSend.getScene().setRoot(LayoutManager.MENU.getLayout());
         }
     }
@@ -53,21 +57,20 @@ public class GameOverController implements GuiController  {
 
     }
 
-    public void updateScore(final User user) {
-        this.topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
+    public void updateScore(final Score score, final User user) {
+        this.topScores = score;
         this.user = user;
 
-        if (!topScores.getScoreList().isEmpty()) {
+        if (topScores.getScoreList().size() >= 10) {
             final Integer minValue = topScores.getScoreList().stream()
                                .mapToInt(s -> s.getScore()).min().getAsInt();
             this.txtName.setVisible(user.getScore() >= minValue);
             this.btnSend.setVisible(user.getScore() >= minValue);
-            this.btnScore.setVisible(user.getScore() < minValue);
+            this.btnScore.setVisible(!(user.getScore() >= minValue));
         } else {
-            this.txtName.setVisible(true);
-            this.btnSend.setVisible(true);
-            this.btnScore.setVisible(false);
+            this.txtName.setVisible(user.getScore() > 0);
+            this.btnSend.setVisible(user.getScore() > 0);
+            this.btnScore.setVisible(!(user.getScore() > 0));
         }
     }
-
 }

@@ -99,7 +99,7 @@ public class GameLoop implements Runnable {
             public void run() {
                 gameController.getMusicPlayer().stopMusic();
                 scene.setRoot(LayoutManager.GAME_OVER.getLayout());
-                gameOverController.updateScore(gameState.getUser());
+                gameOverController.updateScore(gameState.getTopScores(), gameState.getUser());
             }
         });
     }

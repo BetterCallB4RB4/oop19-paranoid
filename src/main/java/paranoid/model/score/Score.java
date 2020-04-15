@@ -13,7 +13,6 @@ public class Score implements Serializable{
 
     private final List<User> scoreList;
     private String scoreName;
-    private static final int MAX_ELEM = 10;
 
     private Score(final List<User> scoreList, final String scoreName) {
         this.scoreList = scoreList;
@@ -70,7 +69,7 @@ public class Score implements Serializable{
 
             sortScore();
 
-            while (this.scoreList.size() > MAX_ELEM) {
+            while (this.scoreList.size() > 10) {
                 this.scoreList.remove(this.scoreList.size() - 1);
             }
 
