@@ -18,6 +18,8 @@ import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.gameLoop.GameLoop;
 import paranoid.model.settings.SettingsManager;
 import paranoid.model.level.LevelSelection;
+import paranoid.model.score.User;
+import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.parameters.LayoutManager;
 
@@ -91,6 +93,7 @@ public final class MenuController implements GuiController, SubjectScore {
         setBuilder.fromSettings(SettingsManager.loadOption());
         setBuilder.selectLevel(LevelSelection.LEVEL1.getLevel());
         SettingsManager.saveOption(setBuilder.build());
+        UserManager.saveUser(new User());
         final Scene scene = btnStart.getScene();
         final Thread engine = new Thread(new GameLoop(scene));
         engine.setDaemon(true); //allow jvm to close the thread when close the window.
@@ -129,7 +132,7 @@ public final class MenuController implements GuiController, SubjectScore {
         final Scene scene = playYourLvl.getScene();
         scene.setRoot(LayoutManager.CHOOSE_LVL.getLayout());
     }
-    
+
     @Override
     public void register(final ObserverScore obs) {
         this.observer.add(obs);

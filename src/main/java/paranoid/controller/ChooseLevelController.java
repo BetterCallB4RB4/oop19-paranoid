@@ -35,7 +35,8 @@ import paranoid.controller.gameLoop.GameLoop;
 
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
-
+import paranoid.model.score.User;
+import paranoid.model.score.UserManager;
 import paranoid.model.settings.SettingsManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.parameters.LayoutManager;
@@ -136,6 +137,7 @@ public class ChooseLevelController implements GuiController, Observer {
     @FXML
     public void startMatch() {
         if (!selectedLevel.getText().isBlank()) {
+            UserManager.saveUser(new User());
             final Scene scene = startBtn.getScene();
             final Thread engine = new Thread(new GameLoop(scene));
             engine.setDaemon(true);
