@@ -17,6 +17,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.model.component.graphics.GraphicsAdapter;
+import paranoid.model.component.graphics.GraphicsAdapterImpl;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
@@ -104,6 +106,12 @@ public final class GameController implements GuiController {
     }
     private void drawWorld(final List<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
+        GraphicsAdapter ga = new GraphicsAdapterImpl(gc);
+        gameEntities.stream().forEach(e -> {
+            e.updateGraphics(ga);
+        });
+
+        /*
         gc.setFill(Color.ALICEBLUE);
         gameEntities.stream().forEach(e -> {
             final P2d pos = e.getPos();
@@ -124,6 +132,7 @@ public final class GameController implements GuiController {
                 gc.strokeRect(xPos, yPos, w, h);
             }
         });
+        */
     }
 
     private double getXinPixel(final P2d pos) {
