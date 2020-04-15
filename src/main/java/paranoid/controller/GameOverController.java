@@ -43,7 +43,7 @@ public class GameOverController implements GuiController  {
 
     @FXML
     private void btnScoreOnClickHandler() {
-        this.btnScore.getScene().setRoot(LayoutManager.SCORE.getLayout());
+        this.btnScore.getScene().setRoot(LayoutManager.MENU.getLayout());
     }
 
     @FXML
