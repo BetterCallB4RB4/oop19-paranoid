@@ -7,13 +7,15 @@ public class User implements Serializable{
 
     private static final long serialVersionUID = 7908156953699582799L;
 
-    private final String name;
-    private final Integer score;
+    private String name;
+    private Integer score;
+    private Integer lives;
     private final Date date;
 
-    public User(final String name, final Integer score) {
-        this.name = name;
-        this.score = score;
+    public User() {
+        this.name = "player";
+        this.score = 0;
+        this.lives = 4;
         this.date = new Date();
     }
 
@@ -27,6 +29,22 @@ public class User implements Serializable{
 
     public Date getDate() {
         return this.date;
+    }
+
+    public Integer getLives() {
+        return this.lives;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public void setScore(final Integer score) {
+        this.score = score;
+    }
+
+    public void setLives(final Integer lives) {
+        this.lives = lives;
     }
 
     @Override
