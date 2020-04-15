@@ -9,6 +9,8 @@ import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.SerializableColor;
 import paranoid.common.V2d;
+import paranoid.model.component.graphics.DummyGraphicsComponent;
+import paranoid.model.component.graphics.GraphicsAdapter;
 import paranoid.model.component.input.DummyInputComponent;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.DummyPhysicsComponent;
@@ -34,7 +36,7 @@ public final class Brick extends GameObj implements Serializable {
      * @param width the width of this game object
      */
     private Brick(final P2d pos, final int height, final int width, final Color color, final int pointEarned, final int energy, final boolean indestructible) {
-        super(pos, new V2d(0, 0), 0, height, width, new DummyPhysicsComponent(), new DummyInputComponent());
+        super(pos, new V2d(0, 0), 0, height, width, new DummyPhysicsComponent(), new DummyInputComponent(), new DummyGraphicsComponent());
         this.color = new SerializableColor(color);
         this.pointEarned = pointEarned;
         this.energy = energy;
@@ -56,6 +58,14 @@ public final class Brick extends GameObj implements Serializable {
     public void updateInput(final InputController controller) {
         super.getInputComponent().update(this, controller);
 
+    }
+
+    /**
+     * allows to update the graphics component of the brick.
+     */
+    @Override
+    public void updateGraphics(final GraphicsAdapter graphicsAdapter) {
+        this.getGraphicsComponent().update(this, graphicsAdapter);
     }
 
     public Color getColor() {
