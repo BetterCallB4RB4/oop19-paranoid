@@ -10,15 +10,20 @@
    <items>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Label text="GAME OVER">
+            <Label fx:id="lblGameOver" text="GAME OVER">
                <font>
                   <Font size="60.0" />
                </font>
             </Label>
-            <Label text="PURTROPPO HAI PERSO LA PARTITA!">
+            <Label fx:id="lblScore" text="PUNTEGGIO: ">
                <font>
                   <Font size="20.0" />
                </font></Label>
+            <Label fx:id="lblName" text="INSERISCI IL TUO NOME: ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="txtName">

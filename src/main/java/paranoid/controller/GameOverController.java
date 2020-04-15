@@ -1,10 +1,8 @@
 package paranoid.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
@@ -21,10 +19,19 @@ public class GameOverController implements GuiController  {
     private TextField txtName;
 
     @FXML
+    private Label lblName;
+
+    @FXML
+    private Label lblScore;
+
+    @FXML
     private Button btnSend;
 
     @FXML
     private Button btnScore;
+    
+    @FXML
+    private Label lblGameOver;
 
     @FXML
     private void btnSendOnClickHandler() {
@@ -38,7 +45,7 @@ public class GameOverController implements GuiController  {
             Score.Builder scoreBuilder = new Score.Builder();
             scoreBuilder.fromExistScore(this.topScores);
             scoreBuilder.addUserScore(user);
-            if (this.topScores.getScoreName().contentEquals("storia")) {
+            if (this.topScores.getScoreName().contentEquals(TypeScore.STORY.toString())) {
                 ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
             } else {
                 ScoreManager.saveScore(TypeScore.CUSTOM, scoreBuilder.build());
@@ -52,25 +59,30 @@ public class GameOverController implements GuiController  {
         this.btnScore.getScene().setRoot(LayoutManager.MENU.getLayout());
     }
 
-    @FXML
-    public void initialize() {
-
-    }
-
     public void updateScore(final Score score, final User user) {
         this.topScores = score;
         this.user = user;
+        if (this.user.getLives() <= 0) {
+            this.lblGameOver.setText("HAI PERSO!");
+        } else {
+            this.lblGameOver.setText("HAI VINTO!");
+        }
+        this.lblScore.setText("PUNTEGGIO: " + user.getScore().toString());
 
         if (topScores.getScoreList().size() >= 10) {
             final Integer minValue = topScores.getScoreList().stream()
                                .mapToInt(s -> s.getScore()).min().getAsInt();
-            this.txtName.setVisible(user.getScore() >= minValue);
-            this.btnSend.setVisible(user.getScore() >= minValue);
-            this.btnScore.setVisible(!(user.getScore() >= minValue));
+
+            setNameVisible(user.getScore() >= minValue);
         } else {
-            this.txtName.setVisible(user.getScore() > 0);
-            this.btnSend.setVisible(user.getScore() > 0);
-            this.btnScore.setVisible(!(user.getScore() > 0));
+            setNameVisible(true);
         }
+    }
+
+    private void setNameVisible(final boolean condition) {
+        this.txtName.setVisible(condition);
+        this.lblName.setVisible(condition);
+        this.btnSend.setVisible(condition);
+        this.btnScore.setVisible(!(condition));
     }
 }
