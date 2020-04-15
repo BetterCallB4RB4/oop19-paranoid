@@ -46,6 +46,7 @@ public enum LayoutManager {
      */
     LEVEL_BUILDER("layouts/levelBuilder.fxml"),
 
+    NEXT_LEVEL("layouts/nextLevel.fxml"),
     /**
      * gameOver.fxml path.
      */
