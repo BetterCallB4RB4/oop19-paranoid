@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import paranoid.common.PlayerId;
 import paranoid.controller.GameController;
 import paranoid.controller.GameOverController;
+import paranoid.controller.NextLevelController;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.KeyboardInputController;
 import paranoid.model.entity.World;
@@ -24,7 +25,6 @@ public class GameLoop implements Runnable {
     private static final int PERIOD = 20;
     private final Scene scene;
     private final GameController gameController = (GameController) LayoutManager.GAME.getGuiController();
-    private final GameOverController gameOverController = (GameOverController) LayoutManager.GAME_OVER.getGuiController();
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
     private World world;
     private GameState gameState;
@@ -75,35 +75,45 @@ public class GameLoop implements Runnable {
             waitForNextFrame(current);
             lastTime = current;
         }
+        
+        if (gameState.getPhase() == GamePhase.WIN 
+                && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
+                && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
+            changeView(LayoutManager.NEXT_LEVEL);
+        } else {
+            changeView(LayoutManager.GAME_OVER);
+        }
+    }
 
-        Settings settings = SettingsManager.loadOption();
-        Level currentLevel = settings.getSelectedLevel();
-        if (LevelSelection.isStoryLevel(currentLevel.getLevelName())) {
-            SettingsBuilder settingsBuilder = new SettingsBuilder();
-            if (LevelSelection.getSelectionFromLevel(currentLevel).hasNext()) {
+    private void changeView(final LayoutManager lm) {
+        SettingsBuilder settingsBuilder = new SettingsBuilder();
+
+        if (lm.equals(LayoutManager.NEXT_LEVEL)) {
+            UserManager.saveUser(gameState.getUser());
+            SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
+                    .selectLevel(LevelSelection.getSelectionFromLevel(gameState.getLevel()).next().getLevel())
+                    .build());
+            NextLevelController nlc = (NextLevelController) lm.getGuiController();
+            nlc.update(gameState.getLevel(), gameState.getUser());
+        } else if (lm.equals(LayoutManager.GAME_OVER)) {
+            UserManager.saveUser(new User());
+            if (LevelSelection.isStoryLevel(gameState.getLevel().getLevelName())) {
                 SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
-                                                          .selectLevel(LevelSelection.getSelectionFromLevel(currentLevel).next().getLevel())
-                                                          .build());
-                UserManager.saveUser(gameState.getUser());
-            } else {
-                SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
-                                                          .selectLevel(LevelSelection.LEVEL1.getLevel())
-                                                          .build());
-                UserManager.saveUser(new User());
+                        .selectLevel(LevelSelection.LEVEL1.getLevel())
+                        .build());
             }
+            GameOverController goc = (GameOverController) lm.getGuiController();
+            goc.updateScore(gameState.getTopScores(), gameState.getUser());
         }
 
         Platform.runLater(new Runnable() {
-
             @Override
             public void run() {
                 gameController.getMusicPlayer().stopMusic();
-                scene.setRoot(LayoutManager.GAME_OVER.getLayout());
-                gameOverController.updateScore(gameState.getTopScores(), gameState.getUser());
+                scene.setRoot(lm.getLayout());
             }
         });
     }
-
     /**
      * 
      * @param current the execution time before the computational time

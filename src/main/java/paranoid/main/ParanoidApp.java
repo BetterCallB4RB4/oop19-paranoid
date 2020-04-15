@@ -81,7 +81,7 @@ public class ParanoidApp extends Application {
      */
     public static void initSoftware() {
         SettingsBuilder settingsBuilder = new SettingsBuilder();
-        Score.Builder scoreBuilder = new Score.Builder().defaultScore("storia");
+        Score.Builder scoreBuilder = new Score.Builder().defaultScore(TypeScore.STORY.toString());
         File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
         File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);

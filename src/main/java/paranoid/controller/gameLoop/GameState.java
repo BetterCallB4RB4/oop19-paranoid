@@ -37,15 +37,16 @@ public class GameState {
     private final User user = UserManager.loadUser();
     private final Score topScores;
     private GameController gameController;
+    private Level lvl;
 
     public GameState() {
         this.multiplier = 1;
 
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
 
-        Level lvl = set.getSelectedLevel();
+        this.lvl = set.getSelectedLevel();
         if (LevelSelection.isStoryLevel(lvl.getLevelName())) {
-            this.topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
+            this.topScores = ScoreManager.loadScore(TypeScore.STORY, TypeScore.STORY.toString());
         } else {
             this.topScores = ScoreManager.loadScore(TypeScore.CUSTOM, lvl.getLevelName());
         }
@@ -187,5 +188,9 @@ public class GameState {
 
     public Score getTopScores() {
         return this.topScores;
+    }
+    
+    public Level getLevel() {
+        return this.lvl;
     }
 }
