@@ -45,6 +45,8 @@ public class ParanoidApp extends Application {
      */
     public static final String OPTIONS = MAIN_FOLDER + SEPARATOR + "options";
 
+    public static final String USER = MAIN_FOLDER + SEPARATOR + "user";
+
     public static final String SCORE_FOLDER = MAIN_FOLDER + SEPARATOR + "scores";
     /**
      * the file to save the top story scores.
@@ -79,6 +81,7 @@ public class ParanoidApp extends Application {
      */
     public static void initSoftware() {
         SettingsBuilder settingsBuilder = new SettingsBuilder();
+        Score.Builder scoreBuilder = new Score.Builder().defaultScore("storia");
         File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
         File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
@@ -92,9 +95,7 @@ public class ParanoidApp extends Application {
                 scoreStory.mkdir();
                 scoreCustom.mkdir();
                 SettingsManager.saveOption(settingsBuilder.build());
-                ScoreManager.saveScore(TypeScore.STORY, new Score.Builder()
-                        .defaultScore("storia")
-                        .build());
+                ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
