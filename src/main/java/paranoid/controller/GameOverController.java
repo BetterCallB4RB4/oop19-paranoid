@@ -9,12 +9,13 @@ import javafx.scene.control.TextField;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.score.TypeScore;
+import paranoid.model.score.User;
 import paranoid.view.parameters.LayoutManager;
 
 public class GameOverController implements GuiController  {
     private static final int MAX_LENGTH = 10;
     private Score topScores;
-    private Integer playerScore;
+    private User user;
 
     @FXML
     private TextField txtName;
@@ -33,9 +34,10 @@ public class GameOverController implements GuiController  {
             if (username.length() > MAX_LENGTH) {
                 username = this.txtName.getText().substring(0, MAX_LENGTH);
             }
+            this.user.setName(username);
             Score.Builder scoreBuilder = new Score.Builder();
             scoreBuilder.fromExistScore(this.topScores);
-            scoreBuilder.addUserScore(username, this.playerScore);
+            scoreBuilder.addUserScore(user);
             ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
             this.btnSend.getScene().setRoot(LayoutManager.MENU.getLayout());
         }
@@ -51,16 +53,16 @@ public class GameOverController implements GuiController  {
 
     }
 
-    public void updateScore(final Integer playerScore) {
+    public void updateScore(final User user) {
         this.topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
-        this.playerScore = playerScore;
+        this.user = user;
 
         if (!topScores.getScoreList().isEmpty()) {
             final Integer minValue = topScores.getScoreList().stream()
                                .mapToInt(s -> s.getScore()).min().getAsInt();
-            this.txtName.setVisible(this.playerScore >= minValue);
-            this.btnSend.setVisible(this.playerScore >= minValue);
-            this.btnScore.setVisible(this.playerScore < minValue);
+            this.txtName.setVisible(user.getScore() >= minValue);
+            this.btnSend.setVisible(user.getScore() >= minValue);
+            this.btnScore.setVisible(user.getScore() < minValue);
         } else {
             this.txtName.setVisible(true);
             this.btnSend.setVisible(true);

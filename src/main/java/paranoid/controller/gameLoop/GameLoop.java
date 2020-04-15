@@ -12,6 +12,8 @@ import paranoid.model.component.input.KeyboardInputController;
 import paranoid.model.entity.World;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelSelection;
+import paranoid.model.score.User;
+import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.model.settings.SettingsManager;
@@ -82,10 +84,12 @@ public class GameLoop implements Runnable {
                 SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
                                                           .selectLevel(LevelSelection.getSelectionFromLevel(currentLevel).next().getLevel())
                                                           .build());
+                UserManager.saveUser(gameState.getUser());
             } else {
                 SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
                                                           .selectLevel(LevelSelection.LEVEL1.getLevel())
                                                           .build());
+                UserManager.saveUser(new User());
             }
         }
 
@@ -95,7 +99,7 @@ public class GameLoop implements Runnable {
             public void run() {
                 gameController.getMusicPlayer().stopMusic();
                 scene.setRoot(LayoutManager.GAME_OVER.getLayout());
-                gameOverController.updateScore(gameState.getPlayerScore());
+                gameOverController.updateScore(gameState.getUser());
             }
         });
     }

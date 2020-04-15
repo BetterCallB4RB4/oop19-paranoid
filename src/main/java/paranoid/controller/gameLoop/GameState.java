@@ -19,6 +19,8 @@ import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.score.TypeScore;
+import paranoid.model.score.User;
+import paranoid.model.score.UserManager;
 import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
@@ -27,20 +29,17 @@ import paranoid.view.parameters.LayoutManager;
 public class GameState {
 
     private int highScoreValue;
-    private int playerScore;
     private int multiplier;
-    private int lives;
     private World world;
     private GamePhase phase = GamePhase.INIT;
     private Settings set = SettingsManager.loadOption();
+    private final User user = UserManager.loadUser();
     private Score topScores = ScoreManager.loadScore(TypeScore.STORY, "storia");
     private GameController gameController;
 
     public GameState() {
         this.highScoreValue = this.topScores.getHighValue();
-        this.playerScore = 0;
         this.multiplier = 1;
-        this.lives = 4;
 
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
 
@@ -99,25 +98,22 @@ public class GameState {
      * @return the score
      */
     public int getPlayerScore() {
-        return playerScore;
+        return user.getScore();
     }
 
     /**
      * @return the highscore.
      */
     public int getHighScoreValue() {
-        return highScoreValue;
+        return (user.getScore() > this.highScoreValue)
+                ? user.getScore() : this.highScoreValue;
     }
 
     /**
      * @param playerScore the player score to set
      */
     public void setPlayerScore(final int playerScore) {
-        this.playerScore = playerScore;
-
-        if (this.playerScore > this.highScoreValue) {
-            this.highScoreValue = this.playerScore;
-        }
+        user.setScore(playerScore);
     }
 
     /**
@@ -138,21 +134,21 @@ public class GameState {
      * @return the lives
      */
     public int getLives() {
-        return lives;
+        return user.getLives();
     }
 
     /**
      * @param lives the lives to set
      */
     public void setLives(final int lives) {
-        this.lives = lives;
+        user.setLives(lives);
     }
 
     /**
      * 
      */
     public void decLives() {
-        this.lives--;
+        user.setLives(user.getLives() - 1);
     }
 
     /**
@@ -176,5 +172,9 @@ public class GameState {
      */
     public void setPhase(final GamePhase phase) {
         this.phase = phase;
+    }
+
+    public User getUser() {
+        return this.user;
     }
 }
