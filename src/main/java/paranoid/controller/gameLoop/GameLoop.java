@@ -62,9 +62,11 @@ public class GameLoop implements Runnable {
                 render();
                 break;
             case PAUSE:
+                this.gameController.isPause(true);
                 render();
                 break;
             case RUNNING:
+                this.gameController.isPause(false);
                 processInput();
                 updateGame(elapsed);
                 render();
@@ -177,6 +179,11 @@ public class GameLoop implements Runnable {
             case A:
                 inputController.get(PlayerId.TWO).notifyMoveLeft(true);
                 break;
+            case SPACE:
+                if (gameState.getPhase().equals(GamePhase.PAUSE)) {
+                    gameState.setPhase(GamePhase.RUNNING);
+                }
+                break;
             default:
                 break;
             }
@@ -195,25 +202,6 @@ public class GameLoop implements Runnable {
                 break;
             case A:
                 inputController.get(PlayerId.TWO).notifyMoveLeft(false);
-                break;
-            case SPACE:
-                if (gameState.getPhase().equals(GamePhase.PAUSE)) {
-                    gameState.setPhase(GamePhase.RUNNING);
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            gameController.isPause(false);
-                        }
-                    });
-                } else {
-                    gameState.setPhase(GamePhase.PAUSE);
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            gameController.isPause(true);
-                        }
-                    });
-                }
                 break;
             default:
                 break;

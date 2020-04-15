@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Label?>
@@ -9,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="375.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
+<SplitPane dividerPositions="375.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
 
    <items>
       <VBox fx:id="dashBoard" alignment="CENTER">
@@ -73,10 +80,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label fx:id="lblPause" style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="PAUSA" textFill="WHITE" visible="false">
-            	<font>
-       			   <Font size="25.0" />
-    		    </font>
+            <Label fx:id="lblPause" style="-fx-background-color: linear-gradient(to bottom right, #EA3F87, #7748D3); -fx-background-radius: 30;" text="premi spazio per cominciare" textFill="WHITE">
                <effect>
                   <DropShadow />
                </effect>
