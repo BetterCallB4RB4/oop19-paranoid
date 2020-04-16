@@ -26,16 +26,18 @@ public class EventConsumer {
     public void resolveEvent() {
         events.stream().forEach(ev -> {
             if (ev instanceof HitBorderEvent) {
+                gameState.setMultiplier(0);
                 HitBorderEvent hit = (HitBorderEvent) ev;
                 if (hit.getCollision().equals(Collision.BOTTOM)) {
                     gameState.getWorld().removeBall(hit.getBall());
                     if (gameState.getWorld().getBalls().isEmpty()) {
-                        gameState.decLives();
+                        gameState.setLives(gameState.getLives() - 1);
                         gameState.setPhase(GamePhase.INIT);
                     }
                 }
                 this.player.playEffect(Effect.BOARD_COLLISION);
             } else if (ev instanceof HitBrickEvent) {
+                gameState.setMultiplier(gameState.getMultiplier() + 1);
                 Brick brick = ((HitBrickEvent) ev).getBrick();
                 gameState.setPlayerScore(gameState.getPlayerScore() 
                         + (brick.getPointEarned() * gameState.getMultiplier()));
