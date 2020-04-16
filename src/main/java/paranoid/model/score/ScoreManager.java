@@ -41,9 +41,38 @@ public final class ScoreManager {
 
     }
 
-    public static void saveScore(final TypeScore typeScore, final Score score) {
+    public static void saveStory(final Score score) {
+        save(ParanoidApp.SCORE_STORY, score, "storia");
+    }
+
+    public static Score loadStory() {
+        return load(ParanoidApp.SCORE_STORY, "storia");
+    }
+
+    public static void saveCustom(final Score score) {
+        save(ParanoidApp.SCORE_CUSTOM, score, score.getNameScore());
+    }
+
+    public static Score loadCustom(final String nameScore) {
+        return load(ParanoidApp.SCORE_CUSTOM, nameScore);
+    }
+
+    public static List<Score> loadCustomList() {
+        List<Score> scores = new ArrayList<>();
+        String path = ParanoidApp.SCORE_CUSTOM;
+        File scoreFolder = new File(path);
+        if (scoreFolder.exists() && scoreFolder.isDirectory()) {
+            for (int i = 0; i < scoreFolder.list().length; i++) {
+                scores.add(load(path, scoreFolder.listFiles()[i].getName()));
+            }
+        }
+        return scores;
+
+    }
+
+    private static void save(final String path, final Score score, final String nameScore) {
         try (
-                FileOutputStream fileOut = new FileOutputStream(typeScore.getPath() + ParanoidApp.SEPARATOR + score.getScoreName())
+                FileOutputStream fileOut = new FileOutputStream(path + ParanoidApp.SEPARATOR + nameScore)
         ) {
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
             final byte[] iv = cipher.getIV();
@@ -61,20 +90,9 @@ public final class ScoreManager {
         }
     }
 
-    public static List<Score> loadScores(final TypeScore typeScore) {
-        List<Score> scores = new ArrayList<>();
-        File scoreFolder = new File(typeScore.getPath());
-        if (scoreFolder.exists() && scoreFolder.isDirectory()) {
-            for (int i = 0; i < scoreFolder.list().length; i++) {
-                scores.add(loadScore(typeScore, scoreFolder.listFiles()[i].getName()));
-            }
-        }
-        return scores;
-
-    }
-    public static Score loadScore(final TypeScore typeScore, final String scoreName) {
+    private static Score load(final String path, final String nameScore) {
         try (
-                FileInputStream fileIn = new FileInputStream(typeScore.getPath() + ParanoidApp.SEPARATOR + scoreName)
+                FileInputStream fileIn = new FileInputStream(path + ParanoidApp.SEPARATOR + nameScore)
         ) {
             final byte[] fileIv = new byte[16];
             if (fileIn.read(fileIv) == -1) {
