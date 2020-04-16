@@ -12,43 +12,39 @@ public class Score implements Serializable{
     private static final long serialVersionUID = 6171113929805935910L;
 
     private final List<User> scoreList;
-    private String scoreName;
+    private final String nameScore;
 
-    private Score(final List<User> scoreList, final String scoreName) {
+    private Score(final List<User> scoreList, final String nameScore) {
         this.scoreList = scoreList;
-        this.scoreName = scoreName;
+        this.nameScore = nameScore;
     }
 
     public List<User> getScoreList() {
         return this.scoreList;
     }
-
-    public Integer getHighValue() {
-        if (this.scoreList.isEmpty()) {
-            return 0;
-        }
-        return this.scoreList.get(0).getScore();
-
+    
+    public String getNameScore() {
+        return this.nameScore;
     }
 
-    public String getScoreName() {
-        return this.scoreName;
+    public Integer getHighValue() {
+        return this.scoreList.isEmpty() ? 0 : this.scoreList.get(0).getScore();
     }
 
     public static final class Builder {
 
         private List<User> scoreList;
-        private String scoreName;
+        private String nameScore;
 
-        public Builder defaultScore(final String scoreName) {
+        public Builder defaultScore(final String nameScore) {
             this.scoreList = new ArrayList<>();
-            this.scoreName = scoreName;
+            this.nameScore = nameScore;
             return this;
         }
 
         public Builder fromExistScore(final Score score) {
             this.scoreList = score.getScoreList();
-            this.scoreName = score.getScoreName();
+            this.nameScore = score.getNameScore();
             return this;
         }
 
@@ -63,7 +59,7 @@ public class Score implements Serializable{
         }
 
         public Score build() {
-            if (this.scoreList == null || this.scoreName == null) {
+            if (this.scoreList == null || this.nameScore == null) {
                 throw new IllegalStateException();
             }
 
@@ -73,7 +69,7 @@ public class Score implements Serializable{
                 this.scoreList.remove(this.scoreList.size() - 1);
             }
 
-            return new Score(this.scoreList, this.scoreName);
+            return new Score(this.scoreList, this.nameScore);
 
         }
 
