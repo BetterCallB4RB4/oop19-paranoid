@@ -1,11 +1,10 @@
 package paranoid.model.entity;
 
-import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.PlayerId;
 import paranoid.common.V2d;
-import paranoid.model.component.graphics.DummyGraphicsComponent;
 import paranoid.model.component.graphics.GraphicsAdapter;
+import paranoid.model.component.graphics.PlayerGraphicsComponent;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.PlayerInputComponent;
 import paranoid.model.component.physics.PlayerPhysicsComponent;
@@ -14,12 +13,13 @@ import paranoid.model.component.physics.PlayerPhysicsComponent;
  * Player entity.
  */
 public final class Player extends GameObj {
-
-    private final Color color;
+    /**
+     * The movement speed of player.
+     */
+    private static final int PLAYER_AGILITY = 300;
     private final PlayerId playerId;
-    private Player(final P2d pos, final int height, final int width, final Color color, final PlayerId playerId) {
-        super(pos, new V2d(0, 0), 300, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent(), new DummyGraphicsComponent());
-        this.color = color;
+    private Player(final P2d pos, final int height, final int width, final PlayerId playerId) {
+        super(pos, new V2d(0, 0), PLAYER_AGILITY, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent(), new PlayerGraphicsComponent());
         this.playerId = playerId;
     }
 
@@ -48,9 +48,6 @@ public final class Player extends GameObj {
         this.getGraphicsComponent().update(this, graphicsAdapter);
     }
 
-    public Color getColor() {
-        return this.color;
-    }
     public PlayerId getPlayerId() {
         return this.playerId;
     }
@@ -60,7 +57,6 @@ public final class Player extends GameObj {
         private P2d pos;
         private int height;
         private int width;
-        private Color color;
         private PlayerId playerId;
 
         public Builder position(final P2d pos) {
@@ -78,23 +74,18 @@ public final class Player extends GameObj {
             return this;
         }
 
-        public Builder color(final Color color) {
-            this.color = color;
-            return this;
-        }
-
         public Builder playerId(final PlayerId playerId) {
             this.playerId = playerId;
             return this;
         }
 
         public Player build() {
-            if (this.pos == null || this.height <= 0 || this.width <= 0 || this.color == null
+            if (this.pos == null || this.height <= 0 || this.width <= 0
                     || this.playerId == null) {
 
                 throw new IllegalStateException();
             }
-            return new Player(this.pos, this.height, this.width, this.color, this.playerId);
+            return new Player(this.pos, this.height, this.width, this.playerId);
         }
     }
 

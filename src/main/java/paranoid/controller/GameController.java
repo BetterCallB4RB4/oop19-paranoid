@@ -134,7 +134,7 @@ public final class GameController implements GuiController {
         });
         */
     }
-
+/*
     private double getXinPixel(final P2d pos) {
         return pos.getX() * ScreenConstant.RATIO_X;
     }
@@ -150,7 +150,7 @@ public final class GameController implements GuiController {
     private double getHinPixel(final double hp) {
         return hp * ScreenConstant.RATIO_Y;
     }
-
+*/
     public void setBackGroundImage(final BackGround backGround) {
         BackgroundImage bg = new BackgroundImage(new Image(backGround.getLocation(), 
                                                              ScreenConstant.CANVAS_WIDTH,

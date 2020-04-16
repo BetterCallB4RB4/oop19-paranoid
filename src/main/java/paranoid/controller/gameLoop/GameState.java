@@ -70,14 +70,12 @@ public class GameState {
         playerList.add(new Player.Builder().position(StartPhase.PLAYER.getSpawnPoint())
                                            .width(StartPhase.PLAYER.getInitWidth())
                                            .height(StartPhase.PLAYER.getInitHeight())
-                                           .color(Color.DARKGREEN)
                                            .playerId(PlayerId.ONE)
                                            .build());
         if (set.getPlayerNumber() == 2) {
             playerList.add(new Player.Builder().position(StartPhase.PLAYER.getSpawnPoint())
                                                .width(StartPhase.PLAYER.getInitWidth())
                                                .height(StartPhase.PLAYER.getInitHeight())
-                                               .color(Color.RED)
                                                .playerId(PlayerId.TWO)
                                                .build());
         }
@@ -184,5 +182,9 @@ public class GameState {
     
     public Level getLevel() {
         return this.lvl;
+    }
+    
+    public Difficulty getDifficulty() {
+        return this.set.getDifficulty();
     }
 }

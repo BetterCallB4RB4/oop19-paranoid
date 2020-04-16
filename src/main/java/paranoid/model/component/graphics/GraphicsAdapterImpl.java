@@ -4,6 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.entity.Ball;
+import paranoid.model.entity.Player;
 
 public class GraphicsAdapterImpl implements GraphicsAdapter {
 
@@ -22,6 +23,15 @@ public class GraphicsAdapterImpl implements GraphicsAdapter {
         final double screenPositionY = getYinPixel(ball.getPos().getY());
         final double screenWidth = getWinPixel(ball.getWidth());
         final double screenHeight = getHinPixel(ball.getHeight());
+        this.gc.drawImage(sprite, screenPositionX, screenPositionY, screenWidth, screenHeight);
+    }
+
+    @Override
+    public void drawPlayer(Player player, Image sprite) {
+        final double screenPositionX = getXinPixel(player.getPos().getX());
+        final double screenPositionY = getYinPixel(player.getPos().getY());
+        final double screenWidth = getWinPixel(player.getWidth());
+        final double screenHeight = getHinPixel(player.getHeight());
         this.gc.drawImage(sprite, screenPositionX, screenPositionY, screenWidth, screenHeight);
     }
 

@@ -4,6 +4,6 @@ import paranoid.model.entity.GameObject;
 
 public interface GraphicsComponent {
 
-    void update(GameObject obj, GraphicsAdapter w);
+    void update(GameObject obj, GraphicsAdapter ga);
 
 }
