@@ -4,6 +4,8 @@ import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.PlayerId;
 import paranoid.common.V2d;
+import paranoid.model.component.graphics.DummyGraphicsComponent;
+import paranoid.model.component.graphics.GraphicsAdapter;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.PlayerInputComponent;
 import paranoid.model.component.physics.PlayerPhysicsComponent;
@@ -16,7 +18,7 @@ public final class Player extends GameObj {
     private final Color color;
     private final PlayerId playerId;
     private Player(final P2d pos, final int height, final int width, final Color color, final PlayerId playerId) {
-        super(pos, new V2d(0, 0), 300, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent());
+        super(pos, new V2d(0, 0), 300, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent(), new DummyGraphicsComponent());
         this.color = color;
         this.playerId = playerId;
     }
@@ -36,6 +38,14 @@ public final class Player extends GameObj {
     public void updateInput(final InputController controller) {
         super.getInputComponent().update(this, controller);
 
+    }
+
+    /**
+     * allows to update the graphics component of the player.
+     */
+    @Override
+    public void updateGraphics(final GraphicsAdapter graphicsAdapter) {
+        this.getGraphicsComponent().update(this, graphicsAdapter);
     }
 
     public Color getColor() {
