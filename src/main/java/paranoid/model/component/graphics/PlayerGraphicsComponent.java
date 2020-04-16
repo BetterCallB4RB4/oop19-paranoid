@@ -11,8 +11,8 @@ public class PlayerGraphicsComponent implements GraphicsComponent{
     private final Image playerTwoSprite;
 
     public PlayerGraphicsComponent() {
-        this.playerOneSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/ball.png"));
-        this.playerTwoSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/ball2.png"));
+        this.playerOneSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/player1.png"));
+        this.playerTwoSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/player2.png"));
     }
 
     @Override
