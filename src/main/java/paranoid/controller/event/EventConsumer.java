@@ -66,7 +66,19 @@ public class EventConsumer {
             gameState.setPhase(GamePhase.LOST);
         } else if (gameState.getWorld().getBricks().stream()
             .filter(i -> !i.isIndestructible()).count() == 0) {
-            gameState.setPlayerScore(gameState.getPlayerScore() + 10000);
+
+            switch (gameState.getDifficulty()) {
+            case EASY:
+                gameState.setPlayerScore(gameState.getPlayerScore() + 5000);
+                break;
+            case NORMAL:
+                gameState.setPlayerScore(gameState.getPlayerScore() + 10_000);
+                break;
+            case HARD:
+                gameState.setPlayerScore(gameState.getPlayerScore() + 15_000);
+            default:
+                break;
+            }
             gameState.setPhase(GamePhase.WIN);
            }
     }
