@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.NextLevelController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;backgrounds/bgmenu.jpg&quot;); -fx-background-size: stretch;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.NextLevelController">
    <items>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
          <children>
@@ -30,8 +30,8 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button fx:id="btnNext" mnemonicParsing="false" onMouseClicked="#btnNextOnClickHandler" text="NEXT" />
-            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" text="MENU" />
+            <Button fx:id="btnNext" mnemonicParsing="false" onMouseClicked="#btnNextOnClickHandler" text="PROSSIMO LIVELLO" />
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" text="TORNA AL MENU" />
          </children>
       </VBox>
    </items>

@@ -43,13 +43,6 @@ public class NextLevelController implements GuiController{
     public void update(final Level lvl, final User user) {
         this.lblLevel.setText(lvl.getLevelName());
         this.lblLives.setText("VITE RIMASTE: " + user.getLives().toString());
-        for (int x = 0; x <= user.getScore(); x++) {
-            this.lblScore.setText("PUNTEGGIO: " + x);
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        this.lblScore.setText("PUNTEGGIO: " + user.getScore().toString());
     }
 }
