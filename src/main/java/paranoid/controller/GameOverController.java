@@ -95,14 +95,17 @@ public class GameOverController implements GuiController  {
             this.lblGameOver.setText("HAI VINTO!");
         }
         this.lblScore.setText("IL TUO PUNTEGGIO: " + user.getScore().toString());
-        final Integer minValue = topScores.getScoreList().stream()
-                .mapToInt(s -> s.getScore()).min().getAsInt();
-        if (topScores.getScoreList().size() < 10 
-                || user.getScore() > minValue) {
+        final List<User> scoreList = this.topScores.getScoreList();
+        if (scoreList.isEmpty() || scoreList.size() < 10) {
             this.setNameVisible(true);
         } else {
-            this.setNameVisible(false);
-            viewScore(this.updatedScore);
+            final Integer minScore = scoreList.get(scoreList.size() - 1).getScore();
+            if (this.user.getScore() > minScore) {
+                this.setNameVisible(true);
+            } else {
+                this.setNameVisible(false);
+                viewScore(this.updatedScore);
+            }
         }
     }
 
