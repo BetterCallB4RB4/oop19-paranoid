@@ -152,13 +152,6 @@ public class GameState {
     }
 
     /**
-     * 
-     */
-    public void decLives() {
-        user.setLives(user.getLives() - 1);
-    }
-
-    /**
      * @return the world
      */
     public World getWorld() {

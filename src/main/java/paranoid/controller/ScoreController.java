@@ -24,7 +24,7 @@ import paranoid.view.parameters.LayoutManager;
 public class ScoreController implements GuiController, ObserverScore {
 
     private SubjectScore subject;
-    
+
     @FXML
     private SplitPane mainPanel;
 
@@ -53,7 +53,7 @@ public class ScoreController implements GuiController, ObserverScore {
     public void initialize(final SubjectScore subject) {
         this.subject = subject;
         this.subject.register(this);
-        
+
         this.mainPanel.setMinWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMaxWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMinHeight(ScreenConstant.SCREEN_HEIGHT);
@@ -89,22 +89,6 @@ public class ScoreController implements GuiController, ObserverScore {
         this.buttonContainer.getChildren().clear();
         this.grid.getChildren().clear();
 
-        Label name = new Label("NOME: ");
-        name.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
-                + "-fx-background-radius: 30;"
-                + "-fx-font-size: 20;"
-                + "-fx-font-weight: bold");
-
-        Label point = new Label("PUNTEGGIO: ");
-        point.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
-                + "-fx-background-radius: 30;"
-                + "-fx-font-size: 20;"
-                + "-fx-font-weight: bold");
-        this.grid.add(name, 1, 0);
-        this.grid.add(point, 2, 0);
-
-        final Score storyScore = ScoreManager.loadStory();
-
         Button bStory = new Button("STORIA");
         bStory.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
                  + "-fx-background-radius: 30;"
@@ -113,33 +97,9 @@ public class ScoreController implements GuiController, ObserverScore {
         bStory.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
-                grid.getChildren().clear();
-                List<User> scoreList = storyScore.getScoreList();
-                grid.add(name, 1, 0);
-                grid.add(point, 2, 0);
-                if (!scoreList.isEmpty()) {
-                    for (int x = 0; x < scoreList.size(); x++) {
-                        Label i = new Label(" " + Integer.toString(x + 1) + " ");
-                        i.setStyle("-fx-font-size: 20;"
-                                + "-fx-font-weight: bold");
-                        i.setTextFill(Color.ALICEBLUE);
-                        Label n = new Label(scoreList.get(x).getName().toUpperCase());
-                        n.setStyle("-fx-font-size: 20;"
-                                + "-fx-font-weight: bold");
-                        n.setTextFill(Color.ALICEBLUE);
-
-                        Label s = new Label(scoreList.get(x).getScore().toString());
-                        s.setStyle("-fx-font-size: 20;"
-                                + "-fx-font-weight: bold");
-                        s.setTextFill(Color.ALICEBLUE);
-                        grid.add(i, 0, x + 1);
-                        grid.add(n, 1, x + 1);
-                        grid.add(s, 2, x + 1);
-                    }
-
-                }
-
+                viewScore(ScoreManager.loadStory());
             }
+
         });
         this.buttonContainer.getChildren().add(bStory);
 
@@ -152,35 +112,47 @@ public class ScoreController implements GuiController, ObserverScore {
             bCustom.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent event) {
-                    grid.getChildren().clear();
-                    List<User> scoreList = score.getScoreList();
-                    grid.add(name, 1, 0);
-                    grid.add(point, 2, 0);
-                    if (!scoreList.isEmpty()) {
-                        for (int x = 0; x < scoreList.size(); x++) {
-                            Label i = new Label(" " + Integer.toString(x + 1) + " ");
-                            i.setStyle("-fx-font-size: 20;"
-                                    + "-fx-font-weight: bold");
-                            i.setTextFill(Color.ALICEBLUE);
-                            Label n = new Label(scoreList.get(x).getName().toUpperCase());
-                            n.setStyle("-fx-font-size: 20;"
-                                    + "-fx-font-weight: bold");
-                            n.setTextFill(Color.ALICEBLUE);
-
-                            Label s = new Label(scoreList.get(x).getScore().toString());
-                            s.setStyle("-fx-font-size: 20;"
-                                    + "-fx-font-weight: bold");
-                            s.setTextFill(Color.ALICEBLUE);
-                            grid.add(i, 0, x + 1);
-                            grid.add(n, 1, x + 1);
-                            grid.add(s, 2, x + 1);
-                        }
-
-                    }
-
+                    viewScore(score);
                 }
             });
             this.buttonContainer.getChildren().add(bCustom);
+        }
+    }
+
+    private void viewScore(final Score score) {
+        this.grid.getChildren().clear();
+        Label name = new Label("NOME: ");
+        name.setStyle("-fx-font-size: 20;"
+                + "-fx-font-weight: bold");
+        name.setTextFill(Color.LAWNGREEN);
+
+        Label point = new Label("PUNTEGGIO: ");
+        point.setStyle("-fx-font-size: 20;"
+                + "-fx-font-weight: bold");
+        point.setTextFill(Color.LAWNGREEN);
+        this.grid.add(name, 1, 0);
+        this.grid.add(point, 2, 0);
+        List<User> scoreList = score.getScoreList();
+
+        if (!scoreList.isEmpty()) {
+            for (int x = 0; x < scoreList.size(); x++) {
+                Label i = new Label(" " + Integer.toString(x + 1) + " ");
+                i.setStyle("-fx-font-size: 20;"
+                        + "-fx-font-weight: bold");
+                i.setTextFill(Color.ALICEBLUE);
+                Label n = new Label(scoreList.get(x).getName().toUpperCase());
+                n.setStyle("-fx-font-size: 20;"
+                        + "-fx-font-weight: bold");
+                n.setTextFill(Color.ALICEBLUE);
+
+                Label s = new Label(scoreList.get(x).getScore().toString());
+                s.setStyle("-fx-font-size: 20;"
+                        + "-fx-font-weight: bold");
+                s.setTextFill(Color.ALICEBLUE);
+                grid.add(i, 0, x + 1);
+                grid.add(n, 1, x + 1);
+                grid.add(s, 2, x + 1);
+            }
         }
     }
 
