@@ -7,12 +7,17 @@ public enum StartPhase {
     /**
      * 
      */
-    PLAYER(new P2d(290, 580), 78, 5),
+    PLAYER_ONE(new P2d(290, 580), 78, 20),
 
     /**
      * 
      */
-    BALL(new P2d(330, 570), 10, 10);
+    PLAYER_TWO(new P2d(190, 580), 78, 20),
+
+    /**
+     * 
+     */
+    BALL(new P2d(330, 565), 15, 15);
 
     private P2d spawnPoint;
     private int initWidth;

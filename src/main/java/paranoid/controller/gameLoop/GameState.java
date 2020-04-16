@@ -67,15 +67,15 @@ public class GameState {
     public void init() {
       //add players to the world
         List<Player> playerList = new ArrayList<>();
-        playerList.add(new Player.Builder().position(StartPhase.PLAYER.getSpawnPoint())
-                                           .width(StartPhase.PLAYER.getInitWidth())
-                                           .height(StartPhase.PLAYER.getInitHeight())
+        playerList.add(new Player.Builder().position(StartPhase.PLAYER_ONE.getSpawnPoint())
+                                           .width(StartPhase.PLAYER_ONE.getInitWidth())
+                                           .height(StartPhase.PLAYER_ONE.getInitHeight())
                                            .playerId(PlayerId.ONE)
                                            .build());
         if (set.getPlayerNumber() == 2) {
-            playerList.add(new Player.Builder().position(StartPhase.PLAYER.getSpawnPoint())
-                                               .width(StartPhase.PLAYER.getInitWidth())
-                                               .height(StartPhase.PLAYER.getInitHeight())
+            playerList.add(new Player.Builder().position(StartPhase.PLAYER_TWO.getSpawnPoint())
+                                               .width(StartPhase.PLAYER_TWO.getInitWidth())
+                                               .height(StartPhase.PLAYER_TWO.getInitHeight())
                                                .playerId(PlayerId.TWO)
                                                .build());
         }
