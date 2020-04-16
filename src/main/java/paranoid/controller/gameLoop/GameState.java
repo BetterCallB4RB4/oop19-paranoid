@@ -19,7 +19,6 @@ import paranoid.model.level.LevelSelection;
 import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
-import paranoid.model.score.TypeScore;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Difficulty;
@@ -46,9 +45,9 @@ public class GameState {
 
         this.lvl = set.getSelectedLevel();
         if (LevelSelection.isStoryLevel(lvl.getLevelName())) {
-            this.topScores = ScoreManager.loadScore(TypeScore.STORY, TypeScore.STORY.toString());
+            this.topScores = ScoreManager.loadStory();
         } else {
-            this.topScores = ScoreManager.loadScore(TypeScore.CUSTOM, lvl.getLevelName());
+            this.topScores = ScoreManager.loadCustom(lvl.getLevelName());
         }
         this.highScoreValue = this.topScores.getHighValue();
 
@@ -113,7 +112,7 @@ public class GameState {
      * @return the highscore.
      */
     public int getHighScoreValue() {
-        return (user.getScore() > this.highScoreValue)
+        return user.getScore() > this.highScoreValue
                 ? user.getScore() : this.highScoreValue;
     }
 

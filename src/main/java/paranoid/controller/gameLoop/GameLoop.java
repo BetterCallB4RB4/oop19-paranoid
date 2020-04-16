@@ -77,7 +77,7 @@ public class GameLoop implements Runnable {
             waitForNextFrame(current);
             lastTime = current;
         }
-        
+
         if (gameState.getPhase() == GamePhase.WIN 
                 && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
                 && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
@@ -105,7 +105,7 @@ public class GameLoop implements Runnable {
                         .build());
             }
             GameOverController goc = (GameOverController) lm.getGuiController();
-            goc.updateScore(gameState.getTopScores(), gameState.getUser());
+            goc.updateScore(gameState.getTopScores(), gameState.getUser(), gameState.getLevel());
         }
 
         Platform.runLater(new Runnable() {

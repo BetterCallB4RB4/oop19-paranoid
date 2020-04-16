@@ -9,7 +9,6 @@ import paranoid.model.settings.SettingsManager;
 import paranoid.model.level.LevelManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
-import paranoid.model.score.TypeScore;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
 import paranoid.model.level.Level;
@@ -81,7 +80,6 @@ public class ParanoidApp extends Application {
      */
     public static void initSoftware() {
         SettingsBuilder settingsBuilder = new SettingsBuilder();
-        Score.Builder scoreBuilder = new Score.Builder().defaultScore(TypeScore.STORY.toString());
         File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
         File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
@@ -95,19 +93,22 @@ public class ParanoidApp extends Application {
                 scoreStory.mkdir();
                 scoreCustom.mkdir();
                 SettingsManager.saveOption(settingsBuilder.build());
-                ScoreManager.saveScore(TypeScore.STORY, scoreBuilder.build());
+                ScoreManager.saveStory(new Score.Builder()
+                        .defaultScore("storia")
+                        .build());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
         }
-        List<Level> levelList = LevelManager.loadLevels();
-        for (int x = 0; x < levelList.size(); x++) {
-            if (!new File(ParanoidApp.SCORE_CUSTOM + SEPARATOR + levelList.get(x).getLevelName()).exists()) {
-                ScoreManager.saveScore(TypeScore.CUSTOM, new Score.Builder()
-                        .defaultScore(levelList.get(x).getLevelName())
+        final List<Level> levelList = LevelManager.loadLevels();
+        levelList.forEach(i -> {
+            final String levelName = i.getLevelName();
+            if (!new File(ParanoidApp.SCORE_CUSTOM + SEPARATOR + levelName).exists()) {
+                ScoreManager.saveCustom(new Score.Builder()
+                        .defaultScore(levelName)
                         .build());
             }
-        }
+        });
     }
 
 }
