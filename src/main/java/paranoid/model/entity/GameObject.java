@@ -2,6 +2,8 @@ package paranoid.model.entity;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.graphics.GraphicsAdapter;
+import paranoid.model.component.graphics.GraphicsComponent;
 import paranoid.model.component.input.InputComponent;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.PhysicsComponent;
@@ -69,6 +71,11 @@ public interface GameObject {
     InputComponent getInputComponent();
 
     /**
+     * @return the graphics component of this gameObj
+     */
+    GraphicsComponent getGraphicsComponent();
+
+    /**
      * @param dt the time elapsed from game loop
      * @param w the world model
      */
@@ -78,4 +85,10 @@ public interface GameObject {
      * @param controller the input controller of this gameObj
      */
     void updateInput(InputController controller);
+
+    /**
+     * 
+     * @param graphicsAdapter to adapt the object to the screen
+     */
+    void updateGraphics(GraphicsAdapter graphicsAdapter);
 }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import paranoid.common.P2d;
 import paranoid.common.V2d;
+import paranoid.model.component.graphics.GraphicsAdapter;
+import paranoid.model.component.graphics.GraphicsComponent;
 import paranoid.model.component.input.InputComponent;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.PhysicsComponent;
@@ -18,8 +20,9 @@ public abstract class GameObj implements GameObject, Serializable {
     private int width;
     private PhysicsComponent phys;
     private InputComponent input;
+    private GraphicsComponent graphics;
 
-    public GameObj(final P2d pos, final V2d vel, final double speed, final int height, final int width, final PhysicsComponent phys, final InputComponent input) {
+    public GameObj(final P2d pos, final V2d vel, final double speed, final int height, final int width, final PhysicsComponent phys, final InputComponent input, final GraphicsComponent graphics) {
         this.pos = pos;
         this.vel = vel;
         this.speed = speed;
@@ -27,6 +30,7 @@ public abstract class GameObj implements GameObject, Serializable {
         this.width = width;
         this.phys = phys;
         this.input = input;
+        this.graphics = graphics;
     }
 
     /**
@@ -129,6 +133,14 @@ public abstract class GameObj implements GameObject, Serializable {
      * {@inheritDoc}
      */
     @Override
+    public GraphicsComponent getGraphicsComponent() {
+        return this.graphics;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public abstract void updatePhysics(int dt, World w);
 
     /**
@@ -136,5 +148,11 @@ public abstract class GameObj implements GameObject, Serializable {
      */
     @Override
     public abstract void updateInput(InputController controller);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public abstract void updateGraphics(GraphicsAdapter graphicsAdapter);
 
 }
