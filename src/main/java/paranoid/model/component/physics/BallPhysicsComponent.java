@@ -25,7 +25,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
         P2d old = gameObj.getPos();
         P2d pos = ball.getPos();
         V2d vel = ball.getVel();
-        ball.setPos(pos.sum(vel.mul(ball.getSpeed())));
+        ball.setPos(pos.sum(vel.mul(SCALER * dt * ball.getSpeed())));
 
         final Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
         if (borderCollisionInfo.isPresent()) {

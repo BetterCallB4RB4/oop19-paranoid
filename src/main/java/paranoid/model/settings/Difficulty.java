@@ -5,17 +5,17 @@ public enum Difficulty {
     /**
      * 
      */
-    EASY(5), 
+    EASY(200), 
 
     /**
      * 
      */
-    NORMAL(8),
+    NORMAL(400),
 
     /**
      * 
      */
-    HARD(11);
+    HARD(600);
 
     private double speed;
 
