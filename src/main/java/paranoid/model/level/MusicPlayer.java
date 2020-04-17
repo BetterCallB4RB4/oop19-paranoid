@@ -3,6 +3,9 @@ package paranoid.model.level;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineEvent.Type;
 
 public class MusicPlayer {
 
@@ -20,6 +23,13 @@ public class MusicPlayer {
                 this.clip = AudioSystem.getClip();
                 this.clip.open(audioIn);
                 this.clip.start();
+                clip.addLineListener(new LineListener() {
+                    public void update(final LineEvent event) {
+                        if (event.getType().equals(Type.STOP)) {
+                            clip.close();
+                        }
+                    }
+                });
                 this.clip.loop(Clip.LOOP_CONTINUOUSLY);
             } catch (Exception  e) {
                 e.printStackTrace();
@@ -33,7 +43,6 @@ public class MusicPlayer {
     public void stopMusic() {
         if (this.isMusicEnable) {
             this.clip.stop();
-            this.clip.close();
         }
     }
 
@@ -47,6 +56,13 @@ public class MusicPlayer {
                 Clip effectClip = AudioSystem.getClip();
                 effectClip.open(audioIn);
                 effectClip.start();
+                effectClip.addLineListener(new LineListener() {
+                    public void update(final LineEvent event) {
+                        if (event.getType().equals(Type.STOP)) {
+                            effectClip.close();
+                        }
+                    }
+                });
             } catch (Exception  e) {
                 e.printStackTrace();
             }
