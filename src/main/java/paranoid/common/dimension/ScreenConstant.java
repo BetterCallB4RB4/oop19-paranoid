@@ -25,12 +25,12 @@ public final class ScreenConstant {
     /**
      * Width of the game world (used in model World).
      */
-    public static final double WORLD_WIDTH = 600;
+    public static final double WORLD_WIDTH = 611;
 
     /**
      * Height of the game world (used in model World).
      */
-    public static final double WORLD_HEIGHT = 600;
+    public static final double WORLD_HEIGHT = 611;
 
     /**
      * Width of the canvas in GameController gui (adapted to the height res for make a square).
@@ -55,12 +55,12 @@ public final class ScreenConstant {
     /**
      * the number of bricks messu on the x-axis.
      */
-    public static final double BRICK_NUMBER_X = 10;
+    public static final double BRICK_NUMBER_X = 13;
 
     /**
      * the number of bricks messu on the y-axis.
      */
-    public static final double BRICK_NUMBER_Y = 22;
+    public static final double BRICK_NUMBER_Y = 26;
 
     private ScreenConstant() {
 
