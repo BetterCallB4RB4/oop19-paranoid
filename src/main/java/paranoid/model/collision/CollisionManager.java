@@ -64,9 +64,23 @@ public class CollisionManager {
      * @param ball
      * @return ememe
      */
-    public Optional<Pair<GameObject, Direction>> checkCollisionWithPlayers(final Player player, final Ball ball) {
+    public Optional<Collision> checkCollisionWithPlayers(final Player player, final Ball ball) {
         final boolean checkTop = checkTopForCollision(ball.getPos().getY(), player.getPos().getY() + player.getHeight());
         final boolean checkBottom = checkBottomForCollision(ball.getPos().getY() + ball.getHeight(), player.getPos().getY());
+        final boolean checkLeft = checkLeftForCollision(ball.getPos().getX(), player.getPos().getX() + player.getWidth());
+        final boolean checkRight = checkRightForCollision(ball.getPos().getX() + ball.getWidth(), player.getPos().getX());
+        if (!checkLeft) {
+            player.getLastZonePresence().put(ball, Collision.RIGHT);
+        } else if (!checkRight) {
+            player.getLastZonePresence().put(ball, Collision.LEFT);
+        } else if (!checkTop) {
+            player.getLastZonePresence().put(ball, Collision.BOTTOM);
+        } else if (!checkBottom) {
+            player.getLastZonePresence().put(ball, Collision.TOP);
+        } else {
+            return Optional.of(player.getLastZonePresence().get(ball));
+        }
+        /*
         if (checkBottom && checkTop) {
             double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
             double playerHitZone = player.getWidth() / Direction.values().length;
@@ -77,6 +91,7 @@ public class CollisionManager {
                 }
             }
         }
+        */
         return Optional.empty();
     }
 
