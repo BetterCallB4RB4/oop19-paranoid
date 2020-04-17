@@ -1,15 +1,16 @@
 package paranoid.model.component.graphics;
 
 import javafx.scene.image.Image;
+import paranoid.common.ResourceLoader;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.GameObject;
 
 public class BallGraphicsComponent implements GraphicsComponent {
 
-    private Image ballSprite;
+    private final Image ballSprite;
 
     public BallGraphicsComponent() {
-        this.ballSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/ball3.png"));
+        this.ballSprite = ResourceLoader.BALL_SPRITE.getSprite();
     }
 
     /**
