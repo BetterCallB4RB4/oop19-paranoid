@@ -2,6 +2,7 @@ package paranoid.model.component.graphics;
 
 import javafx.scene.image.Image;
 import paranoid.common.PlayerId;
+import paranoid.common.ResourceLoader;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 
@@ -11,8 +12,8 @@ public class PlayerGraphicsComponent implements GraphicsComponent{
     private final Image playerTwoSprite;
 
     public PlayerGraphicsComponent() {
-        this.playerOneSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/player1.png"));
-        this.playerTwoSprite = new Image(ClassLoader.getSystemResourceAsStream("sprite/player2.png"));
+        this.playerOneSprite = ResourceLoader.PLAYER_ONE_SPRITE.getSprite();
+        this.playerTwoSprite = ResourceLoader.PLAYER_TWO_SPRITE.getSprite();
     }
 
     @Override
