@@ -1,5 +1,9 @@
 package paranoid.model.entity;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.PlayerId;
 import paranoid.common.V2d;
@@ -13,6 +17,9 @@ import paranoid.model.component.physics.PlayerPhysicsComponent;
  * Player entity.
  */
 public final class Player extends GameObj {
+
+    private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
+
     /**
      * The movement speed of player.
      */
@@ -50,6 +57,10 @@ public final class Player extends GameObj {
 
     public PlayerId getPlayerId() {
         return this.playerId;
+    }
+
+    public Map<Ball, Collision> getLastZonePresence() {
+        return this.lastZonePresence;
     }
 
     public static final class Builder {
