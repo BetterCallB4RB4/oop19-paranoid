@@ -1,5 +1,6 @@
 package paranoid.model.entity;
 
+import java.awt.desktop.UserSessionEvent.Reason;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -121,15 +122,27 @@ public class World implements WorldEventListener {
      * @param ball
      * @return miao
      */
-    public Optional<Pair<GameObject, Direction>> checkCollisionWithPlayer(final Ball ball) {
-        Optional<Pair<GameObject, Direction>> resultCollision = Optional.empty();
+    public Pair<Optional<Collision>, Optional<Direction>> checkCollisionWithPlayer(final Ball ball) {
+        Optional<Collision> resultCollision = Optional.empty();
         for (var elem : this.players) {
             resultCollision = this.collisionManager.checkCollisionWithPlayers(elem, ball);
             if (resultCollision.isPresent()) {
-                return resultCollision;
+                Collision collisionType = resultCollision.get(); 
+                if (collisionType.equals(Collision.TOP)) {
+                    double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
+                    double playerHitZone = elem.getWidth() / Direction.values().length;
+                    for (int i = 0; i < Direction.values().length; i++) {
+                        if (centerBall > elem.getPos().getX() + (i * playerHitZone)
+                        && centerBall < elem.getPos().getX() + ((i + 1) * playerHitZone)) {
+                            return new Pair<>(Optional.of(Collision.TOP), Optional.of(Direction.values()[i]));
+                        }
+                    }
+                } else if (collisionType.equals(Collision.LEFT) || collisionType.equals(Collision.RIGHT)) {
+                    return new Pair<>(resultCollision, Optional.empty());
+                }
             }
         }
-        return resultCollision;
+        return new Pair<>(Optional.empty(), Optional.empty());
     }
 
     /*
