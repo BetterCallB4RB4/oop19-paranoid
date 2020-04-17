@@ -17,7 +17,7 @@ public enum StartPhase {
     /**
      * 
      */
-    BALL(new P2d(330, 565), 15, 15);
+    BALL(new P2d(330, 570), 10, 10);
 
     private P2d spawnPoint;
     private int initWidth;
