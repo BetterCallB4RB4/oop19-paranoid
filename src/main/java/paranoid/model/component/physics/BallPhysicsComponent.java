@@ -8,6 +8,7 @@ import paranoid.common.Pair;
 import paranoid.common.V2d;
 import paranoid.controller.event.HitBorderEvent;
 import paranoid.controller.event.HitBrickEvent;
+import paranoid.controller.event.HitPlayerEvent;
 import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
@@ -56,6 +57,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
             ball.setPos(old);
             ball.setVel(playerCollisionInfo.get().getY().getVector());
             ball.flipVelOnY();
+            w.notifyEvent(new HitPlayerEvent());
         }
     }
 }

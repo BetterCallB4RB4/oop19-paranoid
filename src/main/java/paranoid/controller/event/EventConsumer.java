@@ -46,6 +46,8 @@ public class EventConsumer {
                     gameState.getWorld().removeBrick(brick);
                 }
                 this.player.playEffect(Effect.BRICK_COLLISION);
+            } else if (ev instanceof HitPlayerEvent) {
+                this.player.playEffect(Effect.PLAYER_COLLISION);
             }
         });
         isOver();
