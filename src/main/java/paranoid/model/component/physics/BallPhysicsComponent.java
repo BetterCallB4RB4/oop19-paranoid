@@ -13,6 +13,7 @@ import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
+import paranoid.model.entity.StartPhase;
 import paranoid.model.entity.World;
 
 public class BallPhysicsComponent implements PhysicsComponent {
@@ -54,10 +55,8 @@ public class BallPhysicsComponent implements PhysicsComponent {
 
         final Optional<Pair<GameObject, Direction>> playerCollisionInfo = w.checkCollisionWithPlayer(ball);
         if (playerCollisionInfo.isPresent()) {
-            ball.setPos(old);
             ball.setVel(playerCollisionInfo.get().getY().getVector());
             ball.flipVelOnY();
-            w.notifyEvent(new HitPlayerEvent());
         }
     }
 }
