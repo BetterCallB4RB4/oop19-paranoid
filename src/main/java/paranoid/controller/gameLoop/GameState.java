@@ -3,7 +3,6 @@ package paranoid.controller.gameLoop;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.paint.Color;
 import paranoid.common.PlayerId;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.GameController;
@@ -30,49 +29,50 @@ public class GameState {
 
     private int highScoreValue;
     private int multiplier;
-    private World world;
-    private GamePhase phase = GamePhase.INIT;
-    private Settings set = SettingsManager.loadOption();
-    private final User user = UserManager.loadUser();
-    private final Score topScores;
-    private GameController gameController;
-    private Level lvl;
+    private GamePhase phase;
+    private final GameController gameController;
+    private final Settings settings;
+    private final Score scores;
+    private final World world;
+    private final Level level;
+    private final User user;
 
     public GameState() {
         this.multiplier = 1;
-
+        this.highScoreValue = 0;
+        this.phase = GamePhase.INIT;
+        this.user = UserManager.loadUser();
+        this.settings = SettingsManager.loadOption();
+        this.level = settings.getSelectedLevel();
         this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
-
-        this.lvl = set.getSelectedLevel();
-        if (LevelSelection.isStoryLevel(lvl.getLevelName())) {
-            this.topScores = ScoreManager.loadStory();
+        if (LevelSelection.isStoryLevel(level.getLevelName())) {
+            this.scores = ScoreManager.loadStory();
         } else {
-            this.topScores = ScoreManager.loadCustom(lvl.getLevelName());
+            this.scores = ScoreManager.loadCustom(level.getLevelName());
         }
-        this.highScoreValue = this.topScores.getHighValue();
+        this.highScoreValue = this.scores.getHighValue();
+        world.setBricks(level.getBricks());
+
 
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
-        this.gameController.setBackGroundImage(BackGround.getBackGroundByName(lvl.getBackGround()));
-        this.gameController.getMusicPlayer().setMusicEnable(set.isPlayMusic());
-        this.gameController.getMusicPlayer().setEffectEnable(set.isPlayEffects());
+        this.gameController.setBackGroundImage(BackGround.getBackGroundByName(level.getBackGround()));
+        this.gameController.getMusicPlayer().setMusicEnable(settings.isPlayMusic());
+        this.gameController.getMusicPlayer().setEffectEnable(settings.isPlayEffects());
         this.world.getEventHanlder().addMusicPlayer(this.gameController.getMusicPlayer());
-        this.gameController.getMusicPlayer().playMusic(Music.getMusicByName(lvl.getMusic()));
-        //add brick to the world
-        world.setBricks(lvl.getBricks());
+        this.gameController.getMusicPlayer().playMusic(Music.getMusicByName(level.getMusic()));
     }
 
     /**
      * set initial game state.
      */
     public void init() {
-      //add players to the world
         List<Player> playerList = new ArrayList<>();
         playerList.add(new Player.Builder().position(StartPhase.PLAYER_ONE.getSpawnPoint())
                                            .width(StartPhase.PLAYER_ONE.getInitWidth())
                                            .height(StartPhase.PLAYER_ONE.getInitHeight())
                                            .playerId(PlayerId.ONE)
                                            .build());
-        if (set.getPlayerNumber() == 2) {
+        if (settings.getPlayerNumber() == 2) {
             playerList.add(new Player.Builder().position(StartPhase.PLAYER_TWO.getSpawnPoint())
                                                .width(StartPhase.PLAYER_TWO.getInitWidth())
                                                .height(StartPhase.PLAYER_TWO.getInitHeight())
@@ -83,7 +83,7 @@ public class GameState {
 
         //add balls to the world
         List<Ball> ballContainer = new ArrayList<>();
-        switch (set.getDifficulty()) {
+        switch (settings.getDifficulty()) {
             case EASY:
                 ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.EASY.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
             break;
@@ -172,19 +172,35 @@ public class GameState {
         this.phase = phase;
     }
 
+    /**
+     * 
+     * @return miao
+     */
     public User getUser() {
         return this.user;
     }
 
+    /**
+     * 
+     * @return gianni
+     */
     public Score getTopScores() {
-        return this.topScores;
+        return this.scores;
     }
-    
+
+    /**
+     * 
+     * @return gneaa
+     */
     public Level getLevel() {
-        return this.lvl;
+        return this.level;
     }
-    
+
+    /**
+     * 
+     * @return miasd
+     */
     public Difficulty getDifficulty() {
-        return this.set.getDifficulty();
+        return this.settings.getDifficulty();
     }
 }

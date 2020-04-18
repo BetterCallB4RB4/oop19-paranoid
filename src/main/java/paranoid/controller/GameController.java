@@ -14,15 +14,10 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import paranoid.common.P2d;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.model.component.graphics.GraphicsAdapter;
 import paranoid.model.component.graphics.GraphicsAdapterImpl;
-import paranoid.model.entity.Ball;
-import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
-import paranoid.model.entity.Player;
 import paranoid.model.level.BackGround;
 import paranoid.model.level.MusicPlayer;
 
@@ -83,7 +78,7 @@ public final class GameController implements GuiController {
         this.dashBoard.setBackground(new Background(myBI2));
     }
 
-    public void isPause(final boolean pause) {
+    public void setPause(final boolean pause) {
         this.lblPause.setVisible(pause);
     }
 
@@ -110,47 +105,8 @@ public final class GameController implements GuiController {
         gameEntities.stream().forEach(e -> {
             e.updateGraphics(ga);
         });
-
-        /*
-        gc.setFill(Color.ALICEBLUE);
-        gameEntities.stream().forEach(e -> {
-            final P2d pos = e.getPos();
-            final double xPos = getXinPixel(pos);
-            final double yPos = getYinPixel(pos);
-            final double w = getWinPixel(e.getWidth());
-            final double h = getHinPixel(e.getHeight());
-
-            if (e instanceof Ball) {
-                gc.fillOval(xPos, yPos, w, h);
-            } else if (e instanceof Player) {
-                gc.setFill(((Player) e).getColor());
-                gc.fillRect(xPos, yPos, w, h);
-            } else if (e instanceof Brick) {
-                gc.setFill(((Brick) e).getColor());
-                gc.fillRect(xPos, yPos, w, h);
-                gc.setStroke(Color.BLACK);
-                gc.strokeRect(xPos, yPos, w, h);
-            }
-        });
-        */
-    }
-/*
-    private double getXinPixel(final P2d pos) {
-        return pos.getX() * ScreenConstant.RATIO_X;
     }
 
-    private double getYinPixel(final P2d pos) {
-        return pos.getY() * ScreenConstant.RATIO_Y;
-    }
-
-    private double getWinPixel(final double wp) {
-        return wp * ScreenConstant.RATIO_X;
-    }
-
-    private double getHinPixel(final double hp) {
-        return hp * ScreenConstant.RATIO_Y;
-    }
-*/
     public void setBackGroundImage(final BackGround backGround) {
         BackgroundImage bg = new BackgroundImage(new Image(backGround.getLocation(), 
                                                              ScreenConstant.CANVAS_WIDTH,

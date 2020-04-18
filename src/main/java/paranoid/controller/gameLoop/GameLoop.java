@@ -11,11 +11,9 @@ import paranoid.controller.NextLevelController;
 import paranoid.model.component.input.InputController;
 import paranoid.model.component.input.KeyboardInputController;
 import paranoid.model.entity.World;
-import paranoid.model.level.Level;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
-import paranoid.model.settings.Settings;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.model.settings.SettingsManager;
 import paranoid.view.parameters.LayoutManager;
@@ -23,25 +21,28 @@ import paranoid.view.parameters.LayoutManager;
 public class GameLoop implements Runnable {
 
     private static final int PERIOD = 20;
+
     private final Scene scene;
-    private final GameController gameController = (GameController) LayoutManager.GAME.getGuiController();
+    private final World world;
+    private final GameState gameState;
+    private final GameController gameController;
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
-    private World world;
-    private GameState gameState;
 
     public GameLoop(final Scene scene) {
         this.scene = scene;
+        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
+        this.gameState = new GameState();
+        this.world = gameState.getWorld();
         Platform.runLater(new Runnable() {
-
             @Override
             public void run() {
                 scene.setRoot(LayoutManager.GAME.getLayout());
             }
         });
+
+        //aggiungi in classe separata player input
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
-        this.gameState = new GameState();
-        this.world = gameState.getWorld();
         notifyInputEvent();
     }
 
@@ -52,22 +53,21 @@ public class GameLoop implements Runnable {
     @Override
     public void run() {
         long lastTime = System.currentTimeMillis();
-        while (gameState.getPhase() != GamePhase.WIN && gameState.getPhase() != GamePhase.LOST
-                && gameState.getPhase() != GamePhase.MENU) {
+        while (!gameState.getPhase().equals(GamePhase.WIN) 
+            && !gameState.getPhase().equals(GamePhase.LOST)
+            && !gameState.getPhase().equals(GamePhase.MENU)) {
             long current = System.currentTimeMillis();
             int elapsed = (int) (current - lastTime);
-
             switch (gameState.getPhase()) {
             case INIT:
                 gameState.init();
-                render();
                 break;
             case PAUSE:
-                this.gameController.isPause(true);
+                this.gameController.setPause(true);
                 render();
                 break;
             case RUNNING:
-                this.gameController.isPause(false);
+                this.gameController.setPause(false);
                 processInput();
                 updateGame(elapsed);
                 render();
@@ -83,8 +83,6 @@ public class GameLoop implements Runnable {
         && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
         && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
             changeView(LayoutManager.NEXT_LEVEL);
-        } else if (gameState.getPhase().equals(GamePhase.LOST)) {
-            changeView(LayoutManager.GAME_OVER);
         } else if (gameState.getPhase().equals(GamePhase.MENU)) {
             Platform.runLater(new Runnable() {
                 @Override
@@ -93,35 +91,36 @@ public class GameLoop implements Runnable {
                     scene.setRoot(LayoutManager.MENU.getLayout());
                 }
             });
+        } else { 
+            changeView(LayoutManager.GAME_OVER);
         }
     }
 
-    private void changeView(final LayoutManager lm) {
-        SettingsBuilder settingsBuilder = new SettingsBuilder();
-
-        if (lm.equals(LayoutManager.NEXT_LEVEL)) {
+    private void changeView(final LayoutManager layoutManager) {
+        final SettingsBuilder settingsBuilder = new SettingsBuilder();
+        if (layoutManager.equals(LayoutManager.NEXT_LEVEL)) {
             UserManager.saveUser(gameState.getUser());
             SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
-                    .selectLevel(LevelSelection.getSelectionFromLevel(gameState.getLevel()).next().getLevel())
-                    .build());
-            NextLevelController nlc = (NextLevelController) lm.getGuiController();
-            nlc.update(gameState.getLevel(), gameState.getUser());
-        } else if (lm.equals(LayoutManager.GAME_OVER)) {
+                           .selectLevel(LevelSelection.getSelectionFromLevel(gameState.getLevel()).next().getLevel())
+                           .build());
+            final NextLevelController nextLevelController = (NextLevelController) layoutManager.getGuiController();
+            nextLevelController.update(gameState.getLevel(), gameState.getUser());
+        } else if (layoutManager.equals(LayoutManager.GAME_OVER)) {
             UserManager.saveUser(new User());
             if (LevelSelection.isStoryLevel(gameState.getLevel().getLevelName())) {
                 SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
-                        .selectLevel(LevelSelection.LEVEL1.getLevel())
-                        .build());
+                               .selectLevel(LevelSelection.LEVEL1.getLevel())
+                               .build());
             }
-            GameOverController goc = (GameOverController) lm.getGuiController();
-            goc.updateScore(gameState.getTopScores(), gameState.getUser(), gameState.getLevel());
+            final GameOverController gameOverController = (GameOverController) layoutManager.getGuiController();
+            gameOverController.updateScore(gameState.getTopScores(), gameState.getUser(), gameState.getLevel());
         }
 
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
                 gameController.getMusicPlayer().stopMusic();
-                scene.setRoot(lm.getLayout());
+                scene.setRoot(layoutManager.getLayout());
             }
         });
     }
@@ -134,7 +133,7 @@ public class GameLoop implements Runnable {
      * of the 3 steps of the game loop
      */
     private void waitForNextFrame(final long current) {
-        long dt = System.currentTimeMillis() - current;
+        final long dt = System.currentTimeMillis() - current;
         if (dt < PERIOD) {
             try {
                 Thread.sleep(PERIOD - dt);
@@ -167,7 +166,7 @@ public class GameLoop implements Runnable {
             @Override
             public void run() {
                 gameController.render(world.getSceneEntities(), gameState.getHighScoreValue(), 
-                        gameState.getPlayerScore(), gameState.getLives());
+                                      gameState.getPlayerScore(), gameState.getLives());
             }
         });
     }

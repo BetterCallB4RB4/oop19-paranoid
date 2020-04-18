@@ -1,19 +1,18 @@
 package paranoid.controller.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import paranoid.common.Collision;
 import paranoid.controller.gameLoop.GamePhase;
 import paranoid.controller.gameLoop.GameState;
-import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.level.Effect;
 import paranoid.model.level.MusicPlayer;
 
 public class EventConsumer {
 
-    private List<Event> events = new ArrayList<>();
+    private Queue<Event> events = new LinkedList<>();
     private GameState gameState;
     private MusicPlayer player;
 
@@ -26,8 +25,8 @@ public class EventConsumer {
     public void resolveEvent() {
         events.stream().forEach(ev -> {
             if (ev instanceof HitBorderEvent) {
-                gameState.setMultiplier(0);
                 HitBorderEvent hit = (HitBorderEvent) ev;
+                gameState.setMultiplier(1);
                 if (hit.getCollision().equals(Collision.BOTTOM)) {
                     gameState.getWorld().removeBall(hit.getBall());
                     if (gameState.getWorld().getBalls().isEmpty()) {
@@ -37,10 +36,9 @@ public class EventConsumer {
                 }
                 this.player.playEffect(Effect.BOARD_COLLISION);
             } else if (ev instanceof HitBrickEvent) {
-                gameState.setMultiplier(gameState.getMultiplier() + 1);
                 Brick brick = ((HitBrickEvent) ev).getBrick();
-                gameState.setPlayerScore(gameState.getPlayerScore() 
-                        + (brick.getPointEarned() * gameState.getMultiplier()));
+                gameState.setMultiplier(gameState.getMultiplier() + 1);
+                gameState.setPlayerScore(gameState.getPlayerScore() + (brick.getPointEarned() * gameState.getMultiplier()));
                 brick.decEnergy();
                 if (brick.getEnergy() == 0 && !brick.isIndestructible()) {
                     gameState.getWorld().removeBrick(brick);
@@ -67,8 +65,8 @@ public class EventConsumer {
         if (gameState.getLives() == 0) {
             gameState.setPhase(GamePhase.LOST);
         } else if (gameState.getWorld().getBricks().stream()
-            .filter(i -> !i.isIndestructible()).count() == 0) {
-
+                                                   .filter(i -> !i.isIndestructible())
+                                                   .count() == 0) {
             switch (gameState.getDifficulty()) {
             case EASY:
                 gameState.setPlayerScore(gameState.getPlayerScore() + 5000);
@@ -82,7 +80,7 @@ public class EventConsumer {
                 break;
             }
             gameState.setPhase(GamePhase.WIN);
-           }
+        }
     }
 
     /**
