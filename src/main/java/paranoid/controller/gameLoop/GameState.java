@@ -66,18 +66,20 @@ public class GameState {
      * set initial game state.
      */
     public void init() {
-        List<Player> playerList = new ArrayList<>();
-        playerList.add(new Player.Builder().position(StartPhase.PLAYER_ONE.getSpawnPoint())
-                                           .width(StartPhase.PLAYER_ONE.getInitWidth())
-                                           .height(StartPhase.PLAYER_ONE.getInitHeight())
-                                           .playerId(PlayerId.ONE)
-                                           .build());
+        final Player.Builder playerBuilder = new Player.Builder();
+        final List<Player> playerList = new ArrayList<>();
+        playerList.add(playerBuilder.position(StartPhase.PLAYER_ONE.getSpawnPoint())
+                .width(StartPhase.PLAYER_ONE.getInitWidth())
+                .height(StartPhase.PLAYER_ONE.getInitHeight())
+                .playerId(PlayerId.ONE)
+                .build());
+
         if (settings.getPlayerNumber() == 2) {
-            playerList.add(new Player.Builder().position(StartPhase.PLAYER_TWO.getSpawnPoint())
-                                               .width(StartPhase.PLAYER_TWO.getInitWidth())
-                                               .height(StartPhase.PLAYER_TWO.getInitHeight())
-                                               .playerId(PlayerId.TWO)
-                                               .build());
+            playerList.add(playerBuilder.position(StartPhase.PLAYER_TWO.getSpawnPoint())
+                    .width(StartPhase.PLAYER_TWO.getInitWidth())
+                    .height(StartPhase.PLAYER_TWO.getInitHeight())
+                    .playerId(PlayerId.TWO)
+                    .build());
         }
         world.setPlayers(playerList);
 
