@@ -6,5 +6,6 @@ public enum GamePhase {
     RUNNING, 
     PAUSE, 
     WIN, 
-    LOST;
+    LOST,
+    MENU;
 }

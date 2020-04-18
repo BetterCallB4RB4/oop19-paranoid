@@ -52,7 +52,8 @@ public class GameLoop implements Runnable {
     @Override
     public void run() {
         long lastTime = System.currentTimeMillis();
-        while (gameState.getPhase() != GamePhase.WIN && gameState.getPhase() != GamePhase.LOST) {
+        while (gameState.getPhase() != GamePhase.WIN && gameState.getPhase() != GamePhase.LOST
+                && gameState.getPhase() != GamePhase.MENU) {
             long current = System.currentTimeMillis();
             int elapsed = (int) (current - lastTime);
 
@@ -78,12 +79,20 @@ public class GameLoop implements Runnable {
             lastTime = current;
         }
 
-        if (gameState.getPhase() == GamePhase.WIN 
-                && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
-                && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
+        if (gameState.getPhase().equals(GamePhase.WIN)
+        && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
+        && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
             changeView(LayoutManager.NEXT_LEVEL);
-        } else {
+        } else if (gameState.getPhase().equals(GamePhase.LOST)) {
             changeView(LayoutManager.GAME_OVER);
+        } else if (gameState.getPhase().equals(GamePhase.MENU)) {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    gameController.getMusicPlayer().stopMusic();
+                    scene.setRoot(LayoutManager.MENU.getLayout());
+                }
+            });
         }
     }
 
@@ -179,6 +188,8 @@ public class GameLoop implements Runnable {
             case A:
                 inputController.get(PlayerId.TWO).notifyMoveLeft(true);
                 break;
+            case ESCAPE:
+                gameState.setPhase(GamePhase.MENU);
             case SPACE:
                 if (gameState.getPhase().equals(GamePhase.PAUSE)) {
                     gameState.setPhase(GamePhase.RUNNING);
