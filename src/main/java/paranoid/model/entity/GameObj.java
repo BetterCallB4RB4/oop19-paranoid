@@ -18,9 +18,9 @@ public abstract class GameObj implements GameObject, Serializable {
     private double speed;
     private int height;
     private int width;
-    private PhysicsComponent phys;
-    private InputComponent input;
-    private GraphicsComponent graphics;
+    private final PhysicsComponent phys;
+    private final InputComponent input;
+    private final GraphicsComponent graphics;
 
     public GameObj(final P2d pos, final V2d vel, final double speed, final int height, final int width, final PhysicsComponent phys, final InputComponent input, final GraphicsComponent graphics) {
         this.pos = pos;
@@ -114,26 +114,26 @@ public abstract class GameObj implements GameObject, Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return asofi
      */
-    @Override
-    public PhysicsComponent getPhysicsComponent() {
+    protected PhysicsComponent getPhysicsComponent() {
         return this.phys;
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return dsad
      */
-    @Override
-    public InputComponent getInputComponent() {
+    protected InputComponent getInputComponent() {
         return this.input;
     }
 
     /**
-     * {@inheritDoc}
+     * 
+     * @return J
      */
-    @Override
-    public GraphicsComponent getGraphicsComponent() {
+    protected GraphicsComponent getGraphicsComponent() {
         return this.graphics;
     }
 

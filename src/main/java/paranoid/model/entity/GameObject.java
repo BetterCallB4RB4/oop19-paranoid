@@ -61,21 +61,6 @@ public interface GameObject {
     int getWidth(); 
 
     /**
-     * @return the physical component of this gameObj
-     */
-    PhysicsComponent getPhysicsComponent();
-
-    /**
-     * @return the input component of this gameObj
-     */
-    InputComponent getInputComponent();
-
-    /**
-     * @return the graphics component of this gameObj
-     */
-    GraphicsComponent getGraphicsComponent();
-
-    /**
      * @param dt the time elapsed from game loop
      * @param w the world model
      */
