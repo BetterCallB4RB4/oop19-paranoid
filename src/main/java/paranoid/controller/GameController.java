@@ -62,7 +62,7 @@ public final class GameController implements GuiController {
         this.panel.setMinHeight(ScreenConstant.CANVAS_HEIGHT);
         this.panel.setMaxHeight(ScreenConstant.CANVAS_HEIGHT);
         this.gc = canvas.getGraphicsContext2D();
-        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/dashboard7.jpg", 
+        final BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/dashboard7.jpg", 
                                                               ScreenConstant.SCREEN_WIDTH - ScreenConstant.CANVAS_WIDTH,
                                                               ScreenConstant.SCREEN_HEIGHT,
                                                               false,
@@ -99,22 +99,22 @@ public final class GameController implements GuiController {
 
     private void drawWorld(final Set<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
-        GraphicsAdapter ga = new GraphicsAdapterImpl(gc);
+        final GraphicsAdapter ga = new GraphicsAdapterImpl(gc);
         gameEntities.stream().forEach(e -> {
             e.updateGraphics(ga);
         });
     }
 
     public void setBackGroundImage(final BackGround backGround) {
-        BackgroundImage bg = new BackgroundImage(new Image(backGround.getLocation(), 
-                                                             ScreenConstant.CANVAS_WIDTH,
-                                                             ScreenConstant.CANVAS_HEIGHT,
-                                                             false,
-                                                             true),
-                                                   BackgroundRepeat.REPEAT, 
-                                                   BackgroundRepeat.NO_REPEAT, 
-                                                   BackgroundPosition.DEFAULT,
-                                                   BackgroundSize.DEFAULT);
+        final BackgroundImage bg = new BackgroundImage(new Image(backGround.getLocation(), 
+                                                           ScreenConstant.CANVAS_WIDTH,
+                                                           ScreenConstant.CANVAS_HEIGHT,
+                                                           false,
+                                                           true),
+                                                 BackgroundRepeat.REPEAT, 
+                                                 BackgroundRepeat.NO_REPEAT, 
+                                                 BackgroundPosition.DEFAULT,
+                                                 BackgroundSize.DEFAULT);
         this.panel.setBackground(new Background(bg));
     }
 }
