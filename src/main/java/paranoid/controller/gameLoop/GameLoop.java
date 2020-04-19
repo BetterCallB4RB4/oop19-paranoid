@@ -9,7 +9,9 @@ import paranoid.controller.GameController;
 import paranoid.controller.GameOverController;
 import paranoid.controller.NextLevelController;
 import paranoid.model.component.input.InputController;
+import paranoid.model.component.input.InputHandler;
 import paranoid.model.component.input.KeyboardInputController;
+import paranoid.model.component.input.KeyboardInputHandler;
 import paranoid.model.entity.World;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.score.User;
@@ -26,6 +28,7 @@ public class GameLoop implements Runnable {
     private final World world;
     private final GameState gameState;
     private final GameController gameController;
+    private final InputHandler inputHandler;
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
 
     public GameLoop(final Scene scene) {
@@ -39,11 +42,10 @@ public class GameLoop implements Runnable {
                 scene.setRoot(LayoutManager.GAME.getLayout());
             }
         });
-
-        //aggiungi in classe separata player input
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
-        notifyInputEvent();
+        this.inputHandler = new KeyboardInputHandler(this.inputController, this.gameController.getCanvas(), this.gameState);
+        this.inputHandler.notifyInputEvent();
     }
 
     /**
@@ -167,54 +169,6 @@ public class GameLoop implements Runnable {
             public void run() {
                 gameController.render(world.getSceneEntities(), gameState.getHighScoreValue(), 
                                       gameState.getPlayerScore(), gameState.getLives());
-            }
-        });
-    }
-
-    private void notifyInputEvent() {
-
-        this.scene.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-            case RIGHT:
-                inputController.get(PlayerId.ONE).notifyMoveRight(true);
-                break;
-            case LEFT:
-                inputController.get(PlayerId.ONE).notifyMoveLeft(true);
-                break;
-            case D:
-                inputController.get(PlayerId.TWO).notifyMoveRight(true);
-                break;
-            case A:
-                inputController.get(PlayerId.TWO).notifyMoveLeft(true);
-                break;
-            case ESCAPE:
-                gameState.setPhase(GamePhase.MENU);
-            case SPACE:
-                if (gameState.getPhase().equals(GamePhase.PAUSE)) {
-                    gameState.setPhase(GamePhase.RUNNING);
-                }
-                break;
-            default:
-                break;
-            }
-        });
-
-        this.scene.setOnKeyReleased(e -> {
-            switch (e.getCode()) {
-            case RIGHT:
-                inputController.get(PlayerId.ONE).notifyMoveRight(false);
-                break;
-            case LEFT:
-                inputController.get(PlayerId.ONE).notifyMoveLeft(false);
-                break;
-            case D:
-                inputController.get(PlayerId.TWO).notifyMoveRight(false);
-                break;
-            case A:
-                inputController.get(PlayerId.TWO).notifyMoveLeft(false);
-                break;
-            default:
-                break;
             }
         });
     }
