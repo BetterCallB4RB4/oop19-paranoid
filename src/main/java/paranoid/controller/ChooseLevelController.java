@@ -3,6 +3,7 @@ package paranoid.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.swing.JOptionPane;
 
@@ -44,6 +45,7 @@ import paranoid.view.parameters.LayoutManager;
 public class ChooseLevelController implements GuiController, Observer {
 
     private Subject subject;
+    private Level currentSelectedLevel;
 
     @FXML
     private SplitPane mainPanel;
@@ -109,7 +111,7 @@ public class ChooseLevelController implements GuiController, Observer {
     public void update() {
         this.buttonContainer.getChildren().clear();
         for (Level lvl : LevelManager.loadLevels()) {
-            Button b = new Button(lvl.getLevelName().toUpperCase());
+            Button b = new Button(lvl.getLevelName());
             b.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
                      + "-fx-background-radius: 30;"
                      + "-fx-font-size: 20;"
@@ -118,10 +120,7 @@ public class ChooseLevelController implements GuiController, Observer {
                 @Override
                 public void handle(final ActionEvent event) {
                     selectedLevel.setOpacity(100);
-                    SettingsBuilder setBuilder = new SettingsBuilder();
-                    setBuilder.fromSettings(SettingsManager.loadOption());
-                    setBuilder.selectLevel(lvl);
-                    SettingsManager.saveOption(setBuilder.build());
+                    currentSelectedLevel = lvl;
                     selectedLevel.setText("Nome livello : " + lvl.getLevelName() + "\n"
                                           + "Sfondo : " + lvl.getBackGround() + "\n"
                                           + "Musica : " + lvl.getMusic());
@@ -139,6 +138,10 @@ public class ChooseLevelController implements GuiController, Observer {
         if (!selectedLevel.getText().isBlank()) {
             UserManager.saveUser(new User());
             final Scene scene = startBtn.getScene();
+            SettingsBuilder setBuilder = new SettingsBuilder();
+            setBuilder.fromSettings(SettingsManager.loadOption());
+            setBuilder.selectLevel(currentSelectedLevel);
+            SettingsManager.saveOption(setBuilder.build());
             final Thread engine = new Thread(new GameLoop(scene));
             engine.setDaemon(true);
             engine.start();
