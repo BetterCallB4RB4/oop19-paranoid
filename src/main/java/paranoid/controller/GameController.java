@@ -123,4 +123,8 @@ public final class GameController implements GuiController {
     public MusicPlayer getMusicPlayer() {
         return this.player;
     }
+
+    public Canvas getCanvas() {
+        return this.canvas;
+    }
 }
