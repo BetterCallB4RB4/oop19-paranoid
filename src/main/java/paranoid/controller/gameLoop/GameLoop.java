@@ -85,7 +85,7 @@ public class GameLoop implements Runnable {
             waitForNextFrame(current);
             lastTime = current;
         }
-
+        player.stopMusic();
         if (gameState.getPhase().equals(GamePhase.WIN)
         && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
         && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
@@ -111,7 +111,6 @@ public class GameLoop implements Runnable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                player.stopMusic();
                 scene.setRoot(layoutManager.getLayout());
             }
         });
