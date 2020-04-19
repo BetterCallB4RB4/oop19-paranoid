@@ -96,7 +96,7 @@
       </VBox>
       <Pane fx:id="panel">
          <children>
-            <Canvas fx:id="canvas" />
+            <Canvas fx:id="canvas" focusTraversable="true" />
          </children>
       </Pane>
    </items>
