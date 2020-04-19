@@ -5,17 +5,14 @@ import java.util.List;
 
 import paranoid.common.PlayerId;
 import paranoid.common.dimension.ScreenConstant;
-import paranoid.controller.GameController;
 import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
 import paranoid.model.entity.StartPhase;
 import paranoid.model.entity.World;
-import paranoid.model.level.BackGround;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelSelection;
-import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
@@ -23,14 +20,12 @@ import paranoid.model.score.UserManager;
 import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.SettingsManager;
-import paranoid.view.parameters.LayoutManager;
 
 public class GameState {
 
+    private GamePhase phase;
     private int highScoreValue;
     private int multiplier;
-    private GamePhase phase;
-    private final GameController gameController;
     private final Settings settings;
     private final Score scores;
     private final World world;
@@ -51,15 +46,7 @@ public class GameState {
             this.scores = ScoreManager.loadCustom(level.getLevelName());
         }
         this.highScoreValue = this.scores.getHighValue();
-        world.setBricks(level.getBricks());
-
-
-        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
-        this.gameController.setBackGroundImage(BackGround.getBackGroundByName(level.getBackGround()));
-        this.gameController.getMusicPlayer().setMusicEnable(settings.isPlayMusic());
-        this.gameController.getMusicPlayer().setEffectEnable(settings.isPlayEffects());
-        this.world.getEventHanlder().addMusicPlayer(this.gameController.getMusicPlayer());
-        this.gameController.getMusicPlayer().playMusic(Music.getMusicByName(level.getMusic()));
+        this.world.setBricks(level.getBricks());
     }
 
     /**
@@ -204,5 +191,21 @@ public class GameState {
      */
     public Difficulty getDifficulty() {
         return this.settings.getDifficulty();
+    }
+
+    /**
+     * 
+     * @return oaisf
+     */
+    public boolean isMusicActive() {
+        return this.settings.isPlayMusic();
+    }
+
+    /**
+     * 
+     * @return zafa
+     */
+    public boolean isEffectActive() {
+        return this.settings.isPlayEffects();
     }
 }
