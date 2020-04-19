@@ -55,7 +55,6 @@ public class KeyboardInputHandler implements InputHandler {
 
     private void onKeyReleased() {
         canvas.setOnKeyReleased(e -> {
-            System.out.println("ciao");
             switch (e.getCode()) {
             case RIGHT:
                 inputController.get(PlayerId.ONE).notifyMoveRight(false);

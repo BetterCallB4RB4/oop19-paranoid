@@ -13,7 +13,10 @@ import paranoid.model.component.input.InputHandler;
 import paranoid.model.component.input.KeyboardInputController;
 import paranoid.model.component.input.KeyboardInputHandler;
 import paranoid.model.entity.World;
+import paranoid.model.level.BackGround;
 import paranoid.model.level.LevelSelection;
+import paranoid.model.level.Music;
+import paranoid.model.level.MusicPlayer;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
@@ -30,12 +33,20 @@ public class GameLoop implements Runnable {
     private final GameController gameController;
     private final InputHandler inputHandler;
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
+    private final MusicPlayer player;
 
     public GameLoop(final Scene scene) {
         this.scene = scene;
-        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.gameState = new GameState();
         this.world = gameState.getWorld();
+        this.player = new MusicPlayer();
+        this.gameController = (GameController) LayoutManager.GAME.getGuiController();
+        this.gameController.setBackGroundImage(BackGround.getBackGroundByName(gameState.getLevel().getBackGround()));
+        this.player.setMusicEnable(gameState.isMusicActive());
+        this.player.setEffectEnable(gameState.isEffectActive());
+        this.world.getEventHanlder().addMusicPlayer(player);
+        this.player.playMusic(Music.getMusicByName(gameState.getLevel().getMusic()));
+
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -89,7 +100,7 @@ public class GameLoop implements Runnable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-                    gameController.getMusicPlayer().stopMusic();
+                    player.stopMusic();
                     scene.setRoot(LayoutManager.MENU.getLayout());
                 }
             });
@@ -121,7 +132,7 @@ public class GameLoop implements Runnable {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                gameController.getMusicPlayer().stopMusic();
+                player.stopMusic();
                 scene.setRoot(layoutManager.getLayout());
             }
         });
