@@ -46,13 +46,7 @@ public class GameLoop implements Runnable {
         this.player.setEffectEnable(gameState.isEffectActive());
         this.world.getEventHanlder().addMusicPlayer(player);
         this.player.playMusic(Music.getMusicByName(gameState.getLevel().getMusic()));
-
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                scene.setRoot(LayoutManager.GAME.getLayout());
-            }
-        });
+        this.changeView(LayoutManager.GAME);
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
         this.inputHandler = new KeyboardInputHandler(this.inputController, this.gameController.getCanvas(), this.gameState);
@@ -69,8 +63,8 @@ public class GameLoop implements Runnable {
         while (!gameState.getPhase().equals(GamePhase.WIN) 
             && !gameState.getPhase().equals(GamePhase.LOST)
             && !gameState.getPhase().equals(GamePhase.MENU)) {
-            long current = System.currentTimeMillis();
-            int elapsed = (int) (current - lastTime);
+            final long current = System.currentTimeMillis();
+            final int elapsed = (int) (current - lastTime);
             switch (gameState.getPhase()) {
             case INIT:
                 gameState.init();
@@ -95,36 +89,21 @@ public class GameLoop implements Runnable {
         if (gameState.getPhase().equals(GamePhase.WIN)
         && LevelSelection.isStoryLevel(gameState.getLevel().getLevelName()) 
         && LevelSelection.getSelectionFromLevel(gameState.getLevel()).hasNext()) {
+            saveState(GamePhase.WIN);
             changeView(LayoutManager.NEXT_LEVEL);
         } else if (gameState.getPhase().equals(GamePhase.MENU)) {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-                    player.stopMusic();
-                    scene.setRoot(LayoutManager.MENU.getLayout());
-                }
-            });
+            changeView(LayoutManager.MENU);
         } else { 
+            saveState(GamePhase.LOST);
             changeView(LayoutManager.GAME_OVER);
         }
     }
 
     private void changeView(final LayoutManager layoutManager) {
-        final SettingsBuilder settingsBuilder = new SettingsBuilder();
         if (layoutManager.equals(LayoutManager.NEXT_LEVEL)) {
-            UserManager.saveUser(gameState.getUser());
-            SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
-                           .selectLevel(LevelSelection.getSelectionFromLevel(gameState.getLevel()).next().getLevel())
-                           .build());
             final NextLevelController nextLevelController = (NextLevelController) layoutManager.getGuiController();
             nextLevelController.update(gameState.getLevel(), gameState.getUser());
         } else if (layoutManager.equals(LayoutManager.GAME_OVER)) {
-            UserManager.saveUser(new User());
-            if (LevelSelection.isStoryLevel(gameState.getLevel().getLevelName())) {
-                SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
-                               .selectLevel(LevelSelection.LEVEL1.getLevel())
-                               .build());
-            }
             final GameOverController gameOverController = (GameOverController) layoutManager.getGuiController();
             gameOverController.updateScore(gameState.getTopScores(), gameState.getUser(), gameState.getLevel());
         }
@@ -136,6 +115,24 @@ public class GameLoop implements Runnable {
                 scene.setRoot(layoutManager.getLayout());
             }
         });
+    }
+
+    private void saveState(final GamePhase phase) {
+        final SettingsBuilder settingsBuilder = new SettingsBuilder();
+        if (phase.equals(GamePhase.WIN)) {
+            UserManager.saveUser(gameState.getUser());
+            SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
+                           .selectLevel(LevelSelection.getSelectionFromLevel(gameState.getLevel()).next().getLevel())
+                           .build());
+        } else if (phase.equals(GamePhase.LOST)) {
+            UserManager.saveUser(new User());
+            if (LevelSelection.isStoryLevel(gameState.getLevel().getLevelName())) {
+                SettingsManager.saveOption(settingsBuilder.fromSettings(SettingsManager.loadOption())
+                               .selectLevel(LevelSelection.LEVEL1.getLevel())
+                               .build());
+            }
+
+        }
     }
     /**
      * 
