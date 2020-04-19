@@ -18,15 +18,13 @@ import paranoid.model.component.physics.PlayerPhysicsComponent;
  */
 public final class Player extends GameObj {
 
+    private static final long serialVersionUID = -854724973379080675L;
     private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
-
-    /**
-     * The movement speed of player.
-     */
-    private static final int PLAYER_AGILITY = 300;
+    private static final int PLAYER_SPEED = 450;
     private final PlayerId playerId;
+
     private Player(final P2d pos, final int height, final int width, final PlayerId playerId) {
-        super(pos, new V2d(0, 0), PLAYER_AGILITY, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent(), new PlayerGraphicsComponent());
+        super(pos, new V2d(0, 0), PLAYER_SPEED, height, width, new PlayerPhysicsComponent(), new PlayerInputComponent(), new PlayerGraphicsComponent());
         this.playerId = playerId;
     }
 

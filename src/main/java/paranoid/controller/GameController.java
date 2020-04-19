@@ -1,6 +1,6 @@
 package paranoid.controller;
 
-import java.util.List;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
@@ -89,7 +89,7 @@ public final class GameController implements GuiController {
      * @param highScore The top score.
      * @param lives The remained life ot the player.
      */
-    public void render(final List<GameObject> gameEntities, final int score, final int highScore, final int lives) {
+    public void render(final Set<GameObject> gameEntities, final int score, final int highScore, final int lives) {
         drawScoreAndLives(score, highScore, lives);
         drawWorld(gameEntities);
 
@@ -99,7 +99,7 @@ public final class GameController implements GuiController {
         this.lblScore.setText("SCORE: " + score.toString());
         this.lblLives.setText("LIVES: " + lives.toString());
     }
-    private void drawWorld(final List<GameObject> gameEntities) {
+    private void drawWorld(final Set<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
         GraphicsAdapter ga = new GraphicsAdapterImpl(gc);
         gameEntities.stream().forEach(e -> {

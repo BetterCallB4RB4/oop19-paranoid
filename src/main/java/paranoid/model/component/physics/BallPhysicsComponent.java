@@ -13,7 +13,6 @@ import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
-import paranoid.model.entity.StartPhase;
 import paranoid.model.entity.World;
 
 public class BallPhysicsComponent implements PhysicsComponent {
@@ -23,11 +22,10 @@ public class BallPhysicsComponent implements PhysicsComponent {
      */
     @Override
     public void update(final int dt, final GameObject gameObj, final World w) {
-        Ball ball = (Ball) gameObj;
-        P2d old = gameObj.getPos();
-        P2d pos = ball.getPos();
-        V2d vel = ball.getVel();
-        ball.setPos(pos.sum(vel.mul(SCALER * dt * ball.getSpeed())));
+        final Ball ball = (Ball) gameObj;
+        final P2d old = ball.getPos();
+        final V2d vel = ball.getVel();
+        ball.setPos(ball.getPos().sum(vel.mul(SCALER * dt * ball.getSpeed())));
 
         final Optional<Collision> borderCollisionInfo = w.checkCollisionWithBoundaries(ball);
         if (borderCollisionInfo.isPresent()) {
@@ -59,20 +57,12 @@ public class BallPhysicsComponent implements PhysicsComponent {
             if (collision.equals(Collision.TOP)) {
                 Direction direction = playerCollisionInfo.getY().get();
                 ball.setPos(old);
-                ball.flipByValue(direction.getVector());
+                ball.setVel(direction.getVector());
                 ball.flipVelOnY();
                 w.notifyEvent(new HitPlayerEvent());
             } else if (collision.equals(Collision.RIGHT) || collision.equals(Collision.LEFT)) {
                 ball.flipVelOnX();
             }
         }
-        /*
-        if (playerCollisionInfo.isPresent()) {
-            ball.setPos(old);
-            ball.setVel(playerCollisionInfo.get().getY().getVector());
-            ball.flipVelOnY();
-            w.notifyEvent(new HitPlayerEvent());
-        }
-        */
     }
 }

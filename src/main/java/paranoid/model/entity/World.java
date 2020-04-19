@@ -1,10 +1,10 @@
 package paranoid.model.entity;
 
-import java.awt.desktop.UserSessionEvent.Reason;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import paranoid.common.Collision;
 import paranoid.common.Pair;
@@ -19,18 +19,18 @@ import paranoid.model.component.input.InputController;
 
 public class World implements WorldEventListener {
 
-    private List<Ball> balls;
-    private List<Brick> bricks;
-    private List<Player> players;
-    private Border border;
-    private CollisionManager collisionManager;
-    private EventConsumer eventHandler;
+    private final Set<Ball> balls;
+    private final Set<Brick> bricks;
+    private final Set<Player> players;
+    private final Border border;
+    private final EventConsumer eventHandler;
+    private final CollisionManager collisionManager;
 
     public World(final Border border, final GameState gameState) {
         this.border = border;
-        this.balls = new ArrayList<>();
-        this.bricks = new ArrayList<>();
-        this.players = new ArrayList<>();
+        this.balls = new HashSet<>();
+        this.bricks = new HashSet<>();
+        this.players = new HashSet<>();
         this.collisionManager = new CollisionManager();
         this.eventHandler = new EventConsumer(gameState);
     }
@@ -39,40 +39,51 @@ public class World implements WorldEventListener {
      * 
      * @param balls added int eh world
      */
-    public void setBalls(final List<Ball> balls) {
-        this.balls = balls;
+    public void setBalls(final Collection<Ball> balls) {
+        this.balls.clear();
+        this.balls.addAll(balls);
     }
 
     /**
      * 
      * @param players added int the world
      */
-    public void setPlayers(final List<Player> players) {
-        this.players = players;
+    public void setPlayers(final Collection<Player> players) {
+        this.players.clear();
+        this.players.addAll(players);
     }
 
     /**
      * 
      * @param bricks added in the world
      */
-    public void setBricks(final List<Brick> bricks) {
-        this.bricks = bricks;
+    public void setBricks(final Collection<Brick> bricks) {
+        this.bricks.clear();
+        this.bricks.addAll(bricks);
     }
 
     /**
      * 
      * @return x
      */
-    public List<Ball> getBalls() {
-        return Collections.unmodifiableList(this.balls);
+    public Set<Ball> getBalls() {
+        return Collections.unmodifiableSet(this.balls);
     }
 
     /**
      * 
      * @return x
      */
-    public List<Brick> getBricks() {
+    public Set<Brick> getBricks() {
         return this.bricks;
+    }
+
+    /**
+     * 
+     * @return the border of the world
+     */
+    public Border getBorder() {
+        return this.border;
     }
 
     /**
@@ -133,7 +144,7 @@ public class World implements WorldEventListener {
                     double playerHitZone = elem.getWidth() / Direction.values().length;
                     for (int i = 0; i < Direction.values().length; i++) {
                         if (centerBall > elem.getPos().getX() + (i * playerHitZone)
-                        && centerBall < elem.getPos().getX() + ((i + 1) * playerHitZone)) {
+                         && centerBall < elem.getPos().getX() + ((i + 1) * playerHitZone)) {
                             return new Pair<>(Optional.of(Collision.TOP), Optional.of(Direction.values()[i]));
                         }
                     }
@@ -145,39 +156,16 @@ public class World implements WorldEventListener {
         return new Pair<>(Optional.empty(), Optional.empty());
     }
 
-    /*
-    public Optional<Pair<GameObject, Collision>> checkCollisionWithEntity(final GameObject entity) {
-        Optional<Pair<GameObject, Collision>> collisionResult = Optional.empty();
-        if (entity instanceof Ball) {
-            final Ball ball = (Ball) entity;
-            for (GameObject gameObj : getSceneEntities()) {
-                if (gameObj instanceof Player) {
-                    collisionResult = this.collisionManager.checkCollisionWithPlayers((Player) gameObj, ball);
-                } else if (gameObj instanceof Brick) {
-                    collisionResult = this.collisionManager.checkCollisionWithBricks((Brick) gameObj, ball);
-                }
-
-                if (collisionResult.isPresent()) {
-                    return collisionResult;
-                }
-
-            }
-        }
-        return Optional.empty();
-
-    }
-    */
-
     /**
      * 
      * @return a list of all the gameObj in the world
      */
-    public List<GameObject> getSceneEntities() {
-        List<GameObject> entities = new ArrayList<>();
+    public Set<GameObject> getSceneEntities() {
+        Set<GameObject> entities = new HashSet<>();
         entities.addAll(this.balls);
         entities.addAll(this.bricks);
         entities.addAll(this.players);
-        return Collections.unmodifiableList(entities);
+        return Collections.unmodifiableSet(entities);
     }
 
     /**
@@ -189,11 +177,14 @@ public class World implements WorldEventListener {
     }
 
     /**
-     * 
-     * @return the border of the world
+     * Update player input component.
+     * @param playerId each player has is own id
+     * @param inputController controller that check the key pressed by user input device
      */
-    public Border getBorder() {
-        return this.border;
+    public void movePlayer(final PlayerId playerId, final InputController inputController) {
+        this.players.stream()
+                    .filter(p -> p.getPlayerId().equals(playerId))
+                    .forEach(p -> p.updateInput(inputController));
     }
 
     /**
@@ -212,14 +203,4 @@ public class World implements WorldEventListener {
         return this.eventHandler;
     }
 
-    /**
-     * Update player input component.
-     * @param playerId each player has is own id
-     * @param inputController controller that check the key pressed by user input device
-     */
-    public void movePlayer(final PlayerId playerId, final InputController inputController) {
-        this.players.stream()
-                    .filter(p -> p.getPlayerId().equals(playerId))
-                    .forEach(p -> p.updateInput(inputController));
-    }
 }

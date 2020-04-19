@@ -10,6 +10,8 @@ import paranoid.model.component.physics.DummyPhysicsComponent;
 
 public class PlaceHolder extends GameObj {
 
+    private static final long serialVersionUID = 6032673900262499421L;
+
     public PlaceHolder(final P2d pos, final int height, final int width) {
         super(pos, new V2d(0, 0), 0, height, width, new DummyPhysicsComponent(), new DummyInputComponent(), new DummyGraphicsComponent());
     }

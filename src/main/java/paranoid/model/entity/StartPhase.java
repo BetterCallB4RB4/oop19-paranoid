@@ -19,9 +19,9 @@ public enum StartPhase {
      */
     BALL(new P2d(330, 570), 10, 10);
 
-    private P2d spawnPoint;
-    private int initWidth;
-    private int initHeight;
+    private final P2d spawnPoint;
+    private final int initWidth;
+    private final int initHeight;
 
     StartPhase(final P2d spawnPoint, final int initWidth, final int initHeight) {
         this.spawnPoint = spawnPoint;

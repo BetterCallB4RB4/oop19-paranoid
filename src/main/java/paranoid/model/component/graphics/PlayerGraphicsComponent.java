@@ -6,7 +6,7 @@ import paranoid.common.ResourceLoader;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 
-public class PlayerGraphicsComponent implements GraphicsComponent{
+public class PlayerGraphicsComponent implements GraphicsComponent {
 
     private final Image playerOneSprite;
     private final Image playerTwoSprite;
@@ -16,6 +16,9 @@ public class PlayerGraphicsComponent implements GraphicsComponent{
         this.playerTwoSprite = ResourceLoader.PLAYER_TWO_SPRITE.getSprite();
     }
 
+    /**
+     * 
+     */
     @Override
     public void update(final GameObject obj, final GraphicsAdapter ga) {
         final Player player = (Player) obj;

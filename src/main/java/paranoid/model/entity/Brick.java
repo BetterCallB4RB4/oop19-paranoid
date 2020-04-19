@@ -10,7 +10,6 @@ import paranoid.common.P2d;
 import paranoid.common.SerializableColor;
 import paranoid.common.V2d;
 import paranoid.model.component.graphics.BrickGraphicsComponent;
-import paranoid.model.component.graphics.DummyGraphicsComponent;
 import paranoid.model.component.graphics.GraphicsAdapter;
 import paranoid.model.component.input.DummyInputComponent;
 import paranoid.model.component.input.InputController;
@@ -22,10 +21,10 @@ import paranoid.model.component.physics.DummyPhysicsComponent;
 public final class Brick extends GameObj implements Serializable {
 
     private static final long serialVersionUID = -2501638679114243141L;
+    private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
+    private final boolean indesctructible;
     private final int pointEarned;
     private int energy;
-    private final boolean indesctructible;
-    private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
 
     /**
      * Constructor.

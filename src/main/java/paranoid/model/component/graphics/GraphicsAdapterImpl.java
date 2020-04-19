@@ -10,7 +10,7 @@ import paranoid.model.entity.Player;
 
 public class GraphicsAdapterImpl implements GraphicsAdapter {
 
-    private GraphicsContext gc;
+    private final GraphicsContext gc;
 
     public GraphicsAdapterImpl(final GraphicsContext gc) {
         this.gc = gc;

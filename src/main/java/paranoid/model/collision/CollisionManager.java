@@ -80,18 +80,6 @@ public class CollisionManager {
         } else {
             return Optional.of(player.getLastZonePresence().get(ball));
         }
-        /*
-        if (checkBottom && checkTop) {
-            double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
-            double playerHitZone = player.getWidth() / Direction.values().length;
-            for (int i = 0; i < Direction.values().length; i++) {
-                if (centerBall > player.getPos().getX() + (i * playerHitZone)
-                && centerBall < player.getPos().getX() + ((i + 1) * playerHitZone)) {
-                    return Optional.of(new Pair<>(player, Direction.values()[i]));
-                }
-            }
-        }
-        */
         return Optional.empty();
     }
 
