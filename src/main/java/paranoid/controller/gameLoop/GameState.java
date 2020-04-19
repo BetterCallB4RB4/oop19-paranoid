@@ -34,8 +34,6 @@ public class GameState {
     private final User user;
 
     public GameState() {
-        this.multiplier = 1;
-        this.highScoreValue = 0;
         this.phase = GamePhase.INIT;
         this.user = UserManager.loadUser();
         this.settings = SettingsManager.loadOption();
@@ -47,6 +45,7 @@ public class GameState {
             this.scores = ScoreManager.loadCustom(level.getLevelName());
         }
         this.highScoreValue = this.scores.getHighValue();
+        this.flatMultiplier();
         this.world.setBricks(level.getBricks());
     }
 
@@ -94,38 +93,54 @@ public class GameState {
     }
 
     /**
-     * @param playerScore the player score to set
+     * 
+     * @param point
      */
-    public void setPlayerScore(final int playerScore) {
-        user.setScore(playerScore);
+    public void addPoint(final int point) {
+        user.setScore(user.getScore() + (point * multiplier));
     }
 
     /**
-     * @return the multiplier
+     * 
      */
-    public int getMultiplier() {
-        return multiplier;
+    public void addBonus() {
+        user.setScore((user.getScore() + settings.getDifficulty().getGameOverBonus()) * this.getLives());
     }
 
     /**
-     * @param multiplier the multiplier to set
+     * 
      */
-    public void setMultiplier(final int multiplier) {
-        this.multiplier = multiplier;
+    public void flatMultiplier() {
+        this.multiplier = this.settings.getDifficulty().getFlatMultiplier();
     }
 
     /**
-     * @return the lives
+     * 
+     */
+    public void incMultiplier() {
+        this.multiplier++;
+    }
+
+    /**
+     * 
+     */
+    public void decLives() {
+        user.setLives(user.getLives() - 1);
+    }
+
+    /**
+     * 
+     */
+    public void incLives() {
+        user.setLives(user.getLives() + 1);
+    }
+
+    /**
+     * 
+     * @return sd
      */
     public int getLives() {
         return user.getLives();
-    }
-
-    /**
-     * @param lives the lives to set
-     */
-    public void setLives(final int lives) {
-        user.setLives(lives);
     }
 
     /**
