@@ -1,6 +1,7 @@
 package paranoid.controller.gameLoop;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import paranoid.common.PlayerId;
@@ -53,6 +54,7 @@ public class GameState {
      * set initial game state.
      */
     public void init() {
+        this.phase = GamePhase.PAUSE;
         final Player.Builder playerBuilder = new Player.Builder();
         final List<Player> playerList = new ArrayList<>();
         playerList.add(playerBuilder.position(StartPhase.PLAYER_ONE.getSpawnPoint())
@@ -68,25 +70,14 @@ public class GameState {
                     .playerId(PlayerId.TWO)
                     .build());
         }
-        world.setPlayers(playerList);
-
-        //add balls to the world
-        List<Ball> ballContainer = new ArrayList<>();
-        switch (settings.getDifficulty()) {
-            case EASY:
-                ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.EASY.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
-            break;
-            case NORMAL:
-                ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.NORMAL.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
-            break;
-            case HARD:
-                ballContainer.add(new Ball(StartPhase.BALL.getSpawnPoint(), Direction.EDGE_LEFT.getVector().mul(-1), Difficulty.HARD.getSpeed(), StartPhase.BALL.getInitWidth(), StartPhase.BALL.getInitHeight()));
-            break;
-            default:
-            break;
-        }
-        world.setBalls(ballContainer);
-        phase = GamePhase.PAUSE;
+        this.world.setPlayers(playerList);
+        this.world.setBalls(Arrays.asList(new Ball.Builder()
+                                             .setPosition(StartPhase.BALL.getSpawnPoint())
+                                             .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
+                                             .setHeight(StartPhase.BALL.getInitHeight())
+                                             .setWidth(StartPhase.BALL.getInitWidth())
+                                             .setSpeed(settings.getDifficulty().getSpeed())
+                                             .build()));
     }
     /**
      * @return the score
@@ -99,8 +90,7 @@ public class GameState {
      * @return the highscore.
      */
     public int getHighScoreValue() {
-        return user.getScore() > this.highScoreValue
-                ? user.getScore() : this.highScoreValue;
+        return user.getScore() > this.highScoreValue ? user.getScore() : this.highScoreValue;
     }
 
     /**
