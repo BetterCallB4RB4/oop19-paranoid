@@ -26,19 +26,19 @@ public class EventConsumer {
         events.stream().forEach(ev -> {
             if (ev instanceof HitBorderEvent) {
                 HitBorderEvent hit = (HitBorderEvent) ev;
-                gameState.setMultiplier(1);
+                gameState.flatMultiplier();
                 if (hit.getCollision().equals(Collision.BOTTOM)) {
                     gameState.getWorld().removeBall(hit.getBall());
                     if (gameState.getWorld().getBalls().isEmpty()) {
-                        gameState.setLives(gameState.getLives() - 1);
+                        gameState.decLives();
                         gameState.setPhase(GamePhase.INIT);
                     }
                 }
                 this.player.playEffect(Effect.BOARD_COLLISION);
             } else if (ev instanceof HitBrickEvent) {
                 Brick brick = ((HitBrickEvent) ev).getBrick();
-                gameState.setMultiplier(gameState.getMultiplier() + 1);
-                gameState.setPlayerScore(gameState.getPlayerScore() + (brick.getPointEarned() * gameState.getMultiplier()));
+                gameState.incMultiplier();
+                gameState.addPoint(brick.getPointEarned());
                 brick.decEnergy();
                 if (brick.getEnergy() == 0 && !brick.isIndestructible()) {
                     gameState.getWorld().removeBrick(brick);
@@ -67,18 +67,7 @@ public class EventConsumer {
         } else if (gameState.getWorld().getBricks().stream()
                                                    .filter(i -> !i.isIndestructible())
                                                    .count() == 0) {
-            switch (gameState.getDifficulty()) {
-            case EASY:
-                gameState.setPlayerScore(gameState.getPlayerScore() + 5000);
-                break;
-            case NORMAL:
-                gameState.setPlayerScore(gameState.getPlayerScore() + 10_000);
-                break;
-            case HARD:
-                gameState.setPlayerScore(gameState.getPlayerScore() + 15_000);
-            default:
-                break;
-            }
+            gameState.addBonus();
             gameState.setPhase(GamePhase.WIN);
         }
     }
