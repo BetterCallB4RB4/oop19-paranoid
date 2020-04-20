@@ -15,12 +15,6 @@ import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import paranoid.common.Pair;
@@ -37,18 +31,18 @@ import paranoid.view.parameters.LayoutManager;
 
 public class GameBuilderController implements GuiController, Subject {
 
+    private int tileY;
+    private int tileX;
+    private GraphicsContext gc;
     private List<Observer> observer;
     private LevelBuilder levelBuilder;
     private static final int PLAYER_ZONE = 4;
-    private GraphicsContext gc;
-    private int tileY;
-    private int tileX;
 
     @FXML
     private ColorPicker colorPicker;
 
     @FXML
-    private CheckBox isIndestructible;
+    private CheckBox indestructible;
 
     @FXML
     private Slider pointSlider;
@@ -94,9 +88,9 @@ public class GameBuilderController implements GuiController, Subject {
         this.setCanvas();
         this.canvas.setOnMouseClicked(e -> {
             if (e.getY() < (tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE))) {
-                Pair<PlaceHolder, Boolean> res = levelBuilder.hit(e.getX(), e.getY(),
+                final Pair<PlaceHolder, Boolean> res = levelBuilder.hit(e.getX(), e.getY(),
                                                                   colorPicker.getValue(),
-                                                                  isIndestructible.isSelected(),
+                                                                  indestructible.isSelected(),
                                                                   (int) pointSlider.getValue(),
                                                                   (int) lifeSlider.getValue());
                 if (res.getY()) {
@@ -109,16 +103,6 @@ public class GameBuilderController implements GuiController, Subject {
                 }
             }
         });
-        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/dashboard1.png", 
-                                                              ScreenConstant.SCREEN_WIDTH - ScreenConstant.CANVAS_WIDTH,
-                                                              ScreenConstant.SCREEN_HEIGHT,
-                                                              false,
-                                                              true),
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundPosition.CENTER,
-                                                    BackgroundSize.DEFAULT);
-        this.formContainer.setBackground(new Background(myBI2));
     }
 
     /**
@@ -132,7 +116,7 @@ public class GameBuilderController implements GuiController, Subject {
         this.gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         this.tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
         this.tileY = (int) (this.canvas.getHeight() / ScreenConstant.BRICK_NUMBER_Y);
-        double wastePixel = ScreenConstant.CANVAS_WIDTH % ScreenConstant.BRICK_NUMBER_X;
+        final double wastePixel = ScreenConstant.CANVAS_WIDTH % ScreenConstant.BRICK_NUMBER_X;
         int currentYpos = 0;
         for (int i = 0; i < ScreenConstant.BRICK_NUMBER_Y; i++) {
             gc.strokeLine(0, currentYpos, canvas.getWidth() - wastePixel, currentYpos);
