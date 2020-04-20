@@ -1,35 +1,16 @@
 package paranoid.controller;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.swing.JOptionPane;
-
-import com.sun.javafx.geom.BaseBounds;
-import com.sun.javafx.geom.transform.BaseTransform;
-import com.sun.javafx.scene.BoundsAccessor;
-import com.sun.scenario.effect.DropShadow;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.Effect;
-import javafx.scene.image.Image;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.gameloop.GameLoop;
@@ -43,7 +24,6 @@ import paranoid.view.parameters.LayoutManager;
 
 public class ChooseLevelController implements GuiController, Observer {
 
-    private Subject subject;
     private Level currentSelectedLevel;
 
     @FXML
@@ -73,9 +53,7 @@ public class ChooseLevelController implements GuiController, Observer {
      */
     @FXML
     public void initialize(final Subject sub) {
-        this.subject = sub;
-        this.subject.register(this);
-
+        sub.register(this);
         this.mainPanel.setMinWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMaxWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMinHeight(ScreenConstant.SCREEN_HEIGHT);
@@ -84,17 +62,6 @@ public class ChooseLevelController implements GuiController, Observer {
         this.buttonContainer.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.starter.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.starter.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
-        this.buttonContainer.setStyle("-fx-background-color:  linear-gradient(to bottom right, #E438A1, #6749D8);");
-        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/dashboard3.png", 
-                                                              ScreenConstant.SCREEN_WIDTH / 2,
-                                                              ScreenConstant.SCREEN_HEIGHT,
-                                                              false,
-                                                              true),
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundPosition.CENTER,
-                                                    BackgroundSize.DEFAULT);
-        this.starter.setBackground(new Background(myBI2));
         this.scroller.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scroller.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scroller.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -109,20 +76,17 @@ public class ChooseLevelController implements GuiController, Observer {
     @Override
     public void update() {
         this.buttonContainer.getChildren().clear();
-        for (Level lvl : LevelManager.loadLevels()) {
+        for (final Level lvl : LevelManager.loadLevels()) {
             Button b = new Button(lvl.getLevelName());
-            b.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
-                     + "-fx-background-radius: 30;"
-                     + "-fx-font-size: 20;"
-                     + "-fx-font-weight: bold");
+            this.setButtonStyle(b, back);
             b.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent event) {
                     selectedLevel.setOpacity(100);
                     currentSelectedLevel = lvl;
-                    selectedLevel.setText("Nome livello : " + lvl.getLevelName() + "\n"
-                                          + "Sfondo : " + lvl.getBackGround() + "\n"
-                                          + "Musica : " + lvl.getMusic());
+                    selectedLevel.setText("Level name : " + lvl.getLevelName() + "\n"
+                                          + "Background : " + lvl.getBackGround() + "\n"
+                                          + "Music : " + lvl.getMusic());
                 }
             });
             this.buttonContainer.getChildren().add(b);
@@ -158,4 +122,9 @@ public class ChooseLevelController implements GuiController, Observer {
         scene.setRoot(LayoutManager.MENU.getLayout());
     }
 
+    private void setButtonStyle(final Button subject, final Button reference) {
+        subject.setStyle(reference.getStyle());
+        subject.setEffect(reference.getEffect());
+        subject.setFont(reference.getFont());
+    }
 }
