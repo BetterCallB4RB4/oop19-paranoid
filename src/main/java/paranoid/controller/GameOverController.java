@@ -48,13 +48,20 @@ public class GameOverController implements GuiController  {
     @FXML
     private GridPane grid;
 
+    /**
+     * 
+     */
     @FXML
     public void initialize() {
         this.scroller.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scroller.setVbarPolicy(ScrollBarPolicy.NEVER);
     }
+
+    /**
+     * 
+     */
     @FXML
-    private void btnSendOnClickHandler() {
+    public void btnSendOnClickHandler() {
 
         if (!this.txtName.getText().contentEquals("")) {
             String username = this.txtName.getText();
@@ -76,11 +83,20 @@ public class GameOverController implements GuiController  {
         }
     }
 
+    /**
+     * 
+     */
     @FXML
-    private void btnScoreOnClickHandler() {
+    public void btnScoreOnClickHandler() {
         this.btnScore.getScene().setRoot(LayoutManager.MENU.getLayout());
     }
 
+    /**
+     * 
+     * @param score
+     * @param user
+     * @param level
+     */
     public void updateScore(final Score score, final User user, final Level level) {
         this.grid.getChildren().clear();
         this.btnScore.setVisible(false);
@@ -118,31 +134,31 @@ public class GameOverController implements GuiController  {
     private void viewScore(final Score score) {
         this.btnScore.setVisible(true);
         this.setNameVisible(false);
-        Label name = new Label("NOME: ");
+        final Label name = new Label("NOME: ");
         name.setStyle("-fx-font-size: 20;"
                 + "-fx-font-weight: bold");
         name.setTextFill(Color.LAWNGREEN);
 
-        Label point = new Label("PUNTEGGIO: ");
+        final Label point = new Label("PUNTEGGIO: ");
         point.setStyle("-fx-font-size: 20;"
                 + "-fx-font-weight: bold");
         point.setTextFill(Color.LAWNGREEN);
         this.grid.add(name, 1, 0);
         this.grid.add(point, 2, 0);
-        List<User> scoreList = score.getScoreList();
+        final List<User> scoreList = score.getScoreList();
 
         if (!scoreList.isEmpty()) {
             for (int x = 0; x < scoreList.size(); x++) {
-                Label i = new Label(" " + Integer.toString(x + 1) + " ");
+                final Label i = new Label(" " + Integer.toString(x + 1) + " ");
                 i.setStyle("-fx-font-size: 20;"
                         + "-fx-font-weight: bold");
                 i.setTextFill(Color.ALICEBLUE);
-                Label n = new Label(scoreList.get(x).getName().toUpperCase());
+                Label n = new Label(scoreList.get(x).getName());
                 n.setStyle("-fx-font-size: 20;"
                         + "-fx-font-weight: bold");
                 n.setTextFill(Color.ALICEBLUE);
 
-                Label s = new Label(scoreList.get(x).getScore().toString());
+                final Label s = new Label(scoreList.get(x).getScore().toString());
                 s.setStyle("-fx-font-size: 20;"
                         + "-fx-font-weight: bold");
                 s.setTextFill(Color.ALICEBLUE);
