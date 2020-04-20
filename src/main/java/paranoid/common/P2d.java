@@ -87,7 +87,7 @@ public class P2d implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        P2d other = (P2d) obj;
+        final P2d other = (P2d) obj;
         if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
             return false;
         }

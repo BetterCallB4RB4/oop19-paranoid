@@ -44,8 +44,14 @@ public class ParanoidApp extends Application {
      */
     public static final String OPTIONS = MAIN_FOLDER + SEPARATOR + "options";
 
+    /**
+     * 
+     */
     public static final String USER = MAIN_FOLDER + SEPARATOR + "user";
 
+    /**
+     * 
+     */
     public static final String SCORE_FOLDER = MAIN_FOLDER + SEPARATOR + "scores";
     /**
      * the file to save the top story scores.
