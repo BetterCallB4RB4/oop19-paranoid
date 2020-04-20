@@ -27,15 +27,15 @@ public class MainStage extends Stage {
         /**
          * Constructor.
          * Add layout menu.fxml and size to the scene.
-         *  e collego gli osservatori al soggetto
+         *  and link observer to menuController subject
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);
+            final MenuController menuController = (MenuController) LayoutManager.MENU.getGuiController();
             final ScoreController scoreController = (ScoreController) LayoutManager.SCORE.getGuiController();
-            scoreController.initialize((MenuController) LayoutManager.MENU.getGuiController());
-            final GameBuilderController builder = (GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController();
             final ChooseLevelController chooseLevel = (ChooseLevelController) LayoutManager.CHOOSE_LVL.getGuiController();
-            chooseLevel.initialize(builder);
+            scoreController.initialize(menuController);
+            chooseLevel.initialize(menuController);
         }
 
     }

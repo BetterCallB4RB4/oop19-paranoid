@@ -1,10 +1,6 @@
 package paranoid.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -29,12 +25,11 @@ import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.view.parameters.LayoutManager;
 
-public class GameBuilderController implements GuiController, Subject {
+public class GameBuilderController implements GuiController {
 
     private int tileY;
     private int tileX;
     private GraphicsContext gc;
-    private List<Observer> observer;
     private LevelBuilder levelBuilder;
     private static final int PLAYER_ZONE = 4;
 
@@ -81,7 +76,6 @@ public class GameBuilderController implements GuiController, Subject {
     public void initialize() {
         this.ost.getItems().addAll(Music.getMusicNames());
         this.backGround.getItems().addAll(BackGround.getBackGroundNames());
-        this.observer = new ArrayList<>();
         this.colorPicker.setValue(Color.HOTPINK);
         this.colorPicker.setEditable(false);
         this.levelBuilder = new LevelBuilder();
@@ -160,7 +154,6 @@ public class GameBuilderController implements GuiController, Subject {
                         .defaultScore(this.levelName.getText())
                         .build());
                 JOptionPane.showMessageDialog(null, "Livello creato con successo");
-                this.notifyObserver();
             }
         }
     }
@@ -172,30 +165,6 @@ public class GameBuilderController implements GuiController, Subject {
     public void delateAll() {
         levelBuilder.delateAll();
         this.setCanvas();
-    }
-
-    /**
-     * add an observer.
-     */
-    @Override
-    public void register(final Observer obs) {
-        this.observer.add(obs);
-    }
-
-    /**
-     * remove an observer.
-     */
-    @Override
-    public void unregister(final Observer obs) {
-        this.observer.remove(obs);
-    }
-
-    /**
-     * notifies all observers of changes that have occurred.
-     */
-    @Override
-    public void notifyObserver() {
-        this.observer.forEach(i -> i.update());
     }
 
 }

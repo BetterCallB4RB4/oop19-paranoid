@@ -21,7 +21,7 @@ import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
 import paranoid.view.parameters.LayoutManager;
 
-public class ScoreController implements GuiController, ObserverScore {
+public class ScoreController implements GuiController, Observer {
 
     @FXML
     private SplitPane mainPanel;
@@ -52,7 +52,7 @@ public class ScoreController implements GuiController, ObserverScore {
      * @param subject
      */
     @FXML
-    public void initialize(final SubjectScore subject) {
+    public void initialize(final Subject subject) {
         subject.register(this);
         this.mainPanel.setMinWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMaxWidth(ScreenConstant.SCREEN_WIDTH);

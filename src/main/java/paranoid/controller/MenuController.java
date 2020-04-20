@@ -20,9 +20,9 @@ import paranoid.view.parameters.LayoutManager;
 /**
  * Controller of menu.fxml.
  */
-public final class MenuController implements GuiController, SubjectScore {
+public final class MenuController implements GuiController, Subject {
 
-    private List<ObserverScore> observers;
+    private List<Observer> observers;
 
     @FXML
     private Button continua;
@@ -114,25 +114,26 @@ public final class MenuController implements GuiController, SubjectScore {
 
     @FXML
     public void clickPlayYourLvl() {
+        this.notifyObserver();
         final Scene scene = playYourLvl.getScene();
         scene.setRoot(LayoutManager.CHOOSE_LVL.getLayout());
     }
 
     @Override
-    public void register(final ObserverScore obs) {
+    public void register(final Observer obs) {
         this.observers.add(obs);
 
     }
 
     @Override
-    public void unregister(final ObserverScore obs) {
+    public void unregister(final Observer obs) {
         this.observers.remove(obs);
 
     }
 
     @Override
     public void notifyObserver() {
-        this.observers.forEach(ObserverScore::update);
+        this.observers.forEach(Observer::update);
 
     }
 
