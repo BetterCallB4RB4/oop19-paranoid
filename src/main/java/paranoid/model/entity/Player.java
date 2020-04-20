@@ -19,8 +19,8 @@ import paranoid.model.component.physics.PlayerPhysicsComponent;
 public final class Player extends GameObj {
 
     private static final long serialVersionUID = -854724973379080675L;
-    private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
     private static final int PLAYER_SPEED = 450;
+    private final Map<Ball, Collision> lastZonePresence = new HashMap<>();
     private final PlayerId playerId;
 
     private Player(final P2d pos, final int height, final int width, final PlayerId playerId) {
