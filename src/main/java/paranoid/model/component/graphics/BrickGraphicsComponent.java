@@ -14,6 +14,9 @@ public class BrickGraphicsComponent implements GraphicsComponent, Serializable {
         this.color = color;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update(GameObject obj, GraphicsAdapter ga) {
         ga.drawBrick((Brick) obj, this.color.getColor());

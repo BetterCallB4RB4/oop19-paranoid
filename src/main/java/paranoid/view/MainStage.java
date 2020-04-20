@@ -31,10 +31,10 @@ public class MainStage extends Stage {
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);
-            ScoreController scoreController = (ScoreController) LayoutManager.SCORE.getGuiController();
+            final ScoreController scoreController = (ScoreController) LayoutManager.SCORE.getGuiController();
             scoreController.initialize((MenuController) LayoutManager.MENU.getGuiController());
-            GameBuilderController builder = (GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController();
-            ChooseLevelController chooseLevel = (ChooseLevelController) LayoutManager.CHOOSE_LVL.getGuiController();
+            final GameBuilderController builder = (GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController();
+            final ChooseLevelController chooseLevel = (ChooseLevelController) LayoutManager.CHOOSE_LVL.getGuiController();
             chooseLevel.initialize(builder);
         }
 

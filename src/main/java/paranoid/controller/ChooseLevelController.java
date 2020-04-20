@@ -32,8 +32,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import paranoid.common.dimension.ScreenConstant;
-import paranoid.controller.gameLoop.GameLoop;
-
+import paranoid.controller.gameloop.GameLoop;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
 import paranoid.model.score.User;

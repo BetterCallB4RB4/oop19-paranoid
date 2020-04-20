@@ -46,8 +46,8 @@ public enum Direction {
     }
 
     public V2d getVector() {
-        double py = Math.sin(Math.toRadians(angle)) * unitVector;
-        double px = Math.cos(Math.toRadians(angle)) * unitVector;
+        final double py = Math.sin(Math.toRadians(angle)) * unitVector;
+        final double px = Math.cos(Math.toRadians(angle)) * unitVector;
         return new V2d(px, py);
     }
 

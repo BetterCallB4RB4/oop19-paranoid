@@ -1,4 +1,4 @@
-package paranoid.controller.gameLoop;
+package paranoid.controller.gameloop;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -31,7 +31,6 @@ public class GameLoop implements Runnable {
     private final World world;
     private final GameState gameState;
     private final GameController gameController;
-    private final InputHandler inputHandler;
     private final Map<PlayerId, InputController> inputController = new HashMap<>();
     private final MusicPlayer player;
 
@@ -49,8 +48,8 @@ public class GameLoop implements Runnable {
         this.changeView(LayoutManager.GAME);
         this.inputController.put(PlayerId.ONE, new KeyboardInputController());
         this.inputController.put(PlayerId.TWO, new KeyboardInputController());
-        this.inputHandler = new KeyboardInputHandler(this.inputController, this.gameController.getCanvas(), this.gameState);
-        this.inputHandler.notifyInputEvent();
+        final InputHandler inputHandler = new KeyboardInputHandler(this.inputController, this.gameController.getCanvas(), this.gameState);
+        inputHandler.notifyInputEvent();
     }
 
     /**
@@ -144,10 +143,12 @@ public class GameLoop implements Runnable {
     private void waitForNextFrame(final long current) {
         final long dt = System.currentTimeMillis() - current;
         if (dt < PERIOD) {
-            try {
-                Thread.sleep(PERIOD - dt);
-            } catch (Exception ex) {
-            }
+                try {
+                    Thread.sleep(PERIOD - dt);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
         }
     }
 

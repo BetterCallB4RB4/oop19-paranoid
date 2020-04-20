@@ -4,8 +4,8 @@ import java.util.Map;
 
 import javafx.scene.canvas.Canvas;
 import paranoid.common.PlayerId;
-import paranoid.controller.gameLoop.GamePhase;
-import paranoid.controller.gameLoop.GameState;
+import paranoid.controller.gameloop.GamePhase;
+import paranoid.controller.gameloop.GameState;
 
 public class KeyboardInputHandler implements InputHandler {
 

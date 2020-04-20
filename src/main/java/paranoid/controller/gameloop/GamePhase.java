@@ -1,4 +1,4 @@
-package paranoid.controller.gameLoop;
+package paranoid.controller.gameloop;
 
 public enum GamePhase {
 

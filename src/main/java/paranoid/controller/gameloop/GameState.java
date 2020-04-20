@@ -1,4 +1,4 @@
-package paranoid.controller.gameLoop;
+package paranoid.controller.gameloop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ import paranoid.model.settings.SettingsManager;
 public class GameState {
 
     private GamePhase phase;
-    private int highScoreValue;
+    private final int highScoreValue;
     private int multiplier;
     private final Settings settings;
     private final Score scores;
