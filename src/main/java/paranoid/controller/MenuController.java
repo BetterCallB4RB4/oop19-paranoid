@@ -7,12 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.gameloop.GameLoop;
@@ -28,7 +22,7 @@ import paranoid.view.parameters.LayoutManager;
  */
 public final class MenuController implements GuiController, SubjectScore {
 
-    private List<ObserverScore> observer;
+    private List<ObserverScore> observers;
 
     @FXML
     private Button continua;
@@ -59,28 +53,18 @@ public final class MenuController implements GuiController, SubjectScore {
 
     @FXML
     public void initialize() {
-        this.observer = new ArrayList<>();
+        this.observers = new ArrayList<>();
         this.backGroundPane.setMinWidth(ScreenConstant.CANVAS_WIDTH);
         this.backGroundPane.setMaxWidth(ScreenConstant.CANVAS_WIDTH);
         this.backGroundPane.setMinHeight(ScreenConstant.CANVAS_HEIGHT);
         this.backGroundPane.setMaxHeight(ScreenConstant.CANVAS_HEIGHT);
-        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/menu1.jpg", 
-                                                              ScreenConstant.SCREEN_WIDTH,
-                                                              ScreenConstant.SCREEN_HEIGHT,
-                                                              false,
-                                                              true),
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundPosition.DEFAULT,
-                                                    BackgroundSize.DEFAULT);
-        this.backDash.setBackground(new Background(myBI2));
     }
 
     @FXML
     public void clickContinue() {
         final Scene scene = continua.getScene();
         final Thread engine = new Thread(new GameLoop(scene));
-        engine.setDaemon(true); //allow jvm to close the thread when close the window.
+        engine.setDaemon(true);
         engine.start();
     }
 
@@ -88,15 +72,15 @@ public final class MenuController implements GuiController, SubjectScore {
      * Handle start game button event.
      */
     @FXML
-    private void btnStartOnClickHandler() {
-        SettingsBuilder setBuilder = new SettingsBuilder();
+    public void btnStartOnClickHandler() {
+        final SettingsBuilder setBuilder = new SettingsBuilder();
         setBuilder.fromSettings(SettingsManager.loadOption());
         setBuilder.selectLevel(LevelSelection.LEVEL1.getLevel());
         SettingsManager.saveOption(setBuilder.build());
         UserManager.saveUser(new User());
         final Scene scene = btnStart.getScene();
         final Thread engine = new Thread(new GameLoop(scene));
-        engine.setDaemon(true); //allow jvm to close the thread when close the window.
+        engine.setDaemon(true);
         engine.start();
     }
 
@@ -104,25 +88,26 @@ public final class MenuController implements GuiController, SubjectScore {
      * Handle high score button event.
      */
     @FXML
-    private void btnScoreOnClickHandler() {
+    public void btnScoreOnClickHandler() {
         this.notifyObserver();
         final Scene scene = btnScore.getScene();
         scene.setRoot(LayoutManager.SCORE.getLayout());
     }
+
     @FXML
-    private void goToLevelBuilder() {
+    public void goToLevelBuilder() {
         final Scene scene = btnBuilder.getScene();
         scene.setRoot(LayoutManager.LEVEL_BUILDER.getLayout());
     }
 
     @FXML
-    private void goToSettings() {
+    public void goToSettings() {
         final Scene scene = btSettings.getScene();
         scene.setRoot(LayoutManager.SETTINGS.getLayout());
     }
 
     @FXML
-    private void btnTutorialOnClickHandler() {
+    public void btnTutorialOnClickHandler() {
         final Scene scene = btnTutorial.getScene();
         scene.setRoot(LayoutManager.TUTORIAL.getLayout());
     }
@@ -135,19 +120,19 @@ public final class MenuController implements GuiController, SubjectScore {
 
     @Override
     public void register(final ObserverScore obs) {
-        this.observer.add(obs);
+        this.observers.add(obs);
 
     }
 
     @Override
     public void unregister(final ObserverScore obs) {
-        this.observer.remove(obs);
+        this.observers.remove(obs);
 
     }
 
     @Override
     public void notifyObserver() {
-        this.observer.forEach(ObserverScore::update);
+        this.observers.forEach(ObserverScore::update);
 
     }
 
