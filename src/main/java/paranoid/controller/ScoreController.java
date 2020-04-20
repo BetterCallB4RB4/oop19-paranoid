@@ -23,8 +23,6 @@ import paranoid.view.parameters.LayoutManager;
 
 public class ScoreController implements GuiController, ObserverScore {
 
-    private SubjectScore subject;
-
     @FXML
     private SplitPane mainPanel;
 
@@ -49,34 +47,32 @@ public class ScoreController implements GuiController, ObserverScore {
     @FXML
     private VBox labelContainer;
 
+    /**
+     * 
+     * @param subject
+     */
     @FXML
     public void initialize(final SubjectScore subject) {
-        this.subject = subject;
-        this.subject.register(this);
-
+        subject.register(this);
         this.mainPanel.setMinWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMaxWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMinHeight(ScreenConstant.SCREEN_HEIGHT);
         this.mainPanel.setMaxHeight(ScreenConstant.SCREEN_HEIGHT);
-
-
         this.scrollerLeft.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerLeft.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerLeft.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scrollerLeft.setVbarPolicy(ScrollBarPolicy.NEVER);
-
         this.scrollerRight.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerRight.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerRight.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scrollerRight.setVbarPolicy(ScrollBarPolicy.NEVER);
-        this.btnMenu.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
-                + "-fx-background-radius: 30;"
-                + "-fx-font-size: 20;"
-                + "-fx-font-weight: bold");
     }
 
+    /**
+     * 
+     */
     @FXML
-    private void btnMenuOnClickHandler() {
+    public void btnMenuOnClickHandler() {
         final Scene scene = labelContainer.getScene();
         scene.setRoot(LayoutManager.MENU.getLayout());
     }
@@ -88,12 +84,8 @@ public class ScoreController implements GuiController, ObserverScore {
     public void update() {
         this.buttonContainer.getChildren().clear();
         this.grid.getChildren().clear();
-
-        Button bStory = new Button("STORIA");
-        bStory.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
-                 + "-fx-background-radius: 30;"
-                 + "-fx-font-size: 20;"
-                 + "-fx-font-weight: bold");
+        final Button bStory = new Button("STORIA");
+        this.setButtonStyle(bStory, btnMenu);
         bStory.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
@@ -102,13 +94,9 @@ public class ScoreController implements GuiController, ObserverScore {
 
         });
         this.buttonContainer.getChildren().add(bStory);
-
         for (final Score score : ScoreManager.loadCustomList()) {
-            Button bCustom = new Button(score.getNameScore().toUpperCase());
-            bCustom.setStyle("-fx-background-color:  linear-gradient(to bottom right, #FFE74E, #A2FD24);"
-                     + "-fx-background-radius: 30;"
-                     + "-fx-font-size: 20;"
-                     + "-fx-font-weight: bold");
+            final Button bCustom = new Button(score.getNameScore());
+            this.setButtonStyle(bCustom, btnMenu);
             bCustom.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent event) {
@@ -121,31 +109,31 @@ public class ScoreController implements GuiController, ObserverScore {
 
     private void viewScore(final Score score) {
         this.grid.getChildren().clear();
-        Label name = new Label("NOME: ");
+        final Label name = new Label("NOME: ");
         name.setStyle("-fx-font-size: 20;"
                 + "-fx-font-weight: bold");
         name.setTextFill(Color.LAWNGREEN);
 
-        Label point = new Label("PUNTEGGIO: ");
+        final Label point = new Label("PUNTEGGIO: ");
         point.setStyle("-fx-font-size: 20;"
                 + "-fx-font-weight: bold");
         point.setTextFill(Color.LAWNGREEN);
         this.grid.add(name, 1, 0);
         this.grid.add(point, 2, 0);
-        List<User> scoreList = score.getScoreList();
+        final List<User> scoreList = score.getScoreList();
 
         if (!scoreList.isEmpty()) {
             for (int x = 0; x < scoreList.size(); x++) {
-                Label i = new Label(" " + Integer.toString(x + 1) + " ");
+                final Label i = new Label(" " + Integer.toString(x + 1) + " ");
                 i.setStyle("-fx-font-size: 20;"
                         + "-fx-font-weight: bold");
                 i.setTextFill(Color.ALICEBLUE);
-                Label n = new Label(scoreList.get(x).getName().toUpperCase());
+                final Label n = new Label(scoreList.get(x).getName());
                 n.setStyle("-fx-font-size: 20;"
                         + "-fx-font-weight: bold");
                 n.setTextFill(Color.ALICEBLUE);
 
-                Label s = new Label(scoreList.get(x).getScore().toString());
+                final Label s = new Label(scoreList.get(x).getScore().toString());
                 s.setStyle("-fx-font-size: 20;"
                         + "-fx-font-weight: bold");
                 s.setTextFill(Color.ALICEBLUE);
@@ -154,6 +142,12 @@ public class ScoreController implements GuiController, ObserverScore {
                 grid.add(s, 2, x + 1);
             }
         }
+    }
+
+    private void setButtonStyle(final Button subject, final Button reference) {
+        subject.setStyle(reference.getStyle());
+        subject.setEffect(reference.getEffect());
+        subject.setFont(reference.getFont());
     }
 
 }
