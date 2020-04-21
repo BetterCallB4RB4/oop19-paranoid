@@ -20,29 +20,28 @@ public final class ScoreManager {
     }
 
     public static void saveStory(final Score score) {
-        save(ParanoidApp.SCORE_STORY, score, "storia");
-    }
-
-    public static Score loadStory() {
-        return load(ParanoidApp.SCORE_STORY, "storia");
+        save(ParanoidApp.SCORE_STORY_PATH, score, ParanoidApp.SCORE_STORY_NAME);
     }
 
     public static void saveCustom(final Score score) {
-        save(ParanoidApp.SCORE_CUSTOM, score, score.getNameScore());
+        save(ParanoidApp.SCORE_CUSTOM_PATH, score, score.getNameScore());
+    }
+
+    public static Score loadStory() {
+        return load(ParanoidApp.SCORE_STORY_PATH, ParanoidApp.SCORE_STORY_NAME);
     }
 
     public static Score loadCustom(final String nameScore) {
-        return load(ParanoidApp.SCORE_CUSTOM, nameScore);
+        return load(ParanoidApp.SCORE_CUSTOM_PATH, nameScore);
     }
 
     public static List<Score> loadCustomList() {
         final List<Score> scores = new ArrayList<>();
-        final String path = ParanoidApp.SCORE_CUSTOM;
-        final File scoreFolder = new File(path);
+        final File scoreFolder = new File(ParanoidApp.SCORE_CUSTOM_PATH);
         if (scoreFolder.exists() && scoreFolder.isDirectory()) {
             final File[] scoreFileList = scoreFolder.listFiles();
             for (final File file : scoreFileList) {
-                scores.add(load(path, file.getName()));
+                scores.add(load(ParanoidApp.SCORE_CUSTOM_PATH, file.getName()));
             }
         }
         return scores;

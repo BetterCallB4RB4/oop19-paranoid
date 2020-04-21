@@ -4,6 +4,7 @@ import paranoid.main.ParanoidApp;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -13,15 +14,15 @@ public final class Score implements Serializable {
 
     private static final long serialVersionUID = 6171113929805935910L;
 
-    private final LinkedList<User> scoreList;
+    private final List<User> scoreList;
     private final String nameScore;
 
-    private Score(final LinkedList<User> scoreList, final String nameScore) {
+    private Score(final List<User> scoreList, final String nameScore) {
         this.scoreList = scoreList;
         this.nameScore = nameScore;
     }
 
-    public LinkedList<User> getScoreList() {
+    public List<User> getScoreList() {
         return this.scoreList;
     }
 
@@ -30,12 +31,12 @@ public final class Score implements Serializable {
     }
 
     public Integer getHighValue() {
-        return this.scoreList.isEmpty() ? 0 : this.scoreList.peekFirst().getScore();
+        return this.scoreList.isEmpty() ? 0 : this.scoreList.get(0).getScore();
     }
 
     public static final class Builder {
 
-        private LinkedList<User> scoreList;
+        private List<User> scoreList;
         private String nameScore;
 
         public Builder defaultScore(final String nameScore) {
@@ -68,7 +69,7 @@ public final class Score implements Serializable {
             if (!this.nameScore.isEmpty()) {
                 sortScore();
                 while (this.scoreList.size() > ParanoidApp.SCORE_MAX_ELEM) {
-                    this.scoreList.pollLast();
+                    this.scoreList.remove(this.scoreList.size() - 1);
                 }
             }
         }

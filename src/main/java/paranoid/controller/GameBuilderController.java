@@ -150,9 +150,6 @@ public class GameBuilderController implements GuiController {
                 this.levelBuilder.setBackGround(backGround.getValue());
                 this.levelBuilder.setSong(ost.getValue());
                 LevelManager.saveLevel(this.levelBuilder.build());
-                ScoreManager.saveCustom(new Score.Builder()
-                        .defaultScore(this.levelName.getText())
-                        .build());
                 JOptionPane.showMessageDialog(null, "Livello creato con successo");
             }
         }
