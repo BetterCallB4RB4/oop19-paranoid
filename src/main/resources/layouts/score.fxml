@@ -20,11 +20,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="mainPanel" dividerPositions="0.5" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ScoreController">
+<SplitPane fx:id="mainPanel" dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ScoreController">
    <items>
       <VBox fx:id="vBoxMenu" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);">
          <children>
-            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24); -fx-background-radius: 30;" text="MENU">
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="MENU">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
