@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import paranoid.model.settings.SettingsManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
+import paranoid.model.score.User;
+import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
 /**
@@ -107,6 +109,7 @@ public class ParanoidApp extends Application {
                 ScoreManager.saveStory(new Score.Builder()
                         .defaultScore(SCORE_STORY_NAME)
                         .build());
+                UserManager.saveUser(new User());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
