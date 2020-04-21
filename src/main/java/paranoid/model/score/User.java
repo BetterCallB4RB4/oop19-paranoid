@@ -3,6 +3,9 @@ package paranoid.model.score;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * User.
+ */
 public class User implements Serializable {
 
     private static final long serialVersionUID = 7908156953699582799L;
@@ -77,7 +80,7 @@ public class User implements Serializable {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -90,7 +93,7 @@ public class User implements Serializable {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(final Object obj) {

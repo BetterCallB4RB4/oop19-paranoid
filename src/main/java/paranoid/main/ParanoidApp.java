@@ -1,17 +1,15 @@
 package paranoid.main;
 
 import java.io.File;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import paranoid.model.settings.SettingsManager;
-import paranoid.model.level.LevelManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
+import paranoid.model.score.User;
+import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
-import paranoid.model.level.Level;
 /**
  * PARANOID MAIN.
  * Stage creation.
@@ -56,12 +54,21 @@ public class ParanoidApp extends Application {
     /**
      * the file to save the top story scores.
      */
-    public static final String SCORE_STORY = SCORE_FOLDER + SEPARATOR + "story";
+    public static final String SCORE_STORY_PATH = SCORE_FOLDER + SEPARATOR + "story";
 
+    /**
+     * the default name of the story score.
+     */
+    public static final String SCORE_STORY_NAME = "story";
     /**
      * the file to save the top story scores.
      */
-    public static final String SCORE_CUSTOM = SCORE_FOLDER + SEPARATOR + "custom";
+    public static final String SCORE_CUSTOM_PATH = SCORE_FOLDER + SEPARATOR + "custom";
+
+    /**
+     * maximum number of element in the score.
+     */
+    public static final int SCORE_MAX_ELEM = 10;
 
     /**
      * {@inheritDoc}
@@ -89,8 +96,8 @@ public class ParanoidApp extends Application {
         final File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
         final File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
         final File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
-        final File scoreStory = new File(ParanoidApp.SCORE_STORY);
-        final File scoreCustom = new File(ParanoidApp.SCORE_CUSTOM);
+        final File scoreStory = new File(ParanoidApp.SCORE_STORY_PATH);
+        final File scoreCustom = new File(ParanoidApp.SCORE_CUSTOM_PATH);
         if (!mainFolder.exists()) {
             try {
                 mainFolder.mkdir();
@@ -100,21 +107,13 @@ public class ParanoidApp extends Application {
                 scoreCustom.mkdir();
                 SettingsManager.saveOption(settingsBuilder.build());
                 ScoreManager.saveStory(new Score.Builder()
-                            .defaultScore("storia")
-                            .build());
+                        .defaultScore(SCORE_STORY_NAME)
+                        .build());
+                UserManager.saveUser(new User());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }
         }
-        final List<Level> levelList = LevelManager.loadLevels();
-        levelList.forEach(i -> {
-            final String levelName = i.getLevelName();
-            if (!new File(ParanoidApp.SCORE_CUSTOM + SEPARATOR + levelName).exists()) {
-                ScoreManager.saveCustom(new Score.Builder()
-                        .defaultScore(levelName)
-                        .build());
-            }
-        });
     }
 
 }
