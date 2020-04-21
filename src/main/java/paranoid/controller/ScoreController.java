@@ -1,11 +1,7 @@
 package paranoid.controller;
 
 import java.io.File;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -64,12 +60,8 @@ public class ScoreController implements GuiController, Observer {
         this.mainPanel.setMaxWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMinHeight(ScreenConstant.SCREEN_HEIGHT);
         this.mainPanel.setMaxHeight(ScreenConstant.SCREEN_HEIGHT);
-        this.scrollerLeft.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
-        this.scrollerLeft.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerLeft.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scrollerLeft.setVbarPolicy(ScrollBarPolicy.NEVER);
-        this.scrollerRight.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
-        this.scrollerRight.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerRight.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scrollerRight.setVbarPolicy(ScrollBarPolicy.NEVER);
     }
@@ -154,7 +146,7 @@ public class ScoreController implements GuiController, Observer {
                 counter++;
             }
         } else {
-            final Label emptyList = new Label("SCORE IS EMPTY");
+            final Label emptyList = new Label("SCORE EMPTY");
             setLabelStyle(emptyList, Color.ALICEBLUE);
             grid.add(emptyList, 1, 1);
         }

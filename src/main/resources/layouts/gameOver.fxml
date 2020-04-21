@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.*?>
@@ -7,46 +8,62 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameOverController">
+<SplitPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameOverController">
    <items>
-      <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: black;">
+      <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);">
          <children>
             <Label fx:id="lblGameOver" text="GAME OVER" textFill="WHITE">
                <font>
-                  <Font size="40.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Label fx:id="lblScore" text="IL TUO PUNTEGGIO: " textFill="WHITE">
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24);" text="MENU">
                <font>
-                  <Font size="20.0" />
-               </font></Label>
-            <Button fx:id="btnScore" mnemonicParsing="false" onMouseClicked="#btnScoreOnClickHandler" text="TORNA AL MENU">
-               <font>
-                  <Font size="15.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Label fx:id="lblName" text="INSERISCI IL TUO NOME: " textFill="WHITE">
+            <VBox fx:id="boxName" alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="NAME: " textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtName">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="btnSend" mnemonicParsing="false" onMouseClicked="#btnSendOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24);" text="SEND">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lblError" text="INSERT A VALID NAME!" textFill="#ee2727">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <Label fx:id="lblScore" text="YOUR SCORE: " textFill="WHITE">
                <font>
-                  <Font size="20.0" />
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <Label fx:id="lblTop" text="TOP SCORE" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER">
-               <children>
-                  <TextField fx:id="txtName">
-                     <font>
-                        <Font size="15.0" />
-                     </font></TextField>
-                  <Button fx:id="btnSend" mnemonicParsing="false" onMouseClicked="#btnSendOnClickHandler" text="INVIA">
-                     <font>
-                        <Font size="15.0" />
-                     </font></Button>
-               </children>
-            </HBox>
-            <ScrollPane fx:id="scroller" fitToHeight="true" fitToWidth="true" style="-fx-background-color: black;">
+            <ScrollPane fx:id="scroller" fitToHeight="true" fitToWidth="true" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);">
                <content>
-                  <VBox fx:id="labelContainer" alignment="TOP_CENTER" style="-fx-background-color: black;">
+                  <VBox fx:id="labelContainer" alignment="TOP_CENTER" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);">
                      <children>
-                        <GridPane fx:id="grid" alignment="TOP_CENTER" vgap="15.0">
+                        <GridPane fx:id="grid" alignment="TOP_CENTER" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);" vgap="15.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="97.0" minWidth="19.0" prefWidth="37.0" />
                               <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="177.0" minWidth="64.0" prefWidth="126.0" />
@@ -65,8 +82,24 @@
                      </children>
                   </VBox>
                </content>
+               <effect>
+                  <Lighting diffuseConstant="1.4" specularConstant="0.39" specularExponent="28.84" surfaceScale="0.92">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
             </ScrollPane>
          </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="30.0" />
+         </padding>
       </VBox>
    </items>
 </SplitPane>
