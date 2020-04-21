@@ -10,52 +10,52 @@ public enum BackGround implements Serializable {
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_1("animatedBackGround/backGround0.gif", "The World That Never Was"),
+    BACKGROUND_1("animatedBackGround/bg1.gif", "The World That Never Was"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_2("animatedBackGround/backGround1.gif", "Memory's Skyscraper"),
+    BACKGROUND_2("animatedBackGround/bg2.gif", "Memory's Skyscraper"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_3("animatedBackGround/backGround2.gif", "The Brink of Despair"),
+    BACKGROUND_3("animatedBackGround/bg3.gif", "The Brink of Despair"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_4("animatedBackGround/backGround3.gif", "Avenue to Dreams"),
+    BACKGROUND_4("animatedBackGround/bg4.gif", "Avenue to Dreams"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_5("animatedBackGround/backGround4.gif", "Contorted City"),
+    BACKGROUND_5("animatedBackGround/bg5.gif", "Contorted City"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_6("animatedBackGround/backGround5.gif", "Delusive Beginning"),
+    BACKGROUND_6("animatedBackGround/bg6.gif", "Delusive Beginning"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_7("animatedBackGround/backGround6.gif", "Walk of Delusions"),
+    BACKGROUND_7("animatedBackGround/bg7.gif", "Walk of Delusions"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_8("animatedBackGround/backGround7.gif", "Fact within Fiction"),
+    BACKGROUND_8("animatedBackGround/bg8.gif", "Fact within Fiction"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_9("animatedBackGround/backGround8.gif", "Purle heart"),
+    BACKGROUND_9("animatedBackGround/bg9.gif", "Purle heart"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    BACKGROUND_10("animatedBackGround/backGround9.gif", "Autonomous Sensory Meridian Response");
+    BACKGROUND_10("animatedBackGround/bg10.gif", "Autonomous Sensory Meridian Response");
 
     private String location;
     private String name;
