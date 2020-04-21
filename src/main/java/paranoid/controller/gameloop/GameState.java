@@ -53,7 +53,6 @@ public class GameState {
      * set initial game state.
      */
     public void init() {
-        this.phase = GamePhase.PAUSE;
         final Player.Builder playerBuilder = new Player.Builder();
         final List<Player> playerList = new ArrayList<>();
         playerList.add(playerBuilder.position(StartPhase.PLAYER_ONE.getSpawnPoint())
@@ -77,6 +76,7 @@ public class GameState {
                                              .setWidth(StartPhase.BALL.getInitWidth())
                                              .setSpeed(settings.getDifficulty().getSpeed())
                                              .build()));
+        this.phase = GamePhase.PAUSE;
     }
     /**
      * @return the score
