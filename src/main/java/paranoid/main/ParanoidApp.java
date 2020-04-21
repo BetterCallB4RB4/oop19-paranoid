@@ -64,6 +64,11 @@ public class ParanoidApp extends Application {
     public static final String SCORE_CUSTOM = SCORE_FOLDER + SEPARATOR + "custom";
 
     /**
+     * maximum number of element in the score.
+     */
+    public static final int SCORE_MAX_ELEM = 10;
+
+    /**
      * {@inheritDoc}
      */
     @Override

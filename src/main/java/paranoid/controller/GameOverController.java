@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import paranoid.main.ParanoidApp;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.score.Score;
@@ -112,7 +113,7 @@ public class GameOverController implements GuiController  {
         }
         this.lblScore.setText("IL TUO PUNTEGGIO: " + user.getScore().toString());
         final List<User> scoreList = this.topScores.getScoreList();
-        if (scoreList.isEmpty() || scoreList.size() < 10) {
+        if (scoreList.isEmpty() || scoreList.size() < ParanoidApp.SCORE_MAX_ELEM) {
             this.setNameVisible(true);
         } else {
             final Integer minScore = scoreList.get(scoreList.size() - 1).getScore();

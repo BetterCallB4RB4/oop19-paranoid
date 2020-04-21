@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.ChooseLevelController;
-import paranoid.controller.GameBuilderController;
 import paranoid.controller.MenuController;
 import paranoid.controller.ScoreController;
 import paranoid.view.parameters.LayoutManager;

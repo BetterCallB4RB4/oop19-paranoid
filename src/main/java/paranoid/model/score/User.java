@@ -3,7 +3,10 @@ package paranoid.model.score;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
+/**
+ * User.
+ */
+public class User implements Serializable {
 
     private static final long serialVersionUID = 7908156953699582799L;
 
@@ -47,6 +50,9 @@ public class User implements Serializable{
         this.lives = lives;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -57,6 +63,9 @@ public class User implements Serializable{
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -68,7 +77,7 @@ public class User implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        User other = (User) obj;
+        final User other = (User) obj;
         if (date == null) {
             if (other.date != null) {
                 return false;
