@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="mainPanel" style="-fx-background-color: lightgreen;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.NextLevelController">
+<SplitPane fx:id="mainPanel" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #50A8FF, #8E0098);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.NextLevelController">
    <items>
       <VBox alignment="TOP_CENTER" spacing="10.0">
          <children>
@@ -30,11 +30,11 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Button fx:id="btnNext" mnemonicParsing="false" onMouseClicked="#btnNextOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24); -fx-background-radius: 30;" text="NEXT LEVEL">
+            <Button fx:id="btnNext" mnemonicParsing="false" onMouseClicked="#btnNextOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="NEXT LEVEL">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></Button>
-            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24); -fx-background-radius: 30;" text="MENU">
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="MENU">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font></Button>
