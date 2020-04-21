@@ -18,17 +18,17 @@ public class LevelBuilder {
 
     //questa mi serve per capire quanle mattoncino ho cliccato nel canvasa 
     //restituaentdomi la coordinata del mattoncino
-    private Map<PlaceHolder, Pair<Integer, Integer>> builderCanvas = new HashMap<>();
+    private final Map<PlaceHolder, Pair<Integer, Integer>> builderCanvas = new HashMap<>();
 
     //questo mi permette di andare a vedere se ho già cliccato il mattoncino
     //se non è presente costruisco il mattoncino con le caratteristiche del place holder
     //e dell form presenti nell'interfaccia grafica
-    private Map<Pair<Integer, Integer>, Pair<PlaceHolder, Optional<Brick>>> gameCanvas = new HashMap<>();
+    private final Map<Pair<Integer, Integer>, Pair<PlaceHolder, Optional<Brick>>> gameCanvas = new HashMap<>();
 
-    private int builderBrickDimensionY = (int) (ScreenConstant.CANVAS_HEIGHT / ScreenConstant.BRICK_NUMBER_Y);
-    private int builderBrickDimensionX = (int) (ScreenConstant.CANVAS_WIDTH / ScreenConstant.BRICK_NUMBER_X);
-    private int gameBrickDimensionY = (int) (ScreenConstant.WORLD_HEIGHT / ScreenConstant.BRICK_NUMBER_Y);
-    private int gameBrickDimensionX = (int) (ScreenConstant.WORLD_WIDTH / ScreenConstant.BRICK_NUMBER_X);
+    private final int builderBrickDimensionY = (int) (ScreenConstant.CANVAS_HEIGHT / ScreenConstant.BRICK_NUMBER_Y);
+    private final int builderBrickDimensionX = (int) (ScreenConstant.CANVAS_WIDTH / ScreenConstant.BRICK_NUMBER_X);
+    private final int gameBrickDimensionY = (int) (ScreenConstant.WORLD_HEIGHT / ScreenConstant.BRICK_NUMBER_Y);
+    private final int gameBrickDimensionX = (int) (ScreenConstant.WORLD_WIDTH / ScreenConstant.BRICK_NUMBER_X);
 
     private String levelName;
     private String song;
@@ -40,8 +40,8 @@ public class LevelBuilder {
         for (int i = 0; i < ScreenConstant.BRICK_NUMBER_X; i++) {
             int currentYpos = 0;
             for (int j = 0; j < ScreenConstant.BRICK_NUMBER_Y; j++) {
-                Pair<Integer, Integer> coordinates = new Pair<>(i, j);
-                PlaceHolder ph = new PlaceHolder(new P2d(currentXpos, currentYpos), builderBrickDimensionY, builderBrickDimensionX);
+                final Pair<Integer, Integer> coordinates = new Pair<>(i, j);
+                final PlaceHolder ph = new PlaceHolder(new P2d(currentXpos, currentYpos), builderBrickDimensionY, builderBrickDimensionX);
                 this.builderCanvas.put(ph, coordinates);
                 currentYpos += builderBrickDimensionY;
             }
@@ -53,8 +53,8 @@ public class LevelBuilder {
         for (int i = 0; i < ScreenConstant.BRICK_NUMBER_X; i++) {
             int currentYpos = 0;
             for (int j = 0; j < ScreenConstant.BRICK_NUMBER_Y; j++) {
-                Pair<Integer, Integer> coordinates = new Pair<>(i, j);
-                PlaceHolder ph = new PlaceHolder(new P2d(currentXpos, currentYpos), gameBrickDimensionY, gameBrickDimensionX);
+                final Pair<Integer, Integer> coordinates = new Pair<>(i, j);
+                final PlaceHolder ph = new PlaceHolder(new P2d(currentXpos, currentYpos), gameBrickDimensionY, gameBrickDimensionX);
                 this.gameCanvas.put(coordinates, new Pair<>(ph, Optional.empty()));
                 currentYpos += gameBrickDimensionY;
             }
@@ -76,7 +76,7 @@ public class LevelBuilder {
      * @param x mouse coordinates
      * @param y mouse coordinates
      * @param color selected
-     * @param isDestructibile
+     * @param isIndestructibile
      * @param point
      * @param lives
      * @return Pair<Brick, Boolean>
@@ -85,17 +85,17 @@ public class LevelBuilder {
                                           final Color color, final boolean isIndestructibile, 
                                           final int point, final int lives) {
         Pair<PlaceHolder, Boolean> res = new Pair<>(new PlaceHolder(new P2d(0, 0), 0, 0), false);
-        for (PlaceHolder ph : this.builderCanvas.keySet()) {
+        for (final PlaceHolder ph : this.builderCanvas.keySet()) {
             if (x > ph.getPos().getX() && x < ph.getPos().getX() + ph.getWidth() && y > ph.getPos().getY()
                     && y < ph.getPos().getY() + ph.getHeight()) {
-                Pair<Integer, Integer> hit = this.builderCanvas.get(ph);
+                final Pair<Integer, Integer> hit = this.builderCanvas.get(ph);
                 if (this.gameCanvas.get(hit).getY().isPresent()) {
                     this.gameCanvas.replace(hit, new Pair<>(this.gameCanvas.get(hit).getX(), Optional.empty()));
                     res = new Pair<>(ph, false);
                 } else {
-                    Builder builder = new Builder();
-                    PlaceHolder gamePlaceHolder = this.gameCanvas.get(hit).getX();
-                    Brick brick = builder.position(new P2d(gamePlaceHolder.getPos().getX(), gamePlaceHolder.getPos().getY()))
+                    final Builder builder = new Builder();
+                    final PlaceHolder gamePlaceHolder = this.gameCanvas.get(hit).getX();
+                    final Brick brick = builder.position(new P2d(gamePlaceHolder.getPos().getX(), gamePlaceHolder.getPos().getY()))
                                          .height(this.gameCanvas.get(hit).getX().getHeight())
                                          .width(this.gameCanvas.get(hit).getX().getWidth())
                                          .pointEarned(point)
@@ -115,7 +115,7 @@ public class LevelBuilder {
      * delate all the brick.
      */
     public void delateAll() {
-        for (var elem : this.gameCanvas.keySet()) {
+        for (final var elem : this.gameCanvas.keySet()) {
             this.gameCanvas.replace(elem, new Pair<>(this.gameCanvas.get(elem).getX(), Optional.empty()));
         }
     }
@@ -125,11 +125,11 @@ public class LevelBuilder {
      * @return the built level
      */
     public Level build() {
-        List<Brick> level = this.gameCanvas.entrySet().stream()
-                                                      .map(i -> i.getValue().getY())
-                                                      .filter(i -> i.isPresent())
-                                                      .map(i -> i.get())
-                                                      .collect(Collectors.toList());
+        final List<Brick> level = this.gameCanvas.entrySet().stream()
+                                                            .map(i -> i.getValue().getY())
+                                                            .filter(i -> i.isPresent())
+                                                            .map(i -> i.get())
+                                                            .collect(Collectors.toList());
         return new Level(level, levelName, song, backGround);
     }
 
