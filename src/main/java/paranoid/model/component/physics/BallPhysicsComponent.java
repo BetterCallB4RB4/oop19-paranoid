@@ -18,7 +18,9 @@ import paranoid.model.entity.World;
 public class BallPhysicsComponent implements PhysicsComponent {
 
     /**
-     * 
+     * updates the position of the ball according to elapsed time 
+     * and then asks the world if collisions have occurred. 
+     * if the collisions occurred the state of the ball will be changed.
      */
     @Override
     public void update(final int dt, final GameObject gameObj, final World w) {

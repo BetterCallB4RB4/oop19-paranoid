@@ -14,7 +14,7 @@ public class BallGraphicsComponent implements GraphicsComponent {
     }
 
     /**
-     * 
+     * draw the ball by passing the specific graphic information to the graphic adapter. 
      */
     @Override
     public void update(final GameObject obj, final GraphicsAdapter ga) {

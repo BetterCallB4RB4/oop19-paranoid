@@ -26,6 +26,9 @@ public class TutorialController implements GuiController {
         this.mainPanel.setMaxHeight(ScreenConstant.SCREEN_HEIGHT);
     }
 
+    /**
+     * 
+     */
     @FXML
     public void btnMenuOnClickHandler() {
         final Scene scene = this.btnMenu.getScene();

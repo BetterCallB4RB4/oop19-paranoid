@@ -19,7 +19,7 @@ public class SerializableColor implements Serializable {
 
     /**
      * 
-     * @return color scomposed int his parts
+     * @return color composed of its 3 parts
      */
     public Color getColor() {
         return Color.color(red, green, blue);

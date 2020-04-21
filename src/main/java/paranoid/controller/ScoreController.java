@@ -2,6 +2,8 @@ package paranoid.controller;
 
 import java.io.File;
 import java.util.List;
+import java.util.Set;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -108,7 +110,7 @@ public class ScoreController implements GuiController, Observer {
     }
 
     private void updateScoreList() {
-        final List<Level> levelList = LevelManager.loadLevels();
+        final Set<Level> levelList = LevelManager.loadLevels();
         levelList.forEach(i -> {
             final String levelName = i.getLevelName();
             if (!new File(ParanoidApp.SCORE_CUSTOM_PATH + ParanoidApp.SEPARATOR + levelName).exists()) {

@@ -31,6 +31,9 @@ public class NextLevelController implements GuiController {
     @FXML
     private Button btnNext;
 
+    /**
+     * 
+     */
     @FXML
     public void initialize() {
         this.mainPanel.setMinWidth(ScreenConstant.SCREEN_WIDTH);
@@ -39,12 +42,18 @@ public class NextLevelController implements GuiController {
         this.mainPanel.setMaxHeight(ScreenConstant.SCREEN_HEIGHT);
     }
 
+    /**
+     * 
+     */
     @FXML
     public void btnMenuOnClickHandler() {
         final Scene scene = btnMenu.getScene();
         scene.setRoot(LayoutManager.MENU.getLayout());
     }
 
+    /**
+     * 
+     */
     @FXML
     public void btnNextOnClickHandler() {
         final Scene scene = btnNext.getScene();
@@ -53,6 +62,11 @@ public class NextLevelController implements GuiController {
         engine.start();
     }
 
+    /**
+     * 
+     * @param lvl
+     * @param user
+     */
     public void update(final Level lvl, final User user) {
         this.lblLevel.setText(lvl.getLevelName());
         this.lblLives.setText("YOUR LIVES: " + user.getLives().toString());
