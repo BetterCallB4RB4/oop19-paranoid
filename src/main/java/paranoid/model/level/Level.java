@@ -74,7 +74,7 @@ public class Level implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Level other = (Level) obj;
+        final Level other = (Level) obj;
         if (levelName == null) {
             if (other.levelName != null) {
                 return false;

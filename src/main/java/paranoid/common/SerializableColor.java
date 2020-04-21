@@ -7,9 +7,9 @@ import javafx.scene.paint.Color;
 public class SerializableColor implements Serializable {
 
     private static final long serialVersionUID = -6024360006502976365L;
-    private double red;
-    private double green;
-    private double blue;
+    private final double red;
+    private final double green;
+    private final double blue;
 
     public SerializableColor(final Color color) {
         this.red = color.getRed();

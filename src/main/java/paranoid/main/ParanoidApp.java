@@ -85,12 +85,12 @@ public class ParanoidApp extends Application {
      * if not present, create the folder to keep the game files.
      */
     public static void initSoftware() {
-        SettingsBuilder settingsBuilder = new SettingsBuilder();
-        File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
-        File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
-        File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
-        File scoreStory = new File(ParanoidApp.SCORE_STORY);
-        File scoreCustom = new File(ParanoidApp.SCORE_CUSTOM);
+        final SettingsBuilder settingsBuilder = new SettingsBuilder();
+        final File mainFolder = new File(ParanoidApp.MAIN_FOLDER);
+        final File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
+        final File scoreFolder = new File(ParanoidApp.SCORE_FOLDER);
+        final File scoreStory = new File(ParanoidApp.SCORE_STORY);
+        final File scoreCustom = new File(ParanoidApp.SCORE_CUSTOM);
         if (!mainFolder.exists()) {
             try {
                 mainFolder.mkdir();
@@ -100,8 +100,8 @@ public class ParanoidApp extends Application {
                 scoreCustom.mkdir();
                 SettingsManager.saveOption(settingsBuilder.build());
                 ScoreManager.saveStory(new Score.Builder()
-                        .defaultScore("storia")
-                        .build());
+                            .defaultScore("storia")
+                            .build());
             } catch (SecurityException e) {
                 e.printStackTrace();
             }

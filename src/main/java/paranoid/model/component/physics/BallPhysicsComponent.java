@@ -53,9 +53,9 @@ public class BallPhysicsComponent implements PhysicsComponent {
 
         final Pair<Optional<Collision>, Optional<Direction>> playerCollisionInfo = w.checkCollisionWithPlayer(ball);
         if (playerCollisionInfo.getX().isPresent()) {
-            Collision collision = playerCollisionInfo.getX().get();
+            final Collision collision = playerCollisionInfo.getX().get();
             if (collision.equals(Collision.TOP)) {
-                Direction direction = playerCollisionInfo.getY().get();
+                final Direction direction = playerCollisionInfo.getY().get();
                 ball.setPos(old);
                 ball.setVel(direction.getVector());
                 ball.flipVelOnY();

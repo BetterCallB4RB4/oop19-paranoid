@@ -19,6 +19,9 @@ public class KeyboardInputHandler implements InputHandler {
         this.gameState = gameState;
     }
 
+    /**
+     * 
+     */
     @Override
     public void notifyInputEvent()  {
         onKeyPressed();

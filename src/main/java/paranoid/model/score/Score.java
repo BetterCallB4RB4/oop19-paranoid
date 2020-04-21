@@ -5,9 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
-
-public class Score implements Serializable{
+public final class Score implements Serializable {
 
     private static final long serialVersionUID = 6171113929805935910L;
 
@@ -22,7 +20,7 @@ public class Score implements Serializable{
     public List<User> getScoreList() {
         return this.scoreList;
     }
-    
+
     public String getNameScore() {
         return this.nameScore;
     }

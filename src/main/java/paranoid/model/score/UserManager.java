@@ -17,10 +17,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 import paranoid.main.ParanoidApp;
 
-public class UserManager {
-    /**
-     * Number of score elements that you want in file.
-     */
+public final class UserManager {
+
     private static SecretKey secretKey;
     private static Cipher cipher;
 
@@ -52,8 +50,12 @@ public class UserManager {
                 ) {
                 w.writeObject(user);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NullPointerException e1) {
+            e1.printStackTrace();
+        } catch (RuntimeException e2) {
+            e2.printStackTrace();
+        } catch (Exception e3) {
+            e3.printStackTrace();
         }
     }
 
@@ -76,8 +78,12 @@ public class UserManager {
 
                 return (User) r.readObject();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (NullPointerException e1) {
+            e1.printStackTrace();
+        } catch (RuntimeException e2) {
+            e2.printStackTrace();
+        } catch (Exception e3) {
+            e3.printStackTrace();
         }
         return null;
     }

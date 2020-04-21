@@ -58,9 +58,9 @@ public final class ScoreManager {
     }
 
     public static List<Score> loadCustomList() {
-        List<Score> scores = new ArrayList<>();
-        String path = ParanoidApp.SCORE_CUSTOM;
-        File scoreFolder = new File(path);
+        final List<Score> scores = new ArrayList<>();
+        final String path = ParanoidApp.SCORE_CUSTOM;
+        final File scoreFolder = new File(path);
         if (scoreFolder.exists() && scoreFolder.isDirectory()) {
             for (int i = 0; i < scoreFolder.list().length; i++) {
                 scores.add(load(path, scoreFolder.listFiles()[i].getName()));

@@ -29,7 +29,6 @@ import paranoid.view.parameters.LayoutManager;
 public class GameBuilderController implements GuiController {
 
     private int tileY;
-    private int tileX;
     private GraphicsContext gc;
     private LevelBuilder levelBuilder;
     private static final int PLAYER_ZONE = 4;
@@ -109,7 +108,7 @@ public class GameBuilderController implements GuiController {
         this.gc = canvas.getGraphicsContext2D();
         this.gc.setStroke(Color.BLACK);
         this.gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        this.tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
+        final int tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
         this.tileY = (int) (this.canvas.getHeight() / ScreenConstant.BRICK_NUMBER_Y);
         final double wastePixel = ScreenConstant.CANVAS_WIDTH % ScreenConstant.BRICK_NUMBER_X;
         int currentYpos = 0;
