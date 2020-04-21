@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameOverController">
+<SplitPane fx:id="mainPanel" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameOverController">
    <items>
       <VBox alignment="TOP_CENTER" spacing="5.0" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);">
          <children>
@@ -17,7 +17,7 @@
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24);" text="MENU">
+            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="MENU">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -36,7 +36,7 @@
                               <Font size="15.0" />
                            </font>
                         </TextField>
-                        <Button fx:id="btnSend" mnemonicParsing="false" onMouseClicked="#btnSendOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24);" text="SEND">
+                        <Button fx:id="btnSend" mnemonicParsing="false" onMouseClicked="#btnSendOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="SEND">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>

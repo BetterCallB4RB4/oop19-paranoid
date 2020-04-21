@@ -8,53 +8,51 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="mainPanel" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.TutorialController">
+<SplitPane fx:id="mainPanel" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.TutorialController">
    <items>
-      <VBox alignment="TOP_CENTER" spacing="5.0">
+      <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: linear-gradient(to bottom right, #1A004A, #FA147C);">
          <children>
-            <Label text="TUTORIAL" textFill="WHITE" wrapText="true">
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" text="TUTORIAL" textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="System Bold" size="50.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Label text="blablablablablablablablablablablablablablablablablablablablablablablabla" wrapText="true">
+            <Button fx:id="btnMenu" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7); -fx-background-radius: 30;" text="MENU">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
-            </Label>
-            <FlowPane rowValignment="TOP">
-               <children>
-                  <Pane prefHeight="100.0" prefWidth="100.0" style="-fx-background-image: url(&quot;images/moves.jpg&quot;); -fx-background-size: stretch;" />
-                  <Label text="blablablablablablablablablablablabla" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-               </children>
-            </FlowPane>
-            <FlowPane rowValignment="TOP">
-               <children>
-                  <Label text="blablablablablablablablablablablabla" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Pane prefHeight="100.0" prefWidth="100.0" style="-fx-background-image: url(&quot;images/collision.jpg&quot;); -fx-background-size: stretch;" />
-               </children>
-            </FlowPane>
-            <Label text="blablablablablablablablablablablablablablablablablablablablablablablabla" wrapText="true">
+            </Button>
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" text="Welcome to Paranoid. Playing this game, a journey inside your mind and your memories awaits you. Stay focused or this trip could drive you crazy. At the end of this path you can discover an enlightened yourself or you will have to live persecuted by paranoia." textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <Button fx:id="btnMenu" mnemonicParsing="false" onMouseClicked="#btnMenuOnClickHandler" style="-fx-background-color: linear-gradient(to bottom right, #FFE74E, #A2FD24); -fx-background-radius: 30;" text="MENU">
+            <Label alignment="TOP_LEFT" text="To continue through the levels and increase your perception you will have to eliminate all the obstacles that prevent your mind from expanding perception. Each brick in the game world represents a block towards this awareness. Your character cannot destroy these obstacles. The only way to eliminate these bricks is to throw a ball at it. It is possible to control the bouncing of the ball in order to direct it on the bricks still in play. The ball in contact with the player will assume a trajectory based on the collision zone." textFill="WHITE" wrapText="true">
                <font>
-                  <Font name="System Bold" size="20.0" />
-               </font></Button>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="94.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url(&quot;images/showDirection.png&quot;);">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <Label alignment="TOP_LEFT" contentDisplay="RIGHT" text="In paranoid you can bring a friend of yours to help you during the trip in order to avoid going crazy. Player one can control his character using the right arrow and the left arrow to move in the respective directions. Player 2 can move using the letter A to move left and the letter D to move right." textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" style="-fx-image: url(&quot;images/playerControl.png&quot;);" />
+               </graphic>
+            </Label>
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" text="On this journey it will be very difficult to stay focused and not lose your head. To help you we have decided to give you points based on your concentration. Every time you destroy a brick you will receive points which will be increased by a multiplier. The multiplier will increase every time bricks are hit without touching the boundaries of the world but will be reset as soon as the ball touches the edges. If you manage to pass the level you will receive a score bonus based on the level of difficulty. Also at the end of the level your total score will be multiplied by the number of lives left." textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
       </VBox>
    </items>
 </SplitPane>
