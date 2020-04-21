@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
@@ -21,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameBuilderController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameBuilderController">
   <items>
       <VBox fx:id="formContainer" alignment="CENTER" spacing="5.0" style="-fx-background-image: url(&quot;backgrounds/dashboard1.png&quot;); -fx-background-size: stretch;">
          <children>
@@ -98,16 +91,6 @@
                <effect>
                   <DropShadow height="20.0" radius="9.5" width="20.0" />
                </effect></ComboBox>
-            <Button fx:id="build" mnemonicParsing="false" onMouseClicked="#buildLvl" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="BUILD" textFill="WHITE">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <effect>
-                  <DropShadow height="20.0" radius="9.5" width="20.0" />
-               </effect></Button>
             <Button fx:id="menu" mnemonicParsing="false" onMouseClicked="#backToMenu" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="MENU" textFill="WHITE">
                <VBox.margin>
                   <Insets />
@@ -117,6 +100,17 @@
                </font>
                <effect>
                   <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="build" mnemonicParsing="false" onMouseClicked="#buildLvl" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="BUILD" textFill="WHITE">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <effect>
+                  <DropShadow height="20.0" radius="9.5" width="20.0" />
                </effect></Button>
             <Button fx:id="del" mnemonicParsing="false" onMouseClicked="#delateAll" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="CLEAR" textFill="WHITE">
                <VBox.margin>
