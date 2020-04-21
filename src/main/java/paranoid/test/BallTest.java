@@ -23,13 +23,9 @@
 //     */
 //    @Test
 //    public void ballCreation() {
-//        final Ball ball = new Ball.Builder()
-//                            .setPosition(StartPhase.BALL.getSpawnPoint())
-//                            .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                            .setHeight(StartPhase.BALL.getInitHeight())
-//                            .setWidth(StartPhase.BALL.getInitWidth())
-//                            .setSpeed(Difficulty.HARD.getSpeed())
-//                            .build(); 
+//        final Ball ball = new Ball.Builder().position(StartPhase.BALL.getSpawnPoint())
+//                .direction(Direction.EDGE_LEFT.getVector().mul(-1)).height(StartPhase.BALL.getInitHeight())
+//                .width(StartPhase.BALL.getInitWidth()).speed(Difficulty.HARD.getSpeed()).build();
 //        assertEquals(StartPhase.BALL.getSpawnPoint(), ball.getPos());
 //        assertEquals(Direction.EDGE_LEFT.getVector().mul(-1), ball.getVel());
 //        assertEquals(Difficulty.HARD.getSpeed(), ball.getSpeed());
@@ -41,21 +37,15 @@
 //     * create a ball with the wrong fields and check that exceptions are thrown.
 //     */
 //    @Test
-//    public void failBallCreation() { 
-//        final Ball.Builder ballBuilder = new Ball.Builder()
-//                                           .setPosition(null);
+//    public void failBallCreation() {
+//        final Ball.Builder ballBuilder = new Ball.Builder().setPosition(null);
 //        assertThrows(IllegalStateException.class, () -> ballBuilder.build());
-//        ballBuilder.setPosition(StartPhase.BALL.getSpawnPoint())
-//                   .setDirection(null);
+//        ballBuilder.position(StartPhase.BALL.getSpawnPoint()).direction(null);
 //        assertThrows(IllegalStateException.class, () -> ballBuilder.build());
-//        ballBuilder.setPosition(StartPhase.BALL.getSpawnPoint())
-//                   .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                   .setHeight(-1);
+//        ballBuilder.position(StartPhase.BALL.getSpawnPoint()).direction(Direction.EDGE_LEFT.getVector().mul(-1)).height(-1);
 //        assertThrows(IllegalStateException.class, () -> ballBuilder.build());
-//        ballBuilder.setPosition(StartPhase.BALL.getSpawnPoint())
-//                   .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                   .setHeight(StartPhase.BALL.getInitHeight())
-//                   .setWidth(-1);
+//        ballBuilder.position(StartPhase.BALL.getSpawnPoint()).direction(Direction.EDGE_LEFT.getVector().mul(-1))
+//                .height(StartPhase.BALL.getInitHeight()).width(-1);
 //        assertThrows(IllegalStateException.class, () -> ballBuilder.build());
 //    }
 //
@@ -66,44 +56,39 @@
 //    public void ballMovement() {
 //        final World world = new World(new Border(100, 100), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
-//        ballBuilder.setHeight(StartPhase.BALL.getInitHeight())
-//                   .setWidth(StartPhase.BALL.getInitWidth())
-//                   .setSpeed(Difficulty.EASY.getSpeed());
-//        //north direction
+//        ballBuilder.height(StartPhase.BALL.getInitHeight()).width(StartPhase.BALL.getInitWidth())
+//                .speed(Difficulty.EASY.getSpeed());
+//        // north direction
 //        double py = Math.sin(Math.toRadians(90));
 //        double px = Math.cos(Math.toRadians(90));
-//        ballBuilder.setPosition(new P2d(50, 50))
-//                   .setDirection(new V2d(px, py));
+//        ballBuilder.position(new P2d(50, 50)).direction(new V2d(px, py));
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(10);
 //        assertEquals(new P2d(50, 52), world.getBalls().stream().findFirst().get().getPos());
 //
-//        //south direction
+//        // south direction
 //        py = Math.sin(Math.toRadians(270));
 //        px = Math.cos(Math.toRadians(270));
-//        ballBuilder.setPosition(new P2d(50, 50))
-//                   .setDirection(new V2d(px, py));
+//        ballBuilder.position(new P2d(50, 50)).direction(new V2d(px, py));
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(10);
 //        assertEquals(new P2d(50, 48), world.getBalls().stream().findFirst().get().getPos());
 //
-//        //east direction
+//        // east direction
 //        py = Math.sin(Math.toRadians(0));
 //        px = Math.cos(Math.toRadians(0));
-//        ballBuilder.setPosition(new P2d(50, 50))
-//                   .setDirection(new V2d(px, py));
+//        ballBuilder.position(new P2d(50, 50)).direction(new V2d(px, py));
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(10);
 //        assertEquals(new P2d(52, 50), world.getBalls().stream().findFirst().get().getPos());
 //
-//        //west direction
+//        // west direction
 //        py = Math.sin(Math.toRadians(180));
 //        px = Math.cos(Math.toRadians(180));
-//        ballBuilder.setPosition(new P2d(50, 50))
-//                   .setDirection(new V2d(px, py));
+//        ballBuilder.position(new P2d(50, 50)).direction(new V2d(px, py));
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(10);
@@ -111,8 +96,8 @@
 //    }
 //
 //    /**
-//     *  update time in the world and check that for equal time intervals, if the ball 
-//     *  has a higher speed, it will have covered a greater space.
+//     * update time in the world and check that for equal time intervals, if the ball
+//     * has a higher speed, it will have covered a greater space.
 //     */
 //    @Test
 //    public void ballSpeed() {
@@ -120,26 +105,24 @@
 //        final double px = Math.cos(Math.toRadians(0));
 //        final World world = new World(new Border(100, 100), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
-//        ballBuilder.setHeight(StartPhase.BALL.getInitHeight())
-//                   .setWidth(StartPhase.BALL.getInitWidth())
-//                   .setPosition(new P2d(50, 50))
-//                   .setDirection(new V2d(px, py));
-//        //0 speed
-//        ballBuilder.setSpeed(0);
+//        ballBuilder.height(StartPhase.BALL.getInitHeight()).width(StartPhase.BALL.getInitWidth()).position(new P2d(50, 50))
+//                .direction(new V2d(px, py));
+//        // 0 speed
+//        ballBuilder.speed(0);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(1000000);
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //
-//        //100 speed
-//        ballBuilder.setSpeed(100);
+//        // 100 speed
+//        ballBuilder.speed(100);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(10);
 //        assertEquals(new P2d(51, 50), world.getBalls().stream().findFirst().get().getPos());
 //
-//        //1000 speed
-//        ballBuilder.setSpeed(1000);
+//        // 1000 speed
+//        ballBuilder.speed(1000);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //        world.updateState(10);
@@ -147,41 +130,31 @@
 //    }
 //
 //    /**
-//     * put the ball near the edge and update time 
-//     * so that the ball collides with the edge.
-//     * if the ball collides with a horizontal wall 
-//     * invert the component x of the velocity vector.
-//     * if the ball collides with a vertical wall 
-//     * invert the component y of the velocity vector.
+//     * put the ball near the edge and update time so that the ball collides with the
+//     * edge. if the ball collides with a horizontal wall invert the component x of
+//     * the velocity vector. if the ball collides with a vertical wall invert the
+//     * component y of the velocity vector.
 //     */
 //    @Test
 //    public void ballBorderPhysics() {
-//        //collision with border vertical
+//        // collision with border vertical
 //        double py = Math.sin(Math.toRadians(0));
 //        double px = Math.cos(Math.toRadians(0));
 //        final World world = new World(new Border(100, 100), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
-//        ballBuilder.setHeight(10)
-//                   .setWidth(10)
-//                   .setPosition(new P2d(90, 50))
-//                   .setDirection(new V2d(px, py))
-//                   .setSpeed(100);
+//        ballBuilder.height(10).width(10).position(new P2d(90, 50)).direction(new V2d(px, py)).speed(100);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new V2d(px, py), world.getBalls().stream().findFirst().get().getVel());
-//        world.updateState(10); 
+//        world.updateState(10);
 //        assertEquals(new V2d(-px, py), world.getBalls().stream().findFirst().get().getVel());
 //
-//        //collision with border orizontal
+//        // collision with border orizontal
 //        px = Math.cos(Math.toRadians(225));
 //        py = Math.sin(Math.toRadians(255));
-//        ballBuilder.setHeight(10)
-//                   .setWidth(10)
-//                   .setDirection(new V2d(px, py))
-//                   .setPosition(new P2d(50, 0))
-//                   .setSpeed(100);
+//        ballBuilder.height(10).width(10).direction(new V2d(px, py)).position(new P2d(50, 0)).speed(100);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new V2d(px, py), world.getBalls().stream().findFirst().get().getVel());
-//        world.updateState(10); 
+//        world.updateState(10);
 //        assertEquals(new V2d(px, -py), world.getBalls().stream().findFirst().get().getVel());
 //    }
 //

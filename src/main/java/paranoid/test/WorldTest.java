@@ -35,11 +35,11 @@
 //                                             .destructible(true)
 //                                             .energy(1)
 //                                             .build();
-//    private final Ball ball = new Ball.Builder().setPosition(new P2d(50, 50))
-//                                          .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                                          .setHeight(StartPhase.BALL.getInitHeight())
-//                                          .setWidth(StartPhase.BALL.getInitWidth())
-//                                          .setSpeed(Difficulty.EASY.getSpeed())
+//    private final Ball ball = new Ball.Builder().position(new P2d(50, 50))
+//                                          .direction(Direction.EDGE_LEFT.getVector().mul(-1))
+//                                          .height(StartPhase.BALL.getInitHeight())
+//                                          .width(StartPhase.BALL.getInitWidth())
+//                                          .speed(Difficulty.EASY.getSpeed())
 //                                          .build();
 //    private final Player player = new Player.Builder()
 //                                      .position(StartPhase.PLAYER_ONE.getSpawnPoint())
@@ -56,11 +56,11 @@
 //    public void insertBallTest() {
 //        final World world = new World(new Border(600, 600), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
-//        ballBuilder.setPosition(StartPhase.BALL.getSpawnPoint())
-//                   .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                   .setHeight(StartPhase.BALL.getInitHeight())
-//                   .setWidth(StartPhase.BALL.getInitWidth())
-//                   .setSpeed(Difficulty.HARD.getSpeed())
+//        ballBuilder.position(StartPhase.BALL.getSpawnPoint())
+//                   .direction(Direction.EDGE_LEFT.getVector().mul(-1))
+//                   .height(StartPhase.BALL.getInitHeight())
+//                   .width(StartPhase.BALL.getInitWidth())
+//                   .speed(Difficulty.HARD.getSpeed())
 //                   .build();
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        world.setBalls(IntStream.range(0, 100)
@@ -119,11 +119,11 @@
 //        final World world = new World(new Border(600, 600), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        final Ball.Builder ballBuilder = new Ball.Builder();
-//        ballBuilder.setPosition(StartPhase.BALL.getSpawnPoint())
-//                   .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                   .setHeight(StartPhase.BALL.getInitHeight())
-//                   .setWidth(StartPhase.BALL.getInitWidth())
-//                   .setSpeed(Difficulty.HARD.getSpeed());
+//        ballBuilder.position(StartPhase.BALL.getSpawnPoint())
+//                   .direction(Direction.EDGE_LEFT.getVector().mul(-1))
+//                   .height(StartPhase.BALL.getInitHeight())
+//                   .width(StartPhase.BALL.getInitWidth())
+//                   .speed(Difficulty.HARD.getSpeed());
 //        final Brick.Builder brickBuilder = new Brick.Builder();
 //        brickBuilder.position(new P2d(10, 10))
 //                    .height(10)
@@ -151,11 +151,11 @@
 //        final World world = new World(new Border(100, 100), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        final Ball.Builder ballBuilder = new Ball.Builder();
-//        ballBuilder.setPosition(new P2d(95, 50))
-//                   .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-//                   .setHeight(StartPhase.BALL.getInitHeight())
-//                   .setWidth(StartPhase.BALL.getInitWidth())
-//                   .setSpeed(Difficulty.HARD.getSpeed());
+//        ballBuilder.position(new P2d(95, 50))
+//                   .direction(Direction.EDGE_LEFT.getVector().mul(-1))
+//                   .height(StartPhase.BALL.getInitHeight())
+//                   .width(StartPhase.BALL.getInitWidth())
+//                   .speed(Difficulty.HARD.getSpeed());
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        //set ball pos to the right edge and check for a collision
 //        assertEquals(Collision.RIGHT, world.checkCollisionWithBoundaries(ballBuilder.build()).get());
