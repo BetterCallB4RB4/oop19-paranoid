@@ -10,12 +10,12 @@ public enum Difficulty {
     /**
      * 
      */
-    NORMAL(400, 10000, 2),
+    NORMAL(400, 10_000, 2),
 
     /**
      * 
      */
-    HARD(600, 15000, 3);
+    HARD(600, 15_000, 3);
 
     private double speed;
     private int gameOverBonus;

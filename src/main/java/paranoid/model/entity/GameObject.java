@@ -3,10 +3,7 @@ package paranoid.model.entity;
 import paranoid.common.P2d;
 import paranoid.common.V2d;
 import paranoid.model.component.graphics.GraphicsAdapter;
-import paranoid.model.component.graphics.GraphicsComponent;
-import paranoid.model.component.input.InputComponent;
 import paranoid.model.component.input.InputController;
-import paranoid.model.component.physics.PhysicsComponent;
 
 public interface GameObject {
 

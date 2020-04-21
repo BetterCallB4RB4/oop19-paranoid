@@ -2,5 +2,13 @@ package paranoid.common;
 
 public enum PlayerId {
 
-    ONE, TWO;
+    /**
+     * 
+     */
+    ONE,
+
+    /**
+     * 
+     */
+    TWO;
 }

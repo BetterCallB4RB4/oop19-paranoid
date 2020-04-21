@@ -4,16 +4,16 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import paranoid.common.Collision;
-import paranoid.controller.gameLoop.GamePhase;
-import paranoid.controller.gameLoop.GameState;
+import paranoid.controller.gameloop.GamePhase;
+import paranoid.controller.gameloop.GameState;
 import paranoid.model.entity.Brick;
 import paranoid.model.level.Effect;
 import paranoid.model.level.MusicPlayer;
 
 public class EventConsumer {
 
-    private Queue<Event> events = new LinkedList<>();
-    private GameState gameState;
+    private final Queue<Event> events = new LinkedList<>();
+    private final GameState gameState;
     private MusicPlayer player;
 
     public EventConsumer(final GameState gameState) {
@@ -25,7 +25,7 @@ public class EventConsumer {
     public void resolveEvent() {
         events.stream().forEach(ev -> {
             if (ev instanceof HitBorderEvent) {
-                HitBorderEvent hit = (HitBorderEvent) ev;
+                final HitBorderEvent hit = (HitBorderEvent) ev;
                 gameState.flatMultiplier();
                 if (hit.getCollision().equals(Collision.BOTTOM)) {
                     gameState.getWorld().removeBall(hit.getBall());
@@ -36,7 +36,7 @@ public class EventConsumer {
                 }
                 this.player.playEffect(Effect.BOARD_COLLISION);
             } else if (ev instanceof HitBrickEvent) {
-                Brick brick = ((HitBrickEvent) ev).getBrick();
+                final Brick brick = ((HitBrickEvent) ev).getBrick();
                 gameState.incMultiplier();
                 gameState.addPoint(brick.getPointEarned());
                 brick.decEnergy();

@@ -12,7 +12,7 @@ import paranoid.common.PlayerId;
 import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
 import paranoid.controller.event.WorldEventListener;
-import paranoid.controller.gameLoop.GameState;
+import paranoid.controller.gameloop.GameState;
 import paranoid.model.collision.CollisionManager;
 import paranoid.model.collision.Direction;
 import paranoid.model.component.input.InputController;
@@ -119,7 +119,7 @@ public class World implements WorldEventListener {
      */
     public Optional<Pair<Brick, Collision>> checkCollisionWithBrick(final Ball ball) {
         Optional<Pair<Brick, Collision>> resultCollision = Optional.empty();
-        for (var elem : this.bricks) {
+        for (final var elem : this.bricks) {
             resultCollision = this.collisionManager.checkCollisionWithBricks(elem, ball);
             if (resultCollision.isPresent()) {
                 return resultCollision;
@@ -135,13 +135,13 @@ public class World implements WorldEventListener {
      */
     public Pair<Optional<Collision>, Optional<Direction>> checkCollisionWithPlayer(final Ball ball) {
         Optional<Collision> resultCollision = Optional.empty();
-        for (var elem : this.players) {
+        for (final var elem : this.players) {
             resultCollision = this.collisionManager.checkCollisionWithPlayers(elem, ball);
             if (resultCollision.isPresent()) {
-                Collision collisionType = resultCollision.get(); 
+                final Collision collisionType = resultCollision.get(); 
                 if (collisionType.equals(Collision.TOP)) {
-                    double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
-                    double playerHitZone = elem.getWidth() / Direction.values().length;
+                    final double centerBall = ball.getPos().getX() + (ball.getWidth() / 2);
+                    final double playerHitZone = elem.getWidth() / Direction.values().length;
                     for (int i = 0; i < Direction.values().length; i++) {
                         if (centerBall > elem.getPos().getX() + (i * playerHitZone)
                          && centerBall < elem.getPos().getX() + ((i + 1) * playerHitZone)) {
@@ -161,7 +161,7 @@ public class World implements WorldEventListener {
      * @return a list of all the gameObj in the world
      */
     public Set<GameObject> getSceneEntities() {
-        Set<GameObject> entities = new HashSet<>();
+        final Set<GameObject> entities = new HashSet<>();
         entities.addAll(this.balls);
         entities.addAll(this.bricks);
         entities.addAll(this.players);

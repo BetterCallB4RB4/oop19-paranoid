@@ -1,62 +1,62 @@
 package paranoid.model.level;
 
+import java.io.Serializable;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
-public enum Music {
-
-    /**
-     * uno di 10 sfondi animati.
-     */
-    MUSIC_1("music/song1.wav", "music1"),
+public enum Music implements Serializable {
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_2("music/song2.wav", "music2"),
+    MUSIC_1("music/song1.wav", "opal downers"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_3("music/song3.wav", "music3"),
+    MUSIC_2("music/song2.wav", "permanent anger"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_4("music/song4.wav", "music4"),
+    MUSIC_3("music/song3.wav", "lost heart"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_5("music/song5.wav", "music5"),
+    MUSIC_4("music/song4.wav", "easy clouds"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_6("music/song6.wav", "music6"),
+    MUSIC_5("music/song5.wav", "acid island"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_7("music/song7.wav", "music7"),
+    MUSIC_6("music/song6.wav", "sky system"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_8("music/song8.wav", "music8"),
+    MUSIC_7("music/song7.wav", "reverb sea"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_9("music/song9.wav", "music9"),
+    MUSIC_8("music/song8.wav", "heart phobia"),
 
     /**
      * uno di 10 sfondi animati.
      */
-    MUSIC_10("music/song10.wav", "music10");
+    MUSIC_9("music/song9.wav", "blanket fuxx"),
+
+    /**
+     * uno di 10 sfondi animati.
+     */
+    MUSIC_10("music/song10.wav", "cold ceremony");
 
     private String location;
     private String name;
@@ -85,33 +85,16 @@ public enum Music {
     }
 
     public static List<String> getMusicNames() {
-        List<String> list = new ArrayList<>();
-        list.add(Music.MUSIC_1.getName());
-        list.add(Music.MUSIC_2.getName());
-        list.add(Music.MUSIC_3.getName());
-        list.add(Music.MUSIC_4.getName());
-        list.add(Music.MUSIC_5.getName());
-        list.add(Music.MUSIC_6.getName());
-        list.add(Music.MUSIC_7.getName());
-        list.add(Music.MUSIC_8.getName());
-        list.add(Music.MUSIC_9.getName());
-        list.add(Music.MUSIC_10.getName());
-        return list;
+        return Arrays.asList(Music.values()).stream()
+                                            .map(i -> i.getName())
+                                            .collect(Collectors.toList());
     }
 
     public static Music getMusicByName(final String name) {
-        Map<String, Music> musicName = new HashMap<>();
-        musicName.put(Music.MUSIC_1.getName(), Music.MUSIC_1);
-        musicName.put(Music.MUSIC_2.getName(), Music.MUSIC_2);
-        musicName.put(Music.MUSIC_3.getName(), Music.MUSIC_3);
-        musicName.put(Music.MUSIC_4.getName(), Music.MUSIC_4);
-        musicName.put(Music.MUSIC_5.getName(), Music.MUSIC_5);
-        musicName.put(Music.MUSIC_6.getName(), Music.MUSIC_6);
-        musicName.put(Music.MUSIC_7.getName(), Music.MUSIC_7);
-        musicName.put(Music.MUSIC_8.getName(), Music.MUSIC_8);
-        musicName.put(Music.MUSIC_9.getName(), Music.MUSIC_9);
-        musicName.put(Music.MUSIC_10.getName(), Music.MUSIC_10);
-        return musicName.get(name);
+        return Arrays.asList(Music.values()).stream()
+                                            .filter(i -> i.getName().equals(name))
+                                            .findFirst()
+                                            .get();
     }
 
 }

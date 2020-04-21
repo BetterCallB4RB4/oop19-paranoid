@@ -1,4 +1,4 @@
-package paranoid.controller.gameLoop;
+package paranoid.controller.gameloop;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +25,7 @@ import paranoid.model.settings.SettingsManager;
 public class GameState {
 
     private GamePhase phase;
-    private int highScoreValue;
+    private final int highScoreValue;
     private int multiplier;
     private final Settings settings;
     private final Score scores;
@@ -45,15 +45,15 @@ public class GameState {
             this.scores = ScoreManager.loadCustom(level.getLevelName());
         }
         this.highScoreValue = this.scores.getHighValue();
-        this.flatMultiplier();
         this.world.setBricks(level.getBricks());
+        this.multiplier = 1;
     }
 
     /**
      * set initial game state.
      */
     public void init() {
-        this.phase = GamePhase.PAUSE;
+        this.flatMultiplier();
         final Player.Builder playerBuilder = new Player.Builder();
         final List<Player> playerList = new ArrayList<>();
         playerList.add(playerBuilder.position(StartPhase.PLAYER_ONE.getSpawnPoint())
@@ -77,6 +77,7 @@ public class GameState {
                                              .setWidth(StartPhase.BALL.getInitWidth())
                                              .setSpeed(settings.getDifficulty().getSpeed())
                                              .build()));
+        this.phase = GamePhase.PAUSE;
     }
     /**
      * @return the score

@@ -13,10 +13,18 @@ public class HitBorderEvent implements Event {
         this.collision = collision;
     }
 
+    /**
+     * 
+     * @return as
+     */
     public Ball getBall() {
         return this.ball;
     }
 
+    /**
+     * 
+     * @return fw
+     */
     public Collision getCollision() {
         return this.collision;
     }

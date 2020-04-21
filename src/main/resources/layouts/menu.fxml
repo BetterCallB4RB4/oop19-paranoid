@@ -8,16 +8,16 @@
 
 <SplitPane fx:id="backGroundPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;backgrounds/bgmenu.jpg&quot;); -fx-background-size: stretch;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.MenuController">
    <items>
-      <VBox fx:id="backDash" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+      <VBox fx:id="backDash" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" spacing="30.0" style="-fx-background-image: url(&quot;backgrounds/menu1.jpg&quot;); -fx-background-size: stretch;">
          <children>
-            <Button fx:id="continua" mnemonicParsing="false" onMouseClicked="#clickContinue" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="CONTINUA" textFill="WHITE">
+            <Button fx:id="continua" mnemonicParsing="false" onMouseClicked="#clickContinue" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="CONTINUE" textFill="WHITE">
                <VBox.margin>
                   <Insets left="100.0" />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button fx:id="btnStart" mnemonicParsing="false" onMouseClicked="#btnStartOnClickHandler" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="NUOVA PARTITA" textFill="WHITE">
+            <Button fx:id="btnStart" mnemonicParsing="false" onMouseClicked="#btnStartOnClickHandler" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="NEW GAME" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -25,7 +25,7 @@
                   <Insets left="100.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnScore" mnemonicParsing="false" onMouseClicked="#btnScoreOnClickHandler" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="PUNTEGGI" textFill="WHITE">
+            <Button fx:id="btnScore" mnemonicParsing="false" onMouseClicked="#btnScoreOnClickHandler" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="SCORE" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -33,7 +33,7 @@
                   <Insets left="100.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btSettings" mnemonicParsing="false" onMouseClicked="#goToSettings" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="IMPOSTAZIONI" textFill="WHITE">
+            <Button fx:id="btSettings" mnemonicParsing="false" onMouseClicked="#goToSettings" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="SETTINGS" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -49,7 +49,7 @@
                   <Insets left="100.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnBuilder" mnemonicParsing="false" onMouseClicked="#goToLevelBuilder" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="COSTRUISCI IL TUO LIVELLO" textFill="WHITE">
+            <Button fx:id="btnBuilder" mnemonicParsing="false" onMouseClicked="#goToLevelBuilder" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="LEVEL BUILDER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -57,7 +57,7 @@
                   <Insets left="100.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="playYourLvl" mnemonicParsing="false" onMouseClicked="#clickPlayYourLvl" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="GIOCA I TUOI LIVELLI" textFill="WHITE">
+            <Button fx:id="playYourLvl" mnemonicParsing="false" onMouseClicked="#clickPlayYourLvl" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #008B7C, #38d8c6);" text="PLAY YOUR LEVEL" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

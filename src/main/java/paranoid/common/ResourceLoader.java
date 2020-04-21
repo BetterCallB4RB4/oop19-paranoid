@@ -10,7 +10,7 @@ public enum ResourceLoader {
     /**
      * ball image path.
      */
-    BALL_SPRITE("sprite/ball3.png"),
+    BALL_SPRITE("sprite/discoBall.png"),
 
     /**
      * player one image path.
@@ -22,7 +22,7 @@ public enum ResourceLoader {
      */
     PLAYER_TWO_SPRITE("sprite/player2.png");
 
-    private final Image sprite;
+    private final transient Image sprite;
 
     ResourceLoader(final String name) {
         this.sprite = new Image(ClassLoader.getSystemResourceAsStream(name));

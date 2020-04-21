@@ -4,19 +4,18 @@ import java.io.BufferedInputStream;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 public enum LevelSelection implements Iterator<LevelSelection> {
 
     /**
      * 
      */
-    LEVEL1("storyLevel/storyLevel10", 0, false),
+    LEVEL1("storyLevel/storyLevel1", 0, false),
 
     /**
      * 
      */
-    LEVEL2("storyLevel/storyLevel11", 1, true);
+    LEVEL2("storyLevel/storyLevel2", 1, true);
 
     private int index;
     private String path;
@@ -67,10 +66,9 @@ public enum LevelSelection implements Iterator<LevelSelection> {
     }
 
     public static boolean isStoryLevel(final String nameLvl) {
-        List<LevelSelection> lvlSel = Arrays.asList(LevelSelection.values());
-        return lvlSel.stream()
-                     .map(i -> i.getLevel().getLevelName())
-                     .anyMatch(i -> i.equals(nameLvl));
+        return Arrays.asList(LevelSelection.values()).stream()
+                                                     .map(i -> i.getLevel().getLevelName())
+                                                     .anyMatch(i -> i.equals(nameLvl));
     }
 
     public static LevelSelection getSelectionFromLevel(final Level level) {
@@ -79,7 +77,5 @@ public enum LevelSelection implements Iterator<LevelSelection> {
                                                      .findFirst()
                                                      .get();
     }
-
-
 
 }

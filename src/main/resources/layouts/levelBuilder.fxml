@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
@@ -14,13 +21,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameBuilderController">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameBuilderController">
   <items>
-      <VBox fx:id="formContainer" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="formContainer" alignment="CENTER" spacing="5.0" style="-fx-background-image: url(&quot;backgrounds/dashboard1.png&quot;); -fx-background-size: stretch;">
          <children>
-            <Label text="COLORE">
+            <Label text="COLOR">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -29,27 +36,27 @@
                <effect>
                   <DropShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0" />
                </effect></ColorPicker>
-            <CheckBox fx:id="isIndestructible" mnemonicParsing="false" text="INDISTRUTTIBILITA'">
+            <CheckBox fx:id="indestructible" mnemonicParsing="false" text="INDESTRUCTIBILITY">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></CheckBox>
-            <Label text="PUNTI">
+            <Label text="POINT">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
                </font></Label>
-            <Slider fx:id="pointSlider" blockIncrement="25.0" showTickLabels="true" showTickMarks="true">
+            <Slider fx:id="pointSlider" blockIncrement="25.0" showTickLabels="true" showTickMarks="true" value="50.0">
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin></Slider>
-            <Label text="DUREZZA">
+            <Label text="ENERGY">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -58,7 +65,7 @@
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin></Slider>
-            <Label text="NOME LIVELLO">
+            <Label text="LEVEL NAME">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -69,9 +76,9 @@
                <VBox.margin>
                   <Insets left="30.0" right="30.0" />
                </VBox.margin></TextField>
-            <Label text="Scegli canzone">
+            <Label text="SELECT THE SONG">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -80,9 +87,9 @@
                <effect>
                   <DropShadow height="20.0" radius="9.5" width="20.0" />
                </effect></ComboBox>
-            <Label text="scegli back ground">
+            <Label text="SELECT THE BACKGROUND">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -91,9 +98,9 @@
                <effect>
                   <DropShadow height="20.0" radius="9.5" width="20.0" />
                </effect></ComboBox>
-            <Button fx:id="build" mnemonicParsing="false" onMouseClicked="#buildLvl" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="COSTRUISCI" textFill="WHITE">
+            <Button fx:id="build" mnemonicParsing="false" onMouseClicked="#buildLvl" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="BUILD" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -103,7 +110,7 @@
                </effect></Button>
             <Button fx:id="menu" mnemonicParsing="false" onMouseClicked="#backToMenu" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="MENU" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -111,9 +118,9 @@
                <effect>
                   <DropShadow />
                </effect></Button>
-            <Button fx:id="del" mnemonicParsing="false" onMouseClicked="#delateAll" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="CANCELLA" textFill="WHITE">
+            <Button fx:id="del" mnemonicParsing="false" onMouseClicked="#delateAll" style="-fx-background-radius: 30; -fx-background-color: linear-gradient(to bottom right, #FFAA7E, #FB7DE7);" text="CLEAR" textFill="WHITE">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font name="System Bold" size="12.0" />

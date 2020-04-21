@@ -9,7 +9,7 @@ import paranoid.model.component.input.InputController;
 import paranoid.model.component.physics.BallPhysicsComponent;
 
 
-public class Ball extends GameObj {
+public final class Ball extends GameObj {
 
     private static final long serialVersionUID = 9139431443544241120L;
 

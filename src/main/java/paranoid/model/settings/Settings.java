@@ -7,11 +7,11 @@ import paranoid.model.level.LevelSelection;
 public final class Settings implements Serializable {
 
     private static final long serialVersionUID = 7866419986850266123L;
-    private Difficulty difficulty;
-    private boolean playMusic;
-    private boolean playEffects;
-    private int playerNumber;
-    private Level selectedLevel;
+    private final Difficulty difficulty;
+    private final boolean playMusic;
+    private final boolean playEffects;
+    private final int playerNumber;
+    private final Level selectedLevel;
 
     private Settings(final Difficulty difficulty, final boolean playMusic, final boolean playEffect,
                     final int playerNumber, final Level selectedLevel) {

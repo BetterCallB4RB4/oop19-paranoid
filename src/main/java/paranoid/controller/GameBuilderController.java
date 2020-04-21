@@ -1,26 +1,17 @@
 package paranoid.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JOptionPane;
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import paranoid.common.Pair;
@@ -35,20 +26,18 @@ import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.view.parameters.LayoutManager;
 
-public class GameBuilderController implements GuiController, Subject {
+public class GameBuilderController implements GuiController {
 
-    private List<Observer> observer;
+    private int tileY;
+    private GraphicsContext gc;
     private LevelBuilder levelBuilder;
     private static final int PLAYER_ZONE = 4;
-    private GraphicsContext gc;
-    private int tileY;
-    private int tileX;
 
     @FXML
     private ColorPicker colorPicker;
 
     @FXML
-    private CheckBox isIndestructible;
+    private CheckBox indestructible;
 
     @FXML
     private Slider pointSlider;
@@ -87,16 +76,15 @@ public class GameBuilderController implements GuiController, Subject {
     public void initialize() {
         this.ost.getItems().addAll(Music.getMusicNames());
         this.backGround.getItems().addAll(BackGround.getBackGroundNames());
-        this.observer = new ArrayList<>();
         this.colorPicker.setValue(Color.HOTPINK);
         this.colorPicker.setEditable(false);
         this.levelBuilder = new LevelBuilder();
         this.setCanvas();
         this.canvas.setOnMouseClicked(e -> {
             if (e.getY() < (tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE))) {
-                Pair<PlaceHolder, Boolean> res = levelBuilder.hit(e.getX(), e.getY(),
+                final Pair<PlaceHolder, Boolean> res = levelBuilder.hit(e.getX(), e.getY(),
                                                                   colorPicker.getValue(),
-                                                                  isIndestructible.isSelected(),
+                                                                  indestructible.isSelected(),
                                                                   (int) pointSlider.getValue(),
                                                                   (int) lifeSlider.getValue());
                 if (res.getY()) {
@@ -109,16 +97,6 @@ public class GameBuilderController implements GuiController, Subject {
                 }
             }
         });
-        BackgroundImage myBI2 = new BackgroundImage(new Image("backgrounds/dashboard1.png", 
-                                                              ScreenConstant.SCREEN_WIDTH - ScreenConstant.CANVAS_WIDTH,
-                                                              ScreenConstant.SCREEN_HEIGHT,
-                                                              false,
-                                                              true),
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundRepeat.NO_REPEAT, 
-                                                    BackgroundPosition.CENTER,
-                                                    BackgroundSize.DEFAULT);
-        this.formContainer.setBackground(new Background(myBI2));
     }
 
     /**
@@ -130,9 +108,9 @@ public class GameBuilderController implements GuiController, Subject {
         this.gc = canvas.getGraphicsContext2D();
         this.gc.setStroke(Color.BLACK);
         this.gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        this.tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
+        final int tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
         this.tileY = (int) (this.canvas.getHeight() / ScreenConstant.BRICK_NUMBER_Y);
-        double wastePixel = ScreenConstant.CANVAS_WIDTH % ScreenConstant.BRICK_NUMBER_X;
+        final double wastePixel = ScreenConstant.CANVAS_WIDTH % ScreenConstant.BRICK_NUMBER_X;
         int currentYpos = 0;
         for (int i = 0; i < ScreenConstant.BRICK_NUMBER_Y; i++) {
             gc.strokeLine(0, currentYpos, canvas.getWidth() - wastePixel, currentYpos);
@@ -143,9 +121,9 @@ public class GameBuilderController implements GuiController, Subject {
             gc.strokeLine(currentXpos, 0, currentXpos, canvas.getHeight());
             currentXpos += tileX;
         }
-        gc.strokeLine(currentXpos, 0, currentXpos, canvas.getHeight());
+        this.gc.strokeLine(currentXpos, 0, currentXpos, canvas.getHeight());
         this.gc.setFill(Color.BLACK);
-        gc.fillRect(0, tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE), canvas.getWidth() - wastePixel, canvas.getHeight());
+        this.gc.fillRect(0, tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE), canvas.getWidth() - wastePixel, canvas.getHeight());
     }
 
     /**
@@ -163,21 +141,27 @@ public class GameBuilderController implements GuiController, Subject {
     @FXML
     public void buildLvl() {
         if (levelName.getText().isBlank() || ost.getValue() == null || backGround.getValue() == null) {
-            JOptionPane.showMessageDialog(null, "Devi riempire tutti le form");
+            final Alert alert = new Alert(AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("You must fill all the form");
+            alert.showAndWait();
+        } else if (LevelSelection.isStoryLevel(levelName.getText())) {
+            final Alert alert = new Alert(AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("The name you have selected already belongs to a story level and cannot be overwritten");
+            alert.showAndWait();
         } else {
-            if (LevelSelection.isStoryLevel(levelName.getText())) {
-                JOptionPane.showMessageDialog(null, "Il nome inserito appartiene ad un livello della storia");
-            } else {
-                this.levelBuilder.setLevelName(levelName.getText());
-                this.levelBuilder.setBackGround(backGround.getValue());
-                this.levelBuilder.setSong(ost.getValue());
-                LevelManager.saveLevel(this.levelBuilder.build());
-                ScoreManager.saveCustom(new Score.Builder()
-                        .defaultScore(this.levelName.getText())
-                        .build());
-                JOptionPane.showMessageDialog(null, "Livello creato con successo");
-                this.notifyObserver();
-            }
+            this.levelBuilder.setLevelName(levelName.getText());
+            this.levelBuilder.setBackGround(backGround.getValue());
+            this.levelBuilder.setSong(ost.getValue());
+            LevelManager.saveLevel(this.levelBuilder.build());
+            ScoreManager.saveCustom(new Score.Builder()
+                    .defaultScore(this.levelName.getText())
+                    .build());
+            final Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("The level was successfully created");
+            alert.showAndWait();
         }
     }
 
@@ -188,30 +172,6 @@ public class GameBuilderController implements GuiController, Subject {
     public void delateAll() {
         levelBuilder.delateAll();
         this.setCanvas();
-    }
-
-    /**
-     * add an observer.
-     */
-    @Override
-    public void register(final Observer obs) {
-        this.observer.add(obs);
-    }
-
-    /**
-     * remove an observer.
-     */
-    @Override
-    public void unregister(final Observer obs) {
-        this.observer.remove(obs);
-    }
-
-    /**
-     * notifies all observers of changes that have occurred.
-     */
-    @Override
-    public void notifyObserver() {
-        this.observer.forEach(i -> i.update());
     }
 
 }

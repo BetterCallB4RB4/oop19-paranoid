@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.ChooseLevelController;
-import paranoid.controller.GameBuilderController;
 import paranoid.controller.MenuController;
 import paranoid.controller.ScoreController;
 import paranoid.view.parameters.LayoutManager;
@@ -27,15 +26,15 @@ public class MainStage extends Stage {
         /**
          * Constructor.
          * Add layout menu.fxml and size to the scene.
-         *  e collego gli osservatori al soggetto
+         *  and link observer to menuController subject
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);
-            ScoreController scoreController = (ScoreController) LayoutManager.SCORE.getGuiController();
-            scoreController.initialize((MenuController) LayoutManager.MENU.getGuiController());
-            GameBuilderController builder = (GameBuilderController) LayoutManager.LEVEL_BUILDER.getGuiController();
-            ChooseLevelController chooseLevel = (ChooseLevelController) LayoutManager.CHOOSE_LVL.getGuiController();
-            chooseLevel.initialize(builder);
+            final MenuController menuController = (MenuController) LayoutManager.MENU.getGuiController();
+            final ScoreController scoreController = (ScoreController) LayoutManager.SCORE.getGuiController();
+            final ChooseLevelController chooseLevel = (ChooseLevelController) LayoutManager.CHOOSE_LVL.getGuiController();
+            scoreController.initialize(menuController);
+            chooseLevel.initialize(menuController);
         }
 
     }

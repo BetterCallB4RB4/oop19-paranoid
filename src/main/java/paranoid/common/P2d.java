@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class P2d implements Serializable {
 
     private static final long serialVersionUID = 5841705605256674477L;
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     public P2d(final double x, final double y) {
         this.x = x;
@@ -51,6 +51,7 @@ public class P2d implements Serializable {
      * 
      * @return String view of the class
      */
+    @Override
     public String toString() {
         return "P2d(" + x + "," + y + ")";
     }
@@ -86,7 +87,7 @@ public class P2d implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        P2d other = (P2d) obj;
+        final P2d other = (P2d) obj;
         if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
             return false;
         }
