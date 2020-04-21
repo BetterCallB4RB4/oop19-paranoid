@@ -7,12 +7,12 @@ import paranoid.model.entity.Brick;
 public class Level implements Serializable {
 
     private static final long serialVersionUID = -3269378075735300995L;
-    private List<Brick> bricks;
-    private String levelName;
-    private String music;
-    private String backGround;
+    private final List<Brick> bricks;
+    private final String levelName;
+    private final Music music;
+    private final BackGround backGround;
 
-    public Level(final List<Brick> bricks, final String levelName, final String music, final String backGround) {
+    public Level(final List<Brick> bricks, final String levelName, final Music music, final BackGround backGround) {
         this.bricks = bricks;
         this.levelName = levelName;
         this.music = music;
@@ -38,14 +38,14 @@ public class Level implements Serializable {
     /**
      * @return the music
      */
-    public String getMusic() {
+    public Music getMusic() {
         return music;
     }
 
     /**
      * @return the backGround
      */
-    public String getBackGround() {
+    public BackGround getBackGround() {
         return backGround;
     }
 

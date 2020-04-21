@@ -11,12 +11,12 @@ public enum LevelSelection implements Iterator<LevelSelection> {
     /**
      * 
      */
-    LEVEL1("storyLevel/storyLevel10", 0, false),
+    LEVEL1("storyLevel/storyLevel1", 0, false),
 
     /**
      * 
      */
-    LEVEL2("storyLevel/storyLevel11", 1, true);
+    LEVEL2("storyLevel/storyLevel2", 1, true);
 
     private int index;
     private String path;

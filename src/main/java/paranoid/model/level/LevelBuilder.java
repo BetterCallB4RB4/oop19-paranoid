@@ -31,8 +31,8 @@ public class LevelBuilder {
     private final int gameBrickDimensionX = (int) (ScreenConstant.WORLD_WIDTH / ScreenConstant.BRICK_NUMBER_X);
 
     private String levelName;
-    private String song;
-    private String backGround;
+    private Music song;
+    private BackGround backGround;
 
     public LevelBuilder() {
         int currentXpos = 0;
@@ -144,14 +144,14 @@ public class LevelBuilder {
      * @param song the song to set
      */
     public void setSong(final String song) {
-        this.song = song;
+        this.song = Music.getMusicByName(song);
     }
 
     /**
      * @param backGround the backGround to set
      */
     public void setBackGround(final String backGround) {
-        this.backGround = backGround;
+        this.backGround = BackGround.getBackGroundByName(backGround);
     }
 
 }
