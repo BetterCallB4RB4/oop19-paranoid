@@ -71,11 +71,11 @@ public class GameState {
         }
         this.world.setPlayers(playerList);
         this.world.setBalls(Arrays.asList(new Ball.Builder()
-                                             .setPosition(StartPhase.BALL.getSpawnPoint())
-                                             .setDirection(Direction.EDGE_LEFT.getVector().mul(-1))
-                                             .setHeight(StartPhase.BALL.getInitHeight())
-                                             .setWidth(StartPhase.BALL.getInitWidth())
-                                             .setSpeed(settings.getDifficulty().getSpeed())
+                                             .position(StartPhase.BALL.getSpawnPoint())
+                                             .direction(Direction.EDGE_LEFT.getVector().mul(-1))
+                                             .height(StartPhase.BALL.getInitHeight())
+                                             .width(StartPhase.BALL.getInitWidth())
+                                             .speed(settings.getDifficulty().getSpeed())
                                              .build()));
         this.phase = GamePhase.PAUSE;
     }
