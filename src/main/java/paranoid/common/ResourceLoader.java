@@ -10,7 +10,7 @@ public enum ResourceLoader {
     /**
      * ball image path.
      */
-    BALL_SPRITE("sprite/ball3.png"),
+    BALL_SPRITE("sprite/discoBall.png"),
 
     /**
      * player one image path.
