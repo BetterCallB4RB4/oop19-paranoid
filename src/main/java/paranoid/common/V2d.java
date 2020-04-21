@@ -5,8 +5,8 @@ import java.io.Serializable;
 public class V2d implements Serializable {
 
     private static final long serialVersionUID = 5926897292953172393L;
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     public V2d(final double x, final double y) {
         this.x = x;
@@ -50,7 +50,7 @@ public class V2d implements Serializable {
      * @return normalize the vector
      */
     public V2d getNormalized() {
-        double module = (double) Math.sqrt(x * x + y * y);
+        final double module = (double) Math.sqrt(x * x + y * y);
         return new V2d(x / module, y / module);
     }
 
@@ -67,6 +67,7 @@ public class V2d implements Serializable {
      * 
      * @return String view of the class
      */
+    @Override
     public String toString() {
         return "V2d(" + x + "," + y + ")";
     }
@@ -102,7 +103,7 @@ public class V2d implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        V2d other = (V2d) obj;
+        final V2d other = (V2d) obj;
         if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
             return false;
         }

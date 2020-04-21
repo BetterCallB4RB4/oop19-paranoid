@@ -46,14 +46,17 @@ public enum LayoutManager {
      */
     LEVEL_BUILDER("layouts/levelBuilder.fxml"),
 
+    /**
+     * 
+     */
     NEXT_LEVEL("layouts/nextLevel.fxml"),
     /**
      * gameOver.fxml path.
      */
     GAME_OVER("layouts/gameOver.fxml");
 
-    private final GuiController guiController;
-    private SplitPane layout;
+    private final transient GuiController guiController;
+    private transient SplitPane layout;
 
     /**
      * Constructor.

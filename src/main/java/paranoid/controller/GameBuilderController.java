@@ -1,10 +1,11 @@
 package paranoid.controller;
 
-import javax.swing.JOptionPane;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ColorPicker;
@@ -28,7 +29,6 @@ import paranoid.view.parameters.LayoutManager;
 public class GameBuilderController implements GuiController {
 
     private int tileY;
-    private int tileX;
     private GraphicsContext gc;
     private LevelBuilder levelBuilder;
     private static final int PLAYER_ZONE = 4;
@@ -108,7 +108,7 @@ public class GameBuilderController implements GuiController {
         this.gc = canvas.getGraphicsContext2D();
         this.gc.setStroke(Color.BLACK);
         this.gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        this.tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
+        final int tileX = (int) (this.canvas.getWidth() / ScreenConstant.BRICK_NUMBER_X);
         this.tileY = (int) (this.canvas.getHeight() / ScreenConstant.BRICK_NUMBER_Y);
         final double wastePixel = ScreenConstant.CANVAS_WIDTH % ScreenConstant.BRICK_NUMBER_X;
         int currentYpos = 0;
@@ -121,9 +121,9 @@ public class GameBuilderController implements GuiController {
             gc.strokeLine(currentXpos, 0, currentXpos, canvas.getHeight());
             currentXpos += tileX;
         }
-        gc.strokeLine(currentXpos, 0, currentXpos, canvas.getHeight());
+        this.gc.strokeLine(currentXpos, 0, currentXpos, canvas.getHeight());
         this.gc.setFill(Color.BLACK);
-        gc.fillRect(0, tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE), canvas.getWidth() - wastePixel, canvas.getHeight());
+        this.gc.fillRect(0, tileY * (ScreenConstant.BRICK_NUMBER_Y - PLAYER_ZONE), canvas.getWidth() - wastePixel, canvas.getHeight());
     }
 
     /**
@@ -141,17 +141,27 @@ public class GameBuilderController implements GuiController {
     @FXML
     public void buildLvl() {
         if (levelName.getText().isBlank() || ost.getValue() == null || backGround.getValue() == null) {
-            JOptionPane.showMessageDialog(null, "Devi riempire tutti le form");
+            final Alert alert = new Alert(AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("You must fill all the form");
+            alert.showAndWait();
+        } else if (LevelSelection.isStoryLevel(levelName.getText())) {
+            final Alert alert = new Alert(AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("The name you have selected already belongs to a story level and cannot be overwritten");
+            alert.showAndWait();
         } else {
-            if (LevelSelection.isStoryLevel(levelName.getText())) {
-                JOptionPane.showMessageDialog(null, "Il nome inserito appartiene ad un livello della storia");
-            } else {
-                this.levelBuilder.setLevelName(levelName.getText());
-                this.levelBuilder.setBackGround(backGround.getValue());
-                this.levelBuilder.setSong(ost.getValue());
-                LevelManager.saveLevel(this.levelBuilder.build());
-                JOptionPane.showMessageDialog(null, "Livello creato con successo");
-            }
+            this.levelBuilder.setLevelName(levelName.getText());
+            this.levelBuilder.setBackGround(backGround.getValue());
+            this.levelBuilder.setSong(ost.getValue());
+            LevelManager.saveLevel(this.levelBuilder.build());
+            ScoreManager.saveCustom(new Score.Builder()
+                    .defaultScore(this.levelName.getText())
+                    .build());
+            final Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("The level was successfully created");
+            alert.showAndWait();
         }
     }
 

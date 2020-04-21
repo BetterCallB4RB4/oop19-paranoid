@@ -12,7 +12,10 @@ import java.util.List;
 
 import paranoid.main.ParanoidApp;
 
-public class LevelManager {
+public final class LevelManager {
+
+    private LevelManager() {
+    }
 
     public static void saveLevel(final Level level) {
         try (ObjectOutputStream ostream = new ObjectOutputStream(
@@ -24,8 +27,8 @@ public class LevelManager {
     }
 
     public static List<Level> loadLevels() {
-        List<Level> levels = new ArrayList<>();
-        File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
+        final List<Level> levels = new ArrayList<>();
+        final File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
         if (levelFolder.exists() && levelFolder.isDirectory()) {
             for (int i = 0; i < levelFolder.list().length; i++) {
                 levels.add(loadLevel(levelFolder.listFiles()[i].getName()));

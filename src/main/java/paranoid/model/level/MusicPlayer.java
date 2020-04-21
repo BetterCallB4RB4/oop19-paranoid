@@ -24,6 +24,7 @@ public class MusicPlayer {
                 this.clip.open(audioIn);
                 this.clip.start();
                 clip.addLineListener(new LineListener() {
+                    @Override
                     public void update(final LineEvent event) {
                         if (event.getType().equals(Type.STOP)) {
                             clip.close();
@@ -31,7 +32,7 @@ public class MusicPlayer {
                     }
                 });
                 this.clip.loop(Clip.LOOP_CONTINUOUSLY);
-            } catch (Exception  e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -53,17 +54,18 @@ public class MusicPlayer {
     public void playEffect(final Effect effect) {
         if (isEffectEnable) {
             try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(effect.getLocation())) {
-                Clip effectClip = AudioSystem.getClip();
+                final Clip effectClip = AudioSystem.getClip();
                 effectClip.open(audioIn);
                 effectClip.start();
                 effectClip.addLineListener(new LineListener() {
+                    @Override
                     public void update(final LineEvent event) {
                         if (event.getType().equals(Type.STOP)) {
                             effectClip.close();
                         }
                     }
                 });
-            } catch (Exception  e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

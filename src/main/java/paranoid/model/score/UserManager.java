@@ -34,7 +34,6 @@ public final class UserManager {
                         new FileInputStream(ParanoidApp.USER)))
 
             ) {
-
             return (User) r.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

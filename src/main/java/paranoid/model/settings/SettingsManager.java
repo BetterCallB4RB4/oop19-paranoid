@@ -9,7 +9,11 @@ import java.io.ObjectOutputStream;
 
 import paranoid.main.ParanoidApp;
 
-public class SettingsManager {
+public final class SettingsManager {
+
+    private SettingsManager() {
+
+    }
 
     public static void saveOption(final Settings settings) {
         try (ObjectOutputStream ostream = new ObjectOutputStream(

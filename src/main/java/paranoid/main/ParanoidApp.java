@@ -1,17 +1,13 @@
 package paranoid.main;
 
 import java.io.File;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 import paranoid.model.settings.SettingsManager;
-import paranoid.model.level.LevelManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
-import paranoid.model.level.Level;
 /**
  * PARANOID MAIN.
  * Stage creation.

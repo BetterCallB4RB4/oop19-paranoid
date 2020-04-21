@@ -22,7 +22,7 @@ public enum ResourceLoader {
      */
     PLAYER_TWO_SPRITE("sprite/player2.png");
 
-    private final Image sprite;
+    private final transient Image sprite;
 
     ResourceLoader(final String name) {
         this.sprite = new Image(ClassLoader.getSystemResourceAsStream(name));

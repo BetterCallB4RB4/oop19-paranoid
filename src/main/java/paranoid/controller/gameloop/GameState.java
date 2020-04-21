@@ -45,14 +45,15 @@ public class GameState {
             this.scores = ScoreManager.loadCustom(level.getLevelName());
         }
         this.highScoreValue = this.scores.getHighValue();
-        this.flatMultiplier();
         this.world.setBricks(level.getBricks());
+        this.multiplier = 1;
     }
 
     /**
      * set initial game state.
      */
     public void init() {
+        this.flatMultiplier();
         final Player.Builder playerBuilder = new Player.Builder();
         final List<Player> playerList = new ArrayList<>();
         playerList.add(playerBuilder.position(StartPhase.PLAYER_ONE.getSpawnPoint())

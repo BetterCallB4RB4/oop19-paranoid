@@ -77,7 +77,7 @@ public class ChooseLevelController implements GuiController, Observer {
     public void update() {
         this.buttonContainer.getChildren().clear();
         for (final Level lvl : LevelManager.loadLevels()) {
-            Button b = new Button(lvl.getLevelName());
+            final Button b = new Button(lvl.getLevelName());
             this.setButtonStyle(b, back);
             b.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -85,8 +85,8 @@ public class ChooseLevelController implements GuiController, Observer {
                     selectedLevel.setOpacity(100);
                     currentSelectedLevel = lvl;
                     selectedLevel.setText("Level name : " + lvl.getLevelName() + "\n"
-                                          + "Background : " + lvl.getBackGround() + "\n"
-                                          + "Music : " + lvl.getMusic());
+                                          + "Background : " + lvl.getBackGround().getName() + "\n"
+                                          + "Music : " + lvl.getMusic().getName());
                 }
             });
             this.buttonContainer.getChildren().add(b);
@@ -101,7 +101,7 @@ public class ChooseLevelController implements GuiController, Observer {
         if (!selectedLevel.getText().isBlank()) {
             UserManager.saveUser(new User());
             final Scene scene = startBtn.getScene();
-            SettingsBuilder setBuilder = new SettingsBuilder();
+            final SettingsBuilder setBuilder = new SettingsBuilder();
             setBuilder.fromSettings(SettingsManager.loadOption());
             setBuilder.selectLevel(currentSelectedLevel);
             SettingsManager.saveOption(setBuilder.build());

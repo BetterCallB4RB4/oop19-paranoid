@@ -7,6 +7,7 @@ import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 
 public class BrickGraphicsComponent implements GraphicsComponent, Serializable {
+
     private static final long serialVersionUID = 5169287434461523175L;
     private final SerializableColor color;
 

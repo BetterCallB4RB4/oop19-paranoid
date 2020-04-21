@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.VBox;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.view.parameters.LayoutManager;
 
@@ -16,6 +15,9 @@ public class TutorialController implements GuiController {
     @FXML
     private Button btnMenu;
 
+    /**
+     * 
+     */
     @FXML
     public void initialize() {
         this.mainPanel.setMinWidth(ScreenConstant.SCREEN_WIDTH);
