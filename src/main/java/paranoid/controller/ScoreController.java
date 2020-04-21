@@ -1,8 +1,7 @@
 package paranoid.controller;
 
+import java.io.File;
 import java.util.List;
-
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,6 +15,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import paranoid.common.dimension.ScreenConstant;
+import paranoid.main.ParanoidApp;
+import paranoid.model.level.Level;
+import paranoid.model.level.LevelManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
@@ -58,12 +60,8 @@ public class ScoreController implements GuiController, Observer {
         this.mainPanel.setMaxWidth(ScreenConstant.SCREEN_WIDTH);
         this.mainPanel.setMinHeight(ScreenConstant.SCREEN_HEIGHT);
         this.mainPanel.setMaxHeight(ScreenConstant.SCREEN_HEIGHT);
-        this.scrollerLeft.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
-        this.scrollerLeft.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerLeft.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scrollerLeft.setVbarPolicy(ScrollBarPolicy.NEVER);
-        this.scrollerRight.setMinWidth(ScreenConstant.SCREEN_WIDTH / 2);
-        this.scrollerRight.setMaxWidth(ScreenConstant.SCREEN_WIDTH / 2);
         this.scrollerRight.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
         this.scrollerRight.setVbarPolicy(ScrollBarPolicy.NEVER);
     }
@@ -82,65 +80,75 @@ public class ScoreController implements GuiController, Observer {
      */
     @Override
     public void update() {
+        updateScoreList();
         this.buttonContainer.getChildren().clear();
         this.grid.getChildren().clear();
-        final Button bStory = new Button("STORIA");
-        this.setButtonStyle(bStory, btnMenu);
-        bStory.setOnAction(new EventHandler<ActionEvent>() {
+        final Score scoreStory = ScoreManager.loadStory();
+        final Button btnStory = new Button(scoreStory.getNameScore());
+        setButtonStyle(btnStory, btnMenu);
+        btnStory.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(final ActionEvent event) {
                 viewScore(ScoreManager.loadStory());
             }
 
         });
-        this.buttonContainer.getChildren().add(bStory);
-        for (final Score score : ScoreManager.loadCustomList()) {
-            final Button bCustom = new Button(score.getNameScore());
-            this.setButtonStyle(bCustom, btnMenu);
-            bCustom.setOnAction(new EventHandler<ActionEvent>() {
+        this.buttonContainer.getChildren().add(btnStory);
+        for (final Score scoreCustom : ScoreManager.loadCustomList()) {
+            final Button btnCustom = new Button(scoreCustom.getNameScore());
+            this.setButtonStyle(btnCustom, btnMenu);
+            btnCustom.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent event) {
-                    viewScore(score);
+                    viewScore(scoreCustom);
                 }
             });
-            this.buttonContainer.getChildren().add(bCustom);
+            this.buttonContainer.getChildren().add(btnCustom);
         }
+    }
+
+    private void updateScoreList() {
+        final List<Level> levelList = LevelManager.loadLevels();
+        levelList.forEach(i -> {
+            final String levelName = i.getLevelName();
+            if (!new File(ParanoidApp.SCORE_CUSTOM_PATH + ParanoidApp.SEPARATOR + levelName).exists()) {
+                ScoreManager.saveCustom(new Score.Builder()
+                        .defaultScore(levelName)
+                        .build());
+            }
+        });
     }
 
     private void viewScore(final Score score) {
         this.grid.getChildren().clear();
-        final Label name = new Label("NOME: ");
-        name.setStyle("-fx-font-size: 20;"
-                + "-fx-font-weight: bold");
-        name.setTextFill(Color.LAWNGREEN);
-
-        final Label point = new Label("PUNTEGGIO: ");
-        point.setStyle("-fx-font-size: 20;"
-                + "-fx-font-weight: bold");
-        point.setTextFill(Color.LAWNGREEN);
+        final Label name = new Label("NAME: ");
+        setLabelStyle(name, Color.LAWNGREEN);
+        final Label point = new Label("SCORE: ");
+        setLabelStyle(point, Color.LAWNGREEN);
         this.grid.add(name, 1, 0);
         this.grid.add(point, 2, 0);
         final List<User> scoreList = score.getScoreList();
 
         if (!scoreList.isEmpty()) {
-            for (int x = 0; x < scoreList.size(); x++) {
-                final Label i = new Label(" " + Integer.toString(x + 1) + " ");
-                i.setStyle("-fx-font-size: 20;"
-                        + "-fx-font-weight: bold");
-                i.setTextFill(Color.ALICEBLUE);
-                final Label n = new Label(scoreList.get(x).getName());
-                n.setStyle("-fx-font-size: 20;"
-                        + "-fx-font-weight: bold");
-                n.setTextFill(Color.ALICEBLUE);
-
-                final Label s = new Label(scoreList.get(x).getScore().toString());
-                s.setStyle("-fx-font-size: 20;"
-                        + "-fx-font-weight: bold");
-                s.setTextFill(Color.ALICEBLUE);
-                grid.add(i, 0, x + 1);
-                grid.add(n, 1, x + 1);
-                grid.add(s, 2, x + 1);
+            Integer counter = 1;
+            for (final User ele : scoreList) {
+                final User user = ele;
+                final Label pos = new Label(counter.toString());
+                setLabelStyle(pos, Color.ALICEBLUE);
+                scoreList.iterator();
+                final Label username = new Label(user.getName());
+                setLabelStyle(username, Color.ALICEBLUE);
+                final Label scorePlayer = new Label(user.getScore().toString());
+                setLabelStyle(scorePlayer, Color.ALICEBLUE);
+                grid.add(pos, 0, counter);
+                grid.add(username, 1, counter);
+                grid.add(scorePlayer, 2, counter);
+                counter++;
             }
+        } else {
+            final Label emptyList = new Label("SCORE EMPTY");
+            setLabelStyle(emptyList, Color.ALICEBLUE);
+            grid.add(emptyList, 1, 1);
         }
     }
 
@@ -148,6 +156,12 @@ public class ScoreController implements GuiController, Observer {
         subject.setStyle(reference.getStyle());
         subject.setEffect(reference.getEffect());
         subject.setFont(reference.getFont());
+    }
+
+    private void setLabelStyle(final Label label, final Color color) {
+        label.setStyle("-fx-font-size: 20;"
+                + "-fx-font-weight: bold");
+        label.setTextFill(color);
     }
 
 }

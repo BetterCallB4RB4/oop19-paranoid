@@ -1,10 +1,14 @@
 package paranoid.model.score;
 
-import java.util.List;
+import paranoid.main.ParanoidApp;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
+/**
+ * Score.
+ */
 public final class Score implements Serializable {
 
     private static final long serialVersionUID = 6171113929805935910L;
@@ -35,7 +39,7 @@ public final class Score implements Serializable {
         private String nameScore;
 
         public Builder defaultScore(final String nameScore) {
-            this.scoreList = new ArrayList<>();
+            this.scoreList = new LinkedList<>();
             this.nameScore = nameScore;
             return this;
         }
@@ -51,24 +55,22 @@ public final class Score implements Serializable {
             return this;
         }
 
-        public Builder removeUserScore(final User user) {
-            this.scoreList.remove(user);
-            return this;
-        }
-
         public Score build() {
             if (this.scoreList == null || this.nameScore == null) {
                 throw new IllegalStateException();
             }
-
-            sortScore();
-
-            while (this.scoreList.size() > 10) {
-                this.scoreList.remove(this.scoreList.size() - 1);
-            }
-
+            checkScoreFull();
             return new Score(this.scoreList, this.nameScore);
 
+        }
+
+        private void checkScoreFull() {
+            if (!this.nameScore.isEmpty()) {
+                sortScore();
+                while (this.scoreList.size() > ParanoidApp.SCORE_MAX_ELEM) {
+                    this.scoreList.remove(this.scoreList.size() - 1);
+                }
+            }
         }
 
         private void sortScore() {
