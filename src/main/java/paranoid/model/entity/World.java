@@ -79,7 +79,7 @@ public interface World {
     /**
      * the collision manager is asked if collisions 
      * have occurred between the ball and the bricks.
-     * @param ball
+     * @param ball object that can collide
      * @return the result of collision
      */
     Optional<Pair<Brick, Collision>> checkCollisionWithBrick(Ball ball);
@@ -87,7 +87,7 @@ public interface World {
     /**
      * the collision manager is asked if collisions 
      * have occurred between the ball and the player.
-     * @param ball
+     * @param ball object that can collide
      * @return if a collision has occurred in the upper part of the player, 
      * the direction the ball will take is also calculated. 
      */
@@ -120,7 +120,7 @@ public interface World {
 
     /**
      * 
-     * @return the eventHandler
+     * @return the eventHandler 
      */
     EventConsumer getEventHanlder();
 

@@ -76,7 +76,7 @@ public class EventConsumer {
 
     /**
      * set a player to play sound effects when specific events occur.
-     * @param player 
+     * @param player player to play music
      */
     public void addMusicPlayer(final MusicPlayer player) {
         this.player = player;

@@ -22,12 +22,6 @@ public enum LevelSelection implements Iterator<LevelSelection> {
     private String path;
     private boolean isLast;
 
-    /**
-     * 
-     * @param path
-     * @param index
-     * @param isLast
-     */
     LevelSelection(final String path, final int index, final boolean isLast) {
         this.path = path;
         this.index = index;
@@ -83,7 +77,7 @@ public enum LevelSelection implements Iterator<LevelSelection> {
 
     /**
      * 
-     * @param nameLvl
+     * @param nameLvl the name level to search
      * @return if the level is part of the campaign. 
      */
     public static boolean isStoryLevel(final String nameLvl) {
@@ -94,7 +88,7 @@ public enum LevelSelection implements Iterator<LevelSelection> {
 
     /**
      * 
-     * @param level
+     * @param level to serch in this enum
      * @return the corresponding enumeration linked to the story level.
      */
     public static LevelSelection getSelectionFromLevel(final Level level) {

@@ -68,7 +68,7 @@ public final class Ball extends GameObj {
         private int width;
 
         /**
-         * @param position
+         * @param position position to set
          * @return returns himself following the pattern builder
          */
         public Builder position(final P2d position) {
@@ -78,7 +78,7 @@ public final class Ball extends GameObj {
 
         /**
          * set the new ball direction.
-         * @param direction
+         * @param direction direction to set
          * @return returns himself following the pattern builder
          */
         public Builder direction(final V2d direction) {
@@ -88,7 +88,7 @@ public final class Ball extends GameObj {
 
         /**
          * set the new ball speed.
-         * @param speed
+         * @param speed speed to set
          * @return returns himself following the pattern builder
          */
         public Builder speed(final double speed) {
@@ -98,7 +98,7 @@ public final class Ball extends GameObj {
 
         /**
          * set the new height. 
-         * @param height
+         * @param height height to se
          * @return returns himself following the pattern builder
          */
         public Builder height(final int height) {
@@ -108,7 +108,7 @@ public final class Ball extends GameObj {
 
         /**
          * set the new width.
-         * @param width
+         * @param width width to set
          * @return returns himself following the pattern builder
          */
         public Builder width(final int width) {

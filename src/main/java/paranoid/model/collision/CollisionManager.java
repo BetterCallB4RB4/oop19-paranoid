@@ -29,8 +29,8 @@ public interface CollisionManager {
 
     /**
      * check for collisions with the player.
-     * @param player
-     * @param ball
+     * @param player entity to check
+     * @param ball entity to check
      * @return the wall where the ball touches the player 
      * and if it is the upper one the direction also returns.
      */

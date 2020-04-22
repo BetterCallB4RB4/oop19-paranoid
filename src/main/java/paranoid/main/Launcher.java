@@ -10,7 +10,7 @@ public final class Launcher {
     }
 
     /** 
-     * @param args
+     * @param args command input
      */
     public static void main(final String[] args) {
         ParanoidApp.main(args);

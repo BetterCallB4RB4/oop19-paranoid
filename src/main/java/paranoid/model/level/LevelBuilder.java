@@ -63,13 +63,13 @@ public class LevelBuilder {
      * checks if the player has already selected that brick 
      * if he had not selected I call the brick builder and build the brick with the form inputs 
      * and the dimensions of the placeholder built on the size of the world 
-     * @param x mouse coordinates
-     * @param y mouse coordinates
-     * @param color selected
-     * @param isIndestructibile
-     * @param point
-     * @param lives
-     * @return Pair<Brick, Boolean>
+     * @param x mouse coordinates mouse x coordinate
+     * @param y mouse coordinates mouse y coordinate
+     * @param color color selected
+     * @param isIndestructibile if the brick is indestructibile
+     * @param point point earned
+     * @param lives lives remaining
+     * @return current game grid state
      */
     public Pair<PlaceHolder, Boolean> hit(final double x, final double y, 
                                           final Color color, final boolean isIndestructibile, 

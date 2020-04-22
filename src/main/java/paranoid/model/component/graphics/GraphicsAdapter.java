@@ -11,24 +11,24 @@ public interface GraphicsAdapter {
     /**
      * allows the graphics to draw the ball
      * with the characteristics of the graphic component.
-     * @param ball
-     * @param sprite
+     * @param ball the object to draw
+     * @param sprite the sprite to use
      */
     void drawBall(Ball ball, Image sprite);
 
     /**
      * allows the graphics to draw the player 
      * with the characteristics of the graphic component.
-     * @param player
-     * @param sprite
+     * @param player the object to draw
+     * @param sprite the sprite to use
      */
     void drawPlayer(Player player, Image sprite);
 
     /**
      * allows the graphics to draw the brick
      * with the characteristics of the graphic component.
-     * @param brick
-     * @param color
+     * @param brick the object to draw
+     * @param color the color to use
      */
     void drawBrick(Brick brick, Color color);
 

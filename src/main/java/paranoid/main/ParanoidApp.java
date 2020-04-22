@@ -83,7 +83,7 @@ public class ParanoidApp extends Application {
 
     /**
      * initializes the game.
-     * @param args
+     * @param args command input
      */
     public static void main(final String[] args) {
         initSoftware();
