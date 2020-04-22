@@ -38,7 +38,7 @@
 //     */
 //    @Test
 //    public void failBallCreation() {
-//        final Ball.Builder ballBuilder = new Ball.Builder().setPosition(null);
+//        final Ball.Builder ballBuilder = new Ball.Builder().position(null);
 //        assertThrows(IllegalStateException.class, () -> ballBuilder.build());
 //        ballBuilder.position(StartPhase.BALL.getSpawnPoint()).direction(null);
 //        assertThrows(IllegalStateException.class, () -> ballBuilder.build());
