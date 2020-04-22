@@ -69,7 +69,7 @@ public final class Player extends GameObj {
     }
 
     /**
-     * Static nested class for build the player
+     * Static nested class for build the player.
      */
     public static final class Builder {
 
