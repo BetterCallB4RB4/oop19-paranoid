@@ -13,7 +13,10 @@ import paranoid.model.entity.World;
 public class PlayerPhysicsComponent implements PhysicsComponent {
 
     /**
-     * {@inheritDoc}
+     * updates the position of the player according to elapsed time and the current player speed
+     * and then asks the world if collisions with boundaries have occurred. 
+     * if the collisions occurred the state of the player will be restored,
+     * so the player can't go outside the world.
      */
     @Override
     public void update(final int dt, final GameObject gameObj, final World w) {

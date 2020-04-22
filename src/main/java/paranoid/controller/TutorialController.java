@@ -7,6 +7,9 @@ import javafx.scene.control.SplitPane;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.view.parameters.LayoutManager;
 
+/**
+ * Controller of tutorial.fxml.
+ */
 public class TutorialController implements GuiController {
 
     @FXML
@@ -16,7 +19,7 @@ public class TutorialController implements GuiController {
     private Button btnMenu;
 
     /**
-     * 
+     * Initialize the window with default settings adapted to the monitor resolution.
      */
     @FXML
     public void initialize() {
@@ -27,7 +30,7 @@ public class TutorialController implements GuiController {
     }
 
     /**
-     * 
+     * Go back to menu when click with mouse the button menu.
      */
     @FXML
     public void btnMenuOnClickHandler() {

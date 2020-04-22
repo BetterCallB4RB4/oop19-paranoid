@@ -66,26 +66,45 @@ public final class Brick extends GameObj implements Serializable {
         this.getGraphicsComponent().update(this, graphicsAdapter);
     }
 
+    /**
+     * @return the point that user earn when hit a brick.
+     */
     public int getPointEarned() {
         return this.pointEarned;
     }
 
+    /**
+     * @return the energy of the brick. When energy is 0 the brick will be removed.
+     */
     public int getEnergy() {
         return this.energy;
     }
 
+    /**
+     * Decrease the energy of brick.
+     */
     public void decEnergy() {
         this.energy = this.energy - 1;
     }
 
+    /**
+     * @return true if the brick is indestructible or false if it can be destroyed
+     */
     public boolean isIndestructible() {
         return this.indesctructible;
     }
 
+    /**
+     * @return a map that contains the information of all ball in the game and the
+     * zone of presence for allow the ball to bounce fine when hit the brick.
+     */
     public Map<Ball, Collision> getLastZonePresence() {
         return this.lastZonePresence;
     }
 
+    /**
+     * Static nested class for build the brick.
+     */
     public static final class Builder {
 
         private P2d pos;
@@ -96,41 +115,73 @@ public final class Brick extends GameObj implements Serializable {
         private int energy;
         private boolean indestructible;
 
+        /**
+         * @param pos the position of the brick to set.
+         * @return the brick builder.
+         */
         public Builder position(final P2d pos) {
             this.pos = pos;
             return this;
         }
 
+        /**
+         * @param height the height of the brick to set.
+         * @return the brick builder.
+         */
         public Builder height(final int height) {
             this.height = height;
             return this;
         }
 
+        /**
+         * @param width the width of the brick to set.
+         * @return the brick builder.
+         */
         public Builder width(final int width) {
             this.width = width;
             return this;
         }
 
+        /**
+         * @param color the color of the brick to set.
+         * @return the brick builder.
+         */
         public Builder color(final Color color) {
             this.color = color;
             return this;
         }
 
+        /**
+         * @param pointEarned the points of the brick to set.
+         * @return the brick builder.
+         */
         public Builder pointEarned(final int pointEarned) {
             this.pointEarned = pointEarned;
             return this;
         }
 
+        /**
+         * @param energy the energy of the brick to set.
+         * @return the brick builder.
+         */
         public Builder energy(final int energy) {
             this.energy = energy;
             return this;
         }
 
-        public Builder destructible(final boolean indestructible) {
+        /**
+         * @param indestructible set if the brick is indestructible or not.
+         * @return the brick builder.
+         */
+        public Builder indestructible(final boolean indestructible) {
             this.indestructible = indestructible;
             return this;
         }
 
+        /**
+         * Build the brick and check if fields are set correctly.
+         * @return the new Brick with the selected properties.
+         */
         public Brick build() {
             if (this.pos == null || this.height <= 0 || this.width <= 0
                     || this.color == null || this.energy <= 0) {

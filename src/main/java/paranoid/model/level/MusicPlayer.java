@@ -62,6 +62,7 @@ public class MusicPlayer {
      * resources as soon as the end audio event is generated.
      * @param effect to play
      */
+    @SuppressWarnings("PMD.CloseResource")
     public void playEffect(final Effect effect) {
         if (isEffectEnable) {
             try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(effect.getLocation())) {

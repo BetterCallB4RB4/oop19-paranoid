@@ -12,43 +12,72 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import paranoid.main.ParanoidApp;
 
+/**
+ * ScoreManater. Provide the save of the top scores in file.
+ */
 public final class ScoreManager {
+
     private ScoreManager() {
 
     }
 
+    /**
+     * Save the current score in the story path with the name retrieved from
+     * ParanoidApp.SCORE_STORY_NAME.
+     * @param score the score to save in the file.
+     */
     public static void saveStory(final Score score) {
         save(ParanoidApp.SCORE_STORY_PATH, score, ParanoidApp.SCORE_STORY_NAME);
     }
 
+    /**
+     * Save the current score in the custom path with the score name.
+     * @param score the score to save in the file.
+     */
     public static void saveCustom(final Score score) {
         save(ParanoidApp.SCORE_CUSTOM_PATH, score, score.getNameScore());
     }
 
+    /**
+     * Load the score from the story path with the name retrieved from
+     * ParanoidApp.SCORE_STORY_NAME.
+     * @return the score loaded from the file.
+     */
     public static Score loadStory() {
         return load(ParanoidApp.SCORE_STORY_PATH, ParanoidApp.SCORE_STORY_NAME);
     }
 
+    /**
+     * Load the score from the custom path with the selected name.
+     * @param nameScore the name of file to load.
+     * @return the score loaded from the file.
+     */
     public static Score loadCustom(final String nameScore) {
         return load(ParanoidApp.SCORE_CUSTOM_PATH, nameScore);
     }
 
-    public static List<Score> loadCustomList() {
+    /**
+     * Load all files from the custom score path.
+     * @return the set of all scores saved in the custom score path.
+     */
+    public static Set<Score> loadCustomScores() {
         try (Stream<Path> walk = Files.walk(Paths.get(ParanoidApp.SCORE_CUSTOM_PATH))) {
             return walk.filter(Files::isRegularFile)
                        .map(i -> i.toFile().getName())
                        .map(i -> load(ParanoidApp.SCORE_CUSTOM_PATH, i))
-                       .collect(Collectors.toList());
+                       .collect(Collectors.toSet());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ArrayList<>();
+        return new HashSet<Score>();
     }
 
     private static void save(final String path, final Score score, final String nameScore) {

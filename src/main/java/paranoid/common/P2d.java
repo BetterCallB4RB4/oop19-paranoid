@@ -77,6 +77,7 @@ public class P2d implements Serializable {
      * @return a generated equals ( pojo )
      */
     @Override
+    @SuppressWarnings("PMD.SimplifyBooleanReturns")
     public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
@@ -90,9 +91,11 @@ public class P2d implements Serializable {
         final P2d other = (P2d) obj;
         if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x)) {
             return false;
+            //return Double.doubleToLongBits(x) == Double.doubleToLongBits(other.x) avoid pmd warning
         }
         if (Double.doubleToLongBits(y) != Double.doubleToLongBits(other.y)) {
             return false;
+            //Double.doubleToLongBits(y) == Double.doubleToLongBits(other.y) avoid pmd warning
         }
         return true;
     }

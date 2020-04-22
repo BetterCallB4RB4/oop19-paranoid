@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * User.
+ * User. It store the information of the current user that play the game.
  */
 public class User implements Serializable {
 
@@ -15,6 +15,10 @@ public class User implements Serializable {
     private Integer lives;
     private final Date date;
 
+    /**
+     * Constructor. It create an user with default name, score, lives and the date to compare
+     * with other user that have the same score.
+     */
     public User() {
         this.name = "player";
         this.score = 0;
@@ -23,25 +27,21 @@ public class User implements Serializable {
     }
 
     /**
-     * 
-     * @return when life gives you lemons
+     * @return name of the user.
      */
     public String getName() {
         return this.name;
     }
 
     /**
-     * 
-     * @return make a lemonade
+     * @return the score earned by the user.
      */
     public Integer getScore() {
         return this.score;
     }
 
     /**
-     * 
-     * 
-     * @return sdsd
+     * @return the date of the creation of the user.
      */
     public Date getDate() {
         return this.date;
@@ -49,31 +49,28 @@ public class User implements Serializable {
 
     /**
      * 
-     * @return ostia
+     * @return the current lives of the user.
      */
     public Integer getLives() {
         return this.lives;
     }
 
     /**
-     * 
-     * @param name
+     * @param name the name to set when you want save the user score in file.
      */
     public void setName(final String name) {
         this.name = name;
     }
 
     /**
-     * 
-     * @param score
+     * @param score the score to set.
      */
     public void setScore(final Integer score) {
         this.score = score;
     }
 
     /**
-     * 
-     * @param lives
+     * @param lives the lives to set.
      */
     public void setLives(final Integer lives) {
         this.lives = lives;

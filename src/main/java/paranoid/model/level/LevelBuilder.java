@@ -90,7 +90,7 @@ public class LevelBuilder {
                                                .width(this.gameCanvas.get(hit).getX().getWidth())
                                                .pointEarned(point)
                                                .color(color)
-                                               .destructible(isIndestructibile)
+                                               .indestructible(isIndestructibile)
                                                .energy(lives)
                                                .build();
                     this.gameCanvas.replace(hit, new Pair<>(this.gameCanvas.get(hit).getX(), Optional.of(brick)));
