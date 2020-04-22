@@ -1,4 +1,4 @@
-package paranoid.model.level;
+package paranoid.controller.event;
 
 import java.net.URL;
 

@@ -7,7 +7,6 @@ import paranoid.common.Collision;
 import paranoid.controller.gameloop.GamePhase;
 import paranoid.controller.gameloop.GameState;
 import paranoid.model.entity.Brick;
-import paranoid.model.level.Effect;
 import paranoid.model.level.MusicPlayer;
 
 public class EventConsumer {
