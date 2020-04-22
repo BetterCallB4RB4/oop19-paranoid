@@ -84,6 +84,7 @@ public class ParanoidApp extends Application {
      */
     public static void main(final String[] args) {
         initSoftware();
+        //unlockStoryLevel();
         launch();
     }
 
@@ -119,4 +120,16 @@ public class ParanoidApp extends Application {
         }
     }
 
+    /*
+    private static void unlockStoryLevel() {
+        Arrays.asList(LevelSelection.values()).stream()
+        .map(i -> i.getLevel())
+        .forEach(i -> {
+            LevelManager.saveLevel(new Level(i.getBricks(),
+                    i.getLevelName() + " (UNLOCK)", 
+                    i.getMusic(),
+                    i.getBackGround()));
+        });
+    }
+    */
 }
