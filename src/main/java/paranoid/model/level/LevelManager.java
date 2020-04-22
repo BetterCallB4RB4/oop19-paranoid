@@ -2,15 +2,19 @@ package paranoid.model.level;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import paranoid.main.ParanoidApp;
 
@@ -38,14 +42,15 @@ public final class LevelManager {
      * @return all the levels in the custom level folder
      */
     public static Set<Level> loadLevels() {
-        final Set<Level> levels = new HashSet<>();
-        final File levelFolder = new File(ParanoidApp.LEVEL_FOLDER);
-        if (levelFolder.exists() && levelFolder.isDirectory()) {
-            for (int i = 0; i < levelFolder.list().length; i++) {
-                levels.add(loadLevel(levelFolder.listFiles()[i].getName()));
-            }
+        try (Stream<Path> walk = Files.walk(Paths.get(ParanoidApp.LEVEL_FOLDER))) {
+            return walk.filter(Files::isRegularFile)
+                       .map(i -> i.toFile().getName())
+                       .map(i -> loadLevel(i))
+                       .collect(Collectors.toSet());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return levels;
+        return new HashSet<Level>();
     }
 
     /**
