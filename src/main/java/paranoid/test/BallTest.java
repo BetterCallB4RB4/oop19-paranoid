@@ -8,12 +8,13 @@
 //import org.junit.jupiter.api.Test;
 //
 //import paranoid.common.P2d;
+//import paranoid.common.StartPhase;
 //import paranoid.common.V2d;
 //import paranoid.model.collision.Direction;
 //import paranoid.model.entity.Ball;
 //import paranoid.model.entity.Border;
-//import paranoid.model.entity.StartPhase;
 //import paranoid.model.entity.World;
+//import paranoid.model.entity.WorldImpl;
 //import paranoid.model.settings.Difficulty;
 //
 //public class BallTest {
@@ -54,7 +55,7 @@
 //     */
 //    @Test
 //    public void ballMovement() {
-//        final World world = new World(new Border(100, 100), null);
+//        final World world = new WorldImpl(new Border(100, 100), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
 //        ballBuilder.height(StartPhase.BALL.getInitHeight()).width(StartPhase.BALL.getInitWidth())
 //                .speed(Difficulty.EASY.getSpeed());
@@ -103,7 +104,7 @@
 //    public void ballSpeed() {
 //        final double py = Math.sin(Math.toRadians(0));
 //        final double px = Math.cos(Math.toRadians(0));
-//        final World world = new World(new Border(100, 100), null);
+//        final World world = new WorldImpl(new Border(100, 100), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
 //        ballBuilder.height(StartPhase.BALL.getInitHeight()).width(StartPhase.BALL.getInitWidth()).position(new P2d(50, 50))
 //                .direction(new V2d(px, py));
@@ -140,7 +141,7 @@
 //        // collision with border vertical
 //        double py = Math.sin(Math.toRadians(0));
 //        double px = Math.cos(Math.toRadians(0));
-//        final World world = new World(new Border(100, 100), null);
+//        final World world = new WorldImpl(new Border(100, 100), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
 //        ballBuilder.height(10).width(10).position(new P2d(90, 50)).direction(new V2d(px, py)).speed(100);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));

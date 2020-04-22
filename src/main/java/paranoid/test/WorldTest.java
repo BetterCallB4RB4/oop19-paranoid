@@ -11,22 +11,23 @@
 //
 //import org.junit.jupiter.api.Test;
 //import javafx.scene.paint.Color;
-//import paranoid.common.Collision;
 //import paranoid.common.P2d;
 //import paranoid.common.Pair;
 //import paranoid.common.PlayerId;
+//import paranoid.common.StartPhase;
+//import paranoid.model.collision.Collision;
 //import paranoid.model.collision.Direction;
 //import paranoid.model.entity.Ball;
 //import paranoid.model.entity.Border;
 //import paranoid.model.entity.Brick;
 //import paranoid.model.entity.Player;
-//import paranoid.model.entity.StartPhase;
 //import paranoid.model.entity.World;
+//import paranoid.model.entity.WorldImpl;
 //import paranoid.model.settings.Difficulty;
 //
 //public class WorldTest {
 //
-//    private final World world = new World(new Border(200, 200), null);
+//    private final World world = new WorldImpl(new Border(200, 200), null);
 //    private final Brick brick = new Brick.Builder().position(new P2d(50, 50))
 //                                             .height(10)
 //                                             .width(10)
@@ -54,7 +55,7 @@
 //     */
 //    @Test
 //    public void insertBallTest() {
-//        final World world = new World(new Border(600, 600), null);
+//        final World world = new WorldImpl(new Border(600, 600), null);
 //        final Ball.Builder ballBuilder = new Ball.Builder();
 //        ballBuilder.position(StartPhase.BALL.getSpawnPoint())
 //                   .direction(Direction.EDGE_LEFT.getVector().mul(-1))
@@ -83,7 +84,7 @@
 //                    .color(Color.BLACK)
 //                    .indestructible(true)
 //                    .energy(1);
-//        final World world = new World(new Border(600, 600), null);
+//        final World world = new WorldImpl(new Border(600, 600), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        world.setBricks(IntStream.range(0, 100)
 //                                 .mapToObj(i -> brickBuilder.build())
@@ -102,7 +103,7 @@
 //                     .width(StartPhase.PLAYER_ONE.getInitWidth())
 //                     .height(StartPhase.PLAYER_ONE.getInitHeight())
 //                     .playerId(PlayerId.ONE);
-//        final World world = new World(new Border(600, 600), null);
+//        final World world = new WorldImpl(new Border(600, 600), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        world.setPlayers(IntStream.range(0, 100)
 //                                  .mapToObj(i -> playerBuilder.build())
@@ -116,7 +117,7 @@
 //     */
 //    @Test
 //    public void insertEntityTest() {
-//        final World world = new World(new Border(600, 600), null);
+//        final World world = new WorldImpl(new Border(600, 600), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        final Ball.Builder ballBuilder = new Ball.Builder();
 //        ballBuilder.position(StartPhase.BALL.getSpawnPoint())
@@ -148,7 +149,7 @@
 //     */
 //    @Test
 //    public void checkBoardCollision() {
-//        final World world = new World(new Border(100, 100), null);
+//        final World world = new WorldImpl(new Border(100, 100), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
 //        final Ball.Builder ballBuilder = new Ball.Builder();
 //        ballBuilder.position(new P2d(95, 50))
