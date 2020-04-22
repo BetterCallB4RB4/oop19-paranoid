@@ -53,14 +53,24 @@ public final class Player extends GameObj {
         this.getGraphicsComponent().update(this, graphicsAdapter);
     }
 
+    /**
+     * @return the id of the player, different id retrieve different player attributes.
+     */
     public PlayerId getPlayerId() {
         return this.playerId;
     }
 
+    /**
+     * @return a map that contains the information of all ball in the game and the
+     * zone of presence for allow the ball to bounce fine when hit the player.
+     */
     public Map<Ball, Collision> getLastZonePresence() {
         return this.lastZonePresence;
     }
 
+    /**
+     * Static nested class for build the player
+     */
     public static final class Builder {
 
         private P2d pos;
@@ -68,26 +78,46 @@ public final class Player extends GameObj {
         private int width;
         private PlayerId playerId;
 
+        /**
+         * @param pos the position of the player to set.
+         * @return the player builder.
+         */
         public Builder position(final P2d pos) {
             this.pos = pos;
             return this;
         }
 
+        /**
+         * @param height the height of the player to set.
+         * @return the player builder.
+         */
         public Builder height(final int height) {
             this.height = height;
             return this;
         }
 
+        /**
+         * @param width the width of the player to set.
+         * @return the player builder.
+         */
         public Builder width(final int width) {
             this.width = width;
             return this;
         }
 
+        /**
+         * @param playerId the id of the player to set.
+         * @return the player builder.
+         */
         public Builder playerId(final PlayerId playerId) {
             this.playerId = playerId;
             return this;
         }
 
+        /**
+         * Build the player and check if fields are set correctly.
+         * @return the new Player with the selected properties.
+         */
         public Player build() {
             if (this.pos == null || this.height <= 0 || this.width <= 0
                     || this.playerId == null) {

@@ -21,6 +21,9 @@ import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
 import paranoid.view.parameters.LayoutManager;
 
+/**
+ * Controller of gameOver.fxml.
+ */
 public class GameOverController implements GuiController  {
     private static final int MAX_LENGTH = 10;
     private Score topScores;
@@ -61,7 +64,8 @@ public class GameOverController implements GuiController  {
     private Button btnMenu;
 
     /**
-     * 
+     * Initialize the window with default settings adapted to the monitor resolution
+     * and remove the ScrollBar from the scrollPane.
      */
     @FXML
     public void initialize() {
@@ -76,7 +80,7 @@ public class GameOverController implements GuiController  {
     }
 
     /**
-     * 
+     * Go back to menu when click with mouse the button menu.
      */
     @FXML
     public void btnMenuOnClickHandler() {
@@ -84,7 +88,9 @@ public class GameOverController implements GuiController  {
     }
 
     /**
-     * 
+     * Send button the allow you to send the name of the user that you have set
+     * in txtName text field and save it in the current score file and update the GUI.
+     * If txtName is empty show an error message on the screen.
      */
     @FXML
     public void btnSendOnClickHandler() {
@@ -112,10 +118,14 @@ public class GameOverController implements GuiController  {
     }
 
     /**
-     * 
-     * @param score
-     * @param user
-     * @param level
+     * Retrieve from gameLoop the score, the user and the level information.
+     * Set to visible name field to set if the user score value is at least
+     * before the minimum value present on the score list. Update the gui if the
+     * user is not present.
+     * Set label to win if user lives is more than 0, otherwise lost.
+     * @param score the top scores to show in the GUI.
+     * @param user the current user.
+     * @param level the 
      */
     public void updateScore(final Score score, final User user, final Level level) {
         this.lblError.setVisible(false);
@@ -143,6 +153,11 @@ public class GameOverController implements GuiController  {
         }
     }
 
+    /**
+     * Update the GUI and set different color if the current user is present in the
+     * update score list.
+     * @param score the score to show.
+     */
     private void viewScore(final Score score) {
         this.grid.getChildren().clear();
         final Label name = new Label("NAME: ");

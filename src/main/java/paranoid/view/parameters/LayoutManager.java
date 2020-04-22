@@ -7,7 +7,7 @@ import javafx.scene.control.SplitPane;
 import paranoid.controller.GuiController;
 
 /**
- * Enum for static load all fxml at the start of application.
+ * Enumeration for static load GUI layouts at the start of application.
  */
 public enum LayoutManager {
 
@@ -47,9 +47,10 @@ public enum LayoutManager {
     LEVEL_BUILDER("layouts/levelBuilder.fxml"),
 
     /**
-     * 
+     * nextlevel.fxml path.
      */
     NEXT_LEVEL("layouts/nextLevel.fxml"),
+
     /**
      * gameOver.fxml path.
      */
@@ -60,7 +61,7 @@ public enum LayoutManager {
 
     /**
      * Constructor.
-     * @param name url where take the fxml
+     * @param name the path where get the layout.
      */
     LayoutManager(final String name) {
         final FXMLLoader loader = new FXMLLoader(ClassLoader.getSystemResource(name));
@@ -81,7 +82,7 @@ public enum LayoutManager {
 
     /**
      * 
-     * @return gui controller from selected fxml path
+     * @return guiController from selected fxml path
      */
     public GuiController getGuiController() {
         return this.guiController;

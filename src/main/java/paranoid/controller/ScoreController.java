@@ -25,6 +25,9 @@ import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
 import paranoid.view.parameters.LayoutManager;
 
+/**
+ * Controller of score.fxml.
+ */
 public class ScoreController implements GuiController, Observer {
 
     @FXML
@@ -52,8 +55,9 @@ public class ScoreController implements GuiController, Observer {
     private VBox labelContainer;
 
     /**
-     * 
-     * @param subject
+     * Initialize the window with default settings adapted to the monitor resolution
+     * and remove the ScrollBar from the scrollPane.
+     * @param subject connect the observer to the subject.
      */
     @FXML
     public void initialize(final Subject subject) {
@@ -73,7 +77,7 @@ public class ScoreController implements GuiController, Observer {
     }
 
     /**
-     * 
+     * Go back to menu when click with mouse the button menu.
      */
     @FXML
     public void btnMenuOnClickHandler() {
@@ -83,6 +87,10 @@ public class ScoreController implements GuiController, Observer {
 
     /**
      * implement pattern observer.
+     * Update called from the menuController subject.
+     * It check if exist the correct score for every level retrieved from the level path folder
+     * and write a default score in custom score folder with level name every if the check resulted is false.
+     * Then it update the gui with a button for every score present in the story/custom folder.
      */
     @Override
     public void update() {
@@ -100,7 +108,7 @@ public class ScoreController implements GuiController, Observer {
 
         });
         this.buttonContainer.getChildren().add(btnStory);
-        for (final Score scoreCustom : ScoreManager.loadCustomList()) {
+        for (final Score scoreCustom : ScoreManager.loadCustomScores()) {
             final Button btnCustom = new Button(scoreCustom.getNameScore());
             this.setButtonStyle(btnCustom, btnMenu);
             btnCustom.setOnAction(new EventHandler<ActionEvent>() {
@@ -125,6 +133,10 @@ public class ScoreController implements GuiController, Observer {
         });
     }
 
+    /**
+     * update the right scrollPane panel of the gui with the information of the user present in the
+     * top score list of the current score file.
+     */
     private void viewScore(final Score score) {
         this.grid.getChildren().clear();
         final Label name = new Label("NAME: ");

@@ -11,6 +11,10 @@ public class BrickGraphicsComponent implements GraphicsComponent, Serializable {
     private static final long serialVersionUID = 5169287434461523175L;
     private final SerializableColor color;
 
+    /**
+     * Constructor.
+     * @param color the serializableColor wrapper that bring information of color.
+     */
     public BrickGraphicsComponent(final SerializableColor color) {
         this.color = color;
     }

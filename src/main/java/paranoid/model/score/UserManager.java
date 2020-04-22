@@ -10,11 +10,18 @@ import java.io.ObjectOutputStream;
 
 import paranoid.main.ParanoidApp;
 
+/**
+ * UserManager. It save the current user in file when a you win or lose a game level.
+ */
 public final class UserManager {
     private UserManager() {
 
     }
 
+    /**
+     * Save user in user path.
+     * @param user the current user to save.
+     */
     public static void saveUser(final User user) {
         try (
                 ObjectOutputStream w = new ObjectOutputStream(
@@ -27,6 +34,10 @@ public final class UserManager {
         }
     }
 
+    /**
+     * Load the user from user path.
+     * @return the current user.
+     */
     public static User loadUser() {
         try (
                 ObjectInputStream r = new ObjectInputStream(

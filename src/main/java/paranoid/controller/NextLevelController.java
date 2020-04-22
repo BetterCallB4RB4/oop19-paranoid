@@ -11,6 +11,9 @@ import paranoid.model.level.Level;
 import paranoid.model.score.User;
 import paranoid.view.parameters.LayoutManager;
 
+/**
+ * Controller of nextLevel.fxml.
+ */
 public class NextLevelController implements GuiController {
 
     @FXML
@@ -32,7 +35,7 @@ public class NextLevelController implements GuiController {
     private Button btnNext;
 
     /**
-     * 
+     * Initialize the window with default settings adapted to the monitor resolution.
      */
     @FXML
     public void initialize() {
@@ -43,7 +46,7 @@ public class NextLevelController implements GuiController {
     }
 
     /**
-     * 
+     * Go back to menu when click with mouse the button menu.
      */
     @FXML
     public void btnMenuOnClickHandler() {
@@ -52,7 +55,7 @@ public class NextLevelController implements GuiController {
     }
 
     /**
-     * 
+     * Start a new gameLoop thread with the next level set before in the gameLoop.
      */
     @FXML
     public void btnNextOnClickHandler() {
@@ -63,9 +66,8 @@ public class NextLevelController implements GuiController {
     }
 
     /**
-     * 
-     * @param lvl
-     * @param user
+     * @param lvl the current level to display.
+     * @param user the user to retrieve the information about score and lives.
      */
     public void update(final Level lvl, final User user) {
         this.lblLevel.setText(lvl.getLevelName());

@@ -11,13 +11,17 @@ public class PlayerGraphicsComponent implements GraphicsComponent {
     private final Image playerOneSprite;
     private final Image playerTwoSprite;
 
+    /**
+     * Constructor.
+     * Store the graphic sprite of players with different playerId.
+     */
     public PlayerGraphicsComponent() {
         this.playerOneSprite = ResourceLoader.PLAYER_ONE_SPRITE.getSprite();
         this.playerTwoSprite = ResourceLoader.PLAYER_TWO_SPRITE.getSprite();
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void update(final GameObject obj, final GraphicsAdapter ga) {
