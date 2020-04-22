@@ -17,7 +17,7 @@ public enum Effect {
     /**
      * the collision effect with the player.
      */
-    PLAYER_COLLISION("effetti/zap1.wav");
+    PLAYER_COLLISION("effetti/phaserUp.wav");
 
     private String location;
 
