@@ -32,7 +32,7 @@
 //                                             .width(10)
 //                                             .pointEarned(0)
 //                                             .color(Color.BLACK)
-//                                             .destructible(true)
+//                                             .indestructible(true)
 //                                             .energy(1)
 //                                             .build();
 //    private final Ball ball = new Ball.Builder().position(new P2d(50, 50))
@@ -81,7 +81,7 @@
 //                    .width(10)
 //                    .pointEarned(0)
 //                    .color(Color.BLACK)
-//                    .destructible(true)
+//                    .indestructible(true)
 //                    .energy(1);
 //        final World world = new World(new Border(600, 600), null);
 //        assertTrue(world.getSceneEntities().isEmpty());
@@ -130,7 +130,7 @@
 //                    .width(10)
 //                    .pointEarned(0)
 //                    .color(Color.BLACK)
-//                    .destructible(true)
+//                    .indestructible(true)
 //                    .energy(1);
 //        final Player.Builder playerBuilder = new Player.Builder();
 //        playerBuilder.position(StartPhase.PLAYER_ONE.getSpawnPoint())
@@ -160,16 +160,16 @@
 //        //set ball pos to the right edge and check for a collision
 //        assertEquals(Collision.RIGHT, world.checkCollisionWithBoundaries(ballBuilder.build()).get());
 //        //set ball pos to the bottom edge and check for a collision
-//        ballBuilder.setPosition(new P2d(50, 95));
+//        ballBuilder.position(new P2d(50, 95));
 //        assertEquals(Collision.BOTTOM, world.checkCollisionWithBoundaries(ballBuilder.build()).get());
 //        //set ball pos to the top edge and check for a collision
-//        ballBuilder.setPosition(new P2d(50, -5));
+//        ballBuilder.position(new P2d(50, -5));
 //        assertEquals(Collision.TOP, world.checkCollisionWithBoundaries(ballBuilder.build()).get());
 //        //set ball pos to the left edge and check for a collision
-//        ballBuilder.setPosition(new P2d(-5, 50));
+//        ballBuilder.position(new P2d(-5, 50));
 //        assertEquals(Collision.LEFT, world.checkCollisionWithBoundaries(ballBuilder.build()).get());
 //        //set ball pos to in the middle of the world and check for no collision;
-//        ballBuilder.setPosition(new P2d(50, 50));
+//        ballBuilder.position(new P2d(50, 50));
 //        assertEquals(Optional.empty(), world.checkCollisionWithBoundaries(ballBuilder.build()));
 //    }
 //
