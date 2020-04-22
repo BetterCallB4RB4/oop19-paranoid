@@ -14,6 +14,7 @@ import paranoid.controller.event.WorldEventListener;
 import paranoid.controller.gameloop.GameState;
 import paranoid.model.collision.Collision;
 import paranoid.model.collision.CollisionManager;
+import paranoid.model.collision.CollisionManagerImpl;
 import paranoid.model.collision.Direction;
 import paranoid.model.component.input.InputController;
 
@@ -31,7 +32,7 @@ public class WorldImpl implements WorldEventListener, World {
         this.balls = new HashSet<>();
         this.bricks = new HashSet<>();
         this.players = new HashSet<>();
-        this.collisionManager = new CollisionManager();
+        this.collisionManager = new CollisionManagerImpl();
         this.eventHandler = new EventConsumer(gameState);
     }
 
