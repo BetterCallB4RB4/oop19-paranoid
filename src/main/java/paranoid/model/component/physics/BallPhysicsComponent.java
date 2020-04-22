@@ -2,13 +2,13 @@ package paranoid.model.component.physics;
 
 import java.util.Optional;
 
-import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.Pair;
 import paranoid.common.V2d;
 import paranoid.controller.event.HitBorderEvent;
 import paranoid.controller.event.HitBrickEvent;
 import paranoid.controller.event.HitPlayerEvent;
+import paranoid.model.collision.Collision;
 import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;

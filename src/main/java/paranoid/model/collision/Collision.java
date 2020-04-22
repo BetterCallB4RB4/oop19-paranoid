@@ -1,4 +1,4 @@
-package paranoid.common;
+package paranoid.model.collision;
 
 /**
  * 

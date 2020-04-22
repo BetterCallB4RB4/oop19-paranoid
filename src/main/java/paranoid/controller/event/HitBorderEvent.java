@@ -1,6 +1,6 @@
 package paranoid.controller.event;
 
-import paranoid.common.Collision;
+import paranoid.model.collision.Collision;
 import paranoid.model.entity.Ball;
 
 public class HitBorderEvent implements Event {

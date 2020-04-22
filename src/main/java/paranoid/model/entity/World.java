@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import paranoid.common.Collision;
 import paranoid.common.Pair;
 import paranoid.common.PlayerId;
 import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
 import paranoid.controller.event.WorldEventListener;
 import paranoid.controller.gameloop.GameState;
+import paranoid.model.collision.Collision;
 import paranoid.model.collision.CollisionManager;
 import paranoid.model.collision.Direction;
 import paranoid.model.component.input.InputController;

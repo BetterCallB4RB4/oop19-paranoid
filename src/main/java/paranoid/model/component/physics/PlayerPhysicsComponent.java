@@ -5,7 +5,7 @@ import paranoid.common.V2d;
 
 import java.util.Optional;
 
-import paranoid.common.Collision;
+import paranoid.model.collision.Collision;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 import paranoid.model.entity.World;

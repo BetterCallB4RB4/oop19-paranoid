@@ -1,4 +1,4 @@
-package paranoid.common.dimension;
+package paranoid.common;
 
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;

@@ -3,11 +3,11 @@ package paranoid.controller.event;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import paranoid.common.Collision;
 import paranoid.controller.gameloop.GamePhase;
 import paranoid.controller.gameloop.GameState;
+import paranoid.model.collision.Collision;
 import paranoid.model.entity.Brick;
-import paranoid.model.level.MusicPlayer;
+import paranoid.model.music.MusicPlayer;
 
 public class EventConsumer {
 

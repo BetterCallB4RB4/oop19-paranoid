@@ -12,7 +12,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.controller.gameloop.GameLoop;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
@@ -20,7 +20,7 @@ import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.SettingsManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
-import paranoid.view.parameters.LayoutManager;
+import paranoid.view.layoutmanager.LayoutManager;
 
 public class ChooseLevelController implements GuiController, Observer {
 

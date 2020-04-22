@@ -2,7 +2,6 @@ package paranoid.model.collision;
 
 import java.util.Optional;
 
-import paranoid.common.Collision;
 import paranoid.common.Pair;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;

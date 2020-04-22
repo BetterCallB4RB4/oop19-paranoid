@@ -14,12 +14,12 @@ import paranoid.model.component.input.KeyboardInputController;
 import paranoid.model.component.input.KeyboardInputHandler;
 import paranoid.model.entity.World;
 import paranoid.model.level.LevelSelection;
-import paranoid.model.level.MusicPlayer;
+import paranoid.model.music.MusicPlayer;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
+import paranoid.view.layoutmanager.LayoutManager;
 import paranoid.model.settings.SettingsManager;
-import paranoid.view.parameters.LayoutManager;
 
 /**
  * class that represents the application of the game loop pattern 

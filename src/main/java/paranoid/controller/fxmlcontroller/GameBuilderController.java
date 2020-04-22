@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import paranoid.common.Pair;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.model.entity.PlaceHolder;
 import paranoid.model.level.BackGround;
 import paranoid.model.level.LevelBuilder;
@@ -24,7 +24,7 @@ import paranoid.model.level.LevelSelection;
 import paranoid.model.level.Music;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
-import paranoid.view.parameters.LayoutManager;
+import paranoid.view.layoutmanager.LayoutManager;
 
 public class GameBuilderController implements GuiController {
 

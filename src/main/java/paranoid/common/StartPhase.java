@@ -1,6 +1,4 @@
-package paranoid.model.entity;
-
-import paranoid.common.P2d;
+package paranoid.common;
 
 public enum StartPhase {
 

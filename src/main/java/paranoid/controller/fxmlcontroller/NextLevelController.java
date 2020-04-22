@@ -5,11 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.controller.gameloop.GameLoop;
 import paranoid.model.level.Level;
 import paranoid.model.score.User;
-import paranoid.view.parameters.LayoutManager;
+import paranoid.view.layoutmanager.LayoutManager;
 
 /**
  * Controller of nextLevel.fxml.

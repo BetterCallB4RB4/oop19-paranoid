@@ -16,14 +16,14 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.main.ParanoidApp;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelManager;
 import paranoid.model.score.Score;
 import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
-import paranoid.view.parameters.LayoutManager;
+import paranoid.view.layoutmanager.LayoutManager;
 
 /**
  * Controller of score.fxml.

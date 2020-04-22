@@ -13,7 +13,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.model.component.graphics.GraphicsAdapter;
 import paranoid.model.component.graphics.GraphicsAdapterImpl;
 import paranoid.model.entity.GameObject;

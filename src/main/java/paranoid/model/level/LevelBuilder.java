@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import javafx.scene.paint.Color;
 import paranoid.common.P2d;
 import paranoid.common.Pair;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.Brick.Builder;
 import paranoid.model.entity.PlaceHolder;

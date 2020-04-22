@@ -1,12 +1,11 @@
-package paranoid.view;
+package paranoid.view.layoutmanager;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.controller.fxmlcontroller.ChooseLevelController;
 import paranoid.controller.fxmlcontroller.MenuController;
 import paranoid.controller.fxmlcontroller.ScoreController;
-import paranoid.view.parameters.LayoutManager;
 
 /**
  * Main stage of this application.

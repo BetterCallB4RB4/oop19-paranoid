@@ -9,7 +9,7 @@ import paranoid.model.score.ScoreManager;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
-import paranoid.view.MainStage;
+import paranoid.view.layoutmanager.MainStage;
 
 /**
  * PARANOID MAIN.

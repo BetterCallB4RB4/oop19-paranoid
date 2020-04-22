@@ -14,8 +14,8 @@ import javafx.scene.layout.VBox;
 import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
 import paranoid.model.settings.Settings.SettingsBuilder;
+import paranoid.view.layoutmanager.LayoutManager;
 import paranoid.model.settings.SettingsManager;
-import paranoid.view.parameters.LayoutManager;
 
 public class SettingsController implements GuiController {
 

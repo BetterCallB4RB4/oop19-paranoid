@@ -3,7 +3,7 @@ package paranoid.model.component.graphics;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.Player;

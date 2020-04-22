@@ -4,8 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
-import paranoid.common.dimension.ScreenConstant;
-import paranoid.view.parameters.LayoutManager;
+import paranoid.common.ScreenConstant;
+import paranoid.view.layoutmanager.LayoutManager;
 
 /**
  * Controller of tutorial.fxml.

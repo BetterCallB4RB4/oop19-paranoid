@@ -1,4 +1,4 @@
-package paranoid.model.level;
+package paranoid.model.music;
 
 import java.io.IOException;
 
@@ -12,6 +12,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineEvent.Type;
 
 import paranoid.controller.event.Effect;
+import paranoid.model.level.Music;
 
 public class MusicPlayer {
 

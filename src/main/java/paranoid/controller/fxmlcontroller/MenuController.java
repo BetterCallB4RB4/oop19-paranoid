@@ -8,14 +8,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.VBox;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
 import paranoid.controller.gameloop.GameLoop;
 import paranoid.model.settings.SettingsManager;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
-import paranoid.view.parameters.LayoutManager;
+import paranoid.view.layoutmanager.LayoutManager;
 
 /**
  * Controller of menu.fxml.

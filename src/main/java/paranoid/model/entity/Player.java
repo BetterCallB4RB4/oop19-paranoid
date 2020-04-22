@@ -3,10 +3,10 @@ package paranoid.model.entity;
 import java.util.HashMap;
 import java.util.Map;
 
-import paranoid.common.Collision;
 import paranoid.common.P2d;
 import paranoid.common.PlayerId;
 import paranoid.common.V2d;
+import paranoid.model.collision.Collision;
 import paranoid.model.component.graphics.GraphicsAdapter;
 import paranoid.model.component.graphics.PlayerGraphicsComponent;
 import paranoid.model.component.input.InputController;

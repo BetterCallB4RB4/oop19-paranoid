@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import paranoid.common.PlayerId;
-import paranoid.common.dimension.ScreenConstant;
+import paranoid.common.ScreenConstant;
+import paranoid.common.StartPhase;
 import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
-import paranoid.model.entity.StartPhase;
 import paranoid.model.entity.World;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelSelection;

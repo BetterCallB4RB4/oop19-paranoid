@@ -1,4 +1,4 @@
-package paranoid.view.parameters;
+package paranoid.view.layoutmanager;
 
 import java.io.IOException;
 
