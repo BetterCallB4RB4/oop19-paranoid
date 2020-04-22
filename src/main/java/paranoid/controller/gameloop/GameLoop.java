@@ -38,7 +38,7 @@ public class GameLoop implements Runnable {
 
     public GameLoop(final Scene scene) {
         this.scene = scene;
-        this.gameState = new GameState();
+        this.gameState = new GameStateImpl();
         this.world = gameState.getWorld();
         this.player = new MusicPlayer();
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
