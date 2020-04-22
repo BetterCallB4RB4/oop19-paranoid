@@ -15,6 +15,7 @@ import paranoid.model.component.input.KeyboardInputHandler;
 import paranoid.model.entity.World;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.music.MusicPlayer;
+import paranoid.model.music.MusicPlayerImpl;
 import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
@@ -40,7 +41,7 @@ public class GameLoop implements Runnable {
         this.scene = scene;
         this.gameState = new GameStateImpl();
         this.world = gameState.getWorld();
-        this.player = new MusicPlayer();
+        this.player = new MusicPlayerImpl();
         this.gameController = (GameController) LayoutManager.GAME.getGuiController();
         this.gameController.setBackGroundImage(gameState.getLevel().getBackGround());
         this.player.setMusicEnable(gameState.isMusicActive());
