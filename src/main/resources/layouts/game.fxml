@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="375.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.GameController">
+<SplitPane dividerPositions="375.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.fxmlcontroller.GameController">
 
    <items>
       <VBox fx:id="dashBoard" alignment="CENTER" prefHeight="410.0" prefWidth="188.0" spacing="20.0" style="-fx-background-image: url(&quot;backgrounds/dashboard7.jpg&quot;); -fx-background-size: stretch;">

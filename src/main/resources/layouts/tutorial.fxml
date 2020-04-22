@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="mainPanel" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.TutorialController">
+<SplitPane fx:id="mainPanel" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.fxmlcontroller.TutorialController">
    <items>
       <VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: linear-gradient(to bottom right, #1A004A, #FA147C);">
          <children>

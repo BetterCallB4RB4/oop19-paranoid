@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.SettingsController">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.fxmlcontroller.SettingsController">
    <items>
       <VBox fx:id="buttonContainer" alignment="TOP_CENTER" prefHeight="484.0" prefWidth="598.0" spacing="20.0" style="-fx-background-image: url(&quot;backgrounds/menu4.jpg&quot;); -fx-background-size: stretch;">
          <children>

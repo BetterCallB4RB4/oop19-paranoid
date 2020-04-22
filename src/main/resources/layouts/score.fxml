@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane fx:id="mainPanel" dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.ScoreController">
+<SplitPane fx:id="mainPanel" dividerPositions="0.5" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="paranoid.controller.fxmlcontroller.ScoreController">
    <items>
       <VBox fx:id="vBoxMenu" alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: linear-gradient(to bottom right, #E438A1, #6749D8);">
          <children>
