@@ -27,7 +27,7 @@ public class Pair<X, Y> {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -39,7 +39,7 @@ public class Pair<X, Y> {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @SuppressWarnings("rawtypes")
     @Override
@@ -72,7 +72,7 @@ public class Pair<X, Y> {
     }
 
     /**
-     * to string method.
+     * {@inheritDoc}
      */
     @Override
     public String toString() {

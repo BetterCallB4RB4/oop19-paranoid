@@ -51,6 +51,9 @@ public final class MenuController implements GuiController, Subject {
     @FXML
     private VBox backDash;
 
+    /**
+     * set the panel settings to the global sizes calculated when the application starts.
+     */
     @FXML
     public void initialize() {
         this.observers = new ArrayList<>();
@@ -60,6 +63,9 @@ public final class MenuController implements GuiController, Subject {
         this.backGroundPane.setMaxHeight(ScreenConstant.CANVAS_HEIGHT);
     }
 
+    /**
+     * the game starts from the last level played.
+     */
     @FXML
     public void clickContinue() {
         final Scene scene = continua.getScene();
@@ -94,24 +100,36 @@ public final class MenuController implements GuiController, Subject {
         scene.setRoot(LayoutManager.SCORE.getLayout());
     }
 
+    /**
+     * set the level builder scene.
+     */
     @FXML
     public void goToLevelBuilder() {
         final Scene scene = btnBuilder.getScene();
         scene.setRoot(LayoutManager.LEVEL_BUILDER.getLayout());
     }
 
+    /**
+     * set the settings scene.
+     */
     @FXML
     public void goToSettings() {
         final Scene scene = btSettings.getScene();
         scene.setRoot(LayoutManager.SETTINGS.getLayout());
     }
 
+    /**
+     * set the tutorial scene.
+     */
     @FXML
     public void btnTutorialOnClickHandler() {
         final Scene scene = btnTutorial.getScene();
         scene.setRoot(LayoutManager.TUTORIAL.getLayout());
     }
 
+    /**
+     * set the level builder scene.
+     */
     @FXML
     public void clickPlayYourLvl() {
         this.notifyObserver();
@@ -119,22 +137,30 @@ public final class MenuController implements GuiController, Subject {
         scene.setRoot(LayoutManager.CHOOSE_LVL.getLayout());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void register(final Observer obs) {
         this.observers.add(obs);
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void unregister(final Observer obs) {
         this.observers.remove(obs);
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void notifyObserver() {
         this.observers.forEach(Observer::update);
-
     }
 
 }

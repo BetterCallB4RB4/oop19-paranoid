@@ -19,6 +19,7 @@ public class EventConsumer {
     public EventConsumer(final GameState gameState) {
         this.gameState = gameState;
     }
+
     /**
      * each event will have specific behavior based on its instance.
      */
@@ -60,7 +61,9 @@ public class EventConsumer {
         this.events.add(event);
     }
 
-
+    /**
+     * check if the game can continue.
+     */
     private void isOver() {
         if (gameState.getLives() == 0) {
             gameState.setPhase(GamePhase.LOST);
@@ -73,8 +76,8 @@ public class EventConsumer {
     }
 
     /**
-     * 
-     * @param player effect
+     * set a player to play sound effects when specific events occur.
+     * @param player 
      */
     public void addMusicPlayer(final MusicPlayer player) {
         this.player = player;

@@ -10,10 +10,14 @@ import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
 
+/**
+ * collision implementation via the AABB (Axis-Aligned Bounding Box) algorithm.
+ *
+ */
 public class CollisionManager {
 
     /**
-     * 
+     * check for collisions between the ball and the edge.
      * @param border the limit of the world
      * @param entity the object that can collide with the border
      * @return the collision surface
@@ -33,6 +37,7 @@ public class CollisionManager {
     }
 
     /**
+     * check for collisions between the ball and the bricks.
      * @param brick the brick to check the collision
      * @param ball the object that can collide with the brick
      * @return the collision surface
@@ -59,10 +64,11 @@ public class CollisionManager {
     }
 
     /**
-     * 
+     * check for collisions with the player.
      * @param player
      * @param ball
-     * @return ememe
+     * @return the wall where the ball touches the player 
+     * and if it is the upper one the direction also returns.
      */
     public Optional<Collision> checkCollisionWithPlayers(final Player player, final Ball ball) {
         final boolean checkTop = checkTopForCollision(ball.getPos().getY(), player.getPos().getY() + player.getHeight());

@@ -65,11 +65,17 @@ public enum LevelSelection implements Iterator<LevelSelection> {
         return level;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasNext() {
         return !this.isLast;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LevelSelection next() {
         return Arrays.asList(LevelSelection.values()).get(index + 1);
@@ -78,7 +84,7 @@ public enum LevelSelection implements Iterator<LevelSelection> {
     /**
      * 
      * @param nameLvl
-     * @return if the level tt is part of the campaign. 
+     * @return if the level is part of the campaign. 
      */
     public static boolean isStoryLevel(final String nameLvl) {
         return Arrays.asList(LevelSelection.values()).stream()

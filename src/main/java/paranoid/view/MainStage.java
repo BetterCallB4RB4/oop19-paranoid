@@ -23,10 +23,10 @@ public class MainStage extends Stage {
     }
 
     private final class MainScene extends Scene {
+
         /**
-         * Constructor.
          * Add layout menu.fxml and size to the scene.
-         *  and link observer to menuController subject
+         * connection of observers to subjects following the observer pattern.
          */
         private MainScene() {
             super(LayoutManager.MENU.getLayout(), ScreenConstant.SCREEN_WIDTH, ScreenConstant.SCREEN_HEIGHT);
@@ -36,7 +36,5 @@ public class MainStage extends Stage {
             scoreController.initialize(menuController);
             chooseLevel.initialize(menuController);
         }
-
     }
-
 }

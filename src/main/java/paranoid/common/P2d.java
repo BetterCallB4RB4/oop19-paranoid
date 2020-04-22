@@ -30,26 +30,25 @@ public class P2d implements Serializable {
     }
 
     /**
-     * 
-     * @param v
-     * @return vectorial sum of the two positions
+     * sum between two vectors.
+     * @param v the vector to be added
+     * @return vector sum of the two positions
      */
     public P2d sum(final V2d v) {
         return new P2d(x + v.getX(), y + v.getY());
     }
 
     /**
-     * 
-     * @param v
-     * @return vectorial sum of the two positions
+     * subtraction between two vectors.
+     * @param v the vector to be sub
+     * @return vector sum of the two positions
      */
     public V2d sub(final P2d v) {
         return new V2d(x - v.x, y - v.y);
     }
 
     /**
-     * 
-     * @return String view of the class
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -57,8 +56,7 @@ public class P2d implements Serializable {
     }
 
     /**
-     * 
-     * @return a generated hashcode ( pojo )
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -73,8 +71,8 @@ public class P2d implements Serializable {
     }
 
     /**
-     * 
-     * @return a generated equals ( pojo )
+     * {@inheritDoc}
+     * two P2d are considered equal if their fields are equal.
      */
     @Override
     @SuppressWarnings("PMD.SimplifyBooleanReturns")

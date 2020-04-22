@@ -50,7 +50,7 @@ public class Level implements Serializable {
     }
 
     /**
-     * hash code.
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -61,7 +61,7 @@ public class Level implements Serializable {
     }
 
     /**
-     * equals.
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(final Object obj) {

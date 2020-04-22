@@ -81,12 +81,23 @@ public final class GameController implements GuiController {
 
     }
 
+    /**
+     * draw information about your current score and lives.
+     * @param highScore
+     * @param score
+     * @param lives
+     */
     private void drawScoreAndLives(final Integer highScore, final Integer score, final Integer lives) {
         this.lblHighScore.setText("HIGHSCORE: " + highScore.toString());
         this.lblScore.setText("SCORE: " + score.toString());
         this.lblLives.setText("LIVES: " + lives.toString());
     }
 
+    /**
+     * calls the graphic component of the game entities by updating them, 
+     * which will be drawn on the canvas.
+     * @param gameEntities to draw
+     */
     private void drawWorld(final Set<GameObject> gameEntities) {
         gc.clearRect(0, 0, ScreenConstant.CANVAS_WIDTH, ScreenConstant.CANVAS_HEIGHT);
         final GraphicsAdapter ga = new GraphicsAdapterImpl(gc);
@@ -95,6 +106,10 @@ public final class GameController implements GuiController {
         });
     }
 
+    /**
+     * set the background image of the canvas.
+     * @param backGround use
+     */
     public void setBackGroundImage(final BackGround backGround) {
         final BackgroundImage bg = new BackgroundImage(new Image(backGround.getLocation(), 
                                                            ScreenConstant.CANVAS_WIDTH,

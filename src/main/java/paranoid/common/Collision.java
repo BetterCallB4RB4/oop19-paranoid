@@ -1,28 +1,29 @@
 package paranoid.common;
 
+/**
+ * 
+ * given two objects A and B, the wall where object A touches object B.
+ *
+ */
 public enum Collision {
 
     /**
-     *
-     * given two objects A and B, the wall where object A touches object B is the right one.
+     * collision with right wall.
      */
     RIGHT,
 
     /**
-     * 
-     * given two objects A and B, the wall where object A touches object B is the left one.
+     * collision with left wall.
      */
     LEFT,
 
     /**
-     * 
-     * given two objects A and B, the wall where object A touches object B is the top one.
+     * collision with top wall.
      */
     TOP,
 
     /**
-     * 
-     * given two objects A and B, the wall where object A touches object B is the bottom one.
+     * collision with bottom wall.
      */
     BOTTOM;
 

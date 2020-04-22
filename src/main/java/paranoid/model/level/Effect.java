@@ -5,26 +5,22 @@ import java.net.URL;
 public enum Effect {
 
     /**
-     * uno di 10 sfondi animati.
+     * the collision effect with the edge.
      */
     BOARD_COLLISION("effetti/laser1.wav"),
 
     /**
-     * uno di 10 sfondi animati.
+     * the collision effect with a brick.
      */
     BRICK_COLLISION("effetti/pepSound1.wav"),
 
     /**
-     * uno di 10 sfondi animati.
+     * the collision effect with the player.
      */
     PLAYER_COLLISION("effetti/zap1.wav");
 
     private String location;
 
-    /**
-     * Constructor.
-     * @param name url where take the fxml
-     */
     Effect(final String location) {
         this.location = location;
     }

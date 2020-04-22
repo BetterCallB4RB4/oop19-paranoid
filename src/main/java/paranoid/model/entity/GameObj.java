@@ -114,8 +114,7 @@ public abstract class GameObj implements GameObject, Serializable {
     }
 
     /**
-     * 
-     * @return asofi
+     * {@inheritDoc}
      */
     protected PhysicsComponent getPhysicsComponent() {
         return this.phys;
@@ -123,7 +122,7 @@ public abstract class GameObj implements GameObject, Serializable {
 
     /**
      * 
-     * @return dsad
+     * {@inheritDoc}
      */
     protected InputComponent getInputComponent() {
         return this.input;
@@ -131,7 +130,7 @@ public abstract class GameObj implements GameObject, Serializable {
 
     /**
      * 
-     * @return J
+     * {@inheritDoc}
      */
     protected GraphicsComponent getGraphicsComponent() {
         return this.graphics;

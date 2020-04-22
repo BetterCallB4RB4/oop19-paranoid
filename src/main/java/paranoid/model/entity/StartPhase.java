@@ -5,17 +5,17 @@ import paranoid.common.P2d;
 public enum StartPhase {
 
     /**
-     * 
+     * the default states.
      */
     PLAYER_ONE(new P2d(290, 580), 78, 20),
 
     /**
-     * 
+     * the default states.
      */
     PLAYER_TWO(new P2d(190, 580), 78, 20),
 
     /**
-     * 
+     * the default states.
      */
     BALL(new P2d(330, 570), 10, 10);
 

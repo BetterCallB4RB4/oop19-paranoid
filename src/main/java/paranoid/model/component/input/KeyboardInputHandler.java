@@ -20,7 +20,7 @@ public class KeyboardInputHandler implements InputHandler {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void notifyInputEvent()  {
@@ -28,6 +28,9 @@ public class KeyboardInputHandler implements InputHandler {
         onKeyReleased();
     }
 
+    /**
+     * changes the state of the input controller by memorizing which keys have been pressed.
+     */
     private void onKeyPressed() {
         canvas.setOnKeyPressed(e -> {
             switch (e.getCode()) {
@@ -56,6 +59,9 @@ public class KeyboardInputHandler implements InputHandler {
         });
     }
 
+    /**
+     * changes the state of the input controller by memorizing which keys have been released. 
+     */
     private void onKeyReleased() {
         canvas.setOnKeyReleased(e -> {
             switch (e.getCode()) {

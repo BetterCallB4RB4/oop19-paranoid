@@ -10,6 +10,7 @@ import paranoid.model.score.User;
 import paranoid.model.score.UserManager;
 import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.view.MainStage;
+
 /**
  * PARANOID MAIN.
  * Stage creation.
@@ -43,14 +44,15 @@ public class ParanoidApp extends Application {
     public static final String OPTIONS = MAIN_FOLDER + SEPARATOR + "options";
 
     /**
-     * 
+     * path to the file where user information is stored.
      */
     public static final String USER = MAIN_FOLDER + SEPARATOR + "user";
 
     /**
-     * 
+     * the folder to save all users score options.
      */
     public static final String SCORE_FOLDER = MAIN_FOLDER + SEPARATOR + "scores";
+
     /**
      * the file to save the top story scores.
      */
@@ -80,6 +82,7 @@ public class ParanoidApp extends Application {
     }
 
     /**
+     * initializes the game.
      * @param args
      */
     public static void main(final String[] args) {

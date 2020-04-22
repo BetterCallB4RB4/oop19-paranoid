@@ -74,6 +74,7 @@ public class ChooseLevelController implements GuiController, Observer {
      * implementation of pattern observer.
      * reads the new generated levels and creates a button as a reference
      * by copying the style from an existing one
+     * {@inheritDoc}
      */
     @Override
     public void update() {

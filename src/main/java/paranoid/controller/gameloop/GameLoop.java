@@ -21,6 +21,10 @@ import paranoid.model.settings.Settings.SettingsBuilder;
 import paranoid.model.settings.SettingsManager;
 import paranoid.view.parameters.LayoutManager;
 
+/**
+ * class that represents the application of the game loop pattern 
+ * divided into process update and render.
+ */
 public class GameLoop implements Runnable {
 
     private static final int PERIOD = 20;
@@ -51,8 +55,7 @@ public class GameLoop implements Runnable {
     }
 
     /**
-     * 
-     * follows the 3 steps of the gameLoop pattern.
+     * apply the three game loop steps based on the game phase.
      */
     @Override
     public void run() {
@@ -96,6 +99,10 @@ public class GameLoop implements Runnable {
         }
     }
 
+    /**
+     * set the gui to show the post game screen.
+     * @param layoutManager 
+     */
     private void changeView(final LayoutManager layoutManager) {
         if (layoutManager.equals(LayoutManager.NEXT_LEVEL)) {
             final NextLevelController nextLevelController = (NextLevelController) layoutManager.getGuiController();
@@ -113,6 +120,10 @@ public class GameLoop implements Runnable {
         });
     }
 
+    /**
+     * stores the game progression as a checkpoint.
+     * @param phase to set 
+     */
     private void saveState(final GamePhase phase) {
         final SettingsBuilder settingsBuilder = new SettingsBuilder();
         if (phase.equals(GamePhase.WIN)) {
@@ -131,12 +142,10 @@ public class GameLoop implements Runnable {
         }
     }
     /**
-     * 
-     * @param current the execution time before the computational time
-     * 
      * pauses the thread based on the difference between 
      * the input time and the computational time 
-     * of the 3 steps of the game loop
+     * of the 3 steps of the game loop.
+     * @param current the execution time before the computational time
      */
     private void waitForNextFrame(final long current) {
         final long dt = System.currentTimeMillis() - current;
@@ -161,7 +170,7 @@ public class GameLoop implements Runnable {
     }
 
     /**
-     * 
+     * update world physics.
      * @param elapsed game physics is updated
      */
     private void updateGame(final int elapsed) {
@@ -169,6 +178,9 @@ public class GameLoop implements Runnable {
         world.updateState(elapsed);
     }
 
+    /**
+     * draw the world elements on the screen.
+     */
     private void render() {
         Platform.runLater(new Runnable() {
             @Override

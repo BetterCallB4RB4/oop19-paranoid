@@ -27,7 +27,7 @@ public final class Ball extends GameObj {
 
     /**
      * 
-     * simulate a orizontal collision.
+     * simulate a horizontal collision.
      */
     public void flipVelOnX() {
         this.setVel(new V2d(-this.getVel().getX(), this.getVel().getY()));

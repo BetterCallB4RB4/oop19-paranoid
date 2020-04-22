@@ -15,7 +15,7 @@ public class HitBorderEvent implements Event {
 
     /**
      * 
-     * @return as
+     * @return the ball that hit the edge
      */
     public Ball getBall() {
         return this.ball;
@@ -23,7 +23,7 @@ public class HitBorderEvent implements Event {
 
     /**
      * 
-     * @return fw
+     * @return the wall on which the collision occurred returns
      */
     public Collision getCollision() {
         return this.collision;

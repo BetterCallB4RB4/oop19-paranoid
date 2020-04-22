@@ -37,7 +37,7 @@ public class World implements WorldEventListener {
 
     /**
      * 
-     * @param balls added int eh world
+     * @param balls to set to the world
      */
     public void setBalls(final Collection<Ball> balls) {
         this.balls.clear();
@@ -46,7 +46,15 @@ public class World implements WorldEventListener {
 
     /**
      * 
-     * @param players added int the world
+     * @param ball to add to the world.
+     */
+    public void addBall(final Ball ball) {
+        this.balls.add(ball);
+    }
+
+    /**
+     * 
+     * @param players to add to the world
      */
     public void setPlayers(final Collection<Player> players) {
         this.players.clear();
@@ -64,7 +72,7 @@ public class World implements WorldEventListener {
 
     /**
      * 
-     * @return x
+     * @return all the balls in the game
      */
     public Set<Ball> getBalls() {
         return Collections.unmodifiableSet(this.balls);
@@ -72,7 +80,7 @@ public class World implements WorldEventListener {
 
     /**
      * 
-     * @return x
+     * @return all the bricks in the world
      */
     public Set<Brick> getBricks() {
         return this.bricks;
@@ -88,7 +96,7 @@ public class World implements WorldEventListener {
 
     /**
      * 
-     * @param ball
+     * @param ball to remove
      */
     public void removeBall(final Ball ball) {
         this.balls.remove(ball);
@@ -96,7 +104,7 @@ public class World implements WorldEventListener {
 
     /**
      * 
-     * @param brick
+     * @param brick to remove
      */
     public void removeBrick(final Brick brick) {
         this.bricks.remove(brick);
@@ -113,9 +121,10 @@ public class World implements WorldEventListener {
     }
 
     /**
-     * 
+     * the collision manager is asked if collisions 
+     * have occurred between the ball and the bricks.
      * @param ball
-     * @return dio 
+     * @return the result of collision
      */
     public Optional<Pair<Brick, Collision>> checkCollisionWithBrick(final Ball ball) {
         Optional<Pair<Brick, Collision>> resultCollision = Optional.empty();
@@ -129,9 +138,11 @@ public class World implements WorldEventListener {
     }
 
     /**
-     * 
+     * the collision manager is asked if collisions 
+     * have occurred between the ball and the player.
      * @param ball
-     * @return miao
+     * @return if a collision has occurred in the upper part of the player, 
+     * the direction the ball will take is also calculated. 
      */
     public Pair<Optional<Collision>, Optional<Direction>> checkCollisionWithPlayer(final Ball ball) {
         Optional<Collision> resultCollision = Optional.empty();

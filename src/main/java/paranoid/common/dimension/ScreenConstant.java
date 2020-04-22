@@ -2,6 +2,7 @@ package paranoid.common.dimension;
 
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
+
 /**
  * Contains global information for setup the view adaptable to the resolution.
  */
@@ -53,12 +54,12 @@ public final class ScreenConstant {
     public static final double RATIO_Y = CANVAS_HEIGHT / WORLD_HEIGHT;
 
     /**
-     * the number of bricks messu on the x-axis.
+     * the number of bricks on the x-axis.
      */
     public static final double BRICK_NUMBER_X = 13;
 
     /**
-     * the number of bricks messu on the y-axis.
+     * the number of bricks on the y-axis.
      */
     public static final double BRICK_NUMBER_Y = 26;
 

@@ -2,6 +2,10 @@ package paranoid.common;
 
 import java.io.Serializable;
 
+/**
+ * represents a vectors to represent a direction in the plane.
+ *
+ */
 public class V2d implements Serializable {
 
     private static final long serialVersionUID = 5926897292953172393L;
@@ -28,9 +32,7 @@ public class V2d implements Serializable {
     }
 
     /**
-     * 
-     * @param v
-     *              the velocity vector to sum to this
+     * @param v vector to sum to this
      * @return sum vector
      */
     public V2d sum(final V2d v) {
@@ -64,8 +66,7 @@ public class V2d implements Serializable {
     }
 
     /**
-     * 
-     * @return String view of the class
+     * {@inheritDoc}
      */
     @Override
     public String toString() {
@@ -73,8 +74,7 @@ public class V2d implements Serializable {
     }
 
     /**
-     * 
-     * @return a generated hashcode ( pojo )
+     * {@inheritDoc}
      */
     @Override
     public int hashCode() {
@@ -90,7 +90,8 @@ public class V2d implements Serializable {
 
     /**
      * 
-     * @return a generated equals ( pojo )
+     * {@inheritDoc}
+     * two V2d are considered equal if their fields are equal
      */
     @Override
     @SuppressWarnings("PMD.SimplifyBooleanReturns")

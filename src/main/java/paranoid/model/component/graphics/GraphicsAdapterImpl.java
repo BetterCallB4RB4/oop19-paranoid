@@ -8,6 +8,11 @@ import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.Player;
 
+/**
+ * allows you to adapt the graphics according to the size of the monitor
+ *  without changing the size of the game objects.
+ *
+ */
 public class GraphicsAdapterImpl implements GraphicsAdapter {
 
     private final GraphicsContext gc;
@@ -17,7 +22,7 @@ public class GraphicsAdapterImpl implements GraphicsAdapter {
     }
 
     /**
-     * 
+     * {@inheritDoc}
      */
     @Override
     public void drawBall(final Ball ball, final Image sprite) {

@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
  * in game creation.
  */
 public enum ResourceLoader {
+
     /**
      * ball image path.
      */
@@ -28,7 +29,11 @@ public enum ResourceLoader {
         this.sprite = new Image(ClassLoader.getSystemResourceAsStream(name));
     }
 
+    /**
+     * @return returns the sprite connected to the selected resource
+     */
     public Image getSprite() {
         return this.sprite;
     }
+
 }

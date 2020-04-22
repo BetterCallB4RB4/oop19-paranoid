@@ -79,8 +79,9 @@ public class GameState {
                                              .build()));
         this.phase = GamePhase.PAUSE;
     }
+
     /**
-     * @return the score
+     * @return score values
      */
     public int getPlayerScore() {
         return user.getScore();
@@ -95,42 +96,42 @@ public class GameState {
 
     /**
      * 
-     * @param point
+     * @param point to add to the total.
      */
     public void addPoint(final int point) {
         user.setScore(user.getScore() + (point * multiplier));
     }
 
     /**
-     * 
+     * add the end game bonus to the total score.
      */
     public void addBonus() {
         user.setScore((user.getScore() + settings.getDifficulty().getGameOverBonus()) * this.getLives());
     }
 
     /**
-     * 
+     * returns the multiplier to its initial state.
      */
     public void flatMultiplier() {
         this.multiplier = this.settings.getDifficulty().getFlatMultiplier();
     }
 
     /**
-     * 
+     * increase the multiplier.
      */
     public void incMultiplier() {
         this.multiplier++;
     }
 
     /**
-     * 
+     * decreases the player's lives.
      */
     public void decLives() {
         user.setLives(user.getLives() - 1);
     }
 
     /**
-     * 
+     * increases the player's lives.
      */
     public void incLives() {
         user.setLives(user.getLives() + 1);
@@ -138,7 +139,7 @@ public class GameState {
 
     /**
      * 
-     * @return sd
+     * @return current number of lives
      */
     public int getLives() {
         return user.getLives();
@@ -153,7 +154,7 @@ public class GameState {
 
     /**
      * 
-     * @return the game phase
+     * @return the current game phase
      */
     public GamePhase getPhase() {
         return this.phase;
@@ -161,7 +162,7 @@ public class GameState {
 
     /**
      * 
-     * @param phase
+     * @param phase set the game phase
      */
     public void setPhase(final GamePhase phase) {
         this.phase = phase;
@@ -169,7 +170,7 @@ public class GameState {
 
     /**
      * 
-     * @return miao
+     * @return the current user
      */
     public User getUser() {
         return this.user;
@@ -177,7 +178,7 @@ public class GameState {
 
     /**
      * 
-     * @return gianni
+     * @return the topScore of the user who is playing
      */
     public Score getTopScores() {
         return this.scores;
@@ -185,7 +186,7 @@ public class GameState {
 
     /**
      * 
-     * @return gneaa
+     * @return the level where the game is taking place
      */
     public Level getLevel() {
         return this.level;
@@ -193,7 +194,7 @@ public class GameState {
 
     /**
      * 
-     * @return miasd
+     * @return the difficulty of the level returns.
      */
     public Difficulty getDifficulty() {
         return this.settings.getDifficulty();
@@ -201,7 +202,7 @@ public class GameState {
 
     /**
      * 
-     * @return oaisf
+     * @return if the music is active
      */
     public boolean isMusicActive() {
         return this.settings.isPlayMusic();
@@ -209,7 +210,7 @@ public class GameState {
 
     /**
      * 
-     * @return zafa
+     * @return if the effects is active
      */
     public boolean isEffectActive() {
         return this.settings.isPlayEffects();

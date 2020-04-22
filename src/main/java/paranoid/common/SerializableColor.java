@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javafx.scene.paint.Color;
 
+/**
+ * class used as java FX color wrapper to make it serializable.
+ */
 public class SerializableColor implements Serializable {
 
     private static final long serialVersionUID = -6024360006502976365L;

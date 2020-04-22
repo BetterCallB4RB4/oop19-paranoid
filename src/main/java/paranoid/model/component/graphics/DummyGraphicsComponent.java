@@ -10,7 +10,7 @@ public class DummyGraphicsComponent implements GraphicsComponent, Serializable {
 
     @Override
     public void update(final GameObject obj, final GraphicsAdapter w) {
-        //dummy mathod do nothing
+        //dummy method do nothing
     }
 
 }
