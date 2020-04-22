@@ -8,7 +8,7 @@ import java.util.Optional;
 import paranoid.model.collision.Collision;
 import paranoid.model.entity.GameObject;
 import paranoid.model.entity.Player;
-import paranoid.model.entity.World;
+import paranoid.model.entity.WorldImpl;
 
 public class PlayerPhysicsComponent implements PhysicsComponent {
 
@@ -19,7 +19,7 @@ public class PlayerPhysicsComponent implements PhysicsComponent {
      * so the player can't go outside the world.
      */
     @Override
-    public void update(final int dt, final GameObject gameObj, final World w) {
+    public void update(final int dt, final GameObject gameObj, final WorldImpl w) {
         final Player player = (Player) gameObj;
         final P2d posPlayer = player.getPos();
         final V2d velPlayer = player.getVel();

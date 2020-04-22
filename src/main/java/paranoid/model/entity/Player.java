@@ -32,7 +32,7 @@ public final class Player extends GameObj {
      * {@inheritDoc}
      */
     @Override
-    public void updatePhysics(final int dt, final World w) {
+    public void updatePhysics(final int dt, final WorldImpl w) {
         super.getPhysicsComponent().update(dt, this, w);
     }
 

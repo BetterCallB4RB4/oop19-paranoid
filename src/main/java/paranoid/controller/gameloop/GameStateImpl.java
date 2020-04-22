@@ -12,6 +12,7 @@ import paranoid.model.entity.Ball;
 import paranoid.model.entity.Border;
 import paranoid.model.entity.Player;
 import paranoid.model.entity.World;
+import paranoid.model.entity.WorldImpl;
 import paranoid.model.level.Level;
 import paranoid.model.level.LevelSelection;
 import paranoid.model.score.Score;
@@ -38,7 +39,7 @@ public class GameStateImpl implements GameState {
         this.user = UserManager.loadUser();
         this.settings = SettingsManager.loadOption();
         this.level = settings.getSelectedLevel();
-        this.world = new World(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
+        this.world = new WorldImpl(new Border(ScreenConstant.WORLD_WIDTH, ScreenConstant.WORLD_HEIGHT), this);
         if (LevelSelection.isStoryLevel(level.getLevelName())) {
             this.scores = ScoreManager.loadStory();
         } else {
