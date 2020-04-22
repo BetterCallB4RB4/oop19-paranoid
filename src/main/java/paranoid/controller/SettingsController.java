@@ -5,9 +5,11 @@ import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import paranoid.model.settings.Difficulty;
 import paranoid.model.settings.Settings;
@@ -48,7 +50,7 @@ public class SettingsController implements GuiController {
     private VBox buttonContainer;
 
     /**
-     * 
+     * initializes the settings screen.
      */
     @FXML
     public void initialize() {
@@ -66,7 +68,7 @@ public class SettingsController implements GuiController {
 
     /**
      * 
-     * save current Options.
+     * save current settings.
      */
     @FXML
     public void applyChanges() {
@@ -89,10 +91,14 @@ public class SettingsController implements GuiController {
             settingsBuilder.playerNumber(2);
         }
         SettingsManager.saveOption(settingsBuilder.build());
+        final Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText("the settings have been saved");
+        alert.showAndWait();
     }
 
     /**
-     * 
+     * updates the form with the currently selected information.
      */
     public void updateForm() {
         final Settings settings = SettingsManager.loadOption();

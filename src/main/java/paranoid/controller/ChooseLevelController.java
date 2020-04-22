@@ -1,16 +1,16 @@
 package paranoid.controller;
 
-import javax.swing.JOptionPane;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.controller.gameloop.GameLoop;
@@ -48,8 +48,8 @@ public class ChooseLevelController implements GuiController, Observer {
     private Button back;
 
     /**
-     * init the window.
-     * @param sub of pattern observer
+     * initializes the window by setting dimensions.
+     * @param sub connect the observer to the subject.
      */
     @FXML
     public void initialize(final Subject sub) {
@@ -71,7 +71,9 @@ public class ChooseLevelController implements GuiController, Observer {
     }
 
     /**
-     * implement pattern observer.
+     * implementation of pattern observer.
+     * reads the new generated levels and creates a button as a reference
+     * by copying the style from an existing one
      */
     @Override
     public void update() {
@@ -94,7 +96,7 @@ public class ChooseLevelController implements GuiController, Observer {
     }
 
     /**
-     * 
+     * loads the currently selected level and starts the gameloop cycle.
      */
     @FXML
     public void startMatch() {
@@ -109,12 +111,15 @@ public class ChooseLevelController implements GuiController, Observer {
             engine.setDaemon(true);
             engine.start();
         } else {
-            JOptionPane.showMessageDialog(null, "devi selezionare un livello");
+            final Alert alert = new Alert(AlertType.WARNING);
+            alert.setHeaderText("Warning");
+            alert.setContentText("No level has been selected");
+            alert.showAndWait();
         }
     }
 
     /**
-     * 
+     * allow to return to the main menu.
      */
     @FXML
     public void backToMenu() {
@@ -122,6 +127,11 @@ public class ChooseLevelController implements GuiController, Observer {
         scene.setRoot(LayoutManager.MENU.getLayout());
     }
 
+    /**
+     * copy the style of a button to another button.
+     * @param subject the button that takes the new style
+     * @param reference the button that gives the new style
+     */
     private void setButtonStyle(final Button subject, final Button reference) {
         subject.setStyle(reference.getStyle());
         subject.setEffect(reference.getEffect());

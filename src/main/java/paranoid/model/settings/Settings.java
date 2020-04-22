@@ -73,6 +73,11 @@ public final class Settings implements Serializable {
             this.selectedLevel = LevelSelection.LEVEL1.getLevel();
         }
 
+        /**
+         * set the settings by copying the parameters from other settings.
+         * @param settings to copy
+         * @return returns himself following the pattern builder
+         */
         public SettingsBuilder fromSettings(final Settings settings) {
             this.difficulty = settings.getDifficulty();
             this.playMusic = settings.isPlayMusic();
@@ -107,6 +112,10 @@ public final class Settings implements Serializable {
             return this;
         }
 
+        /**
+         * 
+         * @return build settings making sure that the values entered are correct
+         */
         public Settings build() {
             if (this.difficulty == null || this.playerNumber <= 0 || this.playerNumber > 2
                     || this.selectedLevel == null) {

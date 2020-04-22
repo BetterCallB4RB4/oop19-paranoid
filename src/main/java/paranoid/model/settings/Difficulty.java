@@ -3,17 +3,20 @@ package paranoid.model.settings;
 public enum Difficulty {
 
     /**
-     * 
+     * set the speed of the player, the base of the multiplier 
+     * and the bonus of points at the end of the game.
      */
     EASY(200, 5000, 1), 
 
     /**
-     * 
+     * set the speed of the player, the base of the multiplier 
+     * and the bonus of points at the end of the game.
      */
     NORMAL(400, 10_000, 2),
 
     /**
-     * 
+     * set the speed of the player, the base of the multiplier and 
+     * the bonus of points at the end of the game.
      */
     HARD(600, 15_000, 3);
 

@@ -70,7 +70,8 @@ public class GameBuilderController implements GuiController {
     private VBox formContainer;
 
     /**
-     * init the canvas.
+     * initializes the level customization form.
+     * sets mouse listeners on the canvas
      */
     @FXML
     public void initialize() {
@@ -136,7 +137,8 @@ public class GameBuilderController implements GuiController {
     }
 
     /**
-     * go back to menu.
+     * check if the forms have been filled correctly.
+     * call the level builder and build a level by passing it the selected information.
      */
     @FXML
     public void buildLvl() {
@@ -155,9 +157,8 @@ public class GameBuilderController implements GuiController {
             this.levelBuilder.setBackGround(backGround.getValue());
             this.levelBuilder.setSong(ost.getValue());
             LevelManager.saveLevel(this.levelBuilder.build());
-            ScoreManager.saveCustom(new Score.Builder()
-                    .defaultScore(this.levelName.getText())
-                    .build());
+            ScoreManager.saveCustom(new Score.Builder().defaultScore(this.levelName.getText())
+                                                       .build());
             final Alert alert = new Alert(AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText("The level was successfully created");
@@ -166,7 +167,7 @@ public class GameBuilderController implements GuiController {
     }
 
     /**
-     * cancella il livello costruito.
+     * removes all the bricks in the grid.
      */
     @FXML
     public void delateAll() {

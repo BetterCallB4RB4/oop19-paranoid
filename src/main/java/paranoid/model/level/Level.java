@@ -1,18 +1,18 @@
 package paranoid.model.level;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import paranoid.model.entity.Brick;
 
 public class Level implements Serializable {
 
     private static final long serialVersionUID = -3269378075735300995L;
-    private final List<Brick> bricks;
+    private final Set<Brick> bricks;
     private final String levelName;
     private final Music music;
     private final BackGround backGround;
 
-    public Level(final List<Brick> bricks, final String levelName, final Music music, final BackGround backGround) {
+    public Level(final Set<Brick> bricks, final String levelName, final Music music, final BackGround backGround) {
         this.bricks = bricks;
         this.levelName = levelName;
         this.music = music;
@@ -23,7 +23,7 @@ public class Level implements Serializable {
      * 
      * @return the list of brick that are in this level
      */
-    public List<Brick> getBricks() {
+    public Set<Brick> getBricks() {
         return this.bricks;
     }
 

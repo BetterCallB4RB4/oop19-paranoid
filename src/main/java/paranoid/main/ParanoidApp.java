@@ -100,16 +100,19 @@ public class ParanoidApp extends Application {
         final File scoreCustom = new File(ParanoidApp.SCORE_CUSTOM_PATH);
         if (!mainFolder.exists()) {
             try {
-                mainFolder.mkdir();
-                levelFolder.mkdir();
-                scoreFolder.mkdir();
-                scoreStory.mkdir();
-                scoreCustom.mkdir();
-                SettingsManager.saveOption(settingsBuilder.build());
-                ScoreManager.saveStory(new Score.Builder()
-                        .defaultScore(SCORE_STORY_NAME)
-                        .build());
-                UserManager.saveUser(new User());
+                boolean mainFolderCreation = mainFolder.mkdir();
+                boolean levelFolderCreation = levelFolder.mkdir();
+                boolean scoreFolderCreation = scoreFolder.mkdir();
+                boolean scoreStoryFolderCreation = scoreStory.mkdir();
+                boolean scoreCustomInitFolderResult = scoreCustom.mkdir();
+                if (mainFolderCreation && levelFolderCreation && scoreFolderCreation 
+                    && scoreStoryFolderCreation && scoreCustomInitFolderResult) {
+                    SettingsManager.saveOption(settingsBuilder.build());
+                    ScoreManager.saveStory(new Score.Builder()
+                            .defaultScore(SCORE_STORY_NAME)
+                            .build());
+                    UserManager.saveUser(new User());
+                }
             } catch (SecurityException e) {
                 e.printStackTrace();
             }

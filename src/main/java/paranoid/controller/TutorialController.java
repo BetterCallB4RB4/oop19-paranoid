@@ -3,9 +3,7 @@ package paranoid.controller;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import paranoid.common.dimension.ScreenConstant;
 import paranoid.view.parameters.LayoutManager;
 
@@ -28,6 +26,9 @@ public class TutorialController implements GuiController {
         this.mainPanel.setMaxHeight(ScreenConstant.SCREEN_HEIGHT);
     }
 
+    /**
+     * 
+     */
     @FXML
     public void btnMenuOnClickHandler() {
         final Scene scene = this.btnMenu.getScene();

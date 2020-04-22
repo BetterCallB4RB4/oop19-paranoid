@@ -17,7 +17,7 @@ public class PlaceHolder extends GameObj {
     }
 
     /**
-     * update physics component.
+     * the placeholde is used to maintain a reference in space. this is a dummy method.
      */
     @Override
     public void updatePhysics(final int dt, final World w) {
@@ -25,7 +25,7 @@ public class PlaceHolder extends GameObj {
     }
 
     /**
-     * update input component.
+     * the placeholde is used to maintain a reference in space. this is a dummy method.
      */
     @Override
     public void updateInput(final InputController controller) {
@@ -33,7 +33,7 @@ public class PlaceHolder extends GameObj {
     }
 
     /**
-     * allows to update the graphics component of the placeHolder.
+     * the placeholde is used to maintain a reference in space. this is a dummy method.
      */
     @Override
     public void updateGraphics(final GraphicsAdapter graphicsAdapter) {

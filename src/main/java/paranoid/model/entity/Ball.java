@@ -68,58 +68,57 @@ public final class Ball extends GameObj {
         private int width;
 
         /**
-         * 
          * @param position
-         * @return asr
+         * @return returns himself following the pattern builder
          */
-        public Builder setPosition(final P2d position) {
+        public Builder position(final P2d position) {
             this.pos = position;
             return this;
         }
 
         /**
-         * 
+         * set the new ball direction.
          * @param direction
-         * @return asf
+         * @return returns himself following the pattern builder
          */
-        public Builder setDirection(final V2d direction) {
+        public Builder direction(final V2d direction) {
             this.dir = direction;
             return this;
         }
 
         /**
-         * 
+         * set the new ball speed.
          * @param speed
-         * @return askd
+         * @return returns himself following the pattern builder
          */
-        public Builder setSpeed(final double speed) {
+        public Builder speed(final double speed) {
             this.speed = speed;
             return this;
         }
 
         /**
-         * 
+         * set the new height. 
          * @param height
-         * @return as
+         * @return returns himself following the pattern builder
          */
-        public Builder setHeight(final int height) {
+        public Builder height(final int height) {
             this.height = height;
             return this;
         }
 
         /**
-         * 
+         * set the new width.
          * @param width
-         * @return zf
+         * @return returns himself following the pattern builder
          */
-        public Builder setWidth(final int width) {
+        public Builder width(final int width) {
             this.width = width;
             return this;
         }
 
         /**
-         * 
-         * @return uishuanow
+         * builds the ball by checking if the past information is all valid.
+         * @return the constructed ball
          */
         public Ball build() {
             if (this.pos == null || this.height <= 0 || this.width <= 0 
