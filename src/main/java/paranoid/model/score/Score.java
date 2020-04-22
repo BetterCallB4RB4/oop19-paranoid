@@ -51,6 +51,9 @@ public final class Score implements Serializable {
         }
 
         public Builder addUserScore(final User user) {
+            if (this.scoreList == null) {
+                throw new IllegalStateException();
+            }
             this.scoreList.add(user);
             return this;
         }
