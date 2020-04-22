@@ -111,7 +111,7 @@
 //        ballBuilder.speed(0);
 //        world.setBalls(Arrays.asList(ballBuilder.build()));
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
-//        world.updateState(1000000);
+//        world.updateState(1_000_000);
 //        assertEquals(new P2d(50, 50), world.getBalls().stream().findFirst().get().getPos());
 //
 //        // 100 speed
