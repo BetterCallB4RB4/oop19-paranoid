@@ -1,4 +1,4 @@
-package paranoid.controller;
+package paranoid.controller.fxmlcontroller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

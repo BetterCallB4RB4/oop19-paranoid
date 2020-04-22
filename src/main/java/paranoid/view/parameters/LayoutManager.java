@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
-import paranoid.controller.GuiController;
+import paranoid.controller.fxmlcontroller.GuiController;
 
 /**
  * Enumeration for static load GUI layouts at the start of application.

@@ -1,4 +1,4 @@
-package paranoid.controller;
+package paranoid.controller.fxmlcontroller;
 
 /**
  * GUI interface.

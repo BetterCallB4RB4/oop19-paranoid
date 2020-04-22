@@ -1,4 +1,4 @@
-package paranoid.controller;
+package paranoid.controller.fxmlcontroller;
 
 import java.util.Arrays;
 import java.util.List;

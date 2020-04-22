@@ -3,9 +3,9 @@ package paranoid.view;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import paranoid.common.dimension.ScreenConstant;
-import paranoid.controller.ChooseLevelController;
-import paranoid.controller.MenuController;
-import paranoid.controller.ScoreController;
+import paranoid.controller.fxmlcontroller.ChooseLevelController;
+import paranoid.controller.fxmlcontroller.MenuController;
+import paranoid.controller.fxmlcontroller.ScoreController;
 import paranoid.view.parameters.LayoutManager;
 
 /**
