@@ -12,9 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,18 +64,18 @@ public final class ScoreManager {
 
     /**
      * Load all files from the custom score path.
-     * @return the set of all scores saved in the custom score path.
+     * @return the list of all scores saved in the custom score path.
      */
-    public static Set<Score> loadCustomScores() {
+    public static List<Score> loadCustomScores() {
         try (Stream<Path> walk = Files.walk(Paths.get(ParanoidApp.SCORE_CUSTOM_PATH))) {
             return walk.filter(Files::isRegularFile)
                        .map(i -> i.toFile().getName())
                        .map(i -> load(ParanoidApp.SCORE_CUSTOM_PATH, i))
-                       .collect(Collectors.toSet());
+                       .collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new HashSet<Score>();
+        return new ArrayList<Score>();
     }
 
     private static void save(final String path, final Score score, final String nameScore) {
