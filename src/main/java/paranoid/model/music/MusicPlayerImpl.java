@@ -5,7 +5,6 @@ import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
@@ -20,7 +19,6 @@ public class MusicPlayerImpl implements MusicPlayer {
     private Clip clip;
     private boolean isMusicEnable;
     private boolean isEffectEnable;
-    private static float volumeReduction = 10.0f;
 
     /**
      * {@inheritDoc}
@@ -31,8 +29,6 @@ public class MusicPlayerImpl implements MusicPlayer {
             try (AudioInputStream audioIn = AudioSystem.getAudioInputStream(music.getLocation())) {
                 this.clip = AudioSystem.getClip();
                 this.clip.open(audioIn);
-                final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                gainControl.setValue(volumeReduction);
                 this.clip.start();
                 clip.addLineListener(new LineListener() {
                     @Override
