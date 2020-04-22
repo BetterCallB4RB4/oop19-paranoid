@@ -1,6 +1,6 @@
-//package paranoid.test;
-//
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+package paranoid.test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 //import static org.junit.jupiter.api.Assertions.assertThrows;
 //
 //import java.util.Collections;
@@ -9,6 +9,7 @@
 //import org.junit.jupiter.api.Test;
 //
 //import paranoid.controller.gameloop.GameState;
+//import paranoid.controller.gameloop.GameStateImpl;
 //import paranoid.main.ParanoidApp;
 //import paranoid.model.score.Score;
 //import paranoid.model.score.User;
@@ -28,7 +29,7 @@
 //    @BeforeEach
 //    public void creationScore() {
 //        UserManager.saveUser(new User());
-//        this.gameState = new GameState();
+//        this.gameState = new GameStateImpl();
 //        this.user = gameState.getUser();
 //    }
 //

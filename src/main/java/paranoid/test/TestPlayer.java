@@ -13,16 +13,18 @@
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //
-//import paranoid.common.Collision;
+//import paranoid.model.collision.Collision;
 //import paranoid.common.P2d;
 //import paranoid.common.PlayerId;
 //import paranoid.controller.gameloop.GameState;
+//import paranoid.controller.gameloop.GameStateImpl;
 //import paranoid.model.component.input.InputController;
 //import paranoid.model.component.input.KeyboardInputController;
 //import paranoid.model.entity.Border;
 //import paranoid.model.entity.Player;
-//import paranoid.model.entity.StartPhase;
+//import paranoid.common.StartPhase;
 //import paranoid.model.entity.World;
+//import paranoid.model.entity.WorldImpl;
 //
 ///**
 // * TestPlayer. Test the creation of the player, the collision and the movement.
@@ -40,8 +42,8 @@
 //     */
 //    @BeforeEach
 //    public void createEntity() {
-//        final GameState gameState = new GameState();
-//        this.world = new World(new Border(600, 600), gameState);
+//        final GameState gameState = new GameStateImpl();
+//        this.world = new WorldImpl(new Border(600, 600), gameState);
 //        this.e1 = createPlayer(StartPhase.PLAYER_ONE.getSpawnPoint(), PlayerId.ONE);
 //        this.e2 = createPlayer(new P2d(600, 580), PlayerId.ONE);
 //        this.e3 = createPlayer(new P2d(-10, 580), PlayerId.ONE);
