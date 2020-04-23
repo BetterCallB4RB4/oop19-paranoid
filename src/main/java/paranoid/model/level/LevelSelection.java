@@ -14,24 +14,49 @@ public enum LevelSelection implements Iterator<LevelSelection> {
     LEVEL1("storyLevel/The beginning of the journey", 0, false),
 
     /**
-     * level 1 location and the input to fit the iterator interface.
+     * level 2 location and the input to fit the iterator interface.
+     */
+    LEVEL2("storyLevel/illusion", 1, false),
+
+    /**
+     * level 3 location and the input to fit the iterator interface.
      */
     LEVEL3("storyLevel/Chamber of evaporation", 2, false),
 
     /**
-     * level 1 location and the input to fit the iterator interface.
+     * level 4 location and the input to fit the iterator interface.
      */
-    LEVEL5("storyLevel/Fiji addicted", 5, false),
+    LEVEL4("storyLevel/desperate", 3, false),
 
     /**
-     * level 1 location and the input to fit the iterator interface.
+     * level 5 location and the input to fit the iterator interface.
+     */
+    LEVEL5("storyLevel/Fiji addicted", 4, false),
+
+    /**
+     * level 6 location and the input to fit the iterator interface.
+     */
+    LEVEL6("storyLevel/fear", 5, false),
+
+    /**
+     * level 7 location and the input to fit the iterator interface.
      */
     LEVEL7("storyLevel/Windows2098", 6, false),
 
     /**
-     * level 2 location and the input to fit the iterator interface.
+     * level 8 location and the input to fit the iterator interface.
      */
-    LEVEL9("storyLevel/Blind third eye", 8, false);
+    LEVEL8("storyLevel/awakening", 7, false),
+
+    /**
+     * level 9 location and the input to fit the iterator interface.
+     */
+    LEVEL9("storyLevel/Blind third eye", 8, false),
+
+    /**
+     * level 10 location and the input to fit the iterator interface.
+     */
+    LEVEL10("storyLevel/madness", 9, true);
 
     private int index;
     private String path;
