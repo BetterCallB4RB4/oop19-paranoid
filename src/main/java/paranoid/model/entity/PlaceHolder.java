@@ -20,7 +20,7 @@ public class PlaceHolder extends GameObj {
      * the placeholder is used to maintain a reference in space. this is a dummy method.
      */
     @Override
-    public void updatePhysics(final int dt, final WorldImpl w) {
+    public void updatePhysics(final int dt, final World w) {
         this.getPhysicsComponent().update(dt, this, w);
     }
 

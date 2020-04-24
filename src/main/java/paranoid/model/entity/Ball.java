@@ -38,7 +38,7 @@ public final class Ball extends GameObj {
      * allows to update the physics component of the ball.
      */
     @Override
-    public void updatePhysics(final int dt, final WorldImpl w) {
+    public void updatePhysics(final int dt, final World w) {
         this.getPhysicsComponent().update(dt, this, w);
     }
 

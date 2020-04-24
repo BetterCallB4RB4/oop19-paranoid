@@ -61,7 +61,7 @@ public interface GameObject {
      * @param dt the time elapsed from game loop
      * @param w the world model
      */
-    void updatePhysics(int dt, WorldImpl w);
+    void updatePhysics(int dt, World w);
 
     /**
      * @param controller the input controller of this gameObj

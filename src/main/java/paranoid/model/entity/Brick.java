@@ -45,7 +45,7 @@ public final class Brick extends GameObj implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public void updatePhysics(final int dt, final WorldImpl w) {
+    public void updatePhysics(final int dt, final World w) {
         super.getPhysicsComponent().update(dt, this, w);
     }
 

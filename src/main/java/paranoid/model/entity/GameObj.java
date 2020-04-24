@@ -140,7 +140,7 @@ public abstract class GameObj implements GameObject, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public abstract void updatePhysics(int dt, WorldImpl w);
+    public abstract void updatePhysics(int dt, World w);
 
     /**
      * {@inheritDoc}
