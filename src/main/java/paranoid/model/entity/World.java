@@ -8,11 +8,12 @@ import paranoid.common.Pair;
 import paranoid.common.PlayerId;
 import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
+import paranoid.controller.event.WorldEventListener;
 import paranoid.model.collision.Collision;
 import paranoid.model.collision.Direction;
 import paranoid.model.component.input.InputController;
 
-public interface World {
+public interface World extends WorldEventListener {
 
     /**
      * 
