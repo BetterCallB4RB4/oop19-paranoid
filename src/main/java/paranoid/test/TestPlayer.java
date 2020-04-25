@@ -94,16 +94,16 @@
 //     */
 //    @Test
 //    public void testPlayerMovement() {
-//        assertEquals((new P2d(290, 580)), e1.getPos());
-//        assertEquals((new P2d(190, 580)), e4.getPos());
+//        assertEquals(new P2d(290, 580), e1.getPos());
+//        assertEquals(new P2d(190, 580), e4.getPos());
 //        inputController.get(PlayerId.ONE).notifyMoveRight(true);
 //        inputController.get(PlayerId.TWO).notifyMoveLeft(true);
 //        inputController.entrySet().forEach(i -> {
 //            world.movePlayer(i.getKey(), i.getValue());
 //        });
 //        world.updateState(20);
-//        assertEquals((new P2d(299,580)), e1.getPos());
-//        assertEquals((new P2d(181,580)), e4.getPos());
+//        assertEquals(new P2d(299,580), e1.getPos());
+//        assertEquals(new P2d(181,580), e4.getPos());
 //    }
 //
 //    private Player createPlayer(final P2d pos, final PlayerId playerId) {
