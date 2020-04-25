@@ -6,6 +6,10 @@ package paranoid.controller.event;
  */
 public interface WorldEventListener {
 
+    /**
+     * add events to the queue that will be resolved with each iteration of gameLoop.
+     * @param ev the event generated
+     */
     void notifyEvent(Event ev);
 
 }
