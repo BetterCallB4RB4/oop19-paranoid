@@ -95,7 +95,7 @@ public interface World extends WorldEventListener {
 
     /**
      * 
-     * @return a list of all the gameObj in the world
+     * @return a set of all the gameObj in the world
      */
     Set<GameObject> getSceneEntities();
 
