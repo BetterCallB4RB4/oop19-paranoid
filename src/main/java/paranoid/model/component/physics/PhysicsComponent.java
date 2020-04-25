@@ -1,7 +1,7 @@
 package paranoid.model.component.physics;
 
 import paranoid.model.entity.GameObject;
-import paranoid.model.entity.World;
+import paranoid.model.entity.WorldImpl;
 
 public interface PhysicsComponent {
 
@@ -16,6 +16,6 @@ public interface PhysicsComponent {
      * @param gameObj entity of the game.
      * @param w world.
      */
-    void update(int dt, GameObject gameObj, World w);
+    void update(int dt, GameObject gameObj, WorldImpl w);
 
 }

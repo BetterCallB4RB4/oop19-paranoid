@@ -13,7 +13,7 @@ import paranoid.model.collision.Direction;
 import paranoid.model.entity.Ball;
 import paranoid.model.entity.Brick;
 import paranoid.model.entity.GameObject;
-import paranoid.model.entity.World;
+import paranoid.model.entity.WorldImpl;
 
 public class BallPhysicsComponent implements PhysicsComponent {
 
@@ -23,7 +23,7 @@ public class BallPhysicsComponent implements PhysicsComponent {
      * if the collisions occurred the state of the ball will be changed.
      */
     @Override
-    public void update(final int dt, final GameObject gameObj, final World w) {
+    public void update(final int dt, final GameObject gameObj, final WorldImpl w) {
         final Ball ball = (Ball) gameObj;
         final P2d old = ball.getPos();
         final V2d vel = ball.getVel();
