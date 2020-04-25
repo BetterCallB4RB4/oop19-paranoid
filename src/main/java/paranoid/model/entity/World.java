@@ -6,7 +6,6 @@ import java.util.Set;
 
 import paranoid.common.Pair;
 import paranoid.common.PlayerId;
-import paranoid.controller.event.Event;
 import paranoid.controller.event.EventConsumer;
 import paranoid.controller.event.WorldEventListener;
 import paranoid.model.collision.Collision;
@@ -112,12 +111,6 @@ public interface World extends WorldEventListener {
      * @param inputController controller that check the key pressed by user input device
      */
     void movePlayer(PlayerId playerId, InputController inputController);
-
-    /**
-     * add events to the queue that will be resolved with each iteration of gameLoop.
-     * @param ev the event generated
-     */
-    void notifyEvent(Event ev);
 
     /**
      * 
