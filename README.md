@@ -4,7 +4,7 @@ The purpose of this project is to emulate the classic arcade game Arkanoid by Ta
 
 ### How do I get set up? ###
 1. Install the Java Runtime environment [here](http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
-2. Download oop19-paranoid-all.jar in the *Downloads* section
+2. Download oop19-paranoid-all.jar in the *Downloads* section (imported from bit bucket)
 3. Start application
 4. Enjoy!
 
